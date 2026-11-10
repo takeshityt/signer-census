@@ -1,0 +1,46 @@
+{
+ "unmappedGt": [],
+ "treeInWindowButNotInGt": [
+  {
+   "tx": "CxTrVT7T4N4xfmPHcczY9hGxdMGC4SmMgnbZbsg748zB",
+   "receipt_id": "BDWgC3R3NVvF6KvcoxRHSU5HNZ91gCxo4qD4qvx953xh",
+   "method": "respond",
+   "predecessor": "natsai-mpc.near",
+   "status": "Failure",
+   "block_hash": "7XmrWrQ9JkWNKtkfvhKNzyF1B3Aj6vNgs8t9Jro8hycE"
+  },
+  {
+   "tx": "pcFEt1TVw2mPagemAPwvsLDjKpp4n4JbURCDrjKBMkT",
+   "receipt_id": "9MRtF8AYQEmHB443gNjGDaBgEdtoUcFxzvT6Xu6K3Sxn",
+   "method": "respond",
+   "predecessor": "mpch-01.near",
+   "status": "Failure",
+   "block_hash": "EYDwF1sckXRG7bL8QaXJm3cVQiZ8xNPfqmmVA34ehNKg"
+  },
+  {
+   "tx": "4k6XumjcvWTv4UeZZryYHnX9XzbLABSRcR1JaAiWmv4G",
+   "receipt_id": "GFRV7G8bHZTGnAys4pceGC6TUThPV5E3Rq5CTbsgGw6j",
+   "method": "respond",
+   "predecessor": "astrostakers-mainnet.near",
+   "status": "Failure",
+   "block_hash": "EYDwF1sckXRG7bL8QaXJm3cVQiZ8xNPfqmmVA34ehNKg"
+  },
+  {
+   "tx": "G91P5mskj2wqV4BWJcPN5mgnwNvhYGBTq7bXvDE6wqpK",
+   "receipt_id": "2FJKyP5a5VuSM8pL8hbVss8E8pCFcxZmSNF24EiWM7qs",
+   "method": "respond",
+   "predecessor": "greenfield-mpc01.near",
+   "status": "Failure",
+   "block_hash": "3uVjahvEbpMvtDM4MbBSqL8kSNqmoYjYthiBAs3Ype3U"
+  },
+  {
+   "tx": "A92rbtMfSX8QHAcQjSNkpy3qrGzDwTPDzJxk87R14LDa",
+   "receipt_id": "8NW63VxZ34VVHdiVstUKQCbu3E8itLMKdX4bTde97s75",
+   "method": "respond",
+   "predecessor": "hashkeympc.near",
+   "status": "Failure",
+   "block_hash": "49EX2SfgzEzNh2GNEAEewkEXmJWZ2xXP5wLPfNzp9QwN"
+  }
+ ],
+ "falsePositiveTxs": []
+}

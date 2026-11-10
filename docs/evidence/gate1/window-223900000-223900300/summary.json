@@ -1,0 +1,58 @@
+{
+  "contract": "v1.signer",
+  "rpc": "https://rpc.mainnet.fastnear.com",
+  "window": {
+    "from": 223900000,
+    "to_exclusive": 223900300,
+    "blocks": 300,
+    "skipped_heights": 0
+  },
+  "requests_made": 834,
+  "units": {
+    "transactions_touching_contract_in_window": 86,
+    "receipts_executed_on_contract_in_window": 126,
+    "receipts_by_method_in_window": {
+      "sign": 43,
+      "respond": 38,
+      "return_signature_and_clean_state_on_success": 43,
+      "submit_participant_info": 1,
+      "resolve_verification": 1
+    },
+    "tx_shapes_in_window": {
+      "respond×1": 43,
+      "return_signature_and_clean_state_on_success×1 + sign×1": 42,
+      "resolve_verification×1 + submit_participant_info×1": 1
+    },
+    "sign_receipts_in_window": 43,
+    "sign_receipt_txs_and_their_outcome": {
+      "sign+return(ok)": 43
+    }
+  },
+  "checks": [
+    {
+      "id": "A",
+      "what": "every receipt executed on v1.signer in window (RPC state changes) belongs to a tx listed by FastNEAR",
+      "pass": true,
+      "detail": "unmapped=0"
+    },
+    {
+      "id": "B",
+      "what": "every tx-tree receipt on v1.signer executed in window appears in RPC ground truth",
+      "pass": false,
+      "detail": "missing_in_ground_truth=5"
+    },
+    {
+      "id": "C",
+      "what": "FastNEAR txs_count for [from,to) equals the number of listed txs with tx block in [from,to)",
+      "pass": true,
+      "detail": "txs_count=86 listed=86"
+    },
+    {
+      "id": "D",
+      "what": "every listed tx really contains a FunctionCall receipt on v1.signer (no false positives)",
+      "pass": true,
+      "detail": "false_positive_txs=0"
+    }
+  ],
+  "verdict": "FAIL"
+}

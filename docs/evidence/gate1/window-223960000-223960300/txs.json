@@ -1,0 +1,3280 @@
+[
+ {
+  "tx_hash": "JCHScZDmUzYofyN2LeLCGEraPLrrcMXzJUbvVrVWGTm1",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223960298,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "A9KRMia1PUtY9LXYjwZF1563kanQ91HaVXCp12aZXVfA",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "Hc7oiQ6mQQd5RmAvUjJGATkHWFYfi6yXT6CqfbM5HJQH"
+   }
+  ]
+ },
+ {
+  "tx_hash": "G37YEetpxzwRH3XPm3Xp19bBR1fDkHPWCYKWRmdiuTdJ",
+  "signer": "tx-bench.near",
+  "tx_block_height": 223960293,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Czj8mUmMz2pPUH8L8p9bctzK4tY4DrL5UK26mT18bere",
+    "method": "sign",
+    "predecessor": "tx-bench.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "GfVMjGBbEbzSCj3ggvno3ypwzW8wWD1hmgYqEZnvmnjb"
+   },
+   {
+    "receipt_id": "3Cvy4MkraowGYiBYguDPKD4LTcErpXjTHKit3fahc8q3",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "H2hJVoJfMEyzs13Yqt4anVJpD1vaqHdT1DijsgUDvGga"
+   }
+  ]
+ },
+ {
+  "tx_hash": "6AkJEJALR4SUiHKrYR8K6N356ixRm8ZyPzQoLqFFwKNz",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960292,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3UUcd3T7HFm9wamyEYeSd2364R643RpDDGUYBhkeg6oH",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "J7yvVGwscnsz1wfYpFjMDreYtyoxN77Q5MeTD8qmiQGk"
+   },
+   {
+    "receipt_id": "9BkNVKSZbaULA63Pdi5cnEqAKjh99zD6Dw7pAeuWm6Xx",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "6EJs5k2uVdqqiizph8vC6xtuNGdSJ3Xng4bbdD1ouoyw"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7xCozSP4pbYfnT4R4muPK3ncLM44bsSmm9xAjAabmDDU",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223960281,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "96cFU36uoLJmsS34i3b8JAx7ynARWdCi5MFtsRfED1gB",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "Ejv1izt3Jmto2YZBYPXqMhmuw3Ptv2CMXpszi3UUEtKH"
+   }
+  ]
+ },
+ {
+  "tx_hash": "G4UcsuBCykNVqAf2EwELAMkZukbhN5uDpFSTWE5SZ9QR",
+  "signer": "tx-bench.near",
+  "tx_block_height": 223960276,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AvpRPFcegYRW4qzCvHs9wp6btfjjc3cH56EzZH65jEZ9",
+    "method": "sign",
+    "predecessor": "tx-bench.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "6P9VvgdBBmuVcd2tXWS5WNxwwJ1N6ArsVY2maF7NaCBf"
+   },
+   {
+    "receipt_id": "GfJpV4E5FB6MJwaTCUyCXGoZLUndQnWo2jnUth4F58LP",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "B28Q5RLMjZ2ZUsquwei2WKmcDQPDG1RUfQhi3LiaJeW5"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DBxGQPidAJjCx3U6hptYKmP2GC64T6hekQHFMSVYbxQ3",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223960275,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FwkBq4Xo1YsLbk8xoCGMEJVQiRfUYfAwQEthXTv4EeC7",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "6m6DFvgcYtp3aLzghRK3aYqTjBa9NbBUNtiuGnEUhErU"
+   }
+  ]
+ },
+ {
+  "tx_hash": "6Dapym95LgBPmdSEwwk8WBiqXwn4q6ijXkyr2afHBD7d",
+  "signer": "natsai-mpc.near",
+  "tx_block_height": 223960270,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FMni8Bv1Fz3NV7L3nzEBB3YGySMkPYoTdDDXo8QiYBYX",
+    "method": "respond",
+    "predecessor": "natsai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "JDuZwQzq86oyHxLoJW49e3YLNuvVYeTDxn8YhDDD9ahq"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9Mge3dMwm6qyx7FqbidksmyrS5seQTRiWF3LMzdgL6qv",
+  "signer": "multichain-mainnet-aurora.near",
+  "tx_block_height": 223960267,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "TsXH3YFcYZrUrUumU9S1qLPtNxeBjhk6t9YYscMWZpv",
+    "method": "respond",
+    "predecessor": "multichain-mainnet-aurora.near",
+    "status": "SuccessValue",
+    "block_hash": "EjhprkuXWB8GgibvJ3sXNbT9e8qUqLvLA3CBGVnWRBQ6"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DX9HtgwD9S1T9972Cr9DiWZK3gMW6H4zQaivb2stX89E",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960265,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DupyVw8kMz8M85zueLkqQYi4nNUzWJggZLJy6htLSFJc",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "JDuZwQzq86oyHxLoJW49e3YLNuvVYeTDxn8YhDDD9ahq"
+   },
+   {
+    "receipt_id": "5GDkJHVAttdYFZ39k8Ns8Sg9nf89rYp36VXxZAS7ZG3n",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "6P9VvgdBBmuVcd2tXWS5WNxwwJ1N6ArsVY2maF7NaCBf"
+   }
+  ]
+ },
+ {
+  "tx_hash": "BzB5tztmxmq42L5eU4ULjfcawLUhUAC9otHhwpJQTA7s",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960260,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HS3Xhhcqcvb7r7HhFA5wqjF5pyJ8dNU5RJqSrovXzkyM",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5eudY6KDZ6M3wkHTz3kzosfvairDxcu2areyng7xNskR"
+   },
+   {
+    "receipt_id": "AfYkV98CqBTHghykTQ61Lp14GZfDnKsY16o9JGxBy8Qg",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "7UvhXgxzhf1a3ZbSFKWdwus6p17NUGBnHA1UVb8BM9Mn"
+   }
+  ]
+ },
+ {
+  "tx_hash": "CKrm9tnPioEE9yRroJyGhzPyXQc3mTztUwQY4xmk2jLC",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960257,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2pfhjmRZQ3YJydfjGCRTPCDsPpeNoDoNpc3Zkb6UToqP",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "Gv6hy2Pv2kMuvovkB8X2mVhcSShZFfT9G1PdVd5V7GPQ"
+   },
+   {
+    "receipt_id": "3bNbq4JqHQKBiF2dQ3SQB5zhrtiHRLxEyW3PmcWuRUaS",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "Erpc4RGjDmVrC1AZEThwq6fSDPLy9FA2qeeLfxvcZgfh"
+   }
+  ]
+ },
+ {
+  "tx_hash": "6bhbX58UuaRSFjovunuxXB25bKvP9rHqjBonKfA2h1sJ",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223960255,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GP6NSFK1arkWWqMmgo7LGP1UhaxeCWmrfA5mcMPHVix2",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "3sToinaBqQwkGa3B8J29vvjEkt9pApMu6Gq8ppiU9drZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FmKByA6ACJfKyZLkr9wmqBnKKkW3VssTLrQviFteVTL7",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960248,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HosUi1HKH3EBj141B7vL8pPauqe2EPeTXUK5Cex2mARo",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "7sg4dcFHoHpeXiih89pt496YHahfqJS4V86KrLRozyQn"
+   },
+   {
+    "receipt_id": "7u1Ykq6GSi2srgNT4AyRAxun2hqWvosGK8WKbLFB1p7d",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "4axwBodEW44jnSkPefuqpZX9sxCoLHtHS9dFxnC3nmtY"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DaCu7NSaEc5uEXqHUnU9EAskDa198XcSSrKoDEfsakBi",
+  "signer": "nodemonster.near",
+  "tx_block_height": 223960238,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3WMCZesCimN1pj3hg7nJLsrL828cv6Ka1CrWS2EhXN9L",
+    "method": "respond",
+    "predecessor": "nodemonster.near",
+    "status": "SuccessValue",
+    "block_hash": "3D4jm2bnTmMN2ZQTCWSVh4C7qRhwYc5BjER5bxu7ntWL"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FXfssPkEBF5uvDzvm7gmSTivfGhoiLjfZkEuEPoC7c3A",
+  "signer": "near-mpc-staking4all-01.near",
+  "tx_block_height": 223960238,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3gT8oRTDfpyJ4AiVrH7ETfiKeUXKkHBzYhc2sW583H6e",
+    "method": "respond",
+    "predecessor": "near-mpc-staking4all-01.near",
+    "status": "SuccessValue",
+    "block_hash": "3D4jm2bnTmMN2ZQTCWSVh4C7qRhwYc5BjER5bxu7ntWL"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4x3YiL7cxJGd3S3HqE63SXmjx4NH1By3XexMovGn35gN",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223960238,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EPjsjsJwmbLC1X53NYfniaP5MjV5gJ4SzdLB3kVF2rVY",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "3D4jm2bnTmMN2ZQTCWSVh4C7qRhwYc5BjER5bxu7ntWL"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FMMcoLNK9onwn45CCpAQTbXK4LYiuZM1LJi91HGuBdcA",
+  "signer": "nodemonster.near",
+  "tx_block_height": 223960236,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9Npsak9aWg8nrR98gJKWJ5htdja32anx7n1ku4e1p8un",
+    "method": "respond",
+    "predecessor": "nodemonster.near",
+    "status": "SuccessValue",
+    "block_hash": "Di36CWppbfuH38ABkcMyHJaJqZzsWhQcGV3BSC1B5eff"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9si95RmLJ9WSijZW4s83UgkhnMfaPvFw4VZWofkJE5df",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960232,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6MoiwYQop1nXTycQ6sJkL8JuxGLBQLcRWJkBLyEd1rBd",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D7wRvRNRJ7QsWSYNKqXShVJpFdpjoCxqxgBPAo5mMrei"
+   },
+   {
+    "receipt_id": "2vANDjdnHSjsiTerixH4ZD61e1HjajFr5nJRLm4di779",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5hLF89Kq3GfyXq8a4eMTf86yNVgNKjWiSAET16EKDG31"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7FNQunJBLtz6GCXNqrG1sDFSJ3MKwqtEDYCrk4tGQWH4",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960232,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CqQYEL9mSsiPH8CybgiW3Jgo6koXKKJX49woAtxFSmyK",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D7wRvRNRJ7QsWSYNKqXShVJpFdpjoCxqxgBPAo5mMrei"
+   },
+   {
+    "receipt_id": "FmGgv2WLktfneyYBjNbiVpSWLLXov7Xa2XRWf3VYvZRQ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5hLF89Kq3GfyXq8a4eMTf86yNVgNKjWiSAET16EKDG31"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DApP2hHCejax85sP5D5pGaNufjsXuViLRdrEQ9dTQ5n4",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960232,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "J9bCsjwRmPWwAxL29gHodebQ3UadD9WZiYnNMA8XiTAB",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D7wRvRNRJ7QsWSYNKqXShVJpFdpjoCxqxgBPAo5mMrei"
+   },
+   {
+    "receipt_id": "B9poLMc9tTb3iG9K5vFwRgLfwkNT22UgLxGbWgEMvwYm",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5hLF89Kq3GfyXq8a4eMTf86yNVgNKjWiSAET16EKDG31"
+   }
+  ]
+ },
+ {
+  "tx_hash": "CybVc2GZf5fmpuXnjXfkaAzr452kbQcAqLHBFwHLx9rX",
+  "signer": "multichain-mainnet-aurora.near",
+  "tx_block_height": 223960231,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CWnyXE9A93pd1fB6RT7Th5q1LsXULvEaeHTREAXbag1p",
+    "method": "respond",
+    "predecessor": "multichain-mainnet-aurora.near",
+    "status": "SuccessValue",
+    "block_hash": "Ab8Y1HniyXw2MzKcMGuoRoTEdqDCrBysUVNhjerLk53U"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FtUNCfbjaPem1skkr8pEdgz674vKjjpWNbjv5XhrfMKe",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223960231,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Hwe1y2nMe6qgokBeaB6ZqSqq1Z6icqyrKBWAf1xhTLU7",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "Ab8Y1HniyXw2MzKcMGuoRoTEdqDCrBysUVNhjerLk53U"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5ZhMTinFeef4Ycfh2ZTYLLzFWjawE4Rtawv1CtiDibbd",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960230,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HpuoMWYk5LSP4FUq4aH6NLPgJszqo38PKPoSy2qwxET",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "Ab8Y1HniyXw2MzKcMGuoRoTEdqDCrBysUVNhjerLk53U"
+   },
+   {
+    "receipt_id": "5BTfoqbSN8GCptPMbT3KpQKu9k9j3Vpj5MmCUosjxiVj",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BYqsH6eQfJ7tVe1NrYmzWfgrtgXVgrCYzcpY54XJ5qqz"
+   }
+  ]
+ },
+ {
+  "tx_hash": "12feEMmNJzYiGE8jAcyHhkAXG2kyAC4ZzxuntNV3mhvF",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960225,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7Tnu125eqrQiBsvNMR9RCetg21zsp2RbjSPGn2y9PTWp",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "AAmQ4oiv7cbbfZJUzsH66Jspwa6oN5bUgzvEKwEdsaFM"
+   },
+   {
+    "receipt_id": "2xSirr59roTF81X7HFQ3nZKFvCSrcQhT6rY2g5PPaSEz",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "HMBcHgmpa99wwsrx2Hpb3ygo7Mj3APKeb8TSAVNwqL6i"
+   }
+  ]
+ },
+ {
+  "tx_hash": "xkynYBEDj2eHL53ormL3x6d3pjoqsmJtJo9MqCjFwpr",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960225,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "A8HXA7PdVvxGvDEkXeUNj2bDjpmL6sdE85E2uJTziggh",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "AAmQ4oiv7cbbfZJUzsH66Jspwa6oN5bUgzvEKwEdsaFM"
+   },
+   {
+    "receipt_id": "rWSscEoK99KD3uYTkas6ysfRGsAD9EBwJN4xdTgt87u",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "HMBcHgmpa99wwsrx2Hpb3ygo7Mj3APKeb8TSAVNwqL6i"
+   }
+  ]
+ },
+ {
+  "tx_hash": "ETFriTkHK985oNZSBigu4Qyh4REtGaKgMNAjZoSENaKy",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223960224,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7bHptxDZPYimug5YD8FRCeXRPrPVdFLewUZZnyc1CQn4",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "EsNydK4ZFL2Lfip55rPCovLRQmYZZQhwnsJs7v92qmPx"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HYd3kvJAaBmpTQkiKkg4hoUkwnKsExvBaAJgTaCfv6Yk",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223960219,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GLhqVzxRq7oGCi3SovztrQcsFMF5ddnCbLedxGi8Q2F4",
+    "method": "submit_participant_info",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "2x8BuWvs2GB5c1GWfxjJuzZRxGV7VyUyk2NSgY7jsKh4"
+   },
+   {
+    "receipt_id": "G9vv4ZXCWiMKPfRdqfFxM8D6oELNLBLFd2v4eVFD13Dh",
+    "method": "resolve_verification",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "rYFPjo6rwayaDtqcyvC6ULjNHAxzTw6PEHRHs36X1FG"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Hdp2LqFT3WVStF5tgDJ6c5eJsNsUnaEsHpvDguniwXsf",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960218,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HXWH8bbcJktu2j92MEjTCa7WDy4byUEFPjSh8To9oEf6",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "2x8BuWvs2GB5c1GWfxjJuzZRxGV7VyUyk2NSgY7jsKh4"
+   },
+   {
+    "receipt_id": "9VziuhaYuaBfNXUFN6qYLbruWXwch7CQRK5du71N7SLJ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "EAvaFD9L6cQvqyWyJvdiaMFk8srPMZY6n8kYhevRMYmF"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HNzxq8GYXwLJunsAji6sRNqPnShEwpgzTW8xaMKWiCgf",
+  "signer": "hashkeympc.near",
+  "tx_block_height": 223960215,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GpcZkbTGvPCetogfGVxAeiJKWBeVvYrMNRnC1DXhdCUg",
+    "method": "respond",
+    "predecessor": "hashkeympc.near",
+    "status": "SuccessValue",
+    "block_hash": "AM9kMGnAxknaPnuPgM59DHrXtWN8Z2X4PxJJotdL4wgi"
+   }
+  ]
+ },
+ {
+  "tx_hash": "8c4qXgBo4M36NUjQw8cvEBaNfPEB33L2fUzDDT7wicxn",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960209,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CJcT2Uzm1xRVAXDtMm6UtX4zuvDrVFJiACgaULqoo6jF",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "AsJu8Wdgb7G3ZPx971r3VNMpp4s3DRoc3rzEnyJcqzAk"
+   },
+   {
+    "receipt_id": "4KmcYEeZr6A3NkFVH99vCQiCfuz1ynCzHjiCgrZ1A6ev",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "32zGKe1poQewFmdJvVKZNZ5yyYPqJarm5ipmbTMQzvGq"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HUTsdByJmh8sZB2MaBDMbvBY1RXRtSG9G2ridHPhRL51",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223960209,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "53AbXpF3VDHTHQqpeLdZ7Rqs5nJTd3UFnB61n3sk54eE",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "JCq7FzYqpLhhGturyknRvMQjZMU8CakogYp3owv6p8Zn"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Gw6ib4rJW5rRG45CdUP7FMG3ii2Y22iTiAS3YmSLRjvL",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960203,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2UXH1Uv6aoW15vzzRYsJFVkTVHgsTn3UFoHjKcK8jNat",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "8FSQCwqhZJxEQAjzLhgbWZc72dmX2Aw9aAguM3qNrkYd"
+   },
+   {
+    "receipt_id": "7DoeooQnwAzEFLvGgF5iM5z7Fcm7VgFG1r2UAqPRvfzs",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "AsJu8Wdgb7G3ZPx971r3VNMpp4s3DRoc3rzEnyJcqzAk"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9vnqtbPAqtsiAtP5JabaHpiiVqHDgTzRFTDwqpNpkJar",
+  "signer": "nodemonster.near",
+  "tx_block_height": 223960200,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3taTJMfWFYHtH3Ku8CvY3Usmk2zP69RbiLCPDbHJZrFH",
+    "method": "respond",
+    "predecessor": "nodemonster.near",
+    "status": "SuccessValue",
+    "block_hash": "9e8cnnVLwHW3aQqtnS2ftTmD7Vz4mYn42ivnQKabNVLb"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Dx7xU7zP9YvZtZ7iocCe1itiAgqb97STpFLYbA4w2Sfc",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960194,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Geijvs8QZ7dWrYtmRZfRkUn1Jz4AQcRDWKhshLWtvdsJ",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "6TYJa1MyPBrkraRfRPNpppSUHKp6ZhQNFNsX9JSHNq8V"
+   },
+   {
+    "receipt_id": "7Skg3YjtB9ZfqTPUSEZQy1o8uqQKJGh1LFuYX2CCQJWA",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "9QtmvV6G93sA68sHpjQQPpnCYmvSv31huboDmQozwGS7"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2Z11tfsXz66n5EF3AQZPvsd7C5ThXrjoEUZJqU8eMRhQ",
+  "signer": "natsai-mpc.near",
+  "tx_block_height": 223960184,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9gTit8DFeetU8er4nTNnR1mMYoVJGX6tGsFqQdyAduTw",
+    "method": "respond",
+    "predecessor": "natsai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "93PL9W7wqeqoxQHphT6dXHWk8asBseerc4W7N5tav2o2"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7k7jcY7uWqr4DHvUt1dsLPAt585gwoLS2oaYSE6XY2Bd",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223960180,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "C9eQuHcxZugdZBGGVgLxfmkNp99HKz6aKAMo7KgYY782",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "GQdurearMCJo2TmNHFSZn7vCMm1aiCsCRDq4iJwdD9As"
+   }
+  ]
+ },
+ {
+  "tx_hash": "De9JaH76snDYjdwjgB5tPr9SyPKd428NKcbQvGdrDCY2",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960174,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "H3TMYYqGKHbVqBecqTdACMaSXnSTZiDwp4m1QcUgYzEt",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "55yghtnitktZRdzrPtWtxbWjSnUy3nGHjWa4NbUV9AyQ"
+   },
+   {
+    "receipt_id": "DX4XHZ1cmLZW5vwkaZqmbph3jdj5JCrXuzjr2ZYgzZbe",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "FAhePcB8Ar4y11nYsGVQG9iaF1PueDc5VXWN3SjwPN5j"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3qu7QEhMqgfttfw3UTxNLhs8UGNbSPiHpZATweJ7NHw7",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960174,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Bg8gjUDhaRQgpHE4cc1VS6pgsYf9ZDWY2AbEJPzUgAG5",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "25mKKyT473xu93TdAyzhXeCU5MKVxzNr4PCaDBPdhUi6"
+   },
+   {
+    "receipt_id": "D96LKvBAFDuNi7v34MYdA8XnwSL7r6Kw5ZpaVbvr5Wc8",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5DvPDDhuL5zG31dGNJoxLSwog157h2ZL53xQsGX49hhm"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3vQnnv4X1RS6hFvCk8zms2Fs7rCFq4i3APeUxmjHfZos",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223960168,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "E1nXaUenXtLXf8yCVFPcouGeG7zZgHsELezeRGgaMuuT",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "BVSZKLAf5r8hT1sFhQ1Ui3kvPpnyGZFJDqeBrGkijw5x"
+   }
+  ]
+ },
+ {
+  "tx_hash": "AWU7UECUk9MacfstcnJxh5VkcnDw9azTgpfv6haFr7gh",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223960166,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FYhhJMXPhgXXEfujx3zJEvsgUenW4GpKkSAsPaUunWwj",
+    "method": "respond",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessValue",
+    "block_hash": "7Tus4FWkMwnhx69dhYadVUkWaDmpLcdYU32t3ZqCoBn1"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Ee2Lagyi748LUFfVgruYyZqz3yD5K23ALoDgzFGCuZNQ",
+  "signer": "klever-nearmpc-01.near",
+  "tx_block_height": 223960164,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2PsUZ7kuRrpVVWQKNR2gCaCXM1YugbcWRei6QmFoCC3F",
+    "method": "respond",
+    "predecessor": "klever-nearmpc-01.near",
+    "status": "SuccessValue",
+    "block_hash": "6UkSj2MksFyPDyR1m8ZNwtJutoU5v9xPMK3h2XbeyUzC"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5e6nts6nzxoDj13pi4nMyfBorDVeKtrNZ14pUgRrMbfZ",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960162,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GFkVPJHW3ZLdtS8ou9dbbUz6Vp5zyuACSATAazHPjicA",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5TNaNqZgy16W3yBbebnBeX6JoFXUowaQjvRYAMhYHGap"
+   },
+   {
+    "receipt_id": "HxcMWj4WsiCHGJBMdcZnokEpcxFQDk3x1UBYCKhNYnFB",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "Am9xzRT7WHRGo37shSzcpXJHSmDYd54YEDEx9Wei7hdJ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "YYUd2uHE4K6B2JXKCZHND9SanTCHmxxm5PMg5N3GhKD",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960156,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "61kwwcVhhy468EBAShK1YRhzWA81DZP9Fv3uJpxgmUpD",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "A6Vx5DACYXLsqAHhydK9WimC3qkAc2qNwfFoFathRSts"
+   },
+   {
+    "receipt_id": "E2XLoHLnHJLK6za4HWgKqSvYkMq1XqVnqhu2pHYs7icQ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "ESRJYV7v7VYtSVD86nzTCf5KYoWuqTfqEk1xW8kEMFBE"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Fqfu6LyquukPA3XvMf2tC6Pg6XQbA16xmGRmN9e7u8Zk",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960154,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7KVDSwayGgjg24jpGPeUjbDS3RtN9GtSxhGNqANCjXQA",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "C9kYh3zphBRX3vX9AVVUse7hyXajXxwcvu51aNQfjyBX"
+   },
+   {
+    "receipt_id": "53b2WwL8xcYCZW8oaLjK6jhttWXNA1Lj4FxLDY5Bih2k",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "G5mPCSJiCdFJtuVX5fWRFMQghNApW3CNqi5ncqjBAfsQ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3JDWZ3GybwQKvuxUz9Rgkr8FhstngpXALRbX4Xp1SzA1",
+  "signer": "multichain-mainnet-aurora.near",
+  "tx_block_height": 223960150,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "5u3HUfnYC3qw4GvW8sNqdgna9Q2gMF1RW3dJNo2eSRw5",
+    "method": "respond",
+    "predecessor": "multichain-mainnet-aurora.near",
+    "status": "SuccessValue",
+    "block_hash": "2Er7B34SGvAFaPGK3NuM77N69M9LNsYjBeAe2WkvHhNZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HVaVMg5acS7iZVztmC2mkvgAg5dGWaAjEbG7eDxav98X",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223960150,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3cZvVQXyEex42RyHXfzV56FPvWTYHuKL9UFfjTq8xCeQ",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "2Er7B34SGvAFaPGK3NuM77N69M9LNsYjBeAe2WkvHhNZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "B8Np4FGgjieWW7AxmbriwPW1kkqcpvUViWoHJ11jyv2D",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223960150,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BZ5jQSougJxVzBcTkEjE7X6GNmFQovBfnmPsHkK18hET",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "2Er7B34SGvAFaPGK3NuM77N69M9LNsYjBeAe2WkvHhNZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9pU9CY9xSjucJjWcBj3VybZsdGtU5dmczHfv1Gi73ZC2",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960144,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "D2EPifafJGbczXEkKW7sarXsoK9thTwqkBcyH1URtHjn",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "2sohXYor4zTzTJRuF8DW3MkrN64P1DQfkAZTsuTxFGSB"
+   },
+   {
+    "receipt_id": "GSNRVU3WeTJLaZU8zaBN9kXyS4uKreLVeLEc5LaG14pS",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2nn7Zvk2NB975iaLYksteS2CQVjyLNfmJUh1ki3Yy5NM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Dw3ctNHQq67ytSrmpiFRkkDpAkLNqnH4qE819qJPCsQr",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960144,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "54yYXXEhLyzY8mLikGpYd3wyLkQosuRn3UfT5ARc3nP4",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "2sohXYor4zTzTJRuF8DW3MkrN64P1DQfkAZTsuTxFGSB"
+   },
+   {
+    "receipt_id": "5sSDQJaNzmz5JaCxLFAV4RqYD3updMWr1PfV8KyXjdg7",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2nn7Zvk2NB975iaLYksteS2CQVjyLNfmJUh1ki3Yy5NM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "E1GJDRrdTCpogQUo741W3tfP7ScnP4uKHYsw6E8VZ9j9",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960144,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "38uzYSywBnn9FMBb1wKcpwsJcUQpyUpXRYDg7ju7Eg4y",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "2sohXYor4zTzTJRuF8DW3MkrN64P1DQfkAZTsuTxFGSB"
+   },
+   {
+    "receipt_id": "GBdnHkVxhuccb3NaHJPmEE9fRm8NGCueDPbG2A2jkJnn",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2nn7Zvk2NB975iaLYksteS2CQVjyLNfmJUh1ki3Yy5NM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7MitRKzVWRNFEKFp5AeX1Ax69ksGUhJkpdM2zDLSn5kK",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223960132,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9siGYu5kgVEQzuN8pFPmnQzHxLBovbfAHKfX5TijWfJr",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "HgesRs2roDDXPz4H6osh4uEhGtKeCsui2oLDrnA2K9vu"
+   }
+  ]
+ },
+ {
+  "tx_hash": "EQocg9DWzj7Sj8MmA1T9HeSkKeAxAkDHJPczwyGvadb7",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960126,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6MswQPuCk4QxsWSVfr3iDXVri6A6VoLWSSJ4cYAjt9mE",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "3gURg3vG7Ge4YcvtdYCvkzhTiMmBXpokB59NW6n7MtvT"
+   },
+   {
+    "receipt_id": "CaQJgk6RtUSCmKi2uawWEqjG2cD1uqc7fTgf8xykfnkz",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "EZ7ZEa3EQd35ioLk2aYQCwWsbpbGrTgoWGD4RTiaZtR3"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7S2jwWNsQUUut7kSdcYFoNc1hypvYfBvh6PspP29uoot",
+  "signer": "near-mpc-staking4all-01.near",
+  "tx_block_height": 223960100,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7wcgVx69WmKXMw1XZJp7utECRrzVDyxq5b2Tm2ifKvDR",
+    "method": "respond",
+    "predecessor": "near-mpc-staking4all-01.near",
+    "status": "SuccessValue",
+    "block_hash": "2XZV6WrRysx1woDLnU5fvTAd7ejrsfEMMX721Hz4BUTv"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FGyVNoba6RcvU7NJF4vLHZPsJ2oAKS2yVoME1RiCgj7r",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223960098,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "69DxXuToHawx2GY483N7n6J8symibbn3Drujg92DtAaX",
+    "method": "respond_verify_foreign_tx",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessValue",
+    "block_hash": "JAnbtQjfqz18wjUdxG1X72trmoF24VyXJ7P4P7n5vxGL"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3zMB5Wu57XW6Wq12Z9sgaxouqJw5SoKa9WeDM8R26JnC",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960094,
+  "tx_success": false,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6zUvUqdMFBzy3EarauHzMUpqMXRGauKwYTZULX75EXVK",
+    "method": "sign",
+    "predecessor": "zcash-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "Fz4rcJMTRfi3h3UfUCYLhzhhWTEs9UwUx6vrNiwLdKum"
+   },
+   {
+    "receipt_id": "4fxDvMfSQmBwVSk8oHcmhfgKrpqkPt7bcy5H9szvw437",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GpemT94Q8441GehY1WTYfgym5cvzJ3zUEKtYSTHkKAG6"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DYTsif67CNwEXQD6xHRpZAYkg4WGERG5qMGJVCifMqs7",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223960093,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EKoyjBNFZVaWbXABaQT1sQeq8VeCwKj2QeV8XgPAZMXk",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "D3vqBDrtxx1EyCHg3HwyQM2quYAN1dv4MPfn7mmxe5dc"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7rTZ4gs4hFv5XYw9mnUveNPP3n6DvPXntkcVZhga1sW5",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960089,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BPoQtcmvpgxYnXAYSuwo99WrzNigx3DFEqxkpDZdHM2s",
+    "method": "verify_foreign_transaction",
+    "predecessor": "mpc-prover-0_4_18.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "FTL8DXzwS733PYq6kLwkZybEQRP8aWHJh6DCeHv1jHDY"
+   },
+   {
+    "receipt_id": "FyoTWjdbeAPVM1YYT633XiAaNyzpszaGKjRA5wzNtfKg",
+    "method": "return_verify_foreign_tx_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "6aUjRGFTrbp29bBnXZ4FeKb91bUGwqPZiq7N8aqGdAvt"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HCKF3U2FFKZaACj8s7NZNevB3Sy6fLudJU2pRPL4yfbK",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960087,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "4bgTxTX2gYg4wvxLwxKMyj8x7qK2uoRHF924Ty2iK7E8",
+    "method": "sign",
+    "predecessor": "zcash-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "CB4Ls3P4vQRQTfPV13Ferxis67XVLx5gssXocZzsB8qn"
+   },
+   {
+    "receipt_id": "HzpGDvquPoMDKjzroYmEfEvQzceurRcbh1W883iELPo8",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2RzKXfQDcCiaY8QgRVMvmPSD3tJ3yveAaSGVckfzS5uQ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9NrK88XnuFVaCjsHSvQbi5SQtRLkNUcWgaTcVyk6MBgx",
+  "signer": "n1-multichain.near",
+  "tx_block_height": 223960075,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7RRhsnL3aiRgTxqftJNBDy8XJ6BptyTKZch4otXWFDbM",
+    "method": "respond",
+    "predecessor": "n1-multichain.near",
+    "status": "SuccessValue",
+    "block_hash": "zyv2AvmvSbSNryuE6JhE6XJkPDK13W51N481a86ZRSD"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HERwTr7odKFNNrbpG46j4VAqmxqaAKhL4gYxPTEeZMcz",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960068,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7v6Z9gzZsEpq1EVWSe7Q4npxdDjYxWmPZhiUAevfUjEM",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "FpUX3vgkNMzhZDDV9VazvBLnckNrpeWk3HAfK2PYA8Ne"
+   },
+   {
+    "receipt_id": "GLhSeC8D6UMpCSnKVfeifkMtrgjkPpPDtBVG5CErNgfF",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "FwXbTtg3djEBbPnF8H1zK3fajtPJPpWSRSRw4FprHvBq"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FqiLu2Z1rPsE2TehM7RP8zS3LU3cqK95QxnwpZEx4wyQ",
+  "signer": "nansen-ai-mpc.near",
+  "tx_block_height": 223960063,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FgGcfgVKtgfCdQrF69Avwdtnu2Nr8GvLFhemo9zwmuM4",
+    "method": "respond",
+    "predecessor": "nansen-ai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "EY9EGV4erH2LomZMeyEAzAznNFLN3bPxyf9Uj2kSS4aB"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Bzy8UjVPLGL3uv7u5Ecw3PXSCWNF8YzkPxU6QsdSUw1u",
+  "signer": "svrn-01.near",
+  "tx_block_height": 223960063,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CdM6H7q9pDWUyzrHodjKK8nYZuYLivqtZKYXutDURDXs",
+    "method": "respond",
+    "predecessor": "svrn-01.near",
+    "status": "SuccessValue",
+    "block_hash": "EY9EGV4erH2LomZMeyEAzAznNFLN3bPxyf9Uj2kSS4aB"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3B927JKFWEeB6vu5YFadJ2HQtURidzzjXvyZoPhrnvrQ",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960055,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "YQUQoYi8RT5ja6XkU2iumTdXmK3hXVuBBXoujipTrus",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "6Ba9JNodxTeSAqqcFYGD2bzWzcXKkkWZEybgQ4FyTcGq"
+   },
+   {
+    "receipt_id": "54stmGQ9hFBsLz5FHTwiULbDCtcZWHLY7YTyLn2HhsLh",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GRqk3UxiAMLFkgazAjp2DRXtyoodGjLQvtDoXpmdohUK"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7dWs1HxRwaRjFEDfznBPamoekkEU8E8PAen3p7SBqXjD",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960052,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "35Rfuz2zrb6Zskw3F7UDraVg29LRrrGeimwHhtsDfMQF",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "BGzkyccdt5tmMeKwqFjd71Wi8gk3rXnm3yAWzhXmBKx5"
+   },
+   {
+    "receipt_id": "F6cWmU1qGvBNSF3SiZYwjmDFsZyR7iXKoSjezvkCkw7u",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GRqk3UxiAMLFkgazAjp2DRXtyoodGjLQvtDoXpmdohUK"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Fpw415J67wqG3Ny1268h1BUmj39rokpdNRxWXG2MJbKt",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223960052,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GbgsUmZ8DT9x9JHSNbydrQMesHYho7pA9ddmH5P7gkmi",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "892R5Eqf7d9tLkuGJfqsgQszzDWN8AJtfBJQH97qHEPs"
+   }
+  ]
+ },
+ {
+  "tx_hash": "fPU7XCgzeog7xDeRGfMaAuUyRWHbDusPxXBeohFAbwJ",
+  "signer": "near-mpc-staking4all-01.near",
+  "tx_block_height": 223960047,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DebLub7HMfgpu2Ht4XcTranxqs4PrHb9NPZAgnz7jVCF",
+    "method": "respond",
+    "predecessor": "near-mpc-staking4all-01.near",
+    "status": "SuccessValue",
+    "block_hash": "GLUXu3n6fQT1eNfft3jSfSDNYaMV5ziJEsepjFqKEqgM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "74YptTSv6G7vHAVd3iNnQD7LhS2LoBT5Fp5w5sRz5r2x",
+  "signer": "svrn-01.near",
+  "tx_block_height": 223960047,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BejLJuMrQRREPZD5HqYUVhm1bPPQ8Axk8UdQAqeTgQkS",
+    "method": "respond",
+    "predecessor": "svrn-01.near",
+    "status": "SuccessValue",
+    "block_hash": "GLUXu3n6fQT1eNfft3jSfSDNYaMV5ziJEsepjFqKEqgM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HuMZz9pNafJ94aEvVPoewiZ4TuPwn732HZmvdy5pziYY",
+  "signer": "nansen-ai-mpc.near",
+  "tx_block_height": 223960047,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CPABobZPyKnvXYNoFZxFkpddVqkCHUPzFspiQT9FN3gx",
+    "method": "respond",
+    "predecessor": "nansen-ai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "GLUXu3n6fQT1eNfft3jSfSDNYaMV5ziJEsepjFqKEqgM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4vhxoYwS4TKiuQLCsMQhX6Kg6smJxiSH5FzzFTJEAWbM",
+  "signer": "klever-nearmpc-01.near",
+  "tx_block_height": 223960046,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3ERMVj18ZHm65QgHPdffT5CULaMfpZhE2k87t56j4QiN",
+    "method": "respond",
+    "predecessor": "klever-nearmpc-01.near",
+    "status": "SuccessValue",
+    "block_hash": "5QRnfg7VKiDDZX4YV2w3C4NiWsHzW9PHusAvCGfpQVBZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HCRMusGX9iXPyURpKPhxtdEgh5GqXVdYKp9C3qu95y1Z",
+  "signer": "bitwise-mpc01.near",
+  "tx_block_height": 223960046,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FKzHedsmyb5DPu8cqstmMbZG1tdVHMyRtnUM8KXA8xLP",
+    "method": "respond",
+    "predecessor": "bitwise-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "5QRnfg7VKiDDZX4YV2w3C4NiWsHzW9PHusAvCGfpQVBZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9PPvm4sctaVprGApeUS8obMz4K2UojvuxofX1C7wbV3j",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223960046,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "5gFbHz3QWbA41PMPGx4iysbKRfJEQsatbT8WPy2dBseR",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "5QRnfg7VKiDDZX4YV2w3C4NiWsHzW9PHusAvCGfpQVBZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DAKuSwz3bE42TsQEgj5rEkeGnkKrua7BrN6cVScZdJAZ",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223960045,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DVnnTpWoKYugysuTrWbk5QjtiVejFgtWZ492oaY3Cadt",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "BpcmsgrRMx1Znjqc6o89XhVdeEuVHac1hWrB2po1wHS"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2GimD4xiW2eJhTKXrqf26xPgf3DPQkJvQXmfB5m6U14S",
+  "signer": "accountant-usdt-meteor-vaults.near",
+  "tx_block_height": 223960045,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2THok7hHR8ZZgPm3gc66hFhN6ZxKo6RCiWyPdwr55ZDH",
+    "method": "sign",
+    "predecessor": "kernel-usdt.meteor-vaults.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5QRnfg7VKiDDZX4YV2w3C4NiWsHzW9PHusAvCGfpQVBZ"
+   },
+   {
+    "receipt_id": "CDHe35H8PCB59JxAVZNQYxFqDeTEDoMKew4JWfUJ1a7m",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "7LoZJCVWJicUoUqnUmKfSBirPBbJx6krXaEkDDqsbNwH"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4Sc1FeTjrJvUGqYjUuWoZZdd5MwrTgnyKakz8Lk5hCyM",
+  "signer": "klever-nearmpc-01.near",
+  "tx_block_height": 223960040,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AH2vLfVm4YVjUUmPrcBpkVHkrQcgWJVTA5MvJkfTTHEU",
+    "method": "respond",
+    "predecessor": "klever-nearmpc-01.near",
+    "status": "SuccessValue",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5TTKt8agBpyuNKafqkbYucF8TtfZ9aUkSvmqD6iRzXg9",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960039,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "G2cmDgEX1eQcmQVxdEW4DRdhHEJVch8uLx8eoBVpbkvF",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   },
+   {
+    "receipt_id": "8TphJAXJuErYtkU7o7NQhDvB3tpscFB1ucXHcozWWjYH",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "AmwV96JW6mHxD8YvbtdYH6eZziev8qfaLkRxLe8o5xYp"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3XxTvttnk2YszDdVcK9K9Z9SesPz55JuvsLYK55DL1WH",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960039,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3yJdijReDfr4zPsnbHECbez8BMtEoVvxHBJgfPr4x1xv",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   },
+   {
+    "receipt_id": "J5FFvDGnaBjvM4vRfm6cYoKX4NBAwHJtTArDDm4eAZwY",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "AmwV96JW6mHxD8YvbtdYH6eZziev8qfaLkRxLe8o5xYp"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2Pib32q8ahgc6eSRmNj4Nq5jQvgcK3bGF3jK1AzvsPUS",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960039,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "A8BWqJkmQduzbrX6Qj9jCAcK9YKmRkNrznxAvBZ6fkty",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   },
+   {
+    "receipt_id": "D3kp8PGdVoDanbLbsxgdwSTFc5xX24cN9jRi4LabvUuT",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5QRnfg7VKiDDZX4YV2w3C4NiWsHzW9PHusAvCGfpQVBZ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "F6qucwT6HAofU86AfvQJruuDsraNVFnrib7k34EMyUuM",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960039,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "A33YNCQwvJR9jk5t3nXapzpB5nezjaqFDY4uPxQjHDE7",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   },
+   {
+    "receipt_id": "J3yC4zgeviZUT7XqgYXdYrZntNxTEugykJXyPbAr9vP1",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "AmwV96JW6mHxD8YvbtdYH6eZziev8qfaLkRxLe8o5xYp"
+   }
+  ]
+ },
+ {
+  "tx_hash": "ELPy4My9C52bhfiJbwiz5w1UM5sBgSFem4XJJ7vKr4Da",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960039,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "5BdArsaYH7ESzj2Sso7UR33Q8PZdiDdZq1GuvetJTVy1",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   },
+   {
+    "receipt_id": "4z6DV2K7tc4ALso9yAHyBPTn7oGhPRr2T6ebq2i74oQZ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GLUXu3n6fQT1eNfft3jSfSDNYaMV5ziJEsepjFqKEqgM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DVS8VMiqqqUGZWs7PsDWztN32c9GLAbTVnChngjgL69a",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223960039,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AEHvFae2px2eV9ty8DsrT7C2mfbB7sMZLu8k3AvHRSK6",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EGtCfb4863eS3pZuZsrhACnhEYZFpyBf1xgAJC3mmhVi"
+   },
+   {
+    "receipt_id": "B3SoqHwjEVrhaJ6QtEYJNWa1C2WSXb3gDbPMcmzeDd5p",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GLUXu3n6fQT1eNfft3jSfSDNYaMV5ziJEsepjFqKEqgM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "27Vcs2EtTnsye3ex8VxY8YWfw1GeekdA14QGHAuxTMyJ",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960036,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EfNraGQMWyxuVccS9npwgE1KsAL5bFz8k7SPtghLcUmZ",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "DkATPKhNnRKqvypvCa5PYWg1nanYrbHJ7HkgWMT9PYJy"
+   },
+   {
+    "receipt_id": "BNUSLfVFmHtKsHk4MZmht1RQKGEpw27KN9A1JzfXp5Jm",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GLUXu3n6fQT1eNfft3jSfSDNYaMV5ziJEsepjFqKEqgM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Ag3EHcovaWyf4GcvrradN7QbVEzs4HohYcP7Gnqfhzmu",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223960027,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BNL4SVjj94BCLREpRJ1CdhUkkeiBFRvZDsvMw4Ynktzt",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "9MLExrV1vq7qaav5zyZcMT6W1ThH7JG95wcX6NWGdB1X"
+   },
+   {
+    "receipt_id": "6SqTjEnsa9PgPzbQtBeQYYLx6mhGwzRgQ3HwxbqWw1KJ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "DkATPKhNnRKqvypvCa5PYWg1nanYrbHJ7HkgWMT9PYJy"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HRfakuFzvECQPNcN3A9WjtkEJhCg2Tj8WNnuq4ZFZgDQ",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223960018,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7axuEHk9VyRmY8C4St3rTX7UBmxkzUpxYkDFg9XJynAV",
+    "method": "submit_participant_info",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "63QhgS2PaMUBc4rb5HLwTxk4QvrCJwWEJtzMDDLGnyY6"
+   },
+   {
+    "receipt_id": "3GACQb1U5egKC17SWgqbpoCYyncAtonU3yoAa3dUHofv",
+    "method": "resolve_verification",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "9dYLniKGHGD29KpSYnjfvucCiFgKNSB4QJPs1E7EqUB6"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7bPugtLsqcDwSGi6kUmCPBL5cReBe4j8fCCsvmK2QoHT",
+  "signer": "multichain-mainnet-aurora.near",
+  "tx_block_height": 223960008,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "JBxERLXGXSZ54DdjXRrMYJiVGLruii9NGZaST5RiiB78",
+    "method": "submit_participant_info",
+    "predecessor": "multichain-mainnet-aurora.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5nuTc6qeZf1qBC989MLAE2SCgEuDZyWiGoWvRWv5weTw"
+   },
+   {
+    "receipt_id": "ANdvzAsK2XaCpeojrxzq8UkYkzEK8giakSdJE7F4615e",
+    "method": "resolve_verification",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2XunwoyFjd4277tiuqq9fG3C4ACPy1cpbumuiJrLvxrY"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4vsaa7jBuqd2yYyPqTJmMJ2c2B3zNVnjk4y3k576ek7T",
+  "signer": "near-mpc-staking4all-01.near",
+  "tx_block_height": 223960007,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Bpggrg8DewXmbXzqtBWVkUnjteDAyKQAEaw92XyHhymD",
+    "method": "respond",
+    "predecessor": "near-mpc-staking4all-01.near",
+    "status": "SuccessValue",
+    "block_hash": "4pFTxRQYDUqWJjWd9o62rzCUmXY9K974RqpgpQNKRUoW"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DhC123g21jn541mp5vAKES7PHhQLr9Ksj6ve2o7KwW3h",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223960005,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6qGMHitZ14XJh1ntvDtSyWbtpj9acBF31hhAqLmouVcg",
+    "method": "respond",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessValue",
+    "block_hash": "FUgozDr7WWi985xZUt35FmyVmon2v2Vz8AkbAM4x1yy"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9CsSdq3gVybHQjDbmWHqvf2Jfg9CXjZ6jjimVtyNUrgM",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223960005,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GxVrN1qE3NC5acC2Qyf3nAWh2YsRqHUq5SaV2gF8seP1",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "FUgozDr7WWi985xZUt35FmyVmon2v2Vz8AkbAM4x1yy"
+   }
+  ]
+ },
+ {
+  "tx_hash": "GfzfeXydGFbH4v3W6yek2S9KtAmtX3p96aP478wLZ9eR",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223960000,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HgpuZPyqmzm7MunbvYyHoNtemhfqGBqeyjxb8jxvfhxi",
+    "method": "respond",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessValue",
+    "block_hash": "wsc7W1rA52TBTp6owedRKvTCmN1KNRto5N2vWuAgBAm"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3VVeJwCm9631QGrbSfgsRRuG4zuMhcxUSmFTbbai9Egp",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959999,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "66QxrxCUSb8K3fapZFDWs38oda2SZMvjcXKDKs87R3r2",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "wsc7W1rA52TBTp6owedRKvTCmN1KNRto5N2vWuAgBAm"
+   },
+   {
+    "receipt_id": "8FtAwYQAVHygktWyMGxKgG5hB3wCeotvueiman5gmUWZ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "3HZACAhiYxN2DGL9pDuDrAGXDhPs3eHG9ayqyUw3cGD7"
+   }
+  ]
+ },
+ {
+  "tx_hash": "8gMUBCg4JE4HV2PqPQJYGLf6DNqwi2yytmmZ5k6CT7hx",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959999,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "C3tFkbaPgiFrHeB86F7t6eXKXQAqepc4S1aVNQXvK1kL",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "wsc7W1rA52TBTp6owedRKvTCmN1KNRto5N2vWuAgBAm"
+   },
+   {
+    "receipt_id": "9xoNVPBbYzPf46DhvgkfcnkNW23aKKmpvp7t2xCU5K4n",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "3HZACAhiYxN2DGL9pDuDrAGXDhPs3eHG9ayqyUw3cGD7"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Esc7jVGz6HRDH3JTQPCWBrUyQPxqvj2h5y9ufL4ZA65s",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959999,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3wRG2RG79ieSWUhiLxQ1iN4QGxxaLkYehK38GyDKWg59",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "wsc7W1rA52TBTp6owedRKvTCmN1KNRto5N2vWuAgBAm"
+   },
+   {
+    "receipt_id": "8SHUbhYvwiUsSG2aj4kzX2xGHQ8jANks3a8oLPxV8qm3",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5nuTc6qeZf1qBC989MLAE2SCgEuDZyWiGoWvRWv5weTw"
+   }
+  ]
+ },
+ {
+  "tx_hash": "12gbjuuowZhMfJfcSakHYWThrCWXkwoL9ajQxEuNsLs",
+  "signer": "bitwise-mpc01.near",
+  "tx_block_height": 223959998,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DpV3KeTNVYRQDgoPWwWMHm7McQaBTikJ75ieTZHeaXkt",
+    "method": "respond",
+    "predecessor": "bitwise-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "FaUknUogt4snQCLs6ks5oThw2KD4884UdnoqgRHRFV8L"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2XC1s25EYebNncUQEK4oLmpcQkyN8YvMt6JZS4GPTqG8",
+  "signer": "hashkeympc.near",
+  "tx_block_height": 223959996,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HTrUGuecUU5LgcgoFkcaXLE5qiK2YMXLDUeHUAuq2yJN",
+    "method": "respond",
+    "predecessor": "hashkeympc.near",
+    "status": "SuccessValue",
+    "block_hash": "GVbR8LbU8tehAWFJ7B68Es9CgLGzYVTsS7YjMT7NkYZn"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7gXbcWPbFQFCfx9oLpWXhoZSVTguNhjWWmRwyAwNK6yf",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959994,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9DFHEMLAK1RQpEMCbDRsGVpbeUufpdk4TRrtFNNir8gP",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "6opXs6SSjyTXK1p133dLZAa2Z5hthLcDGrV2hsdfeTSD"
+   },
+   {
+    "receipt_id": "2JzUcn5M6TB9UQEmnyPPEtwDMTjvVxJjHqRNqj7U3CJC",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5iFtdjPvw3piaeAtHC8ckkvRW4zyhRA7UuaCcd4rDPs"
+   }
+  ]
+ },
+ {
+  "tx_hash": "AfhZUM33BcUCP5JihhfLFA5xUm7eu3RZru7jWdoV2Pfx",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959990,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9ycByQHeXyhut4xJDqUpVXxsHjfrPnToJkepLcMT99sX",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "JCbqLZ8QDvUfxgNz9N75LBAr86hHwmedkiGGQEvmfoXt"
+   },
+   {
+    "receipt_id": "81ktf9JLkeE8dEw3HzxVak4rUr5ZVK5aJ23ck38igXty",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "3joEuxf2GPgYmmrqbt7CU8BYYNe7nf956vt1ZpsqRdvN"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9am35o9HrcMgsCqhNKQ56bGKJLZAmMv6XiuHeFj1Pe37",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959988,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2eByyQZrdN9pBGYKipYkUjWrzb465184wDBiEoMKyqQ1",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "8x6TqX42em2jhUtkTDqU3DstYzhkLU3CTT5wNZq8GGap"
+   },
+   {
+    "receipt_id": "159EvfUdLvtShFi4Lkkp3L94KjmEjrQ2F1JGYjXvUXo",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "8CR97w5UaokD2LvFW3GqaWWscoCT2zn7HYXp1rvsrhzJ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "opHVZ1sqnAB6erPDtqKhKjrgRPsEnv9Grqy6XyDfaFL",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223959988,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2yDqq7TnGUqoeNfLWdwMiCDeqgWJLnk3ScaxbQ77SJsZ",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "9MdRpwWhnK5Y8CvPntj7atV1i4bsKZ8ZVQvBz1fFUgCi"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5KfctZybTRD781FygUHCMPUndS858UEj3VVcQJam4e8r",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959982,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "G62wZkqvTVTTDEbDbGoyKzAKqCjYVfKTCygbg6jzwvVQ",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "Em4o4EBH2gxLXDz1i56ED7TSwNTa9sxSZ3ojCVjjZeBk"
+   },
+   {
+    "receipt_id": "8Uedi1PiMNjgiU2m9wFLZSDDDyAJxrhtUj3uQvAoaPqK",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5Vf3hrd6cGuNqxYAfWky5UycrGSVxkXYXEXsopzanBba"
+   }
+  ]
+ },
+ {
+  "tx_hash": "6TSDvC7rchT3uiY9qYcnXnBTTHs7LEW2eTK6R53UXKVb",
+  "signer": "natsai-mpc.near",
+  "tx_block_height": 223959970,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FdTfpA62fte8f3jgtv6DBQWhiPQKKMtMD67iLqzqNjwo",
+    "method": "respond",
+    "predecessor": "natsai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "49H8NcjcUYbic4s4GjuBWhaBJUZQA7PojnQp48RwL1gV"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2AakHD6kiKia81SAqgxFcVJkt3QKPg3ae4uEyu3KJ1eQ",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223959964,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BGJsmYKC6UEmfceVHpg8TNC7228Bpb1Mgz3vqQRgmK4U",
+    "method": "respond",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessValue",
+    "block_hash": "AbowB52EBgfcnEnf6Asj342zTfmimPiiG9kF26bE6dZc"
+   }
+  ]
+ },
+ {
+  "tx_hash": "6xED1R4enYdShzvDmAzpGsqQYdVb5HanyovtGNYt7YW5",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959963,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "H2NaKGKd1gcgSV8kCqMnffUNW2nSgh7YJwe6frt9AVf4",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "AbowB52EBgfcnEnf6Asj342zTfmimPiiG9kF26bE6dZc"
+   },
+   {
+    "receipt_id": "GttEgyCRgh6syeZgAJw82RkhafbiMj2t5NJkYLuEUEZ3",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2CMXXsESvpHXatDxdhus4W5BEVod1xfFRJ8R2TA5jqdb"
+   }
+  ]
+ },
+ {
+  "tx_hash": "AbJLF8rdbqJfH5osf11r11A9nsofGh4pKeyDHKgLEGFC",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223959962,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "A5b1TB7U9VxUrzGEjri3ENNUSnxQ3oS4HEV5kb7pHYA2",
+    "method": "respond",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessValue",
+    "block_hash": "8pWbgY9sETCum55mqkzKutz5228omncqfNH2ESq35EjP"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HsyeqfmxKpC51fZcirry4WAePatcJ49adMLYr3YHEb8F",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959958,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9qpP7GpZTrWcSCpzrzhLHPGrhUcPov5J5tHB3M7R8zZ4",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "9HaQq69pfKWvf1KZJtKofi87tEjaaaZgD7kAjcke9ZY6"
+   },
+   {
+    "receipt_id": "5m2i418TzDsWNFQdHofLweMZpUGXvdZziAc5i191BTAc",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "4hk7wzM59iHPMw2apqqgs3ZMcJ7x6FTW6snMCujWVUEm"
+   }
+  ]
+ },
+ {
+  "tx_hash": "iJHAn4kj1VDjHnfcX1xXsM9Sc9FuGPrAmdrs4LEXTBf",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959956,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "4uT5KvVN91xTgZwQJMCtG63ECUU3QfSmEBfEjctRokNE",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "JA1iRnjuhEPePVoUBFjJSh6dTtq6MxRz7Ko49dqxiCqm"
+   },
+   {
+    "receipt_id": "8RRngJHdQtBbGfvjaCmcmeBvn9RTwpwgcdwkaSiQg5G",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "GBfXsaQPYym4wcra1hbqJx9Wzr2DU7gt6APqsHGu1SCV"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Cex3mi7DD1TPLYBJEtk5HXirPeQAqJrWPe27JdwxsNmz",
+  "signer": "svrn-01.near",
+  "tx_block_height": 223959956,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DpQeRwyzh9jJq63aSBq6h7mFfUozd2WNYbduvWkX4oii",
+    "method": "respond",
+    "predecessor": "svrn-01.near",
+    "status": "SuccessValue",
+    "block_hash": "GyEtCpzA94BZm6SxybebQipgBkdEp34ZdaDeit9Ju8pG"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2pPKvjzRp9a282KhquoQVtBBwXKerv7foVd9TxqJzTk2",
+  "signer": "natsai-mpc.near",
+  "tx_block_height": 223959953,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GNXgAcrjTxb8Sd4VwyX356tNR4Rrb3GmCkshLghSy2L3",
+    "method": "respond",
+    "predecessor": "natsai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "GMh46bcmUQCqwYF4qnr35MpvHy7FJZpQxQcBFU2iSQfA"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4ERJkrHAYVJzQWwq1xhq3vd2RvdEdjysHhQHuSgWXVdN",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959949,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FSU1HUCfiVPdtu7mUvYwYPW5JpcdqJJaoNagRHFaKjGS",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "AXArHSWAjibNKVGyiFkt3zPBHLewNg2NLQPTyeRjRThv"
+   },
+   {
+    "receipt_id": "7EGUHWr4nK4EKSjbyKczuc3AHubXBaA2ZB3t1YuzhErc",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "JA1iRnjuhEPePVoUBFjJSh6dTtq6MxRz7Ko49dqxiCqm"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HPtSoQaXxW7vFA7ULtbmsi1jDK4vhXi6jNHmXphzdjdf",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959947,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BrotWoyAWnU8BE13drwCrnRywcwL4j4ugSigv2U6YCyS",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "4wiiVa92NKKsaeYicSJM4hYdwMPueK94Jrnstm5CN8H1"
+   },
+   {
+    "receipt_id": "4MQg8uoteUcMvXuzhMXUGXCxX1kUdecTEPWdQiyuBAnA",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "ChreMQSXwJQyofK523wa6EUw8aQzv9dJcQT9MTVLVCR9"
+   }
+  ]
+ },
+ {
+  "tx_hash": "EuU5EyBcPXEnTP8k3VWte7NDaaJ15cZ3imsXQY6AYBxd",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223959924,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "fBN8ZvSrmbp5rqq9T6wWsKZzAj9W3NB6iBkhsJS7jBb",
+    "method": "respond",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessValue",
+    "block_hash": "8MEtpLFKcoyVJwUurAvQuoFzCg9mCSzeDBEaTmBjt8Gz"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5BjDSxyE6QunVu32XLXKTnGifDmNQymjthV7P7sMS3EJ",
+  "signer": "svrn-01.near",
+  "tx_block_height": 223959923,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9MLBNmDEFxE1K228XRSYVtfDTbt3h6yPpDQAbKt9BB3Z",
+    "method": "respond",
+    "predecessor": "svrn-01.near",
+    "status": "SuccessValue",
+    "block_hash": "Fx87FNdGqMKKGXVaiWEZCkMmQa17xTSAcyFCfBC5XJCs"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HcZScrFoCGBSVcxmEnXBCsazhj6bjQkhfzWWR7WRqFDq",
+  "signer": "klever-nearmpc-01.near",
+  "tx_block_height": 223959921,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6wohoKn9Ve4Mi742YA8j8Z2tYRCQUhgqjSRCZEPyfBj1",
+    "method": "respond",
+    "predecessor": "klever-nearmpc-01.near",
+    "status": "SuccessValue",
+    "block_hash": "8juwsn1kx7gckz1m6t44maf3j9Quo5iDP22FNHVuonwA"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DYzbU32PGLN77eHQekZHBnw9Hij9FMqhLgbyV2begPGM",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959916,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2De6MvUsmWCqx9FbtihFE5YFpP32C1EcbdEutEiutiy1",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "BcPQ9Nz9n7ALtr1YfVr9K719oHGxvdfV2bErh4iaiBJb"
+   },
+   {
+    "receipt_id": "CsFTDJB9PfAGi7FgTSQUXmCRDq7kCmm3EUU8eQhrtYrQ",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "8MEtpLFKcoyVJwUurAvQuoFzCg9mCSzeDBEaTmBjt8Gz"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FSuCPf6tmUbDebxWy2vLLWTZGU3mJUwbennZdGWHBpJ3",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223959916,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Ey7tCKQoJt8Q91jepNfj2tZsQ9SyihH7kyc9svWk5Fab",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "9QXkSZZZ3HADBjoYivXyG9CVPHRcLNS8ieXNBSiEa35Z"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5HGGGttYLh6sBYDx9rR5AkCKAoW3NRH6rB5mKofpmi8N",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959913,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "5tPwu4ajDhgA8BPoRoej44HcrKYMpX3s5So3d3QxEkm1",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "9kZ35rKWm4WcfsxQCDkzv27NMPiCvgYHtUvvcK8dPtZx"
+   },
+   {
+    "receipt_id": "CgyusnLkWWRaMLeM53x54YCSxYfP5CJgZ1EfDqmhEvDH",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "2GLTk7RCcFV7naJWMZDh359ApwS1adZi9Bb3q3EHAjqb"
+   }
+  ]
+ },
+ {
+  "tx_hash": "JAr9VPzc2UEHcmEqJjtyQt18fMH2jHpVd7W8b1JtRVjp",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959910,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6YBb4WYpQeAS9urm659BzvMMLHk5NRMLq9BmkVHkpsL2",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D1U2Vp2HaMoLQj5ktnFCMcUYmNnJQwscBMWwbKpZiyJb"
+   },
+   {
+    "receipt_id": "4MtMPTayACxQ1DtQFp8i66V8icJcWzVAYXKi5gEh4pWw",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "7MHcCxLmREgzN8HLuukRmNopRezqME7p7Ty3YnhbJcfr"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Hr43QMGiWpJiHLHtWMDjHqJanPubKAwAD4J8rRwhHKVe",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959909,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HkS7GjXoy6KPqkCiATAPpDZzK5fzEYH67u9N2ep2jEPc",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "J95K63TrC2o2RkZpxjcfQ6iVbYXk79bnji4374ookj4t"
+   },
+   {
+    "receipt_id": "GLTJeLrTHzN9rN7MvMtf4NenMzgLba8aSGaKvL764gsK",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BcPQ9Nz9n7ALtr1YfVr9K719oHGxvdfV2bErh4iaiBJb"
+   }
+  ]
+ },
+ {
+  "tx_hash": "EG3uJBMni1Er7Mk7PYcsrRB8f2rkdVdESUneRmm1pUBy",
+  "signer": "multichain-mainnet-aurora.near",
+  "tx_block_height": 223959908,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GhecC13aQAEE4NeVih5z1hC514zPejsn89JqDnb6H6pw",
+    "method": "respond",
+    "predecessor": "multichain-mainnet-aurora.near",
+    "status": "SuccessValue",
+    "block_hash": "J1L3eny7uYNeParA2rwyY59uJzRE2nvGPgjuGa96bxT3"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FzLYfhtshfP2nZJB57fWrGKWnDKusv68GvYkmfSQ6hmm",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223959898,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7A7K27L8v9pMhsB1rxCAzEWWDkohkxMebE2hWBG18VxZ",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "8NC1Vh6Yy1n1dYjrwNE4kdG4fu3Ve6AF2qVBrZjLs1mt"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Gf2zoNv9Es5ZkJBpDuD5SK28hRDP2AyE46hsAreH4yZb",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959897,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7aBiocMwa9XKyPCMVCoU9XAXA8999JLRoo8iKMk4bixE",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5kSDWgScWPu1yaGPkaJjNQJuLbww9ipdbjhiE7z2v3Ph"
+   },
+   {
+    "receipt_id": "DSjYkFUsLNa2SuoouaUTEtQF8PNFAvM2pbSG1orFTtZu",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "7cYvXjFEksFMJ6f2E1qDEvgfoj6FvGrYf5GjQxK2Cs8d"
+   }
+  ]
+ },
+ {
+  "tx_hash": "8aGi8j7uZvSBC9ffGiK5tNM1JY1bCA3h1DPNoEYUey7e",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223959897,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Dk6pEzPRAtk5pSHgrtcCDsi2jQ1HYNvgoeo9Pb13WZp",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "CRYnNgZKuVYPVeWXFPdAeRQVbw8D8SxqqukbZNyrd8v5"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Cs7gymLeDyHfcwUW4MV5HVhxCDtx3EPvDPaFNLAdvgTh",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223959896,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EtVEp4w3qdrtrxDbPeGhHepBynxVB2Y3GPcxnhfH984s",
+    "method": "respond",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessValue",
+    "block_hash": "6fek6UThnBKiRYcWUSBc31n9nwCKMLUmSCK7rfZPHGo8"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5tUy7MAsJKTfEvVMUEtKkFvTP4THPJQGJpNuymav1Dwm",
+  "signer": "svrn-01.near",
+  "tx_block_height": 223959892,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EXZCSF98gLs1bNVA2VKXtktHrnJsQbUzjGyHxG63RBZi",
+    "method": "respond",
+    "predecessor": "svrn-01.near",
+    "status": "SuccessValue",
+    "block_hash": "ZYevxACfUVaepvNWxM9BkdpTXGXfPUhQRoTfMNHURXH"
+   }
+  ]
+ },
+ {
+  "tx_hash": "GRikcNngbg6rcuvuktrJJGQ49hCkkAZp3EjEHc6Sw4pQ",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959892,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EgEb1CWfxufaYmNf9SKeXMsgL53wvR95h1kGyoE2Jsdw",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5MTKfzSMYVk8KnWAW9bC9u8myKjm9wtfeycbEQrcT6hd"
+   },
+   {
+    "receipt_id": "5aGwErDEFR4GexGfCrNfXu1prPCtdKAYqKyzYoUS82Md",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "ExYxCLCc9M2v2WsfUMRGc4aAAjExm486gWUBa9NNsEkg"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FM3NJpHAGAcBaY9Q9fhvLCQphpGdMUdPpDNZzN4qpEYj",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959891,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "5tdhgQ5YdjhKNiyxCypKGqMQMz3SuVN2qPxh5yru2R79",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "ZYevxACfUVaepvNWxM9BkdpTXGXfPUhQRoTfMNHURXH"
+   },
+   {
+    "receipt_id": "G3Wa5NErPRTYGYD7qxpxaUtLDme44SRsJas6ECBDcEHt",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "8NC1Vh6Yy1n1dYjrwNE4kdG4fu3Ve6AF2qVBrZjLs1mt"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2hEL8A4eQU4xzZ7kDuKpU3veJJbbqV6wGS8eW9tXYaXn",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959887,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "H6HpApi7Jd2jEkG9LKnRQ2XaTCadgs7NRCwaho9vuaLj",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "3btDBpV8fdpwZPS3ZqNwhkQtctNYjhfAdZGFWjyznGu6"
+   },
+   {
+    "receipt_id": "CzXEcp1WyqiTcfcdPt1DhuhG2WxsRZtja9Utnh1przsq",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "CRYnNgZKuVYPVeWXFPdAeRQVbw8D8SxqqukbZNyrd8v5"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3wHZxH8ecc9fpHHn3DtHVhMr2WpMWdiDPHhDxierAjkV",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959886,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "8HVNFtu3vTsqxzHAgt6WjjGs1Ur33oppjPXBDjfjJKCM",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "AeRYdGz89LiVv2aKNSzq6XmVzFQfqMRgYTBhWdC9N1Ab"
+   },
+   {
+    "receipt_id": "556Xbk26uChrZe3dhojFiT8yhN4JypQsYtrgwMDrcHqv",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5MTKfzSMYVk8KnWAW9bC9u8myKjm9wtfeycbEQrcT6hd"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Bz7aRWvpEmwMzvhhCTPqvdK3wtmwGbsSDd71AyES8NG2",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223959884,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6DoPMGcACbB4DqPmDQaPjiBRiTSXrxEscMkqihMGXGzU",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "FcqLiXcvkcJJwGMq8epCtNZsBZssDriiEEPk2y7aPWix"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5FufTcdbRWX12NMWxQYUVhrjBWraQXeBwS2LHBNyxMH1",
+  "signer": "klever-nearmpc-01.near",
+  "tx_block_height": 223959878,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7zxmpRqK3pUV8u1pW6DfcahgVmeadSbv7ctBBv91bnyB",
+    "method": "respond",
+    "predecessor": "klever-nearmpc-01.near",
+    "status": "SuccessValue",
+    "block_hash": "GmBjhSYf43FxCiVoCojtS2ngSzL7ts4Unuw4V2LbPZqs"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FZpzsWJj9aELJz8Z138AFeP6vVFwdzwjPLdQxwVUz7bX",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959874,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9miMBfMDZHbW9gEwC3ELuUBaeainGx82E1NrBJYhj3TR",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "Hq4NRoB6quy6KhUHcQNDXRKgpfjKyuzECTUF8rr5LTqJ"
+   },
+   {
+    "receipt_id": "HfS5shNcKDYgKb8s9YSGmHiS33EMXmfmeyDLixopipgA",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5RF2KaExJmTtCWjAdRbBvPuvSNyB9tG3MkshMANCBccn"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Hd6nYHReAfLNfRpZn7o6PRvidV2MNGjAiAkfBx8YB4Ux",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959872,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AZvN5FgzqXLQeuPBTP5XYnLHcpajUmrtWug19PbrfMd9",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "BHRmXMi8G832sJgBScra1cmZzHLEFSvFmy4KNpepPwB2"
+   },
+   {
+    "receipt_id": "7PZg1EBE6Xk1qSEMphPWo65zceQR3ms7GVe9x7Es8FSh",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "Hq4NRoB6quy6KhUHcQNDXRKgpfjKyuzECTUF8rr5LTqJ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DKT6WYWyoMueeFne83HscHhadUoAJvTc786zViAHN1sV",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223959863,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "57NrZAV7qjvArL9shE7oGCNWhszXCpvdGdfBdHxdPF5j",
+    "method": "respond",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessValue",
+    "block_hash": "3YJKRQSHPb5RABMcdXeCmcd7tWNv9KQADDPimMoTrjeg"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3CHNbSn7aFpAgVg7VSx9SpkNKXh1UXVHZqtaSghVhxZM",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959853,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EYeo4pDzK8JSZp1WtiLfn4d3LmTTZ1jFpFJ8RCBFoSdv",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "MGQyKoVUxYHDEWS3C1EVdD7eLPwmDzcSRMqATxxa81T"
+   },
+   {
+    "receipt_id": "2agcVVKaK5PPyDC66qRSsExXneJbKS5ijyeTDoTqm6Lm",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "HDaibjffZLz4UAvM7nXuoMNimA5nEWaUV48iNcgZBGnd"
+   }
+  ]
+ },
+ {
+  "tx_hash": "hFfZ1bfbf983DHgnBhKGNXuqAh7SWt8KnxUGszLbrC7",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223959843,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "HmxMMwq2Pq23EBUUGwK7zjrXSUo9HGDNmD8xB4W3GKzZ",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "GTZS5w7ToiUixqKD3XiMNo76FM82LGd7dYK5Tv2HetNi"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2kLKvnzfC6CviN2gqL9dNMVyiD5c2B516DkQDBsywNeE",
+  "signer": "multichain-mainnet-aurora.near",
+  "tx_block_height": 223959836,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GcnMhvw6nJLzBMnjLH1ZmJT7NPzK32fd2StG9XCjk8Uy",
+    "method": "respond",
+    "predecessor": "multichain-mainnet-aurora.near",
+    "status": "SuccessValue",
+    "block_hash": "FK18WsidGhvddz7ibKpYcoQgBYW3AgUx9cXk1AxhvWVC"
+   }
+  ]
+ },
+ {
+  "tx_hash": "5dAWvTbTL38N4rak5d7nPKovwV5sFHrwejocEeBqZyBN",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959836,
+  "tx_success": false,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3GnwhuH156zT3AYTGkMXeNgWanEyEzTxTuXD4C2oxwfF",
+    "method": "sign",
+    "predecessor": "zcash-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5CCRDD5XRTkvYxHmkMF3vUADtB2gukMaoQCsokBnkAKN"
+   },
+   {
+    "receipt_id": "35jUpPaT5cDNt57rrpybggDUxDDfnGswYn2Z6z7MssxM",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BAC2FA2PRaChaY8pqsQY6pV8gE5bLhAhBmsJ7zM8XgvD"
+   }
+  ]
+ },
+ {
+  "tx_hash": "LyzYjMXkJtd5BnMao8ijeWPgK1TVSVaGujGjvLADBdb",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223959835,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3LxDDhsydG8BUVFJQvqN9yf4A6CLUszxGVip7KaSjb7y",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "G9aQC5V1hZEF5xL3wFN2mYQQkPud8ejxwXQwxZLZ6T7z"
+   }
+  ]
+ },
+ {
+  "tx_hash": "J84jLBFrfbJ4QYmzcf2aaxVdf4dF2d9WUdRABAvmypSW",
+  "signer": "n1-multichain.near",
+  "tx_block_height": 223959834,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "ASz8EBLAquUbkkWNYND6vcq3ur9svBtGBvudRjFsqKPa",
+    "method": "respond",
+    "predecessor": "n1-multichain.near",
+    "status": "SuccessValue",
+    "block_hash": "4wFTN9zTfTGU45hzkNDLRbc6yAmyC5vHGgww2n3KAhbN"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Fcn7th2h1koDFcQFfmH9d5nQtSRnq3mZZqbmvdZB81mj",
+  "signer": "greenfield-mpc01.near",
+  "tx_block_height": 223959831,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "EW3yzbNGMJz4toQeJStp3u2gYiySAwBgcGCMs6QenRLs",
+    "method": "respond",
+    "predecessor": "greenfield-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "8SQzjHR95PTnfyGs2jG2whXVueVJMM9iYSGtB4q4Ss5v"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2yoUKjPHpqosiUa6k7EvEtFY3oCxDuymtzmfMxPKUft5",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223959831,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FDYVm6SrtmUWDojWqQ4N1JDMgya3ekEgcGLoDc2LsURF",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "8SQzjHR95PTnfyGs2jG2whXVueVJMM9iYSGtB4q4Ss5v"
+   }
+  ]
+ },
+ {
+  "tx_hash": "96rLqrgQR8YdkuLt6fUBMrf1jvvEQkcHY7AwWSaZw4vn",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959830,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9vqG9rjRajuZYUyk1RbD9aPBU7q333xPuT9MSYU4Ri7Y",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "8SQzjHR95PTnfyGs2jG2whXVueVJMM9iYSGtB4q4Ss5v"
+   },
+   {
+    "receipt_id": "FMBNWzo7PaftkND9jaXtY4jBeaUhVwyBPjVLss8rSE87",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "5CCRDD5XRTkvYxHmkMF3vUADtB2gukMaoQCsokBnkAKN"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4TJeKWTRZ7qpxabtnHH62xCRGcs3RChswckDTiQtyNAu",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223959830,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FXjWu52zYXPDjEMrsJGfxvZr7C4jMz2ccebja2soFvEe",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "5scstvqB5F8QxZEhdnL5sQhvCP6dCND6TnCSnbCoDsBd"
+   }
+  ]
+ },
+ {
+  "tx_hash": "6p6HvLbdghaQrvDiMesWN2nbz3npAwU1zCudvvbWksfH",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959828,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AnG1z8M1zfFgKK1Qg4hkL4Pq6S6hvNnHbHtwevmHVqz1",
+    "method": "sign",
+    "predecessor": "zcash-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "EKw7TGnsu8DYAjbWkQ5CgY8cX4NBAktQqeEm4zizNgTL"
+   },
+   {
+    "receipt_id": "Fn9qhUwngYfs4xoSa5c9WjKYkReBANbnnF4yL8KAPkND",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "G9aQC5V1hZEF5xL3wFN2mYQQkPud8ejxwXQwxZLZ6T7z"
+   }
+  ]
+ },
+ {
+  "tx_hash": "4T3THWyjGMGqcyNUwrgEkycxFhELypbjg2pSUAzB8APH",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959825,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "82ZUBzeekrkNPqoH9k7G1yLi3Y6kYwcXyTa9HjG5ZH5F",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "5scstvqB5F8QxZEhdnL5sQhvCP6dCND6TnCSnbCoDsBd"
+   },
+   {
+    "receipt_id": "Ef1PBZxxrqwp4mTwwQMc5pFCVH6BPN67m3jY1T35G6y9",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "FK18WsidGhvddz7ibKpYcoQgBYW3AgUx9cXk1AxhvWVC"
+   }
+  ]
+ },
+ {
+  "tx_hash": "CFzAUg6RK9vZ1GMyFQ4MMne8MxMfa5udhweRZtZ1H6vm",
+  "signer": "stakin-mpc.near",
+  "tx_block_height": 223959825,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DAuXDCcXtCa366gVPk4PwTrk8mE7aYZyzRLUqzQu1J45",
+    "method": "respond",
+    "predecessor": "stakin-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "7Dr2aoVvYP1kToxboA8Cswa9v2SuFHP89ed8un3E6nMi"
+   }
+  ]
+ },
+ {
+  "tx_hash": "74ohPfxtZuzn9X39yFi1cqT6ke45DFzeef71zB2a6e6F",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959824,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3pYvrXMqCiTFaAubLZbniMW1Xf8ZUu1JfxpEnXZYMyKA",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "7Dr2aoVvYP1kToxboA8Cswa9v2SuFHP89ed8un3E6nMi"
+   },
+   {
+    "receipt_id": "AD3pHZj6B8P9v7gv7koLrBS6J7rfqcKjLvmAxR6z3cz7",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "B24eFfFpthgmqy8VirVjjMGKngKqLyw1cwyweHpsjtWg"
+   }
+  ]
+ },
+ {
+  "tx_hash": "J5EG8sHrbTQrckTyzM1tK3FCsf6yqNXfDMfWFV8mFSvz",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959824,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "VesSSfsy5Zp2GKB5dUtsvkQ3X9tzKXVqHX7GkCieP5R",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "7Dr2aoVvYP1kToxboA8Cswa9v2SuFHP89ed8un3E6nMi"
+   },
+   {
+    "receipt_id": "FhCYJoEKuPp849yYa6YUuRPwBU78poNLgN9XgFEXL4oF",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "B24eFfFpthgmqy8VirVjjMGKngKqLyw1cwyweHpsjtWg"
+   }
+  ]
+ },
+ {
+  "tx_hash": "CYCizFmRbqvYh5fN6Ey9Ej297KA7vNWNBzgALtb3mid9",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959824,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "DjWmQygRtE3hf9g3fooaimBKHxHWijd6XmyTwWzQ1Zbz",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "7Dr2aoVvYP1kToxboA8Cswa9v2SuFHP89ed8un3E6nMi"
+   },
+   {
+    "receipt_id": "44g22B456eLC4esPQHTfAufhhSEZJQhcaJ6vbWCJvatx",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "8SQzjHR95PTnfyGs2jG2whXVueVJMM9iYSGtB4q4Ss5v"
+   }
+  ]
+ },
+ {
+  "tx_hash": "7e4qFpjtEgqZTeyqiNWFFWgAiNDwdAfTGXyBj1EJoLQL",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959819,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FFkpen2RNdNA7T7xRDVVaeZeicuKewTEPkB6WQnDeEdw",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "DoNJkPQiE1sQR5ZYjAZEe9BhtR7sjqaHq91V5zVdjHa9"
+   },
+   {
+    "receipt_id": "68gJ4oYhGaRderozUeqCsfTrkUzP7544Nue5Art7pGek",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "8uC1ShfVDtWqKw1JcKbAPVX5H1qKf8bGoQL7DfhQpWT6"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2SL8yaqkwvw3mMYvkxRCeci9VpsrxqiqBNYh2vmqYjCt",
+  "signer": "nansen-ai-mpc.near",
+  "tx_block_height": 223959817,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AkFLH4ogdAFAXSa2okPFRnBMWzjQ8ySrkxQyQ9na5DL6",
+    "method": "respond",
+    "predecessor": "nansen-ai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "415Qtj48WCog8GW7QPThNnsSx68uGrKzigu7GtbwkCvH"
+   }
+  ]
+ },
+ {
+  "tx_hash": "Gext3sgoR3tvfpZzuXyHFsh7LV6a51ay4kizuYd4Afio",
+  "signer": "bitwise-mpc01.near",
+  "tx_block_height": 223959817,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2iq1wpDFTjHCupBgSEYcLPyUA6HnD5pKrcQZ3WG2JgJQ",
+    "method": "respond",
+    "predecessor": "bitwise-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "415Qtj48WCog8GW7QPThNnsSx68uGrKzigu7GtbwkCvH"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9WR4FboNJ87QDKgMz77iq5Pw1c4NSr6JHLTdWiwqmU1N",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959811,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "D5JjoAXCf7ULdYozgrDCpoRwToKFABL8gy2sSCaEbzSF",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "9CZBgpxYeG7tYQaRzib11DtiL6c7Q3m1hyaWWuFtRCiL"
+   },
+   {
+    "receipt_id": "A3aoR35DXs4UoYd18i515w2Uo1UVEPDRRoEUEf4zev5H",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "Ge35A1qswmwPNPFNwdQKa6fYfPDoYwmMsza3dWNP2aqz"
+   }
+  ]
+ },
+ {
+  "tx_hash": "EYaet6yjGBtcKMmbkBExHQvUV98e2cjhi4FQPZWeohaD",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959811,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "AEPjkTnknntokhGZ6Ac33jeBTHN6i1T2Gs3cnjQaYo55",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "9CZBgpxYeG7tYQaRzib11DtiL6c7Q3m1hyaWWuFtRCiL"
+   },
+   {
+    "receipt_id": "6no6FwvxVut5AmACkdtHt39JZusw9QwToAFwA3EvZCwD",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "Ge35A1qswmwPNPFNwdQKa6fYfPDoYwmMsza3dWNP2aqz"
+   }
+  ]
+ },
+ {
+  "tx_hash": "HLMmRnLesuX8F5npzpSV1dBaNhDz3ujGvozpV3igE1EG",
+  "signer": "mpc-lgns.near",
+  "tx_block_height": 223959785,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Gu7qy5SCxYbLM9eDyKrpRwZmworvDiY5Z1T4Us79TD69",
+    "method": "respond",
+    "predecessor": "mpc-lgns.near",
+    "status": "SuccessValue",
+    "block_hash": "2eWLXNYb9CUMyJz4Kgj2mtwhkTEjEzcubRgNH2gJXwLQ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2ufaT7Bo5EBdToLjVEHW6VHBZANNGwMWGn2yEwteAELv",
+  "signer": "n1-multichain.near",
+  "tx_block_height": 223959785,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CRL2vbmBejEJ8qydCPWouqxVwRhWSz6fiXd7voRrhPjw",
+    "method": "respond",
+    "predecessor": "n1-multichain.near",
+    "status": "SuccessValue",
+    "block_hash": "2eWLXNYb9CUMyJz4Kgj2mtwhkTEjEzcubRgNH2gJXwLQ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "8TZMbdffGf7cApJ11nReegpaDDKGEUFnv2Gwz72oHdAa",
+  "signer": "astrostakers-mainnet.near",
+  "tx_block_height": 223959785,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3GVTUTh13xD7AukLD3jNmywGn7AN4w6fmQDrpaZv5Yuv",
+    "method": "respond",
+    "predecessor": "astrostakers-mainnet.near",
+    "status": "SuccessValue",
+    "block_hash": "2eWLXNYb9CUMyJz4Kgj2mtwhkTEjEzcubRgNH2gJXwLQ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "313mpCMp2YERAsePFckfXRwCHGgourxSTeP75QtMPUJF",
+  "signer": "svrn-01.near",
+  "tx_block_height": 223959782,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "Ep2nYh5g8VxwLs8RsDjjeX8XdS4MMsywpxZMBUECnAY8",
+    "method": "submit_participant_info",
+    "predecessor": "svrn-01.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "8BzaNwqmGYHuhX1wbLw4YAWuXuSucwpLJAp5a2wU4nkE"
+   },
+   {
+    "receipt_id": "82hy3WvEu1PgF7jFVs5MZt6FaGK1GkpHhhRmX9fxHoUd",
+    "method": "resolve_verification",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BnD1L3Q5h6S2SKUGC1gjGgKFDMzxTaTKuS3B33KG8qVg"
+   }
+  ]
+ },
+ {
+  "tx_hash": "GXQ9woXLA1HUxdFpM4R9sXQFabWh97y5Bjr47pQY91af",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959778,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "94wfgtrMQdjwhFwWmtCtUanQ2ZZJsRFWmSfM9orpzwPS",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "G1CoQkaXptqZPbMgL5amdea3rxr1QZGCjf4zQGuffKMA"
+   },
+   {
+    "receipt_id": "4eH3SMCQQarYfZVG7SuAKSquuvrgFvtnbihDGbwoXhdp",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BHhk5ZMDN9AcsFf5PF6BsqUyT8EG2NwFLUsD9k9tJFEr"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2F4tGs93YnV6PTMHpp4NeCVNvnqc32tJsaGfEtna5PGW",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959778,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3tJyyxnxf3RvWS5daNKYqHAM1kaooN41XbQj2zoppKwm",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "G1CoQkaXptqZPbMgL5amdea3rxr1QZGCjf4zQGuffKMA"
+   },
+   {
+    "receipt_id": "CRcdtw4VgKiVNBz3B9WhdCrysUDNtmj9KhKQCp7o229X",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BHhk5ZMDN9AcsFf5PF6BsqUyT8EG2NwFLUsD9k9tJFEr"
+   }
+  ]
+ },
+ {
+  "tx_hash": "35nCYuwGZAB4TnSDYCUQqrzbuCn3NT2oQxE5EdXYpwKd",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959778,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FNav5u24XnUUeDpJETWjf8xLP19AYAuLeMRKLiD89Xg4",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "G1CoQkaXptqZPbMgL5amdea3rxr1QZGCjf4zQGuffKMA"
+   },
+   {
+    "receipt_id": "CWanaEF58j1TspVSk8u96Asx3HVc6HzcWJM8g83pxkqp",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BHhk5ZMDN9AcsFf5PF6BsqUyT8EG2NwFLUsD9k9tJFEr"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3yijUiRQqpV7w2xoAA9b6eEMugifHSTv5fBhpSqqo6w2",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223959775,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "9BaPUrxX5V5uR2B24Z5zZg3ZR6BMUQcoirYS9HAT9XLH",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "EgsRLeKZaLL8PTKJpuyyEL4N8rixxxkxQhut14VZGmFu"
+   }
+  ]
+ },
+ {
+  "tx_hash": "BuMpTmePrhyDDyMJwLuuL3AGq8qgP3fLzLob2aK8Pwnu",
+  "signer": "natsai-mpc.near",
+  "tx_block_height": 223959773,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CBC99co2np8LkDKoqR49tSmEiYPVxyVywtc8DBtkdvJR",
+    "method": "respond",
+    "predecessor": "natsai-mpc.near",
+    "status": "SuccessValue",
+    "block_hash": "7zY7g11HAdUgTYJa4ufYvJkKHqitYE68JpoDRYxnNyVJ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "BtmT52gUSHhrKdLA3Wr9cndUvHXWKipWLt2RqDR5tCFs",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223959771,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "BozTH6DB7eQSXXVbFpVKnqi88wUvStBaKmPzAGKgkLZ9",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "FLUcjn2iVx1hPA8MKufV6L6N2y1kz7gEv9SJ7BPeVMUe"
+   }
+  ]
+ },
+ {
+  "tx_hash": "CjjexZQ5qegTUMkCEpLFHQTVcBWg2nDRc1XdVrL1gVwq",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959769,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "8nNQLgpywsVWdEWbAv6VQ6XMWhRnu6Regw2zGiW3umWZ",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "55k6Gg3KA8NsSwCFzgqcYGVGZ2gcEM2bhmCFDeFMcGGg"
+   },
+   {
+    "receipt_id": "B3HQnXhEmWCcMctKyKg1CPeRSd772zWggBYQ3AFgXQCD",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "8gCwEwdfMM2R1FmY5TchM5aJwgUKVmscBQKLSJuStEBP"
+   }
+  ]
+ },
+ {
+  "tx_hash": "96iwYj5hA72AhzkLrgy8AAyqowPjLPcx4uhWS78haa5Z",
+  "signer": "tx-bench.near",
+  "tx_block_height": 223959768,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "GHx33ziJqrdoeL7pxjZyWWJ1fvC6ctuFcurqertGc3Az",
+    "method": "sign",
+    "predecessor": "tx-bench.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "6ZR6kfNgqGoD9XMY9XTfjcmJKUqf8SKpE5o91K2TNBcE"
+   },
+   {
+    "receipt_id": "2M91Fob3vEijrWYdZyq4mNJ7K45urVNXbu9abSTsM98P",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "EBk8LyJebAuUpPnJX8ti7ef18jEFv1fS5NCca9B9ujBe"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FSnaA8aNVD8NrG9QSEEBTPEvPKh6nV7PBaxJ4SKMSSmr",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959765,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "D6HMkAC4ubV62M5bFLpSPHV33FxBWhVNuJcMaTduZUg6",
+    "method": "sign",
+    "predecessor": "omni.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "8ov14M3Pua5YewTxmg7fSc6obcUr7aTXdMHKJ6eZ32DX"
+   },
+   {
+    "receipt_id": "Eibc8rbpeUGtifZU6jQ4Ew2LHmhYyu2hj7bgcetaUpDF",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "EZeH7U8md1W8tZ4rPHeok5E5YotjjbiHUfNtXiXiznww"
+   }
+  ]
+ },
+ {
+  "tx_hash": "2iHYxnnPAirztVa7BeoJXFAsfAB3JnfLX9XBd6xVH4fb",
+  "signer": "bitwise-mpc01.near",
+  "tx_block_height": 223959764,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "7hVZVVKn57nWjVzZkwwjb4wYjTUiG5B175bjAmEcpCrS",
+    "method": "respond",
+    "predecessor": "bitwise-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "3qZkh7r7euDiTrBjziW49nskquaF1mhMPQCo2u9RUEEM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "672e61bxSiaE8nRgybXDSc7YPLsg2Qdr6CeSDdXym5ew",
+  "signer": "hashkeympc.near",
+  "tx_block_height": 223959763,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "FWtJFq1ZxJNFtLmb7qCm88QYTBCknpJQRNXVaawNyg5y",
+    "method": "respond",
+    "predecessor": "hashkeympc.near",
+    "status": "SuccessValue",
+    "block_hash": "4iYhSnEnWXv1HqWbGXTgAXn77aSm464VqBpffWMA1QYC"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3ifr7ggwiTWbWUA23WzG5BoW7jKQw24fbMLqLSKBgtTp",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223959762,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "8Tzmjeo6CDo5inQv87UwP4zwoLrxrqmm3mVeQJqTmRRo",
+    "method": "respond",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessValue",
+    "block_hash": "5bgtp6MwVFFu5dDF9MdHbZtYirx4pvbxdL1JE7G551Fe"
+   }
+  ]
+ },
+ {
+  "tx_hash": "FnU9TYk74yAJi5s24dJKogkMZiDhhXgWQwWfqJJZukV4",
+  "signer": "everstake-mpc-1.near",
+  "tx_block_height": 223959762,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "5zYPkJTHDPUJ9iBkq5WQFYt38U2nJmHNEKJffnU3dxKR",
+    "method": "respond",
+    "predecessor": "everstake-mpc-1.near",
+    "status": "SuccessValue",
+    "block_hash": "5bgtp6MwVFFu5dDF9MdHbZtYirx4pvbxdL1JE7G551Fe"
+   }
+  ]
+ },
+ {
+  "tx_hash": "GdwwmvDU3jBzbCzppaxvdCJJN5Ujmxbn7ExX6APMSAiA",
+  "signer": "hashkeympc.near",
+  "tx_block_height": 223959757,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "4rbmPPt6gbL6sHQeKHSGXrfydm82Lru5PiyuauWypXt8",
+    "method": "respond_verify_foreign_tx",
+    "predecessor": "hashkeympc.near",
+    "status": "SuccessValue",
+    "block_hash": "2JkgReXxttiiSNnMTSmoAuYUy6BX33bMr8EVwWsKdf74"
+   }
+  ]
+ },
+ {
+  "tx_hash": "EG3FFyuMgF32WP2bnQY2yUSR52tLLffhrUpkrXNR4ycR",
+  "signer": "bitwise-mpc01.near",
+  "tx_block_height": 223959757,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "D4TNEw8JWKjNZC9gqxnWJogt1fp6N9JTobmMGuUCXvox",
+    "method": "respond",
+    "predecessor": "bitwise-mpc01.near",
+    "status": "SuccessValue",
+    "block_hash": "2JkgReXxttiiSNnMTSmoAuYUy6BX33bMr8EVwWsKdf74"
+   }
+  ]
+ },
+ {
+  "tx_hash": "3Vn6Xymeum2USGdchPBsgLd4cG7Qh6UBNLNF2apvAY4h",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959755,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "A9NLSMVoByiozUe6B1TQ6wTRKGqFHrXkG4EyK93Eb9Vy",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D7ZLhfHvLw4EvW8KFfWN2RUvKhcWsPtvRVY6imvq578s"
+   },
+   {
+    "receipt_id": "3KCNnmWZHSA7XaAyHnnsbuRto6aemq4fCTaJwt2LoY1C",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "4iYhSnEnWXv1HqWbGXTgAXn77aSm464VqBpffWMA1QYC"
+   }
+  ]
+ },
+ {
+  "tx_hash": "BXLp4aE3n8fM7y6MCnYPfusEuMCZyCCQ5bgmTCeWSzHa",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959755,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "CeZ5grt8yyY9fgXno4uPUMVGCB3DMA8u6zBkJdThMjKt",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D7ZLhfHvLw4EvW8KFfWN2RUvKhcWsPtvRVY6imvq578s"
+   },
+   {
+    "receipt_id": "2xwYKbAG9wK73haWWFUCEprWKrXmuXJPZeCw1JrZDkA1",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "4iYhSnEnWXv1HqWbGXTgAXn77aSm464VqBpffWMA1QYC"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9y91bBjaDG3tgnLJP3fKUa6dkGSNKyEqt5VrAVVCM67h",
+  "signer": "omni-relayer.bridge.near",
+  "tx_block_height": 223959755,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "3fS6TnfTqqGaG4r57bGY97v5A8CppNE1ddPvFBynQxGi",
+    "method": "sign",
+    "predecessor": "btc-connector.bridge.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "D7ZLhfHvLw4EvW8KFfWN2RUvKhcWsPtvRVY6imvq578s"
+   },
+   {
+    "receipt_id": "3WokZ4U9XNQa8seHQPxdrXSTLUWEXT2tbEZGqcM3rZMW",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "3qZkh7r7euDiTrBjziW49nskquaF1mhMPQCo2u9RUEEM"
+   }
+  ]
+ },
+ {
+  "tx_hash": "J2gFeeZzogYRodNMjRHJUXbPtkHqRT7HU6XzPBpeNTzo",
+  "signer": "mpch-01.near",
+  "tx_block_height": 223959755,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2SRcJaGkQ5bjfhPGuCCokFAv2VXygRcPjae9KoSNANn1",
+    "method": "respond",
+    "predecessor": "mpch-01.near",
+    "status": "SuccessValue",
+    "block_hash": "5MXwMd2wSXR2hqq9wez7PyE6VEaNQbogd3QUHQSBYRwQ"
+   }
+  ]
+ },
+ {
+  "tx_hash": "9yH6qxrBwcpJGFwSHmdjKJ3cua3ptgktK9gwaY18xaNu",
+  "signer": "near-mpc-staking4all-01.near",
+  "tx_block_height": 223959754,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "6V6bxsUVJwKY3Hb2SHyuiCFT1TM37J5wMMQg2JoWEoAm",
+    "method": "respond",
+    "predecessor": "near-mpc-staking4all-01.near",
+    "status": "SuccessValue",
+    "block_hash": "99F4ymbRfruvShUm9EVuAaJLox84JhYGi6eML3rC2tVb"
+   }
+  ]
+ },
+ {
+  "tx_hash": "DEH6GQMnCMmmuvkCXVMmb2vfNMrLhAvAAjzhog66rQ13",
+  "signer": "sweat-relayer.near",
+  "tx_block_height": 223959753,
+  "tx_success": true,
+  "v1signer_receipts": [
+   {
+    "receipt_id": "2cmEAMmB7KMcg1J2GeNRUspGtjrAQnisnYW6TPJbmWUg",
+    "method": "sign",
+    "predecessor": "fast-auth.near",
+    "status": "SuccessReceiptId",
+    "block_hash": "8frnomu4EPRga4FHfinLbNtBkEc55xSeACTdMMQE8cJM"
+   },
+   {
+    "receipt_id": "23CekRn14JzEEub7gZFYgmpKLoSESwijVPapT1wYKKFk",
+    "method": "return_signature_and_clean_state_on_success",
+    "predecessor": "v1.signer",
+    "status": "SuccessValue",
+    "block_hash": "BwBt2EPT9N6WoXE9maKT7XqsFTGKS76S4EySzfJKE4w9"
+   }
+  ]
+ }
+]
