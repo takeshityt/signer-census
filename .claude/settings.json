@@ -1,0 +1,19 @@
+{
+  "permissions": {
+    "ask": [
+      "Bash(git push:*)",
+      "Bash(gh repo create:*)",
+      "Bash(gh repo edit:*)",
+      "Bash(vercel:*)",
+      "Bash(npx vercel:*)"
+    ],
+    "deny": [
+      "Bash(near send:*)",
+      "Bash(near call:*)",
+      "Bash(near tokens:*)",
+      "Bash(near transaction:*)",
+      "Read(.env)",
+      "Read(.env.*)"
+    ]
+  }
+}
