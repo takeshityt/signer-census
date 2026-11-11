@@ -43,7 +43,7 @@ const labeled = [...labels.byAccount.keys()];
 const topFailed = Object.entries(probe.totals.failed_by_requester.est).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k]) => k); // requesters with the most contract-rejected sign receipts
 const benchmark = labels.benchmarkAccounts();
 const { point, ci, monthsList, names } = estimateWithBootstrap(clusters, totals, {
-  seed: cfg.seed, replicates: cfg.bootstrapReplicates, requesters: [...new Set([...labeled, ...topFailed, ...ranked.slice(0, cfg.topRequestersTotal + 10)])], extraRequesters: 0, drivers, benchmarkAccounts: benchmark,
+  seed: cfg.seed, replicates: cfg.bootstrapReplicates, requesters: [...new Set([...labeled, ...topFailed, ...ranked.slice(0, cfg.topRequestersTotal + 10)])], extraRequesters: 0, drivers, benchmarkAccounts: benchmark, pairs: cfg.pairs ?? [],
 });
 const flat = flatten(point);
 
@@ -86,6 +86,7 @@ function block(prefix, provenance) {
     target_chain_families: group(prefix, "chains", names.chains),
     target_chain_rule_confidence: group(prefix, "chain_confidences", names.chain_confidences),
     key_types: group(prefix, "keytypes", names.keytypes),
+    relayer_share_of_requester: Object.fromEntries((cfg.pairs ?? []).map(([a, b]) => [`${a} via ${b}`, V(`${prefix}.pairs.${esc(`${a}<-${b}`)}`)])),
     other_request_types_receipts_est: Object.fromEntries(REQUEST_LIKE_OTHER.filter((m) => names.methods.includes(m)).map((m) => [m, V(`${prefix}.methods.est.${m}`, 0)])),
   };
   return out;

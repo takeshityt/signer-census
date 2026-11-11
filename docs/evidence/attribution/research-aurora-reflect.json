@@ -1,62 +1,210 @@
 {
-  "accounts": [
+ "accounts": [
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "Relay Protocol (relay.link) - RelayAllocator contract on Aurora",
+   "what_it_does": "NEAR-side Aurora XCC account of the EVM contract RelayAllocator (0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f), which calls v1.signer.sign to MPC-sign withdrawal payloads for Relay's cross-chain depository system.",
+   "target_chain_evidence": "Not Aurora/NEAR itself: signatures authorize withdrawals on Relay depositories on other chains. Docs: EVM payload builder (all EVM chains, EIP-712, Ecdsa, domain 0), Solana/Eclipse (Eddsa, domain 1), Bitcoin (Ecdsa). Verified source also has Sui (Eddsa) and Hyperliquid (Ecdsa) payload builders. Source maps Ecdsa->domain_id \"0\", any other curve->\"1\", which matches the observed mixed domain 0/1 payloads. Exact per-request target chain is not decoded from our data (inference: ECDSA = EVM/Bitcoin/Hyperliquid, EdDSA = Solana/Sui).",
+   "evidence": [
     {
-      "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
-      "category_suggestion": "third-party-app",
-      "owner_or_project": "Relay Protocol (relay.link) - RelayAllocator contract on Aurora",
-      "what_it_does": "NEAR-side Aurora XCC account of the EVM contract RelayAllocator (0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f), which calls v1.signer.sign to MPC-sign withdrawal payloads for Relay's cross-chain depository system.",
-      "target_chain_evidence": "Not Aurora/NEAR itself: signatures authorize withdrawals on Relay depositories on other chains. Docs: EVM payload builder (all EVM chains, EIP-712, Ecdsa, domain 0), Solana/Eclipse (Eddsa, domain 1), Bitcoin (Ecdsa). Verified source also has Sui (Eddsa) and Hyperliquid (Ecdsa) payload builders. Source maps Ecdsa->domain_id \"0\", any other curve->\"1\", which matches the observed mixed domain 0/1 payloads. Exact per-request target chain is not decoded from our data (inference: ECDSA = EVM/Bitcoin/Hyperliquid, EdDSA = Solana/Sui).",
-      "evidence": [
-        {"kind": "onchain", "url": "https://explorer.mainnet.aurora.dev/api/v2/addresses/0x7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f", "claim": "Verified EVM contract on Aurora named RelayAllocator; creator EOA 0x8B5E4dB198FfC7f69f8F11F6592f682717dF1D92", "quote_or_value": "\"name\":\"RelayAllocator\",\"is_verified\":true,\"creator_address_hash\":\"0x8B5E4dB198FfC7f69f8F11F6592f682717dF1D92\",\"creation_transaction_hash\":\"0x1431a1bb1501e485406620bbd953a24ae693c72a116b01b139dd8c70b61853ca\""},
-        {"kind": "onchain", "url": "https://explorer.mainnet.aurora.dev/api/v2/transactions/0x1431a1bb1501e485406620bbd953a24ae693c72a116b01b139dd8c70b61853ca", "claim": "Contract creation time and NEAR tx", "quote_or_value": "timestamp 2025-11-28T13:27:52Z, near_transaction_hash Eg2TRCmSD5sHkk6fxtnNwhmAGrFNCdEvZrRGNW7kQjDG"},
-        {"kind": "github-source", "url": "https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0x7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f", "claim": "Verified source (contracts/RelayAllocator.sol, solc 0.8.28, MIT, verified 2025-11-28) is by Relay Protocol and uses NEAR MPC signer", "quote_or_value": "\"/// @author Relay Protocol\" ; \"/// @notice Manages cross-chain withdrawal requests and payload signing using NEAR MPC signer\""},
-        {"kind": "github-source", "url": "same smart-contracts API, RelayAllocator.sol lines ~234-247, ~520-540", "claim": "Constructor arg _signer = v1.signer; signerPath = own address hex; sign request path = signerPath; domain_id 0 for Ecdsa else 1; sign called via Aurora XCC near.call(nearSigner,\"sign\",...)", "quote_or_value": "decoded constructor args: ['v1.signer' string _signer]; \"signerPath = Strings.toHexString(uint160(address(this)), 20);\" ; \"keccak256(abi.encodePacked(payloadBuilder.curve())) == ECDSA_HASH ? \\\"0\\\" : \\\"1\\\"\" ; \"near.call(nearSigner, \\\"sign\\\", data, 1, gasSettings.signGas)\""},
-        {"kind": "official-docs", "url": "https://docs.relay.link/references/protocol/addresses.md", "claim": "Relay docs list this exact address as the Allocator on Aurora", "quote_or_value": "\"| **Allocator** | `0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f` |\" ; \"The Allocator and Security Council multisig are deployed on Aurora for integration with the NEAR MPC network.\""},
-        {"kind": "official-docs", "url": "https://docs.relay.link/references/protocol/components/allocator.md", "claim": "Allocator uses NEAR chain signatures; chains signed for", "quote_or_value": "\"The protocol currently uses NEAR MPC chain signatures for its signing infrastructure.\" ; EVM Payload Builder: \"Ethereum, Base, Arbitrum, Optimism, + all EVM chains\"; Solana Payload Builder: Solana and Eclipse (Ed25519); Bitcoin Payload Builder: Bitcoin (ECDSA)"},
-        {"kind": "official-docs", "url": "https://doc.aurora.dev/crosschain/xcc/aurora-to-near/introduction (found via web search; page body not fetched by me, paraphrase from search result)", "claim": "Each EVM address using Aurora XCC gets its own NEAR account named <hex address>.aurora, which is the predecessor seen by the NEAR contract", "quote_or_value": "search-result summary: for address A the account created is A.aurora; the target NEAR contract sees A.aurora as predecessor. Not a verbatim quote."},
-        {"kind": "onchain", "url": "RPC view_account 7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora", "claim": "Account is a NEAR contract account (XCC router), code hash identical for both .aurora accounts, no access keys", "quote_or_value": "code_hash 5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe, storage_usage 121641; view_access_key_list keys: []"},
-        {"kind": "onchain", "url": "https://explorer.mainnet.aurora.dev/api/v2/addresses/0x7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f/transactions", "claim": "Recent txs are signWithdrawCallback (the callback of the sign request), tx count", "quote_or_value": "method signWithdrawCallback(bytes32 withdrawRequestHash, bytes32 hashToSign), latest seen 2026-07-31; counters transactions_count 1481551"},
-        {"kind": "onchain", "url": "RPC view_account relay.aurora + view_access_key_list", "claim": "relay.aurora has no contract and is a plain NEAR account with keys; it is the NEAR tx signer for Aurora submit calls (relayer account), not an app", "quote_or_value": "code_hash 11111111111111111111111111111111; keys include FunctionCall receiver_id aurora methods [call, submit, submit_with_args] plus FullAccess keys. (Inference: generic Aurora transaction relayer; its owner not verified.)"}
-      ],
-      "onchain": {"creator_account": "EVM creator EOA 0x8B5E4dB198FfC7f69f8F11F6592f682717dF1D92 (also the contract's _owner constructor arg)", "creation_tx": "0x1431a1bb1501e485406620bbd953a24ae693c72a116b01b139dd8c70b61853ca (Aurora EVM) / NEAR tx Eg2TRCmSD5sHkk6fxtnNwhmAGrFNCdEvZrRGNW7kQjDG", "creation_time_utc": "2025-11-28T13:27:52Z (EVM contract); NEAR .aurora XCC account creation time not checked (NearBlocks rate limited)", "code_hash": "5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe (NEAR XCC router wasm)", "is_contract": true, "notes": "EVM-side is_contract true, verified. Active span in data 2025-12..2026-07 fits deploy on 2025-11-28."},
-      "confidence": "high",
-      "unresolved": ["NEAR-side creation tx/time of the .aurora XCC account not fetched (NearBlocks 429).", "Aurora docs page text for the <hex>.aurora naming only seen as a search summary, not fetched verbatim (the first doc URL tried returned 404).", "Per-request target chain not decoded; only inferable from curve (ECDSA vs EdDSA).", "Owner of relay.aurora not identified."]
+     "kind": "onchain",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/addresses/0x7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f",
+     "claim": "Verified EVM contract on Aurora named RelayAllocator; creator EOA 0x8B5E4dB198FfC7f69f8F11F6592f682717dF1D92",
+     "quote_or_value": "\"name\":\"RelayAllocator\",\"is_verified\":true,\"creator_address_hash\":\"0x8B5E4dB198FfC7f69f8F11F6592f682717dF1D92\",\"creation_transaction_hash\":\"0x1431a1bb1501e485406620bbd953a24ae693c72a116b01b139dd8c70b61853ca\""
     },
     {
-      "account": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
-      "category_suggestion": "third-party-app",
-      "owner_or_project": "Relay Protocol (likely) - earlier 'Allocator' contract on Aurora, predecessor of RelayAllocator",
-      "what_it_does": "NEAR-side Aurora XCC account of EVM contract 'Allocator' (0xE12Bc514e90E136CAD10413669a6CcDeb9E3aDB7), a verified Aurora contract with the same sign-withdraw interface (signWithdrawCallback, signerPath, nearSigner, hub, payloadBuilders) as Relay's RelayAllocator, constructed with signer v1.signer.",
-      "target_chain_evidence": "Same design as RelayAllocator (Ecdsa -> domain 0 otherwise 1, path = own address). Chains not explicitly stated for this version; its source has the same Hub/payload-builder interface. Inference: same Relay targets.",
-      "evidence": [
-        {"kind": "onchain", "url": "https://explorer.mainnet.aurora.dev/api/v2/addresses/0xe12bc514e90e136cad10413669a6ccdeb9e3adb7", "claim": "Verified contract named Allocator, creator 0x1D682340264cF209257f24C3EDcb2a9fc0592535", "quote_or_value": "\"name\":\"Allocator\",\"is_verified\":true,\"creator_address_hash\":\"0x1D682340264cF209257f24C3EDcb2a9fc0592535\",\"creation_transaction_hash\":\"0x3fc9f318dcd581c1219b4393d774361542ed5b16f30d74e83bb96035357de5c9\""},
-        {"kind": "onchain", "url": "https://explorer.mainnet.aurora.dev/api/v2/transactions/0x3fc9f318dcd581c1219b4393d774361542ed5b16f30d74e83bb96035357de5c9", "claim": "Creation time", "quote_or_value": "2025-09-30T17:02:52Z, NEAR tx 32jwgMhoUskqr8inEK7ye9CzntgyrbvjB8LJCdn6YoWE"},
-        {"kind": "github-source", "url": "https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0xe12bc514e90e136cad10413669a6ccdeb9e3adb7", "claim": "Source (contracts/Allocator.sol, solc 0.8.28, verified 2025-09-30) has identical ABI to RelayAllocator and constructor args _signer=v1.signer, same wNEAR 0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d", "quote_or_value": "decoded constructor args: [owner 0x1D68...2535, delay 1, 'v1.signer', wNEAR 0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d]; same function list incl. signWithdrawCallback, signerPath, nearSigner, hub, payloadBuilders, submitAndSignWithdrawRequest"},
-        {"kind": "onchain", "url": "RPC view_account e12bc514...aurora", "claim": "Same XCC router code hash as the RelayAllocator account", "quote_or_value": "code_hash 5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe, storage_usage 121641"},
-        {"kind": "data-inference", "url": "Aurora explorer counters", "claim": "Contract had 154,491 txs; per the brief active 2025-10..2025-12, consistent with deploy 2025-09-30 and replacement by RelayAllocator on 2025-11-28", "quote_or_value": "transactions_count 154491"}
-      ],
-      "onchain": {"creator_account": "EVM creator EOA 0x1D682340264cF209257f24C3EDcb2a9fc0592535", "creation_tx": "0x3fc9f318dcd581c1219b4393d774361542ed5b16f30d74e83bb96035357de5c9 / NEAR tx 32jwgMhoUskqr8inEK7ye9CzntgyrbvjB8LJCdn6YoWE", "creation_time_utc": "2025-09-30T17:02:52Z", "code_hash": "5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe", "is_contract": true, "notes": "Different EOA owner than RelayAllocator (0x1D68... vs 0x8B5E...)."},
-      "confidence": "medium",
-      "unresolved": ["No source or doc text names Relay for this exact address (the source I fetched has no 'Relay' string checked beyond ABI/interface match; Relay docs list only the 0x7EdA... address). Attribution to Relay is inferred from near-identical code/ABI, same v1.signer/wNEAR constructor args, and activity ending when RelayAllocator started.", "Check Relay GitHub settlement-protocol repo history or Relay announcement for the earlier Allocator address.", "Ownership link between 0x1D68... and 0x8B5E... EOAs not shown."]
+     "kind": "onchain",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/transactions/0x1431a1bb1501e485406620bbd953a24ae693c72a116b01b139dd8c70b61853ca",
+     "claim": "Contract creation time and NEAR tx",
+     "quote_or_value": "timestamp 2025-11-28T13:27:52Z, near_transaction_hash Eg2TRCmSD5sHkk6fxtnNwhmAGrFNCdEvZrRGNW7kQjDG"
     },
     {
-      "account": "reflect-adam-mainnet-agent-contract.near",
-      "category_suggestion": "third-party-app",
-      "owner_or_project": "unknown (account naming suggests an agent named 'adam' under a 'reflect' project; deployer account reflect-adam-account.near; the 'Reflect' project/company not identified)",
-      "what_it_does": "A NEAR Shade Agent framework 'agent contract': it whitelists/registers one agent account and forwards its request_signature calls to v1.signer.sign.",
-      "target_chain_evidence": "Not verified. Path in data is `0x<EVM address>-<uuid>`, which suggests an EVM-address-based derivation per agent session; contract supports key_type Ecdsa and Eddsa but all observed requests are domain 0 (ECDSA). Target chain(s) not determined; EVM is only an inference from the path format.",
-      "evidence": [
-        {"kind": "onchain", "url": "RPC view_account reflect-adam-mainnet-agent-contract.near", "claim": "Account is a contract", "quote_or_value": "code_hash 5iKwSCMdCQweo9qEPWqA1oHFPS82w71HGP8BgwgaX8CY, storage_usage 525611"},
-        {"kind": "onchain", "url": "RPC view_code (strings on wasm, 524964 bytes)", "claim": "Wasm exports/strings match the Shade Agent agent contract: methods register_agent, request_signature, approve_codehash, remove_codehash, whitelist_agent, remove_agent, update_owner_id, update_mpc_contract_id, get_agents, get_approved_codehashes, get_requires_tee; TEE (Intel TDX/SGX quote) verification code; imports near-sdk 5.21.0", "quote_or_value": "\"Agent needs to be whitelisted first\", \"Agent not whitelisted\", \"Caller is not the owner\", \"image:#shade-agent-app-image\", \"payload\",\"path\",\"domain_id\",\"key_type\" fields"},
-        {"kind": "onchain", "url": "RPC view_state", "claim": "State: owner, mpc contract, TEE not required", "quote_or_value": "STATE = owner_id \"reflect-adam-account.near\", mpc_contract_id \"v1.signer\"; get_requires_tee -> false; get_approved_codehashes -> [\"not-in-a-tee\"]"},
-        {"kind": "onchain", "url": "RPC call_function get_agents", "claim": "Single registered+whitelisted agent account, which is also the tx signer of all sign requests in our sample", "quote_or_value": "[{\"account_id\":\"12d602abebd48bb531e534c221c751b6e2ccb0b4e37914591de55468ac345e12\",\"verified\":true,\"whitelisted\":true,\"codehash\":\"not-in-a-tee\"}]; sample_parsed.csv.gz: 589 receipts, tx_signer 12d602abe..., domain_id 0, months 2026-01 (5), 2026-02 (305), 2026-03 (253), 2026-04 (26)"},
-        {"kind": "onchain", "url": "https://tx.main.fastnear.com/v0/transactions (tx 3YGbqKk1vuR1CqieU2EAw9VMDUiwTtTUE6frdRxRoo46)", "claim": "Created by reflect-adam-account.near via near.create_account at block 178438701 (2025-12-26T14:05:39Z), 10 NEAR deposit, single full-access key ed25519:CLRRwA4UKrN6Mmu9qpubK9eZZudDFyU9eEygbn1Hxkgw", "quote_or_value": "signer_id reflect-adam-account.near, receiver_id near, method create_account, new_account_id reflect-adam-mainnet-agent-contract.near (base64 args), block_timestamp 1766757939797980565"},
-        {"kind": "onchain", "url": "RPC view_account reflect-adam-account.near", "claim": "Owner/creator account is a plain account, no contract, no further identity", "quote_or_value": "code_hash 11111111111111111111111111111111, storage_usage 182"},
-        {"kind": "official-docs", "url": "https://docs.near.org/ai/shade-agents/reference/agent-contract (and framework repo https://github.com/NearDeFi/shade-agent-framework via search)", "claim": "Shade Agent Framework is now flagged deprecated; the fetched page says nothing about the contract details", "quote_or_value": "\"Do not use the Shade Agent Framework.\" \"It has not been maintained since April 19, 2026\""}
-      ],
-      "onchain": {"creator_account": "reflect-adam-account.near", "creation_tx": "3YGbqKk1vuR1CqieU2EAw9VMDUiwTtTUE6frdRxRoo46", "creation_time_utc": "2025-12-26T14:05:39Z", "code_hash": "5iKwSCMdCQweo9qEPWqA1oHFPS82w71HGP8BgwgaX8CY", "is_contract": true, "notes": "Contract owner_id is reflect-adam-account.near. Only registered agent is 12d602abebd48bb531e534c221c751b6e2ccb0b4e37914591de55468ac345e12 (implicit account), whitelisted without TEE ('not-in-a-tee'), so it is not attested. Account has 82,033 txs per fastnear."},
-      "confidence": "medium",
-      "unresolved": ["Owner is unknown: who 'Reflect' is was not identified. Web searches for 'Reflect' + NEAR/shade agent returned only unrelated Reflect products (runreflect/agent, a web testing tool - unrelated, not claimed) and no project matching. Did not find an official site/GitHub/docs for this agent.", "Target chain not established; path '0x<addr>-<uuid>' not decoded to a chain. Could be checked by deriving the address from v1.signer public key for the path or looking up 0xac92Bde559D6965F34e3eb9f4c0D7cf2A9bE9a52 on chain explorers (not done).", "Function of 'adam' agent (trading? other) unknown.", "Not checked: who funded reflect-adam-account.near (its creator) - possible next step to find an owner."]
+     "kind": "github-source",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0x7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f",
+     "claim": "Verified source (contracts/RelayAllocator.sol, solc 0.8.28, MIT, verified 2025-11-28) is by Relay Protocol and uses NEAR MPC signer",
+     "quote_or_value": "\"/// @author Relay Protocol\" ; \"/// @notice Manages cross-chain withdrawal requests and payload signing using NEAR MPC signer\""
+    },
+    {
+     "kind": "github-source",
+     "url": "same smart-contracts API, RelayAllocator.sol lines ~234-247, ~520-540",
+     "claim": "Constructor arg _signer = v1.signer; signerPath = own address hex; sign request path = signerPath; domain_id 0 for Ecdsa else 1; sign called via Aurora XCC near.call(nearSigner,\"sign\",...)",
+     "quote_or_value": "decoded constructor args: ['v1.signer' string _signer]; \"signerPath = Strings.toHexString(uint160(address(this)), 20);\" ; \"keccak256(abi.encodePacked(payloadBuilder.curve())) == ECDSA_HASH ? \\\"0\\\" : \\\"1\\\"\" ; \"near.call(nearSigner, \\\"sign\\\", data, 1, gasSettings.signGas)\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.relay.link/references/protocol/addresses.md",
+     "claim": "Relay docs list this exact address as the Allocator on Aurora",
+     "quote_or_value": "\"| **Allocator** | `0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f` |\" ; \"The Allocator and Security Council multisig are deployed on Aurora for integration with the NEAR MPC network.\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.relay.link/references/protocol/components/allocator.md",
+     "claim": "Allocator uses NEAR chain signatures; chains signed for",
+     "quote_or_value": "\"The protocol currently uses NEAR MPC chain signatures for its signing infrastructure.\" ; EVM Payload Builder: \"Ethereum, Base, Arbitrum, Optimism, + all EVM chains\"; Solana Payload Builder: Solana and Eclipse (Ed25519); Bitcoin Payload Builder: Bitcoin (ECDSA)"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://doc.aurora.dev/crosschain/xcc/aurora-to-near/introduction",
+     "claim": "Each EVM address using Aurora XCC gets its own NEAR account named <hex address>.aurora, which is the predecessor seen by the NEAR contract",
+     "quote_or_value": "search-result summary: for address A the account created is A.aurora; the target NEAR contract sees A.aurora as predecessor. Not a verbatim quote.",
+     "url_note": "(found via web search; page body not fetched by me, paraphrase from search result)"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_account 7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+     "claim": "Account is a NEAR contract account (XCC router), code hash identical for both .aurora accounts, no access keys",
+     "quote_or_value": "code_hash 5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe, storage_usage 121641; view_access_key_list keys: []"
+    },
+    {
+     "kind": "onchain",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/addresses/0x7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f/transactions",
+     "claim": "Recent txs are signWithdrawCallback (the callback of the sign request), tx count",
+     "quote_or_value": "method signWithdrawCallback(bytes32 withdrawRequestHash, bytes32 hashToSign), latest seen 2026-07-31; counters transactions_count 1481551"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_account relay.aurora + view_access_key_list",
+     "claim": "relay.aurora has no contract and is a plain NEAR account with keys; it is the NEAR tx signer for Aurora submit calls (relayer account), not an app",
+     "quote_or_value": "code_hash 11111111111111111111111111111111; keys include FunctionCall receiver_id aurora methods [call, submit, submit_with_args] plus FullAccess keys. (Inference: generic Aurora transaction relayer; its owner not verified.)"
     }
-  ]
+   ],
+   "onchain": {
+    "creator_account": "EVM creator EOA 0x8B5E4dB198FfC7f69f8F11F6592f682717dF1D92 (also the contract's _owner constructor arg)",
+    "creation_tx": "0x1431a1bb1501e485406620bbd953a24ae693c72a116b01b139dd8c70b61853ca (Aurora EVM) / NEAR tx Eg2TRCmSD5sHkk6fxtnNwhmAGrFNCdEvZrRGNW7kQjDG",
+    "creation_time_utc": "2025-11-28T13:27:52Z (EVM contract); NEAR .aurora XCC account creation time not checked (NearBlocks rate limited)",
+    "code_hash": "5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe (NEAR XCC router wasm)",
+    "is_contract": true,
+    "notes": "EVM-side is_contract true, verified. Active span in data 2025-12..2026-07 fits deploy on 2025-11-28."
+   },
+   "confidence": "high",
+   "unresolved": [
+    "NEAR-side creation tx/time of the .aurora XCC account not fetched (NearBlocks 429).",
+    "Aurora docs page text for the <hex>.aurora naming only seen as a search summary, not fetched verbatim (the first doc URL tried returned 404).",
+    "Per-request target chain not decoded; only inferable from curve (ECDSA vs EdDSA).",
+    "Owner of relay.aurora not identified."
+   ]
+  },
+  {
+   "account": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "Relay Protocol (likely) - earlier 'Allocator' contract on Aurora, predecessor of RelayAllocator",
+   "what_it_does": "NEAR-side Aurora XCC account of EVM contract 'Allocator' (0xE12Bc514e90E136CAD10413669a6CcDeb9E3aDB7), a verified Aurora contract with the same sign-withdraw interface (signWithdrawCallback, signerPath, nearSigner, hub, payloadBuilders) as Relay's RelayAllocator, constructed with signer v1.signer.",
+   "target_chain_evidence": "Same design as RelayAllocator (Ecdsa -> domain 0 otherwise 1, path = own address). Chains not explicitly stated for this version; its source has the same Hub/payload-builder interface. Inference: same Relay targets.",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/addresses/0xe12bc514e90e136cad10413669a6ccdeb9e3adb7",
+     "claim": "Verified contract named Allocator, creator 0x1D682340264cF209257f24C3EDcb2a9fc0592535",
+     "quote_or_value": "\"name\":\"Allocator\",\"is_verified\":true,\"creator_address_hash\":\"0x1D682340264cF209257f24C3EDcb2a9fc0592535\",\"creation_transaction_hash\":\"0x3fc9f318dcd581c1219b4393d774361542ed5b16f30d74e83bb96035357de5c9\""
+    },
+    {
+     "kind": "onchain",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/transactions/0x3fc9f318dcd581c1219b4393d774361542ed5b16f30d74e83bb96035357de5c9",
+     "claim": "Creation time",
+     "quote_or_value": "2025-09-30T17:02:52Z, NEAR tx 32jwgMhoUskqr8inEK7ye9CzntgyrbvjB8LJCdn6YoWE"
+    },
+    {
+     "kind": "github-source",
+     "url": "https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0xe12bc514e90e136cad10413669a6ccdeb9e3adb7",
+     "claim": "Source (contracts/Allocator.sol, solc 0.8.28, verified 2025-09-30) has identical ABI to RelayAllocator and constructor args _signer=v1.signer, same wNEAR 0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d",
+     "quote_or_value": "decoded constructor args: [owner 0x1D68...2535, delay 1, 'v1.signer', wNEAR 0xC42C30aC6Cc15faC9bD938618BcaA1a1FaE8501d]; same function list incl. signWithdrawCallback, signerPath, nearSigner, hub, payloadBuilders, submitAndSignWithdrawRequest"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_account e12bc514...aurora",
+     "claim": "Same XCC router code hash as the RelayAllocator account",
+     "quote_or_value": "code_hash 5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe, storage_usage 121641"
+    },
+    {
+     "kind": "data-inference",
+     "url": "Aurora explorer counters",
+     "claim": "Contract had 154,491 txs; per the brief active 2025-10..2025-12, consistent with deploy 2025-09-30 and replacement by RelayAllocator on 2025-11-28",
+     "quote_or_value": "transactions_count 154491"
+    }
+   ],
+   "onchain": {
+    "creator_account": "EVM creator EOA 0x1D682340264cF209257f24C3EDcb2a9fc0592535",
+    "creation_tx": "0x3fc9f318dcd581c1219b4393d774361542ed5b16f30d74e83bb96035357de5c9 / NEAR tx 32jwgMhoUskqr8inEK7ye9CzntgyrbvjB8LJCdn6YoWE",
+    "creation_time_utc": "2025-09-30T17:02:52Z",
+    "code_hash": "5t8cMe51P4JJzqxRxeD6CFc3dRCwh4FNH6WmNb5PNPFe",
+    "is_contract": true,
+    "notes": "Different EOA owner than RelayAllocator (0x1D68... vs 0x8B5E...)."
+   },
+   "confidence": "medium",
+   "unresolved": [
+    "No source or doc text names Relay for this exact address (the source I fetched has no 'Relay' string checked beyond ABI/interface match; Relay docs list only the 0x7EdA... address). Attribution to Relay is inferred from near-identical code/ABI, same v1.signer/wNEAR constructor args, and activity ending when RelayAllocator started.",
+    "Check Relay GitHub settlement-protocol repo history or Relay announcement for the earlier Allocator address.",
+    "Ownership link between 0x1D68... and 0x8B5E... EOAs not shown."
+   ]
+  },
+  {
+   "account": "reflect-adam-mainnet-agent-contract.near",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "unknown (account naming suggests an agent named 'adam' under a 'reflect' project; deployer account reflect-adam-account.near; the 'Reflect' project/company not identified)",
+   "what_it_does": "A NEAR Shade Agent framework 'agent contract': it whitelists/registers one agent account and forwards its request_signature calls to v1.signer.sign.",
+   "target_chain_evidence": "Not verified. Path in data is `0x<EVM address>-<uuid>`, which suggests an EVM-address-based derivation per agent session; contract supports key_type Ecdsa and Eddsa but all observed requests are domain 0 (ECDSA). Target chain(s) not determined; EVM is only an inference from the path format.",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "RPC view_account reflect-adam-mainnet-agent-contract.near",
+     "claim": "Account is a contract",
+     "quote_or_value": "code_hash 5iKwSCMdCQweo9qEPWqA1oHFPS82w71HGP8BgwgaX8CY, storage_usage 525611"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_code (strings on wasm, 524964 bytes)",
+     "claim": "Wasm exports/strings match the Shade Agent agent contract: methods register_agent, request_signature, approve_codehash, remove_codehash, whitelist_agent, remove_agent, update_owner_id, update_mpc_contract_id, get_agents, get_approved_codehashes, get_requires_tee; TEE (Intel TDX/SGX quote) verification code; imports near-sdk 5.21.0",
+     "quote_or_value": "\"Agent needs to be whitelisted first\", \"Agent not whitelisted\", \"Caller is not the owner\", \"image:#shade-agent-app-image\", \"payload\",\"path\",\"domain_id\",\"key_type\" fields"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_state",
+     "claim": "State: owner, mpc contract, TEE not required",
+     "quote_or_value": "STATE = owner_id \"reflect-adam-account.near\", mpc_contract_id \"v1.signer\"; get_requires_tee -> false; get_approved_codehashes -> [\"not-in-a-tee\"]"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC call_function get_agents",
+     "claim": "Single registered+whitelisted agent account, which is also the tx signer of all sign requests in our sample",
+     "quote_or_value": "[{\"account_id\":\"12d602abebd48bb531e534c221c751b6e2ccb0b4e37914591de55468ac345e12\",\"verified\":true,\"whitelisted\":true,\"codehash\":\"not-in-a-tee\"}]; sample_parsed.csv.gz: 589 receipts, tx_signer 12d602abe..., domain_id 0, months 2026-01 (5), 2026-02 (305), 2026-03 (253), 2026-04 (26)"
+    },
+    {
+     "kind": "onchain",
+     "url": "https://tx.main.fastnear.com/v0/transactions",
+     "claim": "Created by reflect-adam-account.near via near.create_account at block 178438701 (2025-12-26T14:05:39Z), 10 NEAR deposit, single full-access key ed25519:CLRRwA4UKrN6Mmu9qpubK9eZZudDFyU9eEygbn1Hxkgw",
+     "quote_or_value": "signer_id reflect-adam-account.near, receiver_id near, method create_account, new_account_id reflect-adam-mainnet-agent-contract.near (base64 args), block_timestamp 1766757939797980565",
+     "url_note": "(tx 3YGbqKk1vuR1CqieU2EAw9VMDUiwTtTUE6frdRxRoo46)"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_account reflect-adam-account.near",
+     "claim": "Owner/creator account is a plain account, no contract, no further identity",
+     "quote_or_value": "code_hash 11111111111111111111111111111111, storage_usage 182"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.near.org/ai/shade-agents/reference/agent-contract",
+     "claim": "Shade Agent Framework is now flagged deprecated; the fetched page says nothing about the contract details",
+     "quote_or_value": "\"Do not use the Shade Agent Framework.\" \"It has not been maintained since April 19, 2026\"",
+     "url_note": "(and framework repo https://github.com/NearDeFi/shade-agent-framework via search)"
+    }
+   ],
+   "onchain": {
+    "creator_account": "reflect-adam-account.near",
+    "creation_tx": "3YGbqKk1vuR1CqieU2EAw9VMDUiwTtTUE6frdRxRoo46",
+    "creation_time_utc": "2025-12-26T14:05:39Z",
+    "code_hash": "5iKwSCMdCQweo9qEPWqA1oHFPS82w71HGP8BgwgaX8CY",
+    "is_contract": true,
+    "notes": "Contract owner_id is reflect-adam-account.near. Only registered agent is 12d602abebd48bb531e534c221c751b6e2ccb0b4e37914591de55468ac345e12 (implicit account), whitelisted without TEE ('not-in-a-tee'), so it is not attested. Account has 82,033 txs per fastnear."
+   },
+   "confidence": "medium",
+   "unresolved": [
+    "Owner is unknown: who 'Reflect' is was not identified. Web searches for 'Reflect' + NEAR/shade agent returned only unrelated Reflect products (runreflect/agent, a web testing tool - unrelated, not claimed) and no project matching. Did not find an official site/GitHub/docs for this agent.",
+    "Target chain not established; path '0x<addr>-<uuid>' not decoded to a chain. Could be checked by deriving the address from v1.signer public key for the path or looking up 0xac92Bde559D6965F34e3eb9f4c0D7cf2A9bE9a52 on chain explorers (not done).",
+    "Function of 'adam' agent (trading? other) unknown.",
+    "Not checked: who funded reflect-adam-account.near (its creator) - possible next step to find an owner."
+   ]
+  }
+ ]
 }

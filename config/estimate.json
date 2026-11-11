@@ -5,5 +5,12 @@
   "driversTop": 6,
   "robustnessSeed": 777,
   "robustnessReplicates": 2000,
-  "note": "Cluster bootstrap: clusters (pages of <=200 consecutive txs) are resampled with replacement within each month; census months are not resampled."
+  "note": "Cluster bootstrap: clusters (pages of <=200 consecutive txs) are resampled with replacement within each month; census months are not resampled.",
+  "pairs": [
+    [
+      "fast-auth.near",
+      "sweat-relayer.near"
+    ]
+  ],
+  "pairs_note": "share of a requester's sign receipts whose tx was signed by the given account (relayer); used for the FastAuth -> Sweat relayer evidence"
 }

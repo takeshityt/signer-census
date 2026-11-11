@@ -121,6 +121,14 @@ describe("estimates", () => {
     expect(point.totals.failed_by_requester.est.A).toBeCloseTo(10, 9);
   });
 
+  it("pair share: fraction of a requester's sign receipts sent by a given tx signer", () => {
+    const mk = (cluster, signer, n) => Array.from({ length: n }, (_, i) => ({ cluster_id: cluster, month: "2026-06", census: 0, tx_hash: `${cluster}-${signer}-${i}`, tx_block_height: i, tx_kind: "request", tx_signer_class: "request_side", tx_signer: signer, method: "sign", predecessor: "fa.near", receipt_status: "Success", fulfilled: 1, payload_hash: `${cluster}${signer}${i}`, domain_id: "1", key_version: "", path: "p" }));
+    const r = [...mk("P-c0", "relayer-a.near", 3), ...mk("P-c0", "relayer-b.near", 1)];
+    const { point } = estimateWithBootstrap(clusterStats(r), [{ month: "2026-06", txs_count: "40", partial: "0" }], { seed: 1, replicates: 10, requesters: ["fa.near"], pairs: [["fa.near", "relayer-a.near"]] });
+    expect(point.months["2026-06"].pairs["fa.near<-relayer-a.near"]).toBeCloseTo(0.75, 9);
+    expect(point.totals.pairs["fa.near<-relayer-a.near"]).toBeCloseTo(0.75, 9);
+  });
+
   it("estimateFromSums handles an empty sample safely", () => {
     const r = estimateFromSums([{ month: "m", txTotal: 100, sums: sumClusters([]) }]);
     expect(r.totals.requests).toBe(0);

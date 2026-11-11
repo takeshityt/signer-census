@@ -11,9 +11,27 @@ labels:
     confidence: high
     owner: "Peersyst (operator of NEAR Auth / FastAuth per auth.near.org)"
     note: >
-      FastAuth contract: a JWT login maps to an MPC-derived Ed25519 key. Since 2026-04 ~99.96% of its sign calls in the sample carry the path
-      jwt#https://fastauth.swe.at#<sub> and are sent by sweat-relayer.near. That the issuer fastauth.swe.at / relayer sweat-relayer.near belong to Sweat Economy
-      (Sweat Wallet) is a name-based inference; no official statement was found, so it is NOT asserted. The Apr-2026 ramp has no announcement we could find.
+      FastAuth contract (operated by Peersyst): a JWT login maps to an MPC-derived Ed25519 key. Since 2026-04 ≈ 99.97% of its sign requests are sent by sweat-relayer.near
+      and carry the issuer https://fastauth.swe.at (see dominant_integrator). The category stays FastAuth: the contract is shared NEAR infrastructure; Sweat is its dominant integrator.
+      The Apr-2026 ramp has no announcement we could find.
+    dominant_integrator:
+      name: "Sweat Wallet (Sweat Foundation)"
+      confidence: medium
+      note: >
+        HIGH confidence that the dominant FastAuth issuer is the Sweat Foundation's login (swe.at domain + on-chain guard named "sweat"); MEDIUM that the traffic is specifically Sweat Wallet:
+        the release says Sweat Wallet supports EVM chains "through Chain Signatures" but no source states that Sweat Wallet logins go through fast-auth.near.
+        Who controls sweat-relayer.near is not stated by any source (created 2024-04-02 by meteor-relayer.near; not verified further).
+      evidence:
+        - url: https://rpc.mainnet.fastnear.com
+          claim: 'view_state of jwt.fast-auth.near (block 224116390) maps issuer "https://fastauth.swe.at" to guard account "sweat.jwt.fast-auth.near" (and "https://login.auth.near.org/" to "auth0.jwt.fast-auth.near"); maintainer fast-auth-maintainer.sputnik-dao.near.'
+        - url: https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/
+          claim: 'Issuer The Sweat Foundation Ltd, 1 October 2026: "Sweat Wallet and SWEAT in their present form will end on 30 December 2026"; Sweat Wallet has "support for Ethereum, BSC, Base and Arbitrum through Chain Signatures"; "Details and FAQs are at https://update.swe.at" and media contact update@swe.at (swe.at is the Foundation''s domain).'
+        - url: https://altfins.com/crypto-news/article/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026
+          claim: 'Same release (same wording on the end date and on Chain Signatures), re-read on 2026-11-12.'
+        - url: https://nearblocks.io/txns/4D3WeD62e6VtztRCsitPadwJh2RHUFdSM3ZYWh3snew4
+          claim: 'sweat-relayer.near was created 2024-04-02T18:40:24Z by meteor-relayer.near (create_account through near); FastNEAR reports ≈ 253M txs for sweat-relayer.near.'
+        - url: https://github.com/takeshityt/signer-census/blob/main/out/metrics.json
+          claim: 'months[].relayer_share_of_requester["fast-auth.near via sweat-relayer.near"]: ≈ 99.9-100% of fast-auth.near sign requests in every month 2026-04..2026-11 (≈ 99.97% overall, 95% CI 99.92-100%); command npm run reproduce.'
     evidence:
       - url: https://auth.near.org
         claim: 'FAQ states "NEAR Auth is built and operated by Peersyst as a public-good account-abstraction layer for the NEAR ecosystem" and names the shared mainnet infrastructure "fast-auth.near, jwt.fast-auth.near, v1.signer".'

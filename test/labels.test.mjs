@@ -28,6 +28,13 @@ describe("labels.yaml validation", () => {
     expect(l.confidenceOf("zzz")).toBe("unlabeled");
     expect(l.benchmarkAccounts()).toEqual(["b.near"]); // suspected benchmark is included in the 'excluding benchmark' headline variant
   });
+  it("validates dominant_integrator: name, confidence and evidence are required", () => {
+    const base = "labels:\n  - { account: x.near, category: wallet, confidence: high, evidence: [ { url: 'https://e.org', claim: c } ], dominant_integrator: ";
+    expect(() => parseLabels(base + "{ name: S, confidence: medium, evidence: [ { url: 'https://e.org', claim: c } ] } }")).not.toThrow();
+    expect(() => parseLabels(base + "{ name: S, confidence: sure, evidence: [ { url: 'https://e.org', claim: c } ] } }")).toThrow(/dominant_integrator/);
+    expect(() => parseLabels(base + "{ name: S, confidence: medium, evidence: [] } }")).toThrow(/dominant_integrator/);
+  });
+
   it("rejects a label without evidence", () => {
     expect(() => parseLabels("labels:\n  - { account: x.near, category: wallet, confidence: high, evidence: [] }")).toThrow(/evidence/);
   });

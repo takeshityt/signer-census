@@ -7,9 +7,9 @@
       "data/derived/sample_parsed.csv": "cc05335c07c83db89526e74b7d8dc6ef2e4cfbb6e648baf973f62b72d6a358a0",
       "data/derived/sample_clusters.csv": "4145eb3e823fd04f0d675dd09c3feca5574fa321f390271ab18cd557544c8061",
       "data/derived/proximity_cutoffs.json": "4a4dc0e0df1d93a3e28f047fb93e2a584d78897408c17d4ba2e0d116c7d3fdea",
-      "config/estimate.json": "e0fe098e05d9f4998ca5fb31ba0ee53a753d1912190ffd4171d9fc4e9b3dbc41",
+      "config/estimate.json": "15fde3cb57ceb1ec48e87a93fe41703c2283772ef493c4b435723966b42da52d",
       "config/proximity_reported.json": "6e3e3de50205f3ce55cef9776554a32c1990ff3241469fff65de3a3ec4b751e9",
-      "labels.yaml": "407c6ebbe2d3dc6ade88b5e2e935dbc88ec58ae6e65f271aa9959daa5171e59d",
+      "labels.yaml": "a8e5024e128494ad787d16d0f9eb0bc2d642c0f831e815e2675be604a95da782",
       "config/chain_rules.yaml": "4bb209ab745fc6b18bee8cb1b7ddb6e218712dbdc81a428a8214c103b1de6450",
       "docs/evidence/gate1/window-223900000-223900300/summary.json": "6131b6f98286763c31dbd79321a31eb6afd020030dff99f4fb55b1b1b94d2926",
       "docs/evidence/gate1/window-223960000-223960300/summary.json": "87834fb1ee74734b4742434a7e475e12d8c2d04d195ca2355e87579549cd23c7",
@@ -593,6 +593,15 @@
             0.458722
           ]
         }
+      }
+    },
+    "relayer_share_of_requester": {
+      "fast-auth.near via sweat-relayer.near": {
+        "value": 0.999659,
+        "ci95": [
+          0.999245,
+          1
+        ]
       }
     },
     "other_request_types_receipts_est": {
@@ -1861,6 +1870,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -2427,6 +2445,15 @@
               1
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -2997,6 +3024,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -3565,6 +3601,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -4131,6 +4176,15 @@
               1
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -4709,6 +4763,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -5277,6 +5340,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -5843,6 +5915,15 @@
               1
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -6435,6 +6516,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -7009,6 +7099,15 @@
               1
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -7587,6 +7686,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -8163,6 +8271,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -8729,6 +8846,15 @@
               1
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -9307,6 +9433,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -9873,6 +10008,15 @@
               0.993487
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -10443,6 +10587,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -11009,6 +11162,15 @@
               0.612383
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -11587,6 +11749,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -12153,6 +12324,15 @@
               0.75243
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -12723,6 +12903,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 308,
@@ -13289,6 +13478,15 @@
               0.436299
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -13859,6 +14057,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -14425,6 +14632,15 @@
               0.290581
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -14995,6 +15211,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0.999225,
+          "ci95": [
+            0.997567,
+            1
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 0,
@@ -15561,6 +15786,15 @@
               0.440941
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
         }
       },
       "other_request_types_receipts_est": {
@@ -16131,6 +16365,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0.99866,
+          "ci95": [
+            0.995608,
+            1
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 4564,
@@ -16699,6 +16942,15 @@
           }
         }
       },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 0.998584,
+          "ci95": [
+            0.995595,
+            1
+          ]
+        }
+      },
       "other_request_types_receipts_est": {
         "verify_foreign_transaction": {
           "value": 2743,
@@ -17265,6 +17517,15 @@
               0.697769
             ]
           }
+        }
+      },
+      "relayer_share_of_requester": {
+        "fast-auth.near via sweat-relayer.near": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
         }
       },
       "other_request_types_receipts_est": {

@@ -11,6 +11,9 @@ const NUM_FIELDS = ["n_tx", "receipts", "sign", "sign_failed", "fulfilled", "dup
 export const PER_TX = ["kinds", "classes", "methods"];
 export const PER_SIGN = ["requesters", "categories", "confidences", "chains", "chain_confidences", "keytypes", "failed_by_requester"];
 const ALL_GROUPS = [...PER_TX, ...PER_SIGN];
+// summed but not reported generically: (requester, tx signer) pairs of sign receipts
+const SUMMED = [...ALL_GROUPS, "req_signer"];
+const pairKey = (req, signer) => `${req}<-${signer}`;
 
 /** Group parsed rows (one per receipt) into per-cluster additive statistics.
  *  ctx: { categoryOf(account) -> string, confidenceOf(account) -> string, chainOf(row) -> string, keyTypeOf(row) -> string } (all optional) */
@@ -29,7 +32,7 @@ export function clusterStats(rows, ctx = {}) {
   for (const c of byCluster.values()) {
     const s = { cluster_id: c.cluster_id, month: c.month, census: c.census };
     for (const f of NUM_FIELDS) s[f] = 0;
-    for (const g of ALL_GROUPS) s[g] = {};
+    for (const g of SUMMED) s[g] = {};
     for (const k of KINDS) s.kinds[k] = 0;
     for (const k of CLASSES) s.classes[k] = 0;
     const bump = (g, k, d = 1) => { s[g][k] = (s[g][k] ?? 0) + d; };
@@ -53,6 +56,7 @@ export function clusterStats(rows, ctx = {}) {
         if (r.receipt_status === "Failure") { s.sign_failed++; bump("failed_by_requester", r.predecessor); } // rejected by the contract itself (e.g. "already submitted")
         if (Number(r.fulfilled) === 1) s.fulfilled++;
         bump("requesters", r.predecessor);
+        bump("req_signer", pairKey(r.predecessor, r.tx_signer));
         bump("categories", categoryOf(r.predecessor));
         bump("confidences", confidenceOf(r.predecessor));
         bump("chains", chainOf(r));
@@ -71,9 +75,9 @@ export function clusterStats(rows, ctx = {}) {
 
 const addInto = (acc, s, w = 1) => {
   for (const k of NUM_FIELDS) acc[k] += w * s[k];
-  for (const g of ALL_GROUPS) for (const [k, v] of Object.entries(s[g])) acc[g][k] = (acc[g][k] ?? 0) + w * v;
+  for (const g of SUMMED) for (const [k, v] of Object.entries(s[g])) acc[g][k] = (acc[g][k] ?? 0) + w * v;
 };
-const emptySums = () => { const a = {}; for (const f of NUM_FIELDS) a[f] = 0; for (const g of ALL_GROUPS) a[g] = {}; return a; };
+const emptySums = () => { const a = {}; for (const f of NUM_FIELDS) a[f] = 0; for (const g of SUMMED) a[g] = {}; return a; };
 /** Sum clusters; optional weights (same length) are used by the density-weighted robustness variant. */
 export function sumClusters(list, weights = null) { const a = emptySums(); list.forEach((s, i) => addInto(a, s, weights ? weights[i] : 1)); return a; }
 
@@ -102,10 +106,12 @@ export function estimateFromSums(months, opts = {}) {
   const names = opts.names ?? { kinds: KINDS, classes: CLASSES, methods: [], categories: [], confidences: [], chains: [], chain_confidences: [], keytypes: [], requesters: [] };
   const benchmark = opts.benchmarkAccounts ?? [];
   const drivers = opts.drivers ?? [];
+  const pairs = opts.pairs ?? []; // [[requester, txSigner]]: share of the requester's sign receipts sent by that tx signer (e.g. a relayer)
   const trackedFailed = names.requesters;
   const res = { months: {}, totals: null };
   const T = { tx: 0, req: 0, receipts: 0, fulfilled: 0, signFailed: 0, dup: 0, respondFailed: 0, respondTotal: 0, identified: 0 };
   for (const g of ALL_GROUPS) T[g] = {};
+  T.pairs = {};
   const nameSet = (g) => (g === "failed_by_requester" ? trackedFailed : names[g]);
 
   for (const m of months) {
@@ -132,6 +138,8 @@ export function estimateFromSums(months, opts = {}) {
       }
     }
     rec.sign_failed_est = s.sign_failed * f;
+    if (pairs.length) { rec.pairs = {}; for (const [a, b] of pairs) rec.pairs[pairKey(a, b)] = ratio(s.req_signer[pairKey(a, b)] ?? 0, s.requesters[a] ?? 0); }
+    for (const [a, b] of pairs) { T.pairs[pairKey(a, b)] = (T.pairs[pairKey(a, b)] ?? 0) + (s.req_signer[pairKey(a, b)] ?? 0) * f; }
     T.identified += rec.identified_share * req;
     rec.requests_excluding_benchmark = req - benchmark.reduce((a, b) => a + (s.requesters[b] ?? 0) * f, 0); // headline variant without benchmark/test (confirmed or suspected) accounts
     if (drivers.length) {
@@ -167,6 +175,7 @@ export function estimateFromSums(months, opts = {}) {
     for (const d of drivers) { const v = Object.values(res.months).reduce((a, r) => a + r.drivers[d], 0); tot.drivers[d] = v; used += v; }
     tot.drivers.__other = T.req - used;
   }
+  if (pairs.length) { tot.pairs = {}; for (const [a, b] of pairs) tot.pairs[pairKey(a, b)] = ratio(T.pairs[pairKey(a, b)] ?? 0, T.requesters[a] ?? 0); }
   res.totals = tot;
   return res;
 }
@@ -197,7 +206,7 @@ export function estimateWithBootstrap(clusters, totals, opts) {
   for (const c of clusters) { if (!byMonth.has(c.month)) byMonth.set(c.month, []); byMonth.get(c.month).push(c); }
   const monthsList = totals.filter((t) => byMonth.has(t.month)).map((t) => ({ month: t.month, txTotal: Number(t.txs_count), partial: Number(t.partial) === 1, list: byMonth.get(t.month) }));
   const names = trackedNames(clusters, { requesters: [...(opts.requesters ?? []), ...(opts.drivers ?? [])], extraRequesters: opts.extraRequesters ?? 0 });
-  const eopts = { names, drivers: opts.drivers ?? [], benchmarkAccounts: opts.benchmarkAccounts ?? [] };
+  const eopts = { names, drivers: opts.drivers ?? [], benchmarkAccounts: opts.benchmarkAccounts ?? [], pairs: opts.pairs ?? [] };
   const toInput = (pick) => monthsList.map((m) => ({ month: m.month, txTotal: m.txTotal, sums: sumClusters(pick(m)) }));
 
   const point = estimateFromSums(toInput((m) => m.list), eopts);

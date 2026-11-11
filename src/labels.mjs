@@ -25,6 +25,11 @@ export function parseLabels(text) {
     }
     if (e.suspected_category !== undefined && !CATEGORIES.includes(e.suspected_category)) throw new Error(`${where}: suspected_category is not a known category`);
     if (e.category === "unknown" && !e.note) throw new Error(`${where}: "unknown" entries need a note saying what is and is not established`);
+    if (e.dominant_integrator !== undefined) {
+      const d = e.dominant_integrator;
+      if (!d.name || !CONFIDENCE.includes(d.confidence)) throw new Error(`${where}: dominant_integrator needs a name and a confidence (high|medium|low)`);
+      if (!Array.isArray(d.evidence) || d.evidence.length === 0 || !d.evidence.every((ev) => /^https?:\/\/\S+$/.test(ev?.url ?? "") && ev.claim)) throw new Error(`${where}: dominant_integrator needs evidence items with an http(s) url and a claim`);
+    }
   }
   const byAccount = new Map(entries.map((e) => [e.account, e]));
   return {

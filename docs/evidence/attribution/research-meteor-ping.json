@@ -45,9 +45,10 @@
     },
     {
      "kind": "official-docs",
-     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "url": "https://docs.dew.finance/introduction/overview",
      "claim": "Dew is built on NEAR Intents and Chain Signatures",
-     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\"",
+     "url_note": "(llms.txt)"
     },
     {
      "kind": "official-docs",
@@ -57,9 +58,10 @@
     },
     {
      "kind": "announcement",
-     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594",
      "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
-     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)",
+     "url_note": "(via web search snippet; direct fetch returned HTTP 402)"
     }
    ],
    "onchain": {
@@ -122,9 +124,10 @@
     },
     {
      "kind": "official-docs",
-     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "url": "https://docs.dew.finance/introduction/overview",
      "claim": "Dew is built on NEAR Intents and Chain Signatures",
-     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\"",
+     "url_note": "(llms.txt)"
     },
     {
      "kind": "official-docs",
@@ -134,9 +137,10 @@
     },
     {
      "kind": "announcement",
-     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594",
      "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
-     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)",
+     "url_note": "(via web search snippet; direct fetch returned HTTP 402)"
     }
    ],
    "onchain": {
@@ -198,9 +202,10 @@
     },
     {
      "kind": "official-docs",
-     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "url": "https://docs.dew.finance/introduction/overview",
      "claim": "Dew is built on NEAR Intents and Chain Signatures",
-     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\"",
+     "url_note": "(llms.txt)"
     },
     {
      "kind": "official-docs",
@@ -210,9 +215,10 @@
     },
     {
      "kind": "announcement",
-     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594",
      "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
-     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)",
+     "url_note": "(via web search snippet; direct fetch returned HTTP 402)"
     }
    ],
    "onchain": {
@@ -274,9 +280,10 @@
     },
     {
      "kind": "official-docs",
-     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "url": "https://docs.dew.finance/introduction/overview",
      "claim": "Dew is built on NEAR Intents and Chain Signatures",
-     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\"",
+     "url_note": "(llms.txt)"
     },
     {
      "kind": "official-docs",
@@ -286,9 +293,10 @@
     },
     {
      "kind": "announcement",
-     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594",
      "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
-     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)",
+     "url_note": "(via web search snippet; direct fetch returned HTTP 402)"
     }
    ],
    "onchain": {
