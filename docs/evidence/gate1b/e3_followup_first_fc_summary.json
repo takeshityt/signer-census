@@ -1,0 +1,7 @@
+{
+ "fastnear_tx_api_http": 200,
+ "signer": "multichain-mpc-dev-2.near",
+ "method": "state",
+ "archival_tx_status_ok": true,
+ "archival_receipts": 2
+}

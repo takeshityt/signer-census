@@ -1,0 +1,441 @@
+{
+ "E1": {
+  "window_B_failed_respond": [
+   {
+    "failed_receipt": "6s9qoLDGU9kUbaTu3wRwGBqH2JJJefncNQW1UsEFcrow",
+    "failed_tx": "HQsRFSBLqNSBsgv4xyFavPwmQNWQKVH5mMiR9HouMW5j",
+    "node": "nodemonster.near",
+    "tx_block": 223899980,
+    "in_window": false,
+    "domain": 1,
+    "payload": "c6bd51438e5a7226\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "DthXTt5Vh8TLmMRnJhv6mK85o5ZS1QgQYbzAjP2Qvibf",
+      "node": "astrostakers-mainnet.near",
+      "tx_block": 223899976
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "6srbUUmwL1oMZAx2u1CL79fUTs5p2WfzutShRtzJmNTq",
+      "caller": "fast-auth.near",
+      "path": "jwt#https://fastauth.swe.at#NjNZrvEIigXumrBBclrpdqqPKGt2",
+      "tx_block": 223899950,
+      "exec_height": null
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true
+    ]
+   },
+   {
+    "failed_receipt": "Din9dTERfcfbTDn5iguv6tEfxivPXFUoN7xH21DaUAqy",
+    "failed_tx": "DjvtW2nbEY4VdBE4uZfMx9D2v7H9pdqYKPEsKW55iQFa",
+    "node": "astrostakers-mainnet.near",
+    "tx_block": 223899984,
+    "in_window": false,
+    "domain": 1,
+    "payload": "c6bd51438e5a7226\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "DthXTt5Vh8TLmMRnJhv6mK85o5ZS1QgQYbzAjP2Qvibf",
+      "node": "astrostakers-mainnet.near",
+      "tx_block": 223899976
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "6srbUUmwL1oMZAx2u1CL79fUTs5p2WfzutShRtzJmNTq",
+      "caller": "fast-auth.near",
+      "path": "jwt#https://fastauth.swe.at#NjNZrvEIigXumrBBclrpdqqPKGt2",
+      "tx_block": 223899950,
+      "exec_height": null
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true
+    ]
+   },
+   {
+    "failed_receipt": "8NW63VxZ34VVHdiVstUKQCbu3E8itLMKdX4bTde97s75",
+    "failed_tx": "A92rbtMfSX8QHAcQjSNkpy3qrGzDwTPDzJxk87R14LDa",
+    "node": "hashkeympc.near",
+    "tx_block": 223900010,
+    "in_window": true,
+    "domain": 0,
+    "payload": "d7b23d650e7b71d8\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "FSakh6fuVhtxVMdf9S6vKq9DLGHJr6q99Pb9oy2JCi8v",
+      "node": "bitwise-mpc01.near",
+      "tx_block": 223900009
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "84T7V63D7bYPo3byc2soFtPMndT9NTthhEUL7GYiFEP4",
+      "caller": "zcash-connector.bridge.near",
+      "path": "zcash-connector.bridge.near",
+      "tx_block": 223900004,
+      "exec_height": 223900006
+     },
+     {
+      "tx": "6B5ozEjJDMovPo1mEmKBhrL4tVS6NWAwabDJHBrHMvnX",
+      "caller": "zcash-connector.bridge.near",
+      "path": "zcash-connector.bridge.near",
+      "tx_block": 223900001,
+      "exec_height": 223900003
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true,
+     true
+    ]
+   },
+   {
+    "failed_receipt": "2FJKyP5a5VuSM8pL8hbVss8E8pCFcxZmSNF24EiWM7qs",
+    "failed_tx": "G91P5mskj2wqV4BWJcPN5mgnwNvhYGBTq7bXvDE6wqpK",
+    "node": "greenfield-mpc01.near",
+    "tx_block": 223900013,
+    "in_window": true,
+    "domain": 0,
+    "payload": "a1724cc7c885ad32\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "7cF9pu7MpfjL1R54CKxeV27JepsYmbmjrKY99217QCC6",
+      "node": "multichain-mainnet-aurora.near",
+      "tx_block": 223900009
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "6WGXSwa48FV8VoddSjd5d8ayA2PddADctnCjQuUfYFrw",
+      "caller": "zcash-connector.bridge.near",
+      "path": "6bbf735980944532b82e68367ba7552fd8be49683bb2cc92338db058469f6b74",
+      "tx_block": 223900007,
+      "exec_height": 223900009
+     },
+     {
+      "tx": "BuaKQDcNpmvqvqLxH3wsmK3enodZd2XygdJhPZhbB87u",
+      "caller": "zcash-connector.bridge.near",
+      "path": "6bbf735980944532b82e68367ba7552fd8be49683bb2cc92338db058469f6b74",
+      "tx_block": 223900001,
+      "exec_height": 223900003
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true,
+     true
+    ]
+   },
+   {
+    "failed_receipt": "9MRtF8AYQEmHB443gNjGDaBgEdtoUcFxzvT6Xu6K3Sxn",
+    "failed_tx": "pcFEt1TVw2mPagemAPwvsLDjKpp4n4JbURCDrjKBMkT",
+    "node": "mpch-01.near",
+    "tx_block": 223900053,
+    "in_window": true,
+    "domain": 0,
+    "payload": "61294252ae35bb73\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "5uhWBPwrLN4nfR9qV77Ft4aEyRpMrYWM1LqayZqiT2Z8",
+      "node": "nodemonster.near",
+      "tx_block": 223900050
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "AQdPQ5tW4jMey8Xh2sXwsu1yMk2PisddwcogxCccYsSB",
+      "caller": "zcash-connector.bridge.near",
+      "path": "fa43f8bbe2b2bf72b6bf908250e71b2ecab239e59cbb12d8188691b2d2e615a6",
+      "tx_block": 223900047,
+      "exec_height": 223900049
+     },
+     {
+      "tx": "6ZjjCCsUrzTAdY5DuGm7SKt5rrkJAwvvSuD19x2DiYNq",
+      "caller": "zcash-connector.bridge.near",
+      "path": "fa43f8bbe2b2bf72b6bf908250e71b2ecab239e59cbb12d8188691b2d2e615a6",
+      "tx_block": 223900044,
+      "exec_height": 223900046
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true,
+     true
+    ]
+   },
+   {
+    "failed_receipt": "GFRV7G8bHZTGnAys4pceGC6TUThPV5E3Rq5CTbsgGw6j",
+    "failed_tx": "4k6XumjcvWTv4UeZZryYHnX9XzbLABSRcR1JaAiWmv4G",
+    "node": "astrostakers-mainnet.near",
+    "tx_block": 223900053,
+    "in_window": true,
+    "domain": 0,
+    "payload": "800225d662580546\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "7dRRo1CeyLN3Aa96E8AZDpG67G8BNgxBEYYmtScZZ2t6",
+      "node": "everstake-mpc-1.near",
+      "tx_block": 223900050
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "2HMuYaXB1Kks49ZAtBn2DuxJrCjmKHWaCQFdxCidSsGg",
+      "caller": "zcash-connector.bridge.near",
+      "path": "zcash-connector.bridge.near",
+      "tx_block": 223900047,
+      "exec_height": 223900049
+     },
+     {
+      "tx": "7zUW4vJnKwwBxUW6Z2vxxPDrEnJ5Frxk28CazVKcfy9h",
+      "caller": "zcash-connector.bridge.near",
+      "path": "zcash-connector.bridge.near",
+      "tx_block": 223900044,
+      "exec_height": 223900046
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true,
+     true
+    ]
+   },
+   {
+    "failed_receipt": "BDWgC3R3NVvF6KvcoxRHSU5HNZ91gCxo4qD4qvx953xh",
+    "failed_tx": "CxTrVT7T4N4xfmPHcczY9hGxdMGC4SmMgnbZbsg748zB",
+    "node": "natsai-mpc.near",
+    "tx_block": 223900054,
+    "in_window": true,
+    "domain": 0,
+    "payload": "bf687af3b512aaa4\u2026",
+    "error": "Smart contract panicked: This sign request has timed out, was completed, or never existed.",
+    "earlier_successful_respond": [
+     {
+      "tx": "Ec381zhudRnX816vJzx9AF6DecioHe68ZMCpdWU3rhdG",
+      "node": "multichain-mainnet-aurora.near",
+      "tx_block": 223900050
+     }
+    ],
+    "later_successful_respond": [],
+    "sign_receipts_same_payload": [
+     {
+      "tx": "CkK4nmPMStRb3MB69CbFpHc6hgd5yoQCGpFqk5tZtxD5",
+      "caller": "zcash-connector.bridge.near",
+      "path": "d14c76c97214f053a9172407c8ed8f0320cd3162273d225422f419f2ecbfbc9d",
+      "tx_block": 223900047,
+      "exec_height": 223900049
+     },
+     {
+      "tx": "Axww3L8ZancScX1u26oP5wN4o5b1cyoNAAFvvrdfpEeR",
+      "caller": "zcash-connector.bridge.near",
+      "path": "d14c76c97214f053a9172407c8ed8f0320cd3162273d225422f419f2ecbfbc9d",
+      "tx_block": 223900044,
+      "exec_height": 223900046
+     }
+    ],
+    "return_ok_for_that_sign": [
+     true,
+     true
+    ]
+   }
+  ],
+  "summary": {
+   "n_failed": 7,
+   "duplicate_of_earlier_success": 7,
+   "duplicate_of_later_success": 0,
+   "no_other_respond_found_in_data": 0,
+   "with_matching_sign_receipt_in_data": 7
+  }
+ },
+ "E2": {
+  "A": {
+   "window": "window-223960000-223960300",
+   "txs_in_window": 88,
+   "distinct_tx_signers": 20,
+   "tx_kinds": {
+    "node: respond": 43,
+    "user-side: sign": 40,
+    "other/admin: resolve_verification+submit_participant_info": 3,
+    "node: respond_verify_foreign_tx": 1,
+    "user-side: verify_foreign_transaction": 1
+   },
+   "node_accounts_seen_in_respond": [
+    "astrostakers-mainnet.near",
+    "bitwise-mpc01.near",
+    "everstake-mpc-1.near",
+    "greenfield-mpc01.near",
+    "hashkeympc.near",
+    "klever-nearmpc-01.near",
+    "mpc-lgns.near",
+    "mpch-01.near",
+    "multichain-mainnet-aurora.near",
+    "n1-multichain.near",
+    "nansen-ai-mpc.near",
+    "natsai-mpc.near",
+    "near-mpc-staking4all-01.near",
+    "nodemonster.near",
+    "stakin-mpc.near",
+    "svrn-01.near"
+   ],
+   "respond_tx_signer_equals_respond_predecessor": true,
+   "signers_by_kind": {
+    "node: respond": {
+     "stakin-mpc.near": 6,
+     "astrostakers-mainnet.near": 6,
+     "near-mpc-staking4all-01.near": 4,
+     "greenfield-mpc01.near": 4,
+     "multichain-mainnet-aurora.near": 3,
+     "nodemonster.near": 3,
+     "klever-nearmpc-01.near": 3,
+     "natsai-mpc.near": 2,
+     "everstake-mpc-1.near": 2,
+     "mpch-01.near": 2,
+     "nansen-ai-mpc.near": 2,
+     "svrn-01.near": 2,
+     "hashkeympc.near": 1,
+     "n1-multichain.near": 1,
+     "bitwise-mpc01.near": 1,
+     "mpc-lgns.near": 1
+    },
+    "user-side: sign": {
+     "omni-relayer.bridge.near": 28,
+     "sweat-relayer.near": 9,
+     "tx-bench.near": 2,
+     "accountant-usdt-meteor-vaults.near": 1
+    },
+    "other/admin: resolve_verification+submit_participant_info": {
+     "mpch-01.near": 1,
+     "mpc-lgns.near": 1,
+     "multichain-mainnet-aurora.near": 1
+    },
+    "node: respond_verify_foreign_tx": {
+     "mpch-01.near": 1
+    },
+    "user-side: verify_foreign_transaction": {
+     "omni-relayer.bridge.near": 1
+    }
+   },
+   "sign_receipts_executed_in_window": 43,
+   "sign_txs_with_tx_block_in_window": 40,
+   "respond_txs_total": 43,
+   "respond_txs_failed": 0,
+   "other_txs": 5,
+   "hypothesis_tx_eq_2x_sign": {
+    "txs": 88,
+    "two_x_sign_receipts": 86,
+    "diff": 2,
+    "decomposition": "txs = sign_txs + respond_txs + other  ->  88 = 40 + 43 + 5"
+   }
+  },
+  "B": {
+   "window": "window-223900000-223900300",
+   "txs_in_window": 86,
+   "distinct_tx_signers": 22,
+   "tx_kinds": {
+    "node: respond": 43,
+    "user-side: sign": 42,
+    "other/admin: resolve_verification+submit_participant_info": 1
+   },
+   "node_accounts_seen_in_respond": [
+    "astrostakers-mainnet.near",
+    "bitwise-mpc01.near",
+    "everstake-mpc-1.near",
+    "greenfield-mpc01.near",
+    "hashkeympc.near",
+    "klever-nearmpc-01.near",
+    "mpc-lgns.near",
+    "mpch-01.near",
+    "multichain-mainnet-aurora.near",
+    "n1-multichain.near",
+    "nansen-ai-mpc.near",
+    "natsai-mpc.near",
+    "near-mpc-staking4all-01.near",
+    "nodemonster.near",
+    "stakin-mpc.near",
+    "svrn-01.near"
+   ],
+   "respond_tx_signer_equals_respond_predecessor": true,
+   "signers_by_kind": {
+    "node: respond": {
+     "multichain-mainnet-aurora.near": 4,
+     "greenfield-mpc01.near": 4,
+     "mpc-lgns.near": 4,
+     "hashkeympc.near": 4,
+     "near-mpc-staking4all-01.near": 4,
+     "bitwise-mpc01.near": 3,
+     "mpch-01.near": 3,
+     "natsai-mpc.near": 3,
+     "everstake-mpc-1.near": 3,
+     "nansen-ai-mpc.near": 3,
+     "nodemonster.near": 2,
+     "stakin-mpc.near": 2,
+     "astrostakers-mainnet.near": 2,
+     "svrn-01.near": 1,
+     "klever-nearmpc-01.near": 1
+    },
+    "user-side: sign": {
+     "omni-relayer.bridge.near": 25,
+     "sweat-relayer.near": 12,
+     "tx-bench.near": 2,
+     "zec-vault-accountant.near": 1,
+     "accountant-usdc-meteor-vaults.near": 1,
+     "dew-rneardefi-accountant-2.near": 1
+    },
+    "other/admin: resolve_verification+submit_participant_info": {
+     "n1-multichain.near": 1
+    }
+   },
+   "sign_receipts_executed_in_window": 43,
+   "sign_txs_with_tx_block_in_window": 42,
+   "respond_txs_total": 43,
+   "respond_txs_failed": 5,
+   "other_txs": 1,
+   "hypothesis_tx_eq_2x_sign": {
+    "txs": 86,
+    "two_x_sign_receipts": 86,
+    "diff": 0,
+    "decomposition": "txs = sign_txs + respond_txs + other  ->  86 = 42 + 43 + 1"
+   }
+  }
+ },
+ "E2b": {
+  "A": {
+   "sign_receipts": 43,
+   "distinct_sign_keys_payload_domain_path_caller": 42,
+   "sign_keys_requested_more_than_once": {
+    "zcash-connector.bridge.near path=zcash-connector.bridge.n": 2
+   },
+   "ok_respond_receipts": 43,
+   "distinct_ok_respond_keys": 42,
+   "sign_receipts_minus_ok_responds": 0,
+   "distinct_sign_payload_domain": 42
+  },
+  "B": {
+   "sign_receipts": 43,
+   "distinct_sign_keys_payload_domain_path_caller": 37,
+   "sign_keys_requested_more_than_once": {
+    "zcash-connector.bridge.near path=zcash-connector.bridge.n": 2,
+    "zcash-connector.bridge.near path=d14c76c97214f053a9172407": 2,
+    "zcash-connector.bridge.near path=fa43f8bbe2b2bf72b6bf9082": 2,
+    "zcash-connector.bridge.near path=6bbf735980944532b82e6836": 2
+   },
+   "ok_respond_receipts": 38,
+   "distinct_ok_respond_keys": 37,
+   "sign_receipts_minus_ok_responds": 5,
+   "distinct_sign_payload_domain": 37
+  }
+ }
+}

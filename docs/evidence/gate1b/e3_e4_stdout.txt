@@ -1,0 +1,320 @@
+{
+ "E3": {
+  "fastnear_earliest_3_unfiltered": [
+   {
+    "hash": "7iPVs2MkKxskvJhqBT23KiNZsuwyAjE6EWNwDti8R7w5",
+    "height": 124709485,
+    "time": "2024-07-31T20:31:16Z",
+    "is_receiver": true,
+    "is_function_call": false
+   },
+   {
+    "hash": "FWhLZFzbThMoimoZECq5yqaA9uxfNwjWJXw5rcNPAUy8",
+    "height": 124709531,
+    "time": "2024-07-31T20:32:08Z",
+    "is_receiver": true,
+    "is_function_call": false
+   },
+   {
+    "hash": "BJfK2jdMPPWbTmZovzL7iCXNJeYR8Wnxu8s3MeepUFVQ",
+    "height": 124786472,
+    "time": "2024-08-01T20:16:52Z",
+    "is_receiver": true,
+    "is_function_call": false
+   }
+  ],
+  "fastnear_first_function_call_txs": [
+   {
+    "hash": "Gg6bdCn5Vbjtdi7cWUhqsAYETaGzWfW6iEpEqxESFjJk",
+    "height": 124788250,
+    "time": "2024-08-01T20:49:45Z"
+   },
+   {
+    "hash": "HzYbmWKgVRH9auxPdWYoBWdw5kMZ55u5wmb34GZKZgdD",
+    "height": 124811964,
+    "time": "2024-08-02T04:41:44Z"
+   }
+  ],
+  "six_months_ago_tx": {
+   "hash": "7wv6cjsU1qggm9dVS2WPiCK64iq4LUm1MNffzwasVjmB",
+   "height": 197667231,
+   "time": "2026-05-10T03:30:27Z"
+  },
+  "per_target": {
+   "earliest_unfiltered": {
+    "target": {
+     "hash": "7iPVs2MkKxskvJhqBT23KiNZsuwyAjE6EWNwDti8R7w5",
+     "height": 124709485,
+     "time": "2024-07-31T20:31:16Z",
+     "is_receiver": true,
+     "is_function_call": false
+    },
+    "fastnear_tx_api": {
+     "http": 200,
+     "found": true,
+     "signer": "signer",
+     "block_height": 124709485,
+     "time": "2024-07-31T20:31:16Z",
+     "n_receipts": 2
+    },
+    "archival_rpc_fastnear_block": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "seconds": 0.62
+    },
+    "archival_rpc_fastnear_tx_status": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "n_receipts": 2,
+     "seconds": 0.65
+    },
+    "rpc_fastnear_nonarchival_block": {
+     "http": 422,
+     "ok": false,
+     "err": "UNKNOWN_BLOCK",
+     "seconds": 0.47
+    },
+    "rpc_fastnear_nonarchival_tx_status": {
+     "http": 408,
+     "ok": false,
+     "err": "TIMEOUT_ERROR",
+     "n_receipts": null,
+     "seconds": 30.53
+    },
+    "neardata_block": {
+     "http": 200,
+     "ok": true,
+     "seconds": 2.63,
+     "note": null
+    },
+    "nearblocks_tx": {
+     "http": 200,
+     "found": true,
+     "seconds": 0.61,
+     "note": null
+    }
+   },
+   "first_function_call": {
+    "target": {
+     "hash": "Gg6bdCn5Vbjtdi7cWUhqsAYETaGzWfW6iEpEqxESFjJk",
+     "height": 124788250,
+     "time": "2024-08-01T20:49:45Z"
+    },
+    "fastnear_tx_api": {
+     "http": 429,
+     "found": false
+    },
+    "archival_rpc_fastnear_block": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "seconds": 0.85
+    },
+    "rpc_fastnear_nonarchival_block": {
+     "http": 422,
+     "ok": false,
+     "err": "UNKNOWN_BLOCK",
+     "seconds": 0.5
+    },
+    "neardata_block": {
+     "http": 200,
+     "ok": true,
+     "seconds": 1.74,
+     "note": null
+    },
+    "nearblocks_tx": {
+     "http": 200,
+     "found": true,
+     "seconds": 0.62,
+     "note": null
+    }
+   },
+   "six_months_ago": {
+    "target": {
+     "hash": "7wv6cjsU1qggm9dVS2WPiCK64iq4LUm1MNffzwasVjmB",
+     "height": 197667231,
+     "time": "2026-05-10T03:30:27Z"
+    },
+    "fastnear_tx_api": {
+     "http": 200,
+     "found": true,
+     "signer": "blacksandtech.near",
+     "block_height": 197667231,
+     "time": "2026-05-10T03:30:27Z",
+     "n_receipts": 2
+    },
+    "archival_rpc_fastnear_block": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "seconds": 0.61
+    },
+    "archival_rpc_fastnear_tx_status": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "n_receipts": 2,
+     "seconds": 0.44
+    },
+    "rpc_fastnear_nonarchival_block": {
+     "http": 422,
+     "ok": false,
+     "err": "UNKNOWN_BLOCK",
+     "seconds": 0.54
+    },
+    "rpc_fastnear_nonarchival_tx_status": {
+     "http": 408,
+     "ok": false,
+     "err": "TIMEOUT_ERROR",
+     "n_receipts": null,
+     "seconds": 30.2
+    },
+    "neardata_block": {
+     "http": 200,
+     "ok": true,
+     "seconds": 1.31,
+     "note": null
+    },
+    "nearblocks_tx": {
+     "http": 200,
+     "found": true,
+     "seconds": 0.69,
+     "note": null
+    }
+   },
+   "nearblocks_creation_tx": {
+    "target": {
+     "hash": "7iPVs2MkKxskvJhqBT23KiNZsuwyAjE6EWNwDti8R7w5",
+     "height": 124709485,
+     "time": "2024-07-31T20:31:16Z (NearBlocks timestamp 1722457876)"
+    },
+    "fastnear_tx_api": {
+     "http": 200,
+     "found": true,
+     "signer": "signer",
+     "block_height": 124709485,
+     "time": "2024-07-31T20:31:16Z",
+     "n_receipts": 2
+    },
+    "archival_rpc_fastnear_block": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "seconds": 0.56
+    },
+    "archival_rpc_fastnear_tx_status": {
+     "http": 200,
+     "ok": true,
+     "err": null,
+     "n_receipts": 2,
+     "seconds": 0.61
+    },
+    "rpc_fastnear_nonarchival_block": {
+     "http": 422,
+     "ok": false,
+     "err": "UNKNOWN_BLOCK",
+     "seconds": 0.53
+    },
+    "rpc_fastnear_nonarchival_tx_status": {
+     "http": 408,
+     "ok": false,
+     "err": "TIMEOUT_ERROR",
+     "n_receipts": null,
+     "seconds": 30.41
+    },
+    "neardata_block": {
+     "http": 200,
+     "ok": true,
+     "seconds": 2.47,
+     "note": null
+    },
+    "nearblocks_tx": {
+     "http": 200,
+     "found": true,
+     "seconds": 0.66,
+     "note": null
+    }
+   }
+  }
+ },
+ "E4": {
+  "list_pages": {
+   "n": 10,
+   "rows": 2000,
+   "seconds_each": [
+    0.742,
+    0.765,
+    0.825,
+    0.797,
+    0.77,
+    0.745,
+    0.752,
+    0.615,
+    0.611,
+    0.76
+   ],
+   "mean_seconds": 0.738,
+   "wall_seconds_incl_pacing": 10.61
+  },
+  "details": {
+   "requests": 7,
+   "txs_fetched": 143,
+   "seconds_each": [
+    1.069,
+    0.957,
+    1.035,
+    0.869,
+    0.918,
+    0.893,
+    0.807
+   ],
+   "mean_seconds": 0.935,
+   "mean_bytes_per_request": 330737,
+   "bytes_per_tx": 16190,
+   "wall_seconds_incl_pacing": 11.38
+  },
+  "errors_or_rate_limits": [
+   {
+    "call": "details",
+    "n": 60,
+    "http": 429
+   },
+   {
+    "call": "details",
+    "n": 100,
+    "http": 429
+   },
+   {
+    "call": "details",
+    "n": 180,
+    "http": 429
+   }
+  ],
+  "total_txs_now": 13015107,
+  "extrapolation": {
+   "assumption": "requests paced at 3.0/s (approved cap is 4/s); server latency not the bottleneck at this pace",
+   "list_all_pages": {
+    "requests": 65076,
+    "hours": 6.03
+   },
+   "details_for_all_txs": {
+    "requests": 650756,
+    "hours": 60.3,
+    "approx_GB": 210.7
+   },
+   "details_for_sample_10k": {
+    "requests": 500,
+    "minutes": 2.8
+   }
+  }
+ },
+ "requests_total": 51,
+ "http_statuses": {
+  "200": 40,
+  "408": 3,
+  "422": 4,
+  "429": 4
+ }
+}
