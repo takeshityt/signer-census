@@ -1,0 +1,172 @@
+{
+ "accounts": [
+  {
+   "account": "fast-auth.near",
+   "category_suggestion": "near-infra:fastauth",
+   "owner_or_project": "NEAR Auth / FastAuth (built and operated by Peersyst per auth.near.org); heavy current traffic comes via sweat-relayer.near (see unresolved on Sweat)",
+   "what_it_does": "Shared FastAuth contract: verifies an Auth0/guard-checked JWT (via jwt.fast-auth.near router) and then calls v1.signer.sign with path '<guard_id>#<sub>' on behalf of the user, so each web2 login deterministically controls one MPC-derived key.",
+   "target_chain_evidence": "The derived key signs NEAR transactions: docs.near.org says the SDK returns an Ed25519 key by default, 'the same login always controls the same account'; a relayer broadcasts the signed tx. The contract also supports secp256k1/ecdsa (other chains) but our sample shows only Ed25519 (domain_id 1), consistent with NEAR-account signing. Exact account-id mapping (implicit account from the derived pubkey?) not confirmed from docs.",
+   "evidence": [
+    {
+     "kind": "github-source",
+     "url": "https://github.com/Peersyst/fast-auth/blob/main/contracts/fa/src/lib.rs#L533-L541",
+     "claim": "fast-auth.near's eddsa sign path is guard_id#user and domain_id = contract's mpc_domain_id; calls mpc_contract .sign(request)",
+     "quote_or_value": "path: format!(\"{}#{}\", guard_id.clone(), user), domain_id: self.mpc_domain_id,"
+    },
+    {
+     "kind": "github-source",
+     "url": "https://github.com/Peersyst/fast-auth/blob/main/contracts/jwt-guard-router/src/lib.rs#L185-L201",
+     "claim": "guard_id must be 'jwt#GUARD_NAME' so full path = jwt#<guard>#<sub>; guard names here are issuer URLs (e.g. https://fastauth.swe.at)",
+     "quote_or_value": "Invalid guard name format. Expected 'jwt#GUARD_NAME'"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC call_function fast-auth.near mpc_domain_id",
+     "claim": "On mainnet fast-auth.near is configured with MPC domain 1 (= Ed25519 in v1.signer), matching our sample",
+     "quote_or_value": "result bytes [49] = \"1\""
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_code fast-auth.near (exported method names)",
+     "claim": "Deployed wasm exports the methods of the Peersyst fa contract",
+     "quote_or_value": "set_mpc_domain_id, set_mpc_key_version, verify_sign_callback, on_sign_callback, sign"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://auth.near.org/",
+     "claim": "Operator and shared mainnet infrastructure",
+     "quote_or_value": "\"NEAR Auth is built and operated by Peersyst as a public-good account-abstraction layer for the NEAR ecosystem.\"; \"shared infrastructure deployed on mainnet (fast-auth.near, jwt.fast-auth.near, v1.signer)\"; path {guard_id}#{sub} (fetched via WebFetch summary, wording from summary)"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.near.org/web3-apps/tutorials/near-auth",
+     "claim": "Derived key type and flow; login.auth.near.org is the Auth0 domain in NEAR's own React Native example",
+     "quote_or_value": "\"Each identity deterministically derives its own NEAR key, so the same login always controls the same account.\" ; \"returns an Ed25519 key by default\"; Auth0 domain \"login.auth.near.org\"; relayer submits the sign action to fast-auth.near (WebFetch summary)"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://peersyst.github.io/fast-auth/docs/concepts/architecture_mpc",
+     "claim": "Path format examples",
+     "quote_or_value": "{guard_id}#{user_subject}, e.g. jwt#auth0#google-oauth2|123456789"
+    },
+    {
+     "kind": "announcement",
+     "url": "https://pages.near.org/blog/rfps-now-open-for-fast-auth-and-multichain-one-click",
+     "claim": "NEAR Foundation RFP (Feb 2025, via search snippet; page itself redirects to docs.near.org so not re-fetched) said selected teams will maintain the existing Fast Auth network powering 800,000+ SWEAT users",
+     "quote_or_value": "\"existing Fast Auth network powering over 800,000 SWEAT users\" (search-result paraphrase, NOT verified from page text)"
+    },
+    {
+     "kind": "onchain",
+     "url": "NearBlocks GET /v1/account/fast-auth.near; POST tx.main.fastnear.com/v0/transactions BgWu3Fp213hkpXkggJMB64FmKYH51ZqgtYFJiMrawvAy",
+     "claim": "Created by acarrera.near via near.create_account; single full-access key (same key as creator tx); code_hash BvTVSVNZ...",
+     "quote_or_value": "signer_id acarrera.near, receiver near, method create_account, new_account_id fast-auth.near; public_key ed25519:E8ZA31SgGWuJrqbZgkDYBTKES9yfwuPTA74mu8rthYQV"
+    },
+    {
+     "kind": "data-inference",
+     "url": "data/derived/sample_parsed.csv.gz (predecessor=fast-auth.near, method=sign)",
+     "claim": "2026-04..2026-11 sample: tx_signer sweat-relayer.near every month (946,1256,1254,1289,1048,745,705,602 rows incl. 2026-11 partial) with issuer https://fastauth.swe.at; relayer.nearmobile.near + login.auth.near.org only 1 row in each of 2026-07, 09, 10",
+     "quote_or_value": "counts above"
+    }
+   ],
+   "onchain": {
+    "creator_account": "acarrera.near",
+    "creation_tx": "BgWu3Fp213hkpXkggJMB64FmKYH51ZqgtYFJiMrawvAy",
+    "creation_time_utc": "2025-10-06T15:42:59Z",
+    "code_hash": "BvTVSVNZSgjKCcJA7mjNzqo8Rba1toQpDn9TUDrrHJ1Z",
+    "is_contract": true,
+    "notes": "One FullAccess key ed25519:E8ZA31Sg...hYQV (still present, = creator tx key). Storage 231193 bytes. Whether acarrera.near is a Peersyst person is NOT verified. Note: account created Oct 2025, i.e. this is the 'FastAuth 2' deployment (Peersyst), not the older 2023 FastAuth v1 (inference from date)."
+   },
+   "related_accounts": {
+    "sweat-relayer.near": {
+     "onchain": "created 2024-04-02T18:40:24Z by meteor-relayer.near (tx 4D3WeD62e6VtztRCsitPadwJh2RHUFdSM3ZYWh3snew4, NearBlocks), no contract (code_hash all 1s), >100 access keys (RPC TOO_MANY_ACCESS_KEYS)",
+     "note": "Name suggests Sweat but no official statement found; created by meteor-relayer.near, which is unexplained."
+    },
+    "relayer.nearmobile.near": {
+     "onchain": "created 2026-05-15T11:05:30Z by nearmobile.near (tx GKHDQLxFsp1aSYpEz8XRMdCzqUTg1aY6MrkANggLGxKT), no contract, FullAccess key ed25519:83HX1x6Y...",
+     "note": "Account-hierarchy shows same owner as nearmobile.near (a NEAR Mobile wallet per search results, not verified in detail)."
+    },
+    "fastauth.swe.at": "https://fastauth.swe.at returns HTTP 403 Cloudflare Access (not publicly readable). swe.at appears only as an email domain in a Sweat-related press release (search result, secondary).",
+    "login.auth.near.org": "Auth0 login domain in NEAR's official near-auth docs example; i.e. the default NEAR Auth issuer."
+   },
+   "confidence": "high",
+   "unresolved": [
+    "No official statement found that fastauth.swe.at / sweat-relayer.near belong to Sweat Economy/Sweat Wallet. Circumstantial: names (swe.at, sweat-relayer), Sweat's own Medium post (via search snippet only; page returned 403) says Sweat integrates with NEAR FastAuth/Magic Keys, NEAR RFP mentions 800k+ SWEAT users on Fast Auth. => medium confidence on 'Sweat-driven' attribution, unresolved as fact.",
+    "Sweat Foundation press release (bravenewcoin.com, 1 Oct 2026, fetched): 'Sweat Wallet and SWEAT in their present form will end on 30 December 2026.' It does not mention FastAuth. Risk: if mass use is Sweat, it may end ~2026-12-30; this is a thesis-relevant caveat (inference).",
+    "No official announcement found explaining the April 2026 ramp (Sweat Wallet onboarding to fast-auth.near) -> unresolved.",
+    "Exact mapping from derived Ed25519 key to NEAR account id (implicit hex account vs named) not confirmed in docs; whether acarrera.near belongs to Peersyst not verified.",
+    "login.auth.near.org vs docs: the 2 mainnet issuers seen in sample are fastauth.swe.at (99.96%) and login.auth.near.org (0.04%)."
+   ]
+  },
+  {
+   "account": "omni.bridge.near",
+   "category_suggestion": "near-infra:bridge-omni",
+   "owner_or_project": "NEAR Omni Bridge (Near-One/omni-bridge, GitHub org Near-One)",
+   "what_it_does": "Omni Bridge NEAR-side contract: on sign_transfer / log_metadata it calls v1.signer.sign with path 'bridge-1' and key_version 0 on a keccak256 payload of the transfer/metadata message, producing an MPC ECDSA signature that the destination-chain bridge contract verifies to release/mint tokens.",
+   "target_chain_evidence": "Outbound NEAR->foreign-chain transfers all use Chain Signatures (README). Supported: Ethereum, Bitcoin, Zcash (light client + Chain Signatures), Solana, Base, BNB, Arbitrum (Wormhole + Chain Signatures). The sign request is legacy ECDSA (key_version 0, keccak256 payload) so the per-request destination chain is not visible in the request itself; it is inside transfer_message (recipient chain). Not determinable from sign calls alone.",
+   "evidence": [
+    {
+     "kind": "github-source",
+     "url": "https://github.com/Near-One/omni-bridge/blob/main/near/omni-bridge/src/lib.rs#L84",
+     "claim": "Constant path",
+     "quote_or_value": "const SIGN_PATH: &str = \"bridge-1\";"
+    },
+    {
+     "kind": "github-source",
+     "url": "https://github.com/Near-One/omni-bridge/blob/main/near/omni-bridge/src/lib.rs#L475-L482",
+     "claim": "sign_transfer calls MPC signer with the path; payload = keccak256 of TransferMessagePayload (transfer_id, token_address, amount, recipient, fee_recipient, message)",
+     "quote_or_value": "ext_signer::ext(self.mpc_signer.clone()) ... .sign(SignRequest { payload, path: SIGN_PATH.to_owned(), key_version: 0, })"
+    },
+    {
+     "kind": "github-source",
+     "url": "https://github.com/Near-One/omni-bridge/blob/main/near/omni-bridge/src/lib.rs#L367-L374",
+     "claim": "log_metadata_callback also signs (token name/symbol/decimals MetadataPayload) with same path, used to deploy token on foreign chain",
+     "quote_or_value": ".sign(SignRequest { payload, path: SIGN_PATH.to_owned(), key_version: 0, })"
+    },
+    {
+     "kind": "github-source",
+     "url": "https://github.com/Near-One/omni-bridge/blob/main/near/omni-bridge/src/lib.rs#L186-L189",
+     "claim": "ext_signer trait: sign(&mut self, request: SignRequest); mpc_signer is a stored AccountId (line 237)",
+     "quote_or_value": "#[ext_contract(ext_signer)] pub trait ExtSigner { fn sign(&mut self, request: SignRequest); }"
+    },
+    {
+     "kind": "github-source",
+     "url": "https://raw.githubusercontent.com/Near-One/omni-bridge/main/README.md",
+     "claim": "Supported networks and verification",
+     "quote_or_value": "\"NEAR \u2192 Foreign Chain: All outbound transfers use Chain Signatures (MPC).\"; \"Ethereum, Bitcoin, Zcash: Light clients\"; \"Solana, BNB and EVM L2s (Base, Arbitrum, Polygon): Wormhole\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.near.org/chain-abstraction/omnibridge/overview.md",
+     "claim": "Omni Bridge uses Chain Signatures",
+     "quote_or_value": "Ethereum/Bitcoin/Zcash (Light client + Chain Signatures); Solana/Base/BNB/Arbitrum (Wormhole + Chain Signatures)"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_code omni.bridge.near",
+     "claim": "Deployed wasm exports the same methods as the repo",
+     "quote_or_value": "sign_transfer, sign_transfer_callback, log_metadata, log_metadata_callback, sign_log_metadata_callback, fin_transfer, init_transfer, mpc_signer"
+    },
+    {
+     "kind": "onchain",
+     "url": "NearBlocks /v1/account/omni.bridge.near; tx.main.fastnear.com tx 96MHVtXDaNKhtQhjQJrsWVNyXUetSohmmNUpNGFBKd4E",
+     "claim": "Created by bridge.near (CreateAccount+Transfer+AddKey, receiver omni.bridge.near)",
+     "quote_or_value": "signer_id bridge.near; AddKey ed25519:HpfMmmDJo1t4GwSoYRLjNjYQEnKBpwxWAwL4ZFmpdKRd FullAccess"
+    }
+   ],
+   "onchain": {
+    "creator_account": "bridge.near",
+    "creation_tx": "96MHVtXDaNKhtQhjQJrsWVNyXUetSohmmNUpNGFBKd4E",
+    "creation_time_utc": "2025-01-10T18:13:54Z",
+    "code_hash": "F2no3vqrFxm2c34mZqoMNawhRYYHbp22WuRqN6vEd3KP",
+    "is_contract": true,
+    "notes": "No access keys currently (view_access_key_list keys: []) = locked contract, upgrades via DAO/roles. Storage 54.27 MB. Repo source is main branch; not verified that deployed code_hash equals the main commit (method names match; sign args key_version 0 match our data)."
+   },
+   "confidence": "high",
+   "unresolved": [
+    "Per-request destination chain is not in the sign args; would need to decode transfer_message from the parent sign_transfer call args (not done).",
+    "Deployed code_hash not matched to a specific git commit/release.",
+    "bridge.near (creator) owner = Near-One presumed from naming/repo, not verified by statement."
+   ]
+  }
+ ]
+}

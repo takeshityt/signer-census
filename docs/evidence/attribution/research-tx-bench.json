@@ -1,0 +1,96 @@
+{
+  "accounts": [
+    {
+      "account": "tx-bench.near",
+      "category_suggestion": "unknown",
+      "owner_or_project": null,
+      "what_it_does": "Suspected benchmark: an EOA (no contract) whose single full-access key sends one v1.signer.sign call per request, in clockwork ~60 s cadence (ECDSA + EdDSA pairs), 24/7, with random payloads that are never reused; no document found that names this account.",
+      "target_chain_evidence": "unknown (payloads are uniform random 32-byte values, not shown to be real chain tx hashes; no on-chain trace of any signature being used elsewhere could be checked)",
+      "evidence": [
+        { "kind": "onchain", "url": "POST https://archival-rpc.mainnet.fastnear.com tx 2y7oUAur5wJRr3ywPb1jDLbvVX9Avoo24drYtgYJCtmk", "claim": "tx-bench.near was created 2024-04-22 14:18:19 UTC (NearBlocks created.block_timestamp 1713795499505092400) by implicit account 6175a2a556635196d2d99b7416e49594dbcc729e0562adf8ba70d9c4e0a721c6 calling near.create_account", "quote_or_value": "{\"new_account_id\":\"tx-bench.near\",\"new_public_key\":\"ed25519:9XMdCmpw5jtV6uv4ZwdVwzF7wVWMFMovwu7G2WkbrYEn\"}, deposit 0.05 NEAR" },
+        { "kind": "onchain", "url": "POST https://tx.main.fastnear.com/v0/transactions E7N57jy6GQGVqPnWEb2Xu5wMhTL6NtC7NWwKhxbEJS3b", "claim": "The creator 6175a2...21c6 was itself funded by waclaw.near (1 NEAR transfer, same day 2024-04-22). The creator account has only 4 txs in total: that funding, the create_account, a 0.04 NEAR transfer to tx-bench.near (6SJnshftuKRCoMu3DoM8Vdeua1jMRnDP1NkKVLoZv2pt) and creation of tx-bench-buddy.near (BTdLPdF5LbhwLpmvYhmdPmotn1uopVLNNJkqHxqFpK2B, 2024-04-30).", "quote_or_value": "signer_id waclaw.near -> 6175a2..., Transfer 100000000000000000000000 yocto" },
+        { "kind": "onchain", "url": "POST https://tx.main.fastnear.com/v0/account {account_id:tx-bench.near,is_any_signer:false,is_real_receiver:true,desc:false} then POST /v0/transactions on the 47 hashes", "claim": "Later top-ups of tx-bench.near come from n1-payments.near (20 NEAR, 2024-04-25), n1-payments-2.near (several transfers of 100-300 NEAR: 2024-05-28, 2025-08-10, 2025-12-02, 2026-02-22, 2026-05-26, 2026-09-15), n1-multichain.near (10 NEAR, 2026-05-22) and one implicit account a6f04009...fbd68 (0.15 NEAR, 2025-08-06). n1-payments.near and n1-payments-2.near were both created by the same implicit account b2ceffd2f6d1fe6b55d4a152a9f32460ed1ada712f0a9d5f8b5ffe7cc4b261ba (txs Cd2t1U6RiPAokHSjasvLTmQLERtjBdac5NUdBwu4G8mr / 2BWNo18yUigajJZqsjd8SdeVeUVMHwT6DNkjEtjTfS6v) via near.create_account.", "quote_or_value": "n1-payments-2.near -> tx-bench.near Transfer 300000000000000000000000000 (2026-05-26 and 2026-09-15)" },
+        { "kind": "onchain", "url": "POST https://rpc.mainnet.fastnear.com query view_account / view_access_key_list for tx-bench.near", "claim": "Not a contract; exactly one access key, full-access, which is the same key that created the account and that signs every sign tx in our sample.", "quote_or_value": "code_hash 11111111111111111111111111111111; keys: [ed25519:9XMdCmpw5jtV6uv4ZwdVwzF7wVWMFMovwu7G2WkbrYEn FullAccess]; storage_usage 182; FastNEAR /v0/account txs_count 1552374" },
+        { "kind": "data-inference", "url": "data/derived/sample_parsed.csv.gz + data/raw/sample/*/*.json.gz (method=='sign', predecessor=='tx-bench.near')", "claim": "15,492 sign receipts in sample (15,145 distinct txs; 325 tx hashes appear twice/thrice because of overlapping cluster boundaries). All: tx_signer = tx-bench.near, receiver v1.signer, exactly one FunctionCall action (method sign), deposit '1' yoctoNEAR, path always empty, 100% receipt Success, callback Success, fulfilled=1.", "quote_or_value": "shape Counter({('v1.signer',('FunctionCall',)): 15492}); deposit {'1': 15492}; path {'': 15492}; callback_status Success 15492" },
+        { "kind": "data-inference", "url": "same files; gas of FunctionCall", "claim": "Fixed gas attachments, three values only.", "quote_or_value": "15 Tgas: 9948; 10 Tgas: 4793; 20 Tgas: 751" },
+        { "kind": "web-source", "url": "https://hub.docker.com/v2/repositories/nearone/transaction-bench/", "claim": "Near One publishes a Docker image 'transaction-bench' (Docker Hub, last_updated 2026-07-14) described as a latency measurement app. Its GitHub repo (github.com/Near-One/transaction-bench, shown in web search) returns 404 unauthenticated (private or removed). Nothing fetched links this tool to tx-bench.near or to MPC sign calls; the name similarity is only a lead.", "quote_or_value": "\"An application to measure the end user latency of transactions on the Near blockchain.\"" },
+        { "kind": "official-docs", "url": "https://raw.githubusercontent.com/near/nearcore/master/docs/practices/workflows/benchmarking_synthetic_workloads.md", "claim": "NEAR's own tooling (near_synth_bm in nearcore) has a 'benchmark-mpc-sign' command that sends sign calls to an MPC contract; it documents benchmarking on networks where chain-signatures is deployed, but names no mainnet account and does not mention tx-bench.", "quote_or_value": "\"### Benchmark calls to the `sign` method of an MPC contract\" / \"cargo run -- benchmark-mpc-sign --help\"" }
+      ],
+      "onchain": {
+        "creator_account": "6175a2a556635196d2d99b7416e49594dbcc729e0562adf8ba70d9c4e0a721c6 (implicit; funded by waclaw.near)",
+        "creation_tx": "2y7oUAur5wJRr3ywPb1jDLbvVX9Avoo24drYtgYJCtmk",
+        "creation_time_utc": "2024-04-22T14:18:19Z",
+        "code_hash": "11111111111111111111111111111111 (no contract; cannot list exported methods)",
+        "is_contract": false,
+        "notes": "1 full-access key ed25519:9XMdCmpw5jtV6uv4ZwdVwzF7wVWMFMovwu7G2WkbrYEn (owner of the key not known). Sibling account created by the same creator: tx-bench-buddy.near (balance 256931 yocto, no contract). Funders n1-payments.near / n1-payments-2.near / n1-multichain.near share the 'n1-' prefix; that this means Near One is NOT verified. FastNEAR total tx count for the account: 1,552,374 (all kinds)."
+      },
+      "confidence": "low",
+      "unresolved": [
+        "Who owns the key / the account: no document, repo or announcement names tx-bench.near.",
+        "Whether 'n1-' funders (n1-payments, n1-payments-2, n1-multichain) belong to Near One: no source fetched states it (a search for the accounts returned nothing).",
+        "Whether Near-One/transaction-bench (repo not publicly reachable, only a Docker image) is what runs tx-bench.near and whether it issues sign calls.",
+        "Whether any signature produced is broadcast on another chain (not checkable by us).",
+        "Who waclaw.near is (account funded the creator in 2024; no identity source found).",
+        "Real total volume of tx-bench sign calls: our sample is stratified (~2,000 sign receipts per month), so per-month counts are not volumes. The ~1.2M estimate is the caller's, not re-derived here."
+      ]
+    }
+  ],
+  "benchmark_analysis": {
+    "summary": "Strong behavioural signature of a scheduled synthetic/monitoring load (probably a liveness/latency probe or benchmark): fixed cadence, alternating ECDSA/EdDSA, random never-reused payloads, no path, all success, 24/7, one key. Explicit proof of purpose (docs/repo naming it) was NOT found, so the label stays 'unknown - suspected benchmark'.",
+    "sample_scope": "15,492 sign receipts of tx-bench.near in sample_parsed.csv.gz (of 177,727 rows total; sample is cluster windows of 200 consecutive v1.signer txs per census/sample, ~2,000 sign receipts/month).",
+    "months_active_in_sample": {
+      "first": "2025-04", "last": "2026-11 (ongoing)",
+      "sample_counts_by_month": {"2025-04":154,"2025-05":1036,"2025-06":927,"2025-07":1485,"2025-08":1714,"2025-09":1893,"2025-10":1466,"2025-11":1201,"2025-12":1400,"2026-01":1141,"2026-02":787,"2026-03":589,"2026-04":401,"2026-05":211,"2026-06":229,"2026-07":251,"2026-08":227,"2026-09":206,"2026-10":85,"2026-11":89},
+      "share_of_all_sign_receipts_in_sample_that_month": "2025-04 154/2005 (8%); 2025-09 1893/1996 (95%); 2026-03 589/1951 (30%); 2026-05 211/1997 (11%); 2026-11 89/1977 (4.5%). Note: no tx-bench sign receipts in sample before 2025-04 (sample months from 2024-08).",
+      "reading": "Not flat in share: ramps up 2025-04 to a peak in 2025-08/09 (it dominates ~95% of sign requests that month), then declines steadily to ~4-5% by late 2026. Whether this is the account lowering its cadence or others growing is not separable from the sample; per-minute cadence inside a window is constant (see timing)."
+    },
+    "requests_per_cluster": "Up to 100 per 200-tx cluster (e.g. 2025-09-c10: 100 of 100 sign receipts are tx-bench); cluster-level share of sign receipts: min 0, median 12.9%, max 100% (all clusters, all accounts).",
+    "path": "Always empty string (15,492/15,492).",
+    "key_type_mix": {
+      "legacy_bytes (key_version 0, payload list of 32 ints, no domain_id)": 9341,
+      "Ecdsa (domain_id 0, payload_v2)": 3072,
+      "Eddsa (domain_id 1, payload_v2)": 3079,
+      "by_month": "2025-04..2025-10: 100% legacy; 2025-11: 666 legacy / 269 ECDSA / 266 EdDSA (switch month); 2025-12 onward: 100% payload_v2 with ECDSA:EdDSA ~1:1 every month (e.g. 2026-03: 295/294, 2026-09: 101/105)."
+    },
+    "payload_repetition": {
+      "distinct_txs": 15145,
+      "distinct_payload_hashes": 14880,
+      "constant_payloads": "Only in legacy period: 0101..01 (32x byte 0x01) in all 154 receipts of 2025-04 and 0505..05 (32x 0x05) in all 140 of 2025-05 - these are placeholder-looking values, not real hashes.",
+      "random_payloads": "All other 15,198 receipts: 14,878 distinct; first-hex-digit histogram flat (907-1021 per digit), i.e. looks uniformly random 32 bytes. No payload repeats across different txs (apart from the two constants); apparent duplicates are the same tx_hash seen in two overlapping clusters.",
+      "caveat": "Random-looking payloads are consistent with both random test data and real tx sighash values; we cannot tell them apart without seeing the chain."
+    },
+    "tx_shape": {
+      "signer": "tx-bench.near itself (15,492/15,492), single public key ed25519:9XMdCm...1HYbrYEn (= creation key)",
+      "actions": "exactly one FunctionCall (v1.signer.sign) per tx; no batching, no other actions",
+      "deposit": "1 yoctoNEAR always",
+      "gas": "15 Tgas 9,948; 10 Tgas 4,793; 20 Tgas 751",
+      "args": "legacy: {key_version, path, payload[32 ints]}; new: {domain_id, path, payload_v2}"
+    },
+    "timing": {
+      "cadence": "Inside a window, consecutive tx-bench txs are separated by a median 59.7 s (25th-75th pct 50.8-60.2 s); in 2025-09-c10 the 99 gaps are 98-103 blocks (~100 blocks, ~99 min total for 100 txs, one tx every ~60 s). From 2025-11 on, requests come as an ECDSA+EdDSA pair every ~60 s (gaps alternate 7-10 s / 49-54 s, e.g. 2026-03-c05: 7,54,7,53,7,52...). Block-height gap mode 96-101 (legacy, one request/minute) and 12-13 (the intra-pair gap at ~1 s/block plus nearby).",
+      "breaks": "90th-99th percentile gaps ~898-902 s = 15 min: occasional pauses of a round 15 min, i.e. clockwork rather than organic traffic.",
+      "volume_profile": "Hour-of-day (UTC) of 15,492 txs: every hour 414-906 (no day/night pattern) => 24/7 machine activity.",
+      "interpretation": "Inference (c): strongly machine-scheduled, e.g. cron/loop at 60 s."
+    },
+    "fulfilment": "receipt_status Success 15,492; callback_status Success 15,492; fulfilled=1 15,492 => 0 failed in sample (the account is not stress-testing capacity: ~1 req/min is far below MPC throughput).",
+    "cross_chain_use": "Cannot be verified: sign output returns only a signature; we have no chain target, path is empty, payloads not mapped to tx hashes on any chain. Absence of evidence is weak. Inference: with empty path, derived key = the account's own root-derived key; no deposit beyond 1 yocto; random payloads and constant 0x01/0x05 payloads suggest probe traffic rather than real transfers.",
+    "supporting_inferences_for_suspected_benchmark": [
+      "Name 'tx-bench' plus sibling 'tx-bench-buddy.near', both created in the same session by a throwaway implicit account.",
+      "Fixed ~60 s cadence, 24/7, with 15-min pauses; ECDSA+EdDSA alternation after domain-id upgrade (tests both schemes) - coverage-style behaviour.",
+      "Random or constant (0x01/0x05) payloads, empty path, 1 yocto deposit, 100% success, single-action txs.",
+      "Recurring large NEAR top-ups (100-300 NEAR) from 'n1-payments-2.near' show a funded, maintained operation, not a one-off test.",
+      "Near One publishes a 'transaction-bench' image measuring end-user transaction latency (name match; unconfirmed link)."
+    ],
+    "missing_proof": [
+      "Any document naming tx-bench.near as a Near One / NEAR Foundation tool (repo config, README, dashboard, docs, blog).",
+      "Confirmation that n1-* accounts are Near One.",
+      "Source of Near-One/transaction-bench (404) to see whether it calls v1.signer.sign and uses account name 'tx-bench.near'."
+    ],
+    "evidence_that_would_settle_it": [
+      "Near One / MPC team statement or a public repo/config containing 'tx-bench.near' (ask Near One: github.com/Near-One/transaction-bench maintainers).",
+      "An identity link for waclaw.near or the n1-* accounts (e.g. their listing in a Near One document, or their appearing as Near One multisig/treasury).",
+      "Their dashboards for MPC latency (if tx-bench.near is a latency monitor, its sign txs will match published latency numbers)."
+    ],
+    "category_decision": "category_suggestion = 'unknown' (suspected benchmark). 'benchmark-test' not justified: no explicit source names the account or its creator/funder as benchmark tooling. Recommended wording in THESIS: 'a single account with machine-scheduled, probe-like behaviour (1 request/min, random payloads), suspected benchmark/monitoring; not attributed'. Report its share separately so conclusions hold with and without it."
+  }
+}

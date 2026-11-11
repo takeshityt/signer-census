@@ -1,0 +1,71 @@
+# Target-chain rules for sign receipts. First matching rule wins; anything unmatched is the explicit "unknown" bucket.
+# family "multi" = the requester is known (from source) to sign for several destination chains, but the chain of a single request is NOT in the sign arguments.
+# Key type is separate from chain: domain_id 0 / ECDSA / legacy = secp256k1, domain_id 1 / EdDSA = ed25519 (reported as key_types).
+# Deliberately NOT mapped (stay unknown): tx-bench.near (empty path), ping-account.near and reflect-adam-mainnet-agent-contract.near (an EVM-style path is only a hint),
+# the long tail of ~330 small requesters.
+rules:
+  - id: btc-connector-bitcoin
+    family: bitcoin
+    confidence: high
+    match: { requester: btc-connector.bridge.near, key_type: secp256k1 }
+    evidence:
+      - url: https://github.com/Near-One/btc-bridge/blob/7740fae0ed8dc56571adfe2aaf36bd4edee0d441/contracts/satoshi-bridge/src/chain_signature.rs
+        claim: "At the deployed commit (NEP-330 metadata of btc-connector.bridge.near) the contract builds SignRequest{payload,path,key_version} for Bitcoin inputs and converts the answer with to_btc_signature()."
+
+  - id: zcash-connector-zcash
+    family: zcash
+    confidence: medium
+    match: { requester: zcash-connector.bridge.near }
+    evidence:
+      - url: https://github.com/Near-One/btc-bridge/tree/37be7c6dfcb3a067ce8bedbe68052a8739e1445c
+        claim: "NEP-330 metadata of zcash-connector.bridge.near points here; its wasm contains 'orchard' 50x and 'zcash' 39x (0x 'orchard' in the Bitcoin connector). The Zcash sighash code itself was not read, hence medium."
+
+  - id: omni-bridge-multi
+    family: multi
+    confidence: high
+    match: { requester: omni.bridge.near, path_regex: "^bridge-1$" }
+    evidence:
+      - url: https://github.com/Near-One/omni-bridge/blob/83e3ac1eeef6b1330744f53d68dd037fa53aab0f/near/omni-bridge/src/lib.rs
+        claim: "SIGN_PATH = bridge-1 (L84); sign_transfer/log_metadata sign messages for destination-chain bridge contracts (L372-373, L480-481). The destination chain is in the parent call, not in the sign arguments."
+
+  - id: relay-allocator-multi
+    family: multi
+    confidence: high
+    match: { requester: 7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora }
+    evidence:
+      - url: https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f
+        claim: "Verified RelayAllocator source (author Relay Protocol): signs withdrawal payloads with the NEAR MPC signer; the signatures serve Relay depositories on other chains (the specific chain per request is not decoded)."
+
+  - id: relay-allocator-v0-multi
+    family: multi
+    confidence: medium
+    match: { requester: e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora }
+    evidence:
+      - url: https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-aurora-reflect.json
+        claim: "Earlier 'Allocator' contract with the same ABI/constructor arguments as RelayAllocator (research notes from Aurora Blockscout; not re-verified; Relay attribution inferred)."
+
+  - id: fastauth-near-key
+    family: near
+    confidence: medium
+    match: { requester: fast-auth.near, key_type: ed25519 }
+    evidence:
+      - url: https://docs.near.org/web3-apps/tutorials/near-auth
+        claim: 'NEAR docs: "Each identity deterministically derives its own NEAR key, so the same login always controls the same account"; the key is an Ed25519 key obtained through fast-auth.near / v1.signer (domain_id 1). The mapping to a concrete NEAR account id was not checked per request.'
+
+  - id: ref-satoshi-account-near
+    family: near
+    confidence: medium
+    match: { requester: acc.ref-labs.near }
+    evidence:
+      - url: https://rpc.mainnet.fastnear.com
+        claim: "view_code of acc.ref-labs.near exports sign_near_transaction / request_sign_near_txs and no sign_btc_transaction; get_config names v1.signer. Chain inferred from method names (source repo is private)."
+
+  - id: dew-kernel-near-intents
+    family: near
+    confidence: low
+    match:
+      requester: [kernel-usdc.meteor-vaults.near, kernel-usdt.meteor-vaults.near, kernel-near.meteor-vaults.near, kernel-zec.meteor-vaults.near]
+      key_type: ed25519
+    evidence:
+      - url: https://docs.dew.finance/introduction/overview
+        claim: "Dew docs describe ChainSigMessage as signing messages for NEAR Intents swaps (Ed25519 / NEP-413 style); the exact target chain per kernel is not stated publicly, hence low (research notes; wording not re-checked)."

@@ -1,0 +1,381 @@
+{
+ "accounts": [
+  {
+   "account": "kernel-usdc.meteor-vaults.near",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "Dew Finance (Meteor family) - Dew Kernel vault contract; deployed by meteor-vaults.near",
+   "what_it_does": "Dew Kernel vault smart contract (a USDC vault) that calls v1.signer sign with Ed25519 (domain_id 1) to sign NEAR-side messages/transactions for vault-managed accounts, triggered by vault accountant/strategist accounts.",
+   "target_chain_evidence": "NEAR (Ed25519 = NEAR-account-type keys). Kernel wasm exports sign_near_nep413_message and sign_transaction, contains types KernelConfiguration/ChainSigTransaction/NearNativeTransaction/ChainSigMessage, and 'deadline','intents','signer_id','SwapIntentMessage' (NEAR Intents swap message). Dew docs: ChainSigMessage 'is primarily valuable for signing messages on NEAR Intent to execute swaps'. Exact chain for each path not stated publicly (see unresolved).",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "POST https://tx.main.fastnear.com/v0/transactions {\"tx_hashes\":[\"ZxaR9icg3SBfspUb4bT41waJWHKaeTLCFbnYKtkyT4B\"]}",
+     "claim": "Account created by meteor-vaults.near in one tx: CreateAccount+Transfer 14 NEAR+DeployContract+FunctionCall new",
+     "quote_or_value": "signer_id=meteor-vaults.near; block_timestamp 2026-01-19T08:05:22Z (1768809922)"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://rpc.mainnet.fastnear.com view_account kernel-usdc.meteor-vaults.near",
+     "claim": "Contract deployed; same code hash as the other 3 kernel-* accounts",
+     "quote_or_value": "code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z"
+    },
+    {
+     "kind": "onchain",
+     "url": "view_code of the account; ASCII strings in wasm (NEP-330 contract metadata)",
+     "claim": "Source repo and commit embedded in the contract",
+     "quote_or_value": "\"link\":\"https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958\" ; build sourcescan/cargo-near:0.16.0-rust-1.86.0"
+    },
+    {
+     "kind": "onchain",
+     "url": "wasm ASCII strings via view_code",
+     "claim": "Contract hardcodes v1.signer and has sign callbacks",
+     "quote_or_value": "strings: 'v1.signer', 'v1.signer-prod.testnet', 'after_sign', 'sign_near_nep413_message', 'sign_transaction', 'ChainSigResponse::Ed25519', 'near-mpc-recovery v0.1.0 epsilon derivation:', 'derive_address_and_public_key'"
+    },
+    {
+     "kind": "onchain",
+     "url": "decode base64 args of the 'new' call in the creation tx",
+     "claim": "Init args name dew-finance.near as emergency account",
+     "quote_or_value": "{\"owner\":null,...,\"emergency_accounts\":[\"dew-finance.near\"],\"emergency_vote_threshold\":1,...}"
+    },
+    {
+     "kind": "data-inference",
+     "url": "data/derived/sample_parsed.csv.gz, predecessor==kernel-usdc.meteor-vaults.near",
+     "claim": "Request pattern in the sample",
+     "quote_or_value": "255 sample receipts, 2026-01..2026-11; all sign, domain 1, Eddsa; (tx_signer,path): accountant-usdc-meteor-vaults.near/near-1 89; 3 hex implicit signers/near-1 84; strategist-usdc.meteor-vaults.near path '1' 48, '2' 33, 'near-1' 1"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "claim": "Dew is built on NEAR Intents and Chain Signatures",
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/llms-full.txt",
+     "claim": "Vault Managed Accounts are Chain Signatures accounts; ChainSigMessage is for NEAR Intents swap signing; roles accountant/strategist",
+     "quote_or_value": "\"Vault Managed Accounts: Accounts that Dew Kernel controls via Chain Signatures.\" ; \"ChainSigMessage Policy ... primarily valuable for signing messages on NEAR Intent to execute swaps\" ; \"For now, the only supported sign_method is NearIntentsSwap\" ; \"the accountant is responsible for computing NAV\" ; strategist used as required_role; \"derivation_path: constant.CHAIN_SIG_ACCOUNT_1\""
+    },
+    {
+     "kind": "announcement",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+    }
+   ],
+   "onchain": {
+    "creator_account": "meteor-vaults.near",
+    "creation_tx": "ZxaR9icg3SBfspUb4bT41waJWHKaeTLCFbnYKtkyT4B",
+    "creation_time_utc": "2026-01-19T08:05:22Z (1768809922)",
+    "code_hash": "36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z",
+    "is_contract": true,
+    "notes": "Creation tx single signer meteor-vaults.near (ed25519:6rhvPf...). Callers: accountant-usdc-meteor-vaults.near, strategist-usdc.meteor-vaults.near, plus 3 hex implicit accounts (357645..., b9754a..., 1f0373...)"
+   },
+   "confidence": "high",
+   "unresolved": [
+    "Which external chain(s) each derivation path (near-1 / 1 / 2) maps to is not stated in any public source I could fetch; Meteor-Wallet/dew-finance-contract is not publicly readable (github.com 404 for repo and for the commit).",
+    "Dew docs (docs.dew.finance) do not mention 'near-1', Ed25519 or Zcash.",
+    "The path strings: Dew docs only show 'derivation_path: constant.CHAIN_SIG_ACCOUNT_1' (a symbolic constant), so 'near-1' likely = chain-sig account #1 used for NEAR/NEAR-Intents messages, '1'/'2' = accounts 1/2 signed by strategist - INFERENCE only, no quoted source line."
+   ]
+  },
+  {
+   "account": "kernel-usdt.meteor-vaults.near",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "Dew Finance (Meteor family) - Dew Kernel vault contract; deployed by meteor-vaults.near",
+   "what_it_does": "Dew Kernel vault smart contract (a USDT vault) that calls v1.signer sign with Ed25519 (domain_id 1) to sign NEAR-side messages/transactions for vault-managed accounts, triggered by vault accountant/strategist accounts.",
+   "target_chain_evidence": "NEAR (Ed25519 = NEAR-account-type keys). Kernel wasm exports sign_near_nep413_message and sign_transaction, contains types KernelConfiguration/ChainSigTransaction/NearNativeTransaction/ChainSigMessage, and 'deadline','intents','signer_id','SwapIntentMessage' (NEAR Intents swap message). Dew docs: ChainSigMessage 'is primarily valuable for signing messages on NEAR Intent to execute swaps'. Exact chain for each path not stated publicly (see unresolved).",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "POST https://tx.main.fastnear.com/v0/transactions {\"tx_hashes\":[\"5GgZwTYA1cG6s3fjRxn6GhbdM73pmQ6ZxeT52fEHssj6\"]}",
+     "claim": "Account created by meteor-vaults.near in one tx: CreateAccount+Transfer 14 NEAR+DeployContract+FunctionCall new",
+     "quote_or_value": "signer_id=meteor-vaults.near; block_timestamp 2026-01-19T09:41:26Z (1768815686)"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://rpc.mainnet.fastnear.com view_account kernel-usdt.meteor-vaults.near",
+     "claim": "Contract deployed; same code hash as the other 3 kernel-* accounts",
+     "quote_or_value": "code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z"
+    },
+    {
+     "kind": "onchain",
+     "url": "view_code of the account; ASCII strings in wasm (NEP-330 contract metadata)",
+     "claim": "Source repo and commit embedded in the contract",
+     "quote_or_value": "\"link\":\"https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958\" ; build sourcescan/cargo-near:0.16.0-rust-1.86.0"
+    },
+    {
+     "kind": "onchain",
+     "url": "wasm ASCII strings via view_code",
+     "claim": "Contract hardcodes v1.signer and has sign callbacks",
+     "quote_or_value": "strings: 'v1.signer', 'v1.signer-prod.testnet', 'after_sign', 'sign_near_nep413_message', 'sign_transaction', 'ChainSigResponse::Ed25519', 'near-mpc-recovery v0.1.0 epsilon derivation:', 'derive_address_and_public_key'"
+    },
+    {
+     "kind": "onchain",
+     "url": "decode base64 args of the 'new' call in the creation tx",
+     "claim": "Init args name dew-finance.near as emergency account",
+     "quote_or_value": "{\"owner\":null,...,\"emergency_accounts\":[\"dew-finance.near\"],\"emergency_vote_threshold\":1,...}"
+    },
+    {
+     "kind": "data-inference",
+     "url": "data/derived/sample_parsed.csv.gz, predecessor==kernel-usdt.meteor-vaults.near",
+     "claim": "Request pattern in the sample",
+     "quote_or_value": "266 sample receipts, 2026-01..2026-11; Eddsa; accountant-usdt-meteor-vaults.near/near-1 84; hex implicit signers/near-1 83; strategist-usdt.meteor-vaults.near path '1' 63, '2' 36"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "claim": "Dew is built on NEAR Intents and Chain Signatures",
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/llms-full.txt",
+     "claim": "Vault Managed Accounts are Chain Signatures accounts; ChainSigMessage is for NEAR Intents swap signing; roles accountant/strategist",
+     "quote_or_value": "\"Vault Managed Accounts: Accounts that Dew Kernel controls via Chain Signatures.\" ; \"ChainSigMessage Policy ... primarily valuable for signing messages on NEAR Intent to execute swaps\" ; \"For now, the only supported sign_method is NearIntentsSwap\" ; \"the accountant is responsible for computing NAV\" ; strategist used as required_role; \"derivation_path: constant.CHAIN_SIG_ACCOUNT_1\""
+    },
+    {
+     "kind": "announcement",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+    }
+   ],
+   "onchain": {
+    "creator_account": "meteor-vaults.near",
+    "creation_tx": "5GgZwTYA1cG6s3fjRxn6GhbdM73pmQ6ZxeT52fEHssj6",
+    "creation_time_utc": "2026-01-19T09:41:26Z (1768815686)",
+    "code_hash": "36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z",
+    "is_contract": true,
+    "notes": "Creation tx single signer meteor-vaults.near (ed25519:6rhvPf...). Callers: accountant-usdt-meteor-vaults.near, strategist-usdt.meteor-vaults.near, plus 3 hex implicit accounts"
+   },
+   "confidence": "high",
+   "unresolved": [
+    "Which external chain(s) each derivation path (near-1 / 1 / 2) maps to is not stated in any public source I could fetch; Meteor-Wallet/dew-finance-contract is not publicly readable (github.com 404 for repo and for the commit).",
+    "Dew docs (docs.dew.finance) do not mention 'near-1', Ed25519 or Zcash."
+   ]
+  },
+  {
+   "account": "kernel-near.meteor-vaults.near",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "Dew Finance (Meteor family) - Dew Kernel vault contract; deployed by meteor-vaults.near",
+   "what_it_does": "Dew Kernel vault smart contract (a NEAR (rNEAR DeFi, per signer names) vault) that calls v1.signer sign with Ed25519 (domain_id 1) to sign NEAR-side messages/transactions for vault-managed accounts, triggered by vault accountant/strategist accounts.",
+   "target_chain_evidence": "NEAR (Ed25519 = NEAR-account-type keys). Kernel wasm exports sign_near_nep413_message and sign_transaction, contains types KernelConfiguration/ChainSigTransaction/NearNativeTransaction/ChainSigMessage, and 'deadline','intents','signer_id','SwapIntentMessage' (NEAR Intents swap message). Dew docs: ChainSigMessage 'is primarily valuable for signing messages on NEAR Intent to execute swaps'. Exact chain for each path not stated publicly (see unresolved).",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "POST https://tx.main.fastnear.com/v0/transactions {\"tx_hashes\":[\"7jFeMD441bvzD7eXBWR5psUnzFbeGXj7Eizz1Qg5sgCL\"]}",
+     "claim": "Account created by meteor-vaults.near in one tx: CreateAccount+Transfer 14 NEAR+DeployContract+FunctionCall new",
+     "quote_or_value": "signer_id=meteor-vaults.near; block_timestamp 2026-05-13T04:00:46Z (1778644846)"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://rpc.mainnet.fastnear.com view_account kernel-near.meteor-vaults.near",
+     "claim": "Contract deployed; same code hash as the other 3 kernel-* accounts",
+     "quote_or_value": "code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z"
+    },
+    {
+     "kind": "onchain",
+     "url": "view_code of the account; ASCII strings in wasm (NEP-330 contract metadata)",
+     "claim": "Source repo and commit embedded in the contract",
+     "quote_or_value": "\"link\":\"https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958\" ; build sourcescan/cargo-near:0.16.0-rust-1.86.0"
+    },
+    {
+     "kind": "onchain",
+     "url": "wasm ASCII strings via view_code",
+     "claim": "Contract hardcodes v1.signer and has sign callbacks",
+     "quote_or_value": "strings: 'v1.signer', 'v1.signer-prod.testnet', 'after_sign', 'sign_near_nep413_message', 'sign_transaction', 'ChainSigResponse::Ed25519', 'near-mpc-recovery v0.1.0 epsilon derivation:', 'derive_address_and_public_key'"
+    },
+    {
+     "kind": "onchain",
+     "url": "decode base64 args of the 'new' call in the creation tx",
+     "claim": "Init args name dew-finance.near as emergency account",
+     "quote_or_value": "{\"owner\":null,...,\"emergency_accounts\":[\"dew-finance.near\"],\"emergency_vote_threshold\":1,...}"
+    },
+    {
+     "kind": "data-inference",
+     "url": "data/derived/sample_parsed.csv.gz, predecessor==kernel-near.meteor-vaults.near",
+     "claim": "Request pattern in the sample",
+     "quote_or_value": "102 sample receipts, 2026-05..2026-11; Eddsa; near-1 (80), '1' (13), '2' (9)"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "claim": "Dew is built on NEAR Intents and Chain Signatures",
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/llms-full.txt",
+     "claim": "Vault Managed Accounts are Chain Signatures accounts; ChainSigMessage is for NEAR Intents swap signing; roles accountant/strategist",
+     "quote_or_value": "\"Vault Managed Accounts: Accounts that Dew Kernel controls via Chain Signatures.\" ; \"ChainSigMessage Policy ... primarily valuable for signing messages on NEAR Intent to execute swaps\" ; \"For now, the only supported sign_method is NearIntentsSwap\" ; \"the accountant is responsible for computing NAV\" ; strategist used as required_role; \"derivation_path: constant.CHAIN_SIG_ACCOUNT_1\""
+    },
+    {
+     "kind": "announcement",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+    }
+   ],
+   "onchain": {
+    "creator_account": "meteor-vaults.near",
+    "creation_tx": "7jFeMD441bvzD7eXBWR5psUnzFbeGXj7Eizz1Qg5sgCL",
+    "creation_time_utc": "2026-05-13T04:00:46Z (1778644846)",
+    "code_hash": "36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z",
+    "is_contract": true,
+    "notes": "Creation tx single signer meteor-vaults.near (ed25519:6rhvPf...). Callers: dew-rneardefi-accountant-2.near, dew-rneardefi-strategist-1.near"
+   },
+   "confidence": "high",
+   "unresolved": [
+    "Which external chain(s) each derivation path (near-1 / 1 / 2) maps to is not stated in any public source I could fetch; Meteor-Wallet/dew-finance-contract is not publicly readable (github.com 404 for repo and for the commit).",
+    "Dew docs (docs.dew.finance) do not mention 'near-1', Ed25519 or Zcash."
+   ]
+  },
+  {
+   "account": "kernel-zec.meteor-vaults.near",
+   "category_suggestion": "third-party-app",
+   "owner_or_project": "Dew Finance (Meteor family) - Dew Kernel vault contract; deployed by meteor-vaults.near",
+   "what_it_does": "Dew Kernel vault smart contract (a ZEC (Zcash) vault) that calls v1.signer sign with Ed25519 (domain_id 1) to sign NEAR-side messages/transactions for vault-managed accounts, triggered by vault accountant/strategist accounts.",
+   "target_chain_evidence": "NEAR (Ed25519 = NEAR-account-type keys). Kernel wasm exports sign_near_nep413_message and sign_transaction, contains types KernelConfiguration/ChainSigTransaction/NearNativeTransaction/ChainSigMessage, and 'deadline','intents','signer_id','SwapIntentMessage' (NEAR Intents swap message). Dew docs: ChainSigMessage 'is primarily valuable for signing messages on NEAR Intent to execute swaps'. Exact chain for each path not stated publicly (see unresolved). Context only: Zcash Community Forum post (2026-06-26, Noir Wallet) says 'Direct zcash deposit on Dew Finance ZEC Vault is now LIVE' - deposits are via NEAR Intents; this does not state which chain the kernel signatures target.",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "POST https://tx.main.fastnear.com/v0/transactions {\"tx_hashes\":[\"6yFFUTGoxNfeqXrqT2oSGHuNyh59HvczwMGMJhDegVMw\"]}",
+     "claim": "Account created by meteor-vaults.near in one tx: CreateAccount+Transfer 14 NEAR+DeployContract+FunctionCall new",
+     "quote_or_value": "signer_id=meteor-vaults.near; block_timestamp 2026-05-25T05:21:28Z (1779686488)"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://rpc.mainnet.fastnear.com view_account kernel-zec.meteor-vaults.near",
+     "claim": "Contract deployed; same code hash as the other 3 kernel-* accounts",
+     "quote_or_value": "code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z"
+    },
+    {
+     "kind": "onchain",
+     "url": "view_code of the account; ASCII strings in wasm (NEP-330 contract metadata)",
+     "claim": "Source repo and commit embedded in the contract",
+     "quote_or_value": "\"link\":\"https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958\" ; build sourcescan/cargo-near:0.16.0-rust-1.86.0"
+    },
+    {
+     "kind": "onchain",
+     "url": "wasm ASCII strings via view_code",
+     "claim": "Contract hardcodes v1.signer and has sign callbacks",
+     "quote_or_value": "strings: 'v1.signer', 'v1.signer-prod.testnet', 'after_sign', 'sign_near_nep413_message', 'sign_transaction', 'ChainSigResponse::Ed25519', 'near-mpc-recovery v0.1.0 epsilon derivation:', 'derive_address_and_public_key'"
+    },
+    {
+     "kind": "onchain",
+     "url": "decode base64 args of the 'new' call in the creation tx",
+     "claim": "Init args name dew-finance.near as emergency account",
+     "quote_or_value": "{\"owner\":null,...,\"emergency_accounts\":[\"dew-finance.near\"],\"emergency_vote_threshold\":1,...}"
+    },
+    {
+     "kind": "data-inference",
+     "url": "data/derived/sample_parsed.csv.gz, predecessor==kernel-zec.meteor-vaults.near",
+     "claim": "Request pattern in the sample",
+     "quote_or_value": "97 sample receipts, 2026-05..2026-11; Eddsa; near-1 (91), '1' (3), '2' (3)"
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/introduction/overview (llms.txt)",
+     "claim": "Dew is built on NEAR Intents and Chain Signatures",
+     "quote_or_value": "\"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\""
+    },
+    {
+     "kind": "official-docs",
+     "url": "https://docs.dew.finance/llms-full.txt",
+     "claim": "Vault Managed Accounts are Chain Signatures accounts; ChainSigMessage is for NEAR Intents swap signing; roles accountant/strategist",
+     "quote_or_value": "\"Vault Managed Accounts: Accounts that Dew Kernel controls via Chain Signatures.\" ; \"ChainSigMessage Policy ... primarily valuable for signing messages on NEAR Intent to execute swaps\" ; \"For now, the only supported sign_method is NearIntentsSwap\" ; \"the accountant is responsible for computing NAV\" ; strategist used as required_role; \"derivation_path: constant.CHAIN_SIG_ACCOUNT_1\""
+    },
+    {
+     "kind": "announcement",
+     "url": "https://x.com/NEARProtocol/status/1968000555059679594 (via web search snippet; direct fetch returned HTTP 402)",
+     "claim": "NEAR announced Dew as using Chain Signatures; described as sister company of Meteor",
+     "quote_or_value": "\"Dew Finance is coming to NEAR ... leverages the full NEAR stack: NEAR Intents, Chain Signatures, and Shade Agents\" (Meteor-family link is from search-tool summary, not independently verified)"
+    }
+   ],
+   "onchain": {
+    "creator_account": "meteor-vaults.near",
+    "creation_tx": "6yFFUTGoxNfeqXrqT2oSGHuNyh59HvczwMGMJhDegVMw",
+    "creation_time_utc": "2026-05-25T05:21:28Z (1779686488)",
+    "code_hash": "36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z",
+    "is_contract": true,
+    "notes": "Creation tx single signer meteor-vaults.near (ed25519:6rhvPf...). Callers: zec-vault-accountant.near, zec-vault-strategist.near"
+   },
+   "confidence": "high",
+   "unresolved": [
+    "Which external chain(s) each derivation path (near-1 / 1 / 2) maps to is not stated in any public source I could fetch; Meteor-Wallet/dew-finance-contract is not publicly readable (github.com 404 for repo and for the commit).",
+    "Dew docs (docs.dew.finance) do not mention 'near-1', Ed25519 or Zcash."
+   ]
+  },
+  {
+   "account": "ping-account.near",
+   "category_suggestion": "benchmark-test",
+   "owner_or_project": null,
+   "what_it_does": "Plain account with no contract (code hash all-1s) that signs itself, calling the legacy sign method (key_version 0) with a 32-byte payload and path m/44'/60'/0'/0/0 about 8.8k times in the sample, 2024-09..2025-02.",
+   "target_chain_evidence": "unknown from explicit sources. Inference only: path m/44'/60'/0'/0/0 is the BIP44 Ethereum path (coin type 60) and request is Secp256k1 legacy, so signatures are probably for EVM transactions/hashes; nothing public confirms it.",
+   "evidence": [
+    {
+     "kind": "onchain",
+     "url": "GET https://api.nearblocks.io/v1/account/ping-account.near",
+     "claim": "Creation tx and time",
+     "quote_or_value": "created.transaction_hash 3xoBXPzANz4R3gbwKpujRsc9TobmzZktH9MSXnj2RyzH, block_timestamp 1723125555634326800 (2024-08-08T13:59:15Z)"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://tx.main.fastnear.com/v0/transactions {\"tx_hashes\":[\"3xoBXPzANz4R3gbwKpujRsc9TobmzZktH9MSXnj2RyzH\"]}",
+     "claim": "Created by felipepessina.near calling top-level 'near' create_account (0.1 NEAR)",
+     "quote_or_value": "signer_id felipepessina.near, receiver near, method create_account, args {\"new_account_id\":\"ping-account.near\",\"new_public_key\":\"CxTyzqq44NPQ9n3mY3HEAm1q3pMqvaHuzkGqgGXTGYiA\"}, deposit 1e23"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://rpc.mainnet.fastnear.com view_account ping-account.near",
+     "claim": "No contract; tiny storage",
+     "quote_or_value": "code_hash 11111111111111111111111111111111, storage_usage 264, amount ~8.69 NEAR"
+    },
+    {
+     "kind": "onchain",
+     "url": "RPC view_access_key_list ping-account.near",
+     "claim": "Two full-access keys, no function-call keys",
+     "quote_or_value": "ed25519:CxTyzqq44NPQ9n3mY3HEAm1q3pMqvaHuzkGqgGXTGYiA FullAccess; ed25519:H6PhhdrTQc4QDh8fNyLenAWwAiyiKoRBJu5uzX8cXcGa FullAccess"
+    },
+    {
+     "kind": "onchain",
+     "url": "tx 3fSkxWMMzhFZCLRTX1iiB25mHaB91WVe422eSzGavxrs (first sample tx)",
+     "claim": "Tx shape: signer ping-account.near -> v1.signer, FunctionCall sign, gas 300 Tgas, deposit 1 yocto",
+     "quote_or_value": "args decoded: {\"request\":{\"payload\":[52,55,114,237,... 32 bytes],\"path\":\"m/44'/60'/0'/0/0\",\"key_version\":0}}; block_timestamp 1727084220 (2024-09-23T09:37:00Z)"
+    },
+    {
+     "kind": "data-inference",
+     "url": "data/derived/sample_parsed.csv.gz, predecessor==ping-account.near",
+     "claim": "8848 sample receipts, all same path/method; monthly 2024-09:782, 10:2048, 11:1924, 12:2022, 2025-01:1139, 02:933; receipt Success 7897 with callback Success/fulfilled, 951 Success receipt with callback Failure",
+     "quote_or_value": "single (tx_signer=ping-account.near, sign, key_version 0, m/44'/60'/0'/0/0, legacy_bytes) group"
+    },
+    {
+     "kind": "onchain",
+     "url": "POST https://tx.main.fastnear.com/v0/account {account_id:ping-account.near, limit:5, is_real_signer:true}; tx 7dKGrQxj5RHWpStSgg2B2yCAxVuLP46xnYc7xrmgMQDD",
+     "claim": "Most recent signer tx (2025-03-03) went to a different MPC contract, v1.sig-net.near, same path/payload shape; indicates the account kept pinging a Sig Network deployment after leaving v1.signer",
+     "quote_or_value": "receiver v1.sig-net.near, method sign, block_timestamp 1741027100 (2025-03-03T18:38:20Z), path m/44'/60'/0'/0/0, key_version 0"
+    },
+    {
+     "kind": "data-inference",
+     "url": "web search \"ping-account.near\" (standard) ",
+     "claim": "No public repo/docs/announcement found naming this account",
+     "quote_or_value": "search returned only unrelated Ping/Pingpay results; none tie to this account"
+    }
+   ],
+   "onchain": {
+    "creator_account": "felipepessina.near",
+    "creation_tx": "3xoBXPzANz4R3gbwKpujRsc9TobmzZktH9MSXnj2RyzH",
+    "creation_time_utc": "2024-08-08T13:59:15Z",
+    "code_hash": "11111111111111111111111111111111",
+    "is_contract": false,
+    "notes": "First sample sign tx 3fSkxWMM... 2024-09-23; last v1.signer sample tx 5A9jZx9EQP792QzEtPK5B7bnWYD5gJGivgFjFDHPPRki (2025-02); last signer tx seen on-chain 2025-03-03 to v1.sig-net.near. Name/behavior (constant path, one account calling itself, high regular volume) is consistent with an uptime/load pinger or test harness, but this is inference."
+   },
+   "confidence": "low",
+   "unresolved": [
+    "Owner/purpose not stated anywhere public; felipepessina.near not researched or tied to any project (do not attribute from name).",
+    "Is it a benchmark/uptime pinger? only data-inferred (identical request repeated ~2k/month).",
+    "Target chain: EVM only by BIP44 coin type 60 inference.",
+    "Exact last v1.signer request date: sample says 2025-02; not checked with full history."
+   ]
+  }
+ ]
+}

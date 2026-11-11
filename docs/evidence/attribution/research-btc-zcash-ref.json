@@ -1,0 +1,100 @@
+{
+  "accounts": [
+    {
+      "account": "btc-connector.bridge.near",
+      "category_suggestion": "near-infra:bridge-btc",
+      "owner_or_project": "Near One (Near-One/btc-bridge, contract satoshi-bridge built with feature 'bitcoin'); Bitcoin<->NEAR nBTC bridge. Account is a sub-account of bridge.near.",
+      "what_it_does": "Bitcoin bridge contract (nBTC mint/burn); on withdrawals and UTXO management it calls v1.signer.sign to get ECDSA signatures for each Bitcoin transaction input.",
+      "target_chain_evidence": "Bitcoin. Source: sign_btc_transaction builds payload = PSBT sighash of input i (get_hash_to_sign) and path = vutxo.get_path(); signature is converted via to_btc_signature() (bitcoin::secp256k1::ecdsa::Signature, SIGHASH_ALL). Legacy SignRequest{payload,path,key_version} = ECDSA/secp256k1.",
+      "evidence": [
+        {"kind": "onchain", "url": "RPC call_function btc-connector.bridge.near contract_source_metadata (NEP-330)", "claim": "Deployed wasm was built from Near-One/btc-bridge, contract satoshi-bridge, feature bitcoin", "quote_or_value": "\"link\":\"https://github.com/Near-One/btc-bridge/tree/7740fae0ed8dc56571adfe2aaf36bd4edee0d441\" ... \"contract_path\":\"contracts/satoshi-bridge\" ... \"--features\",\"bitcoin\" (version 0.9.6)"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/CLAUDE.md", "claim": "Project purpose and withdraw flow uses Chain Signatures", "quote_or_value": "\"Bridge between Bitcoin/Zcash and NEAR Protocol. Users deposit BTC/ZEC to receive nBTC/nZEC (NEP-141 token)\"; \"Relayer: bridge.sign_btc_transaction(...) for each input -> Chain Signatures signs\""},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/contracts/satoshi-bridge/src/chain_signature.rs", "claim": "sign request = sighash of one BTC input with per-UTXO path, to chain_signatures_account_id", "quote_or_value": "pub struct SignRequest { pub payload: [u8; 32], pub path: String, pub key_version: u32 } ; let payload = btc_pending_info.get_psbt().get_hash_to_sign(sign_index); let path = btc_pending_info.vutxos[sign_index].get_path(); self.sign_promise(SignRequest{payload,path,key_version})"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/contracts/satoshi-bridge/src/deposit_msg.rs", "claim": "64-hex path = per-deposit key path: sha256(JSON of DepositMsg), hex-encoded; deposit address derived from that path", "quote_or_value": "pub fn get_deposit_path(deposit_msg: &DepositMsg) -> String { let deposit_msg_string = serde_json::to_string(&deposit_msg).unwrap(); hex::encode(env::sha256(deposit_msg_string.as_bytes())) }"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/contracts/satoshi-bridge/src/chain_signature.rs", "claim": "literal path = the contract's own account id: used for the change address (so signatures for change UTXOs use path 'btc-connector.bridge.near')", "quote_or_value": "let change_address = self.generate_utxo_chain_address(env::current_account_id().as_str()).to_string();  (INFERENCE: the 540 rows with path == account id are signatures spending change/own-UTXOs; not verified per tx)"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/contracts/satoshi-bridge/src/chain_signature.rs", "claim": "signer account is v1.signer-style ChainSignatures with public_key(domain_id) and sign(request)", "quote_or_value": "pub trait ChainSignatures { fn sign(&mut self, request: SignRequest) -> Promise; fn public_key(&self, domain_id: Option<DomainId>) -> PublicKey; }"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-Bridge-Lab/satoshi-bridge-sdk/main/src/constants.ts", "claim": "Satoshi bridge SDK (Near-Bridge-Lab) names this account as the BTC bridge contract and nBTC token", "quote_or_value": "export const NBTC_ADDRESS = 'nbtc.bridge.near'; export const CONTRACT_ID = 'btc-connector.bridge.near'"},
+        {"kind": "onchain", "url": "RPC call_function acc.ref-labs.near get_config", "claim": "A second contract (acc.ref-labs.near) is configured with bridge_account_id btc-connector.bridge.near and chain_signatures_account_id v1.signer", "quote_or_value": "{\"bridge_account_id\":\"btc-connector.bridge.near\",\"nbtc_account_id\":\"nbtc.bridge.near\",\"chain_signatures_account_id\":\"v1.signer\", ...}"},
+        {"kind": "onchain", "url": "RPC view_code btc-connector.bridge.near (ASCII strings)", "claim": "wasm exports Bitcoin bridge methods", "quote_or_value": "present: sign_btc_transaction, verify_deposit_v2, verify_withdraw_v2, ft_on_transfer, get_user_deposit_address; zcash/orchard strings absent (only 'zcash_address')"},
+        {"kind": "onchain", "url": "POST https://tx.main.fastnear.com/v0/transactions {tx_hashes:[F7AajRAehuJUWF8wuXboVCmDRkqSjzR3vt4VaW3HpceV]}", "claim": "creation tx signed by bridge.near", "quote_or_value": "signer bridge.near -> btc-connector.bridge.near, actions CreateAccount, Transfer, AddKey"},
+        {"kind": "official-docs", "url": "https://aurora.dev/blog/aurora-brings-bitcoin-to-near", "claim": "Aurora built the BTC light client + relayer and handed the project to NEAR One; Chain Signatures to enable native BTC bridges (does not name btc-connector or nBTC)", "quote_or_value": "\"handed over to NEAR One\" (paraphrased by fetch tool; page does not mention nBTC or this account)"}
+      ],
+      "onchain": {
+        "creator_account": "bridge.near",
+        "creation_tx": "F7AajRAehuJUWF8wuXboVCmDRkqSjzR3vt4VaW3HpceV",
+        "creation_time_utc": "2025-01-20T23:29:08Z",
+        "code_hash": "H5mH14wdLG6uRZsSCXJaDMnuatAztuWNSNbXxHnigZ29",
+        "is_contract": true,
+        "notes": "NEP-330 source: Near-One/btc-bridge rev 7740fae0, satoshi-bridge v0.9.6. Wasm 1,278,603 bytes. Code hash is the current one (2026-11-11); earlier versions likely existed since activity starts 2025-01 (not checked). Tx signers omni-relayer.bridge.near, satoshi_opone/optwo.near, nbtc-op.ref-labs.near are relayers calling sign_btc_transaction (inference; not individually verified, but sign requests come from this contract as predecessor)."
+      },
+      "confidence": "high",
+      "unresolved": [
+        "Per-row verification that path == account id corresponds to change-UTXO spends (inferred from source only)",
+        "Which of the 4 tx signers is operated by whom (omni-relayer.bridge.near presumably Near One; satoshi_op*/nbtc-op.ref-labs.near not documented in any source found)",
+        "Aurora blog does not name nBTC/btc-connector; no official announcement found tying nbtc.bridge.near to Near One beyond the repo + NEP-330 metadata"
+      ]
+    },
+    {
+      "account": "zcash-connector.bridge.near",
+      "category_suggestion": "near-infra:bridge-zcash",
+      "owner_or_project": "Near One (same Near-One/btc-bridge repo, contract satoshi-bridge built with feature 'zcash'); Zcash<->NEAR nZEC bridge",
+      "what_it_does": "Zcash bridge contract (same codebase as btc-connector with zcash feature); calls v1.signer.sign for each input of a Zcash transaction withdrawal.",
+      "target_chain_evidence": "Zcash (transparent-input secp256k1 ECDSA). Evidence: contract built from same source with feature zcash; wasm contains zcash/orchard strings; same sign_btc_transaction method and SignRequest as BTC. Exact Zcash sighash (ZIP-244) not verified in source (zcash_utils not read). CLAUDE.md: 'Zcash-Specific ... EITHER transparent OR Orchard output'.",
+      "evidence": [
+        {"kind": "onchain", "url": "RPC call_function zcash-connector.bridge.near contract_source_metadata (NEP-330)", "claim": "built from Near-One/btc-bridge at a different rev, satoshi-bridge 0.9.9", "quote_or_value": "\"link\":\"https://github.com/Near-One/btc-bridge/tree/37be7c6dfcb3a067ce8bedbe68052a8739e1445c\" ... source_code_snapshot git+https://github.com/Near-One/btc-bridge?rev=37be7c6dfcb3a067ce8bedbe68052a8739e1445c"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/CLAUDE.md", "claim": "Repo covers both BTC and Zcash bridges; Makefile has build-local-zcash", "quote_or_value": "\"Bridge between Bitcoin/Zcash and NEAR Protocol. Users deposit BTC/ZEC to receive nBTC/nZEC\"; \"make build-local-zcash      # Zcash bridge\""},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/contracts/satoshi-bridge/src/lib.rs", "claim": "feature-gated zcash module", "quote_or_value": "#[cfg(feature = \"zcash\")] pub mod zcash_utils;"},
+        {"kind": "onchain", "url": "RPC view_code zcash-connector.bridge.near (ASCII strings)", "claim": "wasm includes Zcash/Orchard code and same sign/verify methods", "quote_or_value": "strings: orchard, orchard_output, orchard_v3, zcash, zcash_address, zcash_note_encryption; sign_btc_transaction, verify_deposit_v2, verify_withdraw_v2 present"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-One/btc-bridge/omni-main/contracts/satoshi-bridge/src/deposit_msg.rs", "claim": "64-hex path = sha256(DepositMsg JSON) deposit-address derivation path (same code as BTC); literal path = contract account id for change address", "quote_or_value": "hex::encode(env::sha256(deposit_msg_string.as_bytes()))"},
+        {"kind": "onchain", "url": "POST https://tx.main.fastnear.com/v0/transactions {tx_hashes:[Gg6MXuxLo9wahB23KN36NJVQqdxdK5rFqRnQTjC9Ytfr]}", "claim": "creation tx signed by bridge.near", "quote_or_value": "signer bridge.near -> zcash-connector.bridge.near, actions CreateAccount, Transfer, AddKey"}
+      ],
+      "onchain": {
+        "creator_account": "bridge.near",
+        "creation_tx": "Gg6MXuxLo9wahB23KN36NJVQqdxdK5rFqRnQTjC9Ytfr",
+        "creation_time_utc": "2025-08-20T19:25:34Z",
+        "code_hash": "7fMkmCL8UW9EQxappkKYNB8ubarQZBUJeMRBFd6PcwAR",
+        "is_contract": true,
+        "notes": "Created 2025-08-20 but first sign activity in data only 2026-09 (per task). NEP-330 satoshi-bridge v0.9.9. Wasm 1,385,129 bytes. Code hash is current as of 2026-11-11."
+      },
+      "confidence": "high",
+      "unresolved": [
+        "Zcash sighash/transaction format not verified in zcash_utils source (target chain Zcash inferred from build feature + wasm strings)",
+        "Gap between creation (2025-08) and first sign activity (2026-09) unexplained; launch date not confirmed via announcement",
+        "Whether path==account-id rows are change spends (inferred from source)"
+      ]
+    },
+    {
+      "account": "acc.ref-labs.near",
+      "category_suggestion": "third-party-app",
+      "owner_or_project": "Satoshi bridge ecosystem 'satoshi-account' contract (source Near-Bridge-Lab/btc-bridge-contract, private/not accessible); account under ref-labs.near namespace. Exact legal owner (Ref Finance Labs vs Satoshi/Near-Bridge-Lab) NOT confirmed.",
+      "what_it_does": "'satoshi-account' contract: lets nBTC holders control NEAR accounts (CSNA = chain-signature NEAR account) via a BTC key; relayers submit request_sign_near_txs and the contract calls v1.signer.sign to sign NEAR transactions (sign_near_transaction), paying NEAR gas from nBTC.",
+      "target_chain_evidence": "NEAR (signing NEAR transactions with a secp256k1 key derived from v1.signer). Evidence from wasm strings: methods sign_near_transaction, request_sign_near_txs, generate_near_signed_transaction, create_csna_and_inner_account, get_chain_signature_near_account_id/_public_key, near_transaction_signature; error text 'csna does not match btc public key', 'Unsupported chain id'. Wasm bundles k256/secp256k1 and mpc_old crypto-shared key derivation (kdf.rs). Not verified per-signature on-chain.",
+      "evidence": [
+        {"kind": "onchain", "url": "RPC call_function acc.ref-labs.near contract_source_metadata (NEP-330)", "claim": "source repo and contract path", "quote_or_value": "\"link\":\"https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/af06d696f87ea1294912d03e47eae35553c56ef7\" ... \"contract_path\":\"contracts/satoshi-account\" (version 0.1.3)"},
+        {"kind": "onchain", "url": "RPC call_function acc.ref-labs.near get_config", "claim": "contract is wired to the Satoshi BTC bridge, nBTC token and v1.signer", "quote_or_value": "{\"bridge_account_id\":\"btc-connector.bridge.near\",\"nbtc_account_id\":\"nbtc.bridge.near\",\"chain_signatures_account_id\":\"v1.signer\",\"chain_signatures_root_public_key\":\"secp256k1:3tFRbMqm...\", \"oracle_config\": priceoracle.near / aggregate-oracle.near (Pyth BTC price), \"initial_csna_balance\":\"3e23\", add_function_call_key_gas_fee ...}"},
+        {"kind": "onchain", "url": "RPC view_code acc.ref-labs.near (ASCII strings)", "claim": "wasm source paths and methods show a NEAR-transaction signer, not a BTC signer", "quote_or_value": "paths contracts/satoshi-account/src/{account.rs,chain_signatures.rs,kdf.rs,near_transaction/transaction.rs,near_transaction/user_intention.rs,api/chain_signatures.rs,api/user_intention.rs}; methods sign_near_transaction, request_sign_near_txs, create_csna_and_inner_account; sign_btc_transaction ABSENT; 'AddKeyAction','DeleteKeyAction','gas_token','relayer_white_list'; error 'csna does not match btc public key'"},
+        {"kind": "github-source", "url": "https://raw.githubusercontent.com/Near-Bridge-Lab/satoshi-bridge-sdk/main/src/constants.ts", "claim": "Near-Bridge-Lab (Satoshi bridge SDK) uses btc-connector.bridge.near/nbtc.bridge.near; satoshi-wallet README says 'Satoshi protocol' enables Bitcoin usage on NEAR", "quote_or_value": "CONTRACT_ID = 'btc-connector.bridge.near'; satoshi-wallet README: \"Sotashi Wallet is an integrated toolkit that enables Bitcoin usage on the NEAR blockchain through the Satoshi protocol\""},
+        {"kind": "onchain", "url": "RPC view_account nbtc-op.ref-labs.near / ref-labs.near", "claim": "nbtc-op.ref-labs.near and ref-labs.near are plain accounts (no contract)", "quote_or_value": "code_hash 11111111111111111111111111111111 for both"},
+        {"kind": "onchain", "url": "POST https://tx.main.fastnear.com/v0/transactions {tx_hashes:[A7h8XfL5iwWg3Tg9ZPqYaizxMjy5CcwSLyfpXT9LAqwW]}", "claim": "acc.ref-labs.near created by ref-labs.near", "quote_or_value": "signer ref-labs.near -> acc.ref-labs.near, actions ['CreateAccount','Transfer','AddKey']"},
+        {"kind": "onchain", "url": "RPC view_access_key_list acc.ref-labs.near", "claim": "no access keys (contract is locked / keyless)", "quote_or_value": "keys: []"},
+        {"kind": "data-inference", "url": "task data facts", "claim": "tx signers satoshi_opthree/opfive/opfour/opsix.near are relayers of satoshi-account (request_sign_near_txs relayer whitelist); signers are plain accounts. Relationship inferred from naming satoshi_op* shared with btc-connector signers satoshi_opone/optwo.near; not documented.", "quote_or_value": "satoshi_opthree.near view_account code_hash 11111111111111111111111111111111 (no contract)"}
+      ],
+      "onchain": {
+        "creator_account": "ref-labs.near",
+        "creation_tx": "A7h8XfL5iwWg3Tg9ZPqYaizxMjy5CcwSLyfpXT9LAqwW",
+        "creation_time_utc": "2025-01-21T05:37:18Z",
+        "code_hash": "8VwADtN3ikccTShoZ2cTWXaaUaApfAycTCozA9wFf6rZ",
+        "is_contract": true,
+        "notes": "Wasm 811,368 bytes, NEP-330 version 0.1.3 built with cargo-near 0.16.0 non-reproducible. Code hash current as of 2026-11-11. nbtc-op.ref-labs.near created 2025-07-24 (tx 4TXsjDgzPnhQNkXupzjjDAXxxA33JYswKyXpfTcyBL7f) by (creator not checked)."
+      },
+      "confidence": "medium",
+      "unresolved": [
+        "Which organization actually operates ref-labs.near / Near-Bridge-Lab (Ref Finance Labs vs Satoshi Protocol vs other): GitHub org page shows no description and the source repo Near-Bridge-Lab/btc-bridge-contract returns 404 (private/renamed). No official announcement found; web search found no source linking Ref Finance, Satoshi and nBTC. Do not label owner as 'Ref Finance' without more evidence.",
+        "Which key/path scheme the 64-hex path uses in satoshi-account (kdf.rs not accessible); likely per-CSNA derivation, unverified",
+        "Per-signature confirmation that payloads are NEAR transactions (not checked on-chain; inferred from wasm methods/config)",
+        "Relationship of satoshi_opthree/opfour/opfive/opsix.near to nbtc-op.ref-labs.near and to the satoshi_opone/optwo relayers on btc-connector is unconfirmed",
+        "Note: nbtc-op.ref-labs.near appears as a tx signer on btc-connector.bridge.near, so the ref-labs.near namespace also operates a relayer for the btc bridge (on-chain fact from task data)"
+      ]
+    }
+  ]
+}
