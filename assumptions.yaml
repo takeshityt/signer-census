@@ -1,0 +1,19 @@
+# Scenario assumptions. These are SCENARIOS, not forecasts: they show what the request volume would be IF the assumptions held.
+# Edit any value and re-run `npm run reproduce` (or `node scripts/scenario.mjs`) -> out/scenarios.json.
+
+# Baseline = last full calendar month in out/metrics.json ("last_full") or an explicit month like "2026-10".
+baseline_month: last_full
+# Projection horizon (inclusive).
+horizon_end: "2027-06"
+
+# fast-auth.near traffic is ~100% Sweat (dominant integrator, see labels.yaml). Sweat Wallet "in its present form" ends on 2026-12-30
+# (Sweat Foundation release, 2026-10-01). Retention = share of baseline fast-auth.near volume that remains from the first month after `fastauth_end_month`.
+fastauth_account: fast-auth.near
+fastauth_end_month: "2026-12"
+fastauth_retention: [0, 0.25, 1.0]
+
+# Suspected benchmark accounts (labels.yaml: category or suspected_category benchmark-test): keep their volume or remove it.
+benchmark: [kept, removed]
+
+# Monthly growth of "structural" demand (= all requests minus benchmark minus fast-auth.near), compounded from the baseline month.
+structural_monthly_growth: [-0.05, 0, 0.05]
