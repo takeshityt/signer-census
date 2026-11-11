@@ -1,15 +1,10 @@
 {
   "note": "Documents rendered by `npm run reproduce` from templates. Every number in them comes from out/metrics.json (m:), out/scenarios.json (s:), repository facts (r:, src/repo-facts.mjs), a declared literal (lit:) or an external figure with its URL (ext:). npm test checks each output.",
   "docs": [
-    {
-      "template": "docs/THESIS.template.md",
-      "output": "THESIS.md",
-      "footnotes": true
-    },
-    {
-      "template": "docs/templates/README.template.md",
-      "output": "README.md",
-      "footnotes": true
-    }
+    { "template": "docs/THESIS.template.md", "output": "THESIS.md", "footnotes": true },
+    { "template": "docs/templates/README.template.md", "output": "README.md", "footnotes": true },
+    { "template": "docs/templates/VIDEO_SCRIPT.template.md", "output": "docs/submission/VIDEO_SCRIPT.md", "footnotes": false },
+    { "template": "docs/templates/SUBMISSION_TEXT.template.md", "output": "docs/submission/SUBMISSION_TEXT.md", "footnotes": false },
+    { "template": "docs/templates/X_POST.template.md", "output": "docs/submission/X_POST.md", "footnotes": false }
   ]
 }
