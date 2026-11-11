@@ -1,1 +1,106 @@
-<!doctype html><title>placeholder</title>
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Signer Census: NEAR Chain Signatures, measured</title>
+<meta name="description" content="A reproducible, evidence-backed census of who uses NEAR Chain Signatures (the v1.signer MPC contract), with the numbers, the evidence and the commands to re-run it.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230f1b2a%27/%3E%3Cpath d=%27M5 22 C9 8 12 8 14 18 S20 26 27 9%27 fill=%27none%27 stroke=%27%23f7f8fa%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preload" href="vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<header class="top">
+  <div class="wrap topbar">
+    <a class="brand" href="#top">Signer Census</a>
+    <nav aria-label="Sections">
+      <a href="#usage">Usage</a><a href="#who">Who</a><a href="#chains">Chains</a><a href="#sunset">Sweat sunset</a><a href="#bridges">Bridges</a><a href="#thesis">Thesis</a><a href="#rerun">Re-run</a>
+    </nav>
+    <button id="theme" type="button" aria-label="Color theme">Theme: auto</button>
+  </div>
+</header>
+
+<main id="main">
+  <section id="top" class="hero wrap" aria-labelledby="h1">
+    <h1 id="h1">NEAR Chain Signatures: who actually uses it</h1>
+    <p class="big" id="hero-number" aria-live="polite">…</p>
+    <p class="lede" id="hero-lede">Loading the census…</p>
+    <figure class="stroke">
+      <svg id="stroke" role="img" aria-labelledby="stroke-caption"></svg>
+      <figcaption id="stroke-caption"></figcaption>
+    </figure>
+    <ul class="facts" id="facts"></ul>
+  </section>
+
+  <section id="usage" class="section wrap" aria-labelledby="h-usage">
+    <h2 id="h-usage">Requests over time</h2>
+    <p class="intro" id="usage-intro"></p>
+    <div class="controls"><label class="switch"><input type="checkbox" id="excl-bench"><span>Exclude the suspected benchmark</span></label></div>
+    <ul class="legend" id="legend-usage" aria-label="Legend"></ul>
+    <div class="chart"><canvas id="chart-usage" role="img" aria-label="Monthly signature requests stacked by who sends them"></canvas></div>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-usage"></div></details>
+  </section>
+
+  <section id="who" class="section wrap" aria-labelledby="h-who">
+    <h2 id="h-who">Who sends the requests</h2>
+    <p class="intro" id="who-intro"></p>
+    <div id="who-table"></div>
+  </section>
+
+  <section id="chains" class="section wrap" aria-labelledby="h-chains">
+    <h2 id="h-chains">Where the signatures go</h2>
+    <p class="intro" id="chains-intro"></p>
+    <ul class="legend" id="legend-chains" aria-label="Legend"></ul>
+    <div class="chart"><canvas id="chart-chains" role="img" aria-label="Monthly share of requests by destination: NEAR itself, other chains, not known"></canvas></div>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-chains"></div></details>
+    <div id="families" class="families"></div>
+  </section>
+
+  <section id="sunset" class="section wrap" aria-labelledby="h-sunset">
+    <h2 id="h-sunset">The Sweat sunset and what it could do to the volume</h2>
+    <blockquote class="callout" id="sunset-callout"></blockquote>
+    <p class="intro" id="sunset-intro"></p>
+    <form class="scenario" id="scenario" aria-label="Scenario assumptions"></form>
+    <p class="result" id="scenario-result" aria-live="polite"></p>
+    <ul class="legend" id="legend-scenario" aria-label="Legend"></ul>
+    <div class="chart"><canvas id="chart-scenario" role="img" aria-label="Monthly requests: recent history and the selected scenario"></canvas></div>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-scenario"></div></details>
+    <p class="note" id="scenario-note"></p>
+  </section>
+
+  <section id="bridges" class="section wrap" aria-labelledby="h-bridges">
+    <h2 id="h-bridges">Bridges: the structural signal</h2>
+    <p class="intro" id="bridges-intro"></p>
+    <ul class="legend" id="legend-bridges" aria-label="Legend"></ul>
+    <div class="chart"><canvas id="chart-bridges" role="img" aria-label="Monthly bridge connector requests, with all structural requests as a line"></canvas></div>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-bridges"></div></details>
+  </section>
+
+  <section id="thesis" class="section wrap" aria-labelledby="h-thesis">
+    <h2 id="h-thesis">The thesis</h2>
+    <ul class="fivelines" id="fivelines"></ul>
+    <h3>What would prove us wrong</h3>
+    <p class="intro" id="wrong-intro">Each test can be checked by re-running this repository after the stated date.</p>
+    <ul class="wrong" id="wrong"></ul>
+  </section>
+
+  <section id="rerun" class="section wrap" aria-labelledby="h-rerun">
+    <h2 id="h-rerun">Re-run it yourself</h2>
+    <p class="intro">Needs Node and nothing else: no account, no API key, no paid service.</p>
+    <div id="rerun-steps"></div>
+  </section>
+
+  <section id="honest" class="section wrap" aria-labelledby="h-honest">
+    <h2 id="h-honest">Honest notes</h2>
+    <div id="honest-body"></div>
+  </section>
+</main>
+
+<footer class="foot wrap" id="foot"></footer>
+
+<script src="vendor/chart.umd.min.js"></script>
+<script type="module" src="js/main.js"></script>
+<noscript><p class="wrap">This page needs JavaScript to draw the charts. The numbers are in site/data/metrics.json and docs/THESIS.md.</p></noscript>
+</body>
+</html>

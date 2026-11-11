@@ -7,6 +7,8 @@ export function compact(n) {
   return `${Math.round(n)}`;
 }
 export const approx = (n) => `≈${compact(n)}`;
+/** two decimals for millions, used where a rounded interval would collapse (6.4M–6.4M) */
+export const precise = (n) => (Math.abs(n) >= 1e6 ? `${(n / 1e6).toFixed(2)}M` : compact(n));
 export const pct = (x, d = 0) => `${(x * 100).toFixed(d)}%`;
 export const approxPct = (x, d = 0) => `≈${pct(x, d)}`;
 export const range = (ci, fmt = compact) => (ci ? `${fmt(ci[0])}–${fmt(ci[1])}` : null);

@@ -1,0 +1,80 @@
+- generic [active] [ref=f8e1]:
+  - link "Skip to content" [ref=f8e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f8e3]:
+    - generic [ref=f8e4]:
+      - link "Signer Census" [ref=f8e5] [cursor=pointer]:
+        - /url: "#top"
+      - navigation "Sections" [ref=f8e6]:
+        - link "Usage" [ref=f8e7] [cursor=pointer]:
+          - /url: "#usage"
+        - link "Who" [ref=f8e8] [cursor=pointer]:
+          - /url: "#who"
+        - link "Chains" [ref=f8e9] [cursor=pointer]:
+          - /url: "#chains"
+        - link "Sweat sunset" [ref=f8e10] [cursor=pointer]:
+          - /url: "#sunset"
+        - link "Bridges" [ref=f8e11] [cursor=pointer]:
+          - /url: "#bridges"
+        - link "Thesis" [ref=f8e12] [cursor=pointer]:
+          - /url: "#thesis"
+        - link "Re-run" [ref=f8e13] [cursor=pointer]:
+          - /url: "#rerun"
+      - button "Color theme" [ref=f8e14] [cursor=pointer]: "Theme: auto"
+  - main [ref=f8e15]:
+    - 'region "NEAR Chain Signatures: who actually uses it" [ref=f8e16]':
+      - 'heading "NEAR Chain Signatures: who actually uses it" [level=1] [ref=f8e17]'
+      - paragraph [ref=f8e18]: …
+      - paragraph [ref=f8e19]: Loading the census…
+      - figure [ref=f8e20]
+      - list
+    - region "Requests over time" [ref=f8e22]:
+      - heading "Requests over time" [level=2] [ref=f8e23]
+      - paragraph
+      - generic [ref=f8e25] [cursor=pointer]:
+        - checkbox "Exclude the suspected benchmark" [ref=f8e26]
+        - generic [ref=f8e27]: Exclude the suspected benchmark
+      - list "Legend"
+      - img "Monthly signature requests stacked by who sends them" [ref=f8e29]
+      - group [ref=f8e30]:
+        - generic "Show as table" [ref=f8e31] [cursor=pointer]
+    - region "Who sends the requests" [ref=f8e32]:
+      - heading "Who sends the requests" [level=2] [ref=f8e33]
+      - paragraph
+    - region "Where the signatures go" [ref=f8e34]:
+      - heading "Where the signatures go" [level=2] [ref=f8e35]
+      - paragraph
+      - list "Legend"
+      - 'img "Monthly share of requests by destination: NEAR itself, other chains, not known" [ref=f8e37]'
+      - group [ref=f8e38]:
+        - generic "Show as table" [ref=f8e39] [cursor=pointer]
+    - region "The Sweat sunset and what it could do to the volume" [ref=f8e40]:
+      - heading "The Sweat sunset and what it could do to the volume" [level=2] [ref=f8e41]
+      - blockquote [ref=f8e42]
+      - paragraph
+      - form "Scenario assumptions"
+      - paragraph [ref=f8e43]
+      - list "Legend"
+      - 'img "Monthly requests: recent history and the selected scenario" [ref=f8e45]'
+      - group [ref=f8e46]:
+        - generic "Show as table" [ref=f8e47] [cursor=pointer]
+      - paragraph
+    - 'region "Bridges: the structural signal" [ref=f8e48]':
+      - 'heading "Bridges: the structural signal" [level=2] [ref=f8e49]'
+      - paragraph
+      - list "Legend"
+      - img "Monthly bridge connector requests, with all structural requests as a line" [ref=f8e51]
+      - group [ref=f8e52]:
+        - generic "Show as table" [ref=f8e53] [cursor=pointer]
+    - region "The thesis" [ref=f8e54]:
+      - heading "The thesis" [level=2] [ref=f8e55]
+      - list
+      - heading "What would prove us wrong" [level=3] [ref=f8e56]
+      - paragraph [ref=f8e57]: Each test can be checked by re-running this repository after the stated date.
+      - list
+    - region "Re-run it yourself" [ref=f8e58]:
+      - heading "Re-run it yourself" [level=2] [ref=f8e59]
+      - paragraph [ref=f8e60]: "Needs Node and nothing else: no account, no API key, no paid service."
+    - region "Honest notes" [ref=f8e61]:
+      - heading "Honest notes" [level=2] [ref=f8e62]
+  - contentinfo [ref=f8e63]
