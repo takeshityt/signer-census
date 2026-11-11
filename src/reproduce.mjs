@@ -10,7 +10,8 @@ import { parseChainRules, keyTypeOf, FAMILIES } from "./chains.mjs";
 import { compareProximity } from "./proximity.mjs";
 import { densityWeighted, censusReplay, windowComparison } from "./robustness.mjs";
 import { writeScenarios } from "../scripts/scenario.mjs";
-import { render } from "./thesis.mjs";
+import { render, expandIncludes } from "./thesis.mjs";
+import { repoFacts } from "./repo-facts.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const read = (p) => readFileSync(ROOT + p);
@@ -205,7 +206,13 @@ console.log(`out/metrics.json written. sha256 ${sha256(Buffer.from(text))}`);
 console.log(`months: ${months.length}, clusters: ${allSample.n_clusters}, sampled txs: ${allSample.n_txs}, estimated requests: ${out.totals.requests_est.value} (95% CI ${out.totals.requests_est.ci95.join(" – ")})`);
 const sc = writeScenarios(); // scenarios (NOT forecasts) from out/metrics.json + assumptions.yaml
 console.log(`out/scenarios.json written (${sc.count} scenarios, baseline ${sc.baseline}). sha256 ${sc.sha256}`);
-// THESIS.md is rendered from docs/THESIS.template.md: every number in it comes from out/metrics.json or out/scenarios.json
-const thesis = render(readFileSync(ROOT + "docs/THESIS.template.md", "utf8"), { metrics: JSON.parse(readFileSync(ROOT + "out/metrics.json", "utf8")), scenarios: JSON.parse(readFileSync(ROOT + "out/scenarios.json", "utf8")) });
-writeFileSync(ROOT + "THESIS.md", thesis);
-console.log(`THESIS.md rendered from docs/THESIS.template.md. sha256 ${sha256(Buffer.from(thesis))}`);
+// THESIS.md, README.md and the submission drafts are rendered from templates (config/rendered-docs.json): every number comes from
+// out/metrics.json, out/scenarios.json or repository facts. npm test fails if an output differs from its rendering or contains another digit.
+const docData = { metrics: JSON.parse(readFileSync(ROOT + "out/metrics.json", "utf8")), scenarios: JSON.parse(readFileSync(ROOT + "out/scenarios.json", "utf8")), repo: repoFacts(ROOT) };
+for (const d of JSON.parse(read("config/rendered-docs.json")).docs) {
+  const tpl = expandIncludes(readFileSync(ROOT + d.template, "utf8"), (f) => readFileSync(ROOT + f, "utf8"));
+  const text = render(tpl, docData, { footnotes: d.footnotes });
+  mkdirSync(ROOT + d.output.split("/").slice(0, -1).join("/"), { recursive: true });
+  writeFileSync(ROOT + d.output, text);
+  console.log(`${d.output} rendered from ${d.template}. sha256 ${sha256(Buffer.from(text))}`);
+}

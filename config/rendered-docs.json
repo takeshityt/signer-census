@@ -1,0 +1,15 @@
+{
+  "note": "Documents rendered by `npm run reproduce` from templates. Every number in them comes from out/metrics.json (m:), out/scenarios.json (s:), repository facts (r:, src/repo-facts.mjs), a declared literal (lit:) or an external figure with its URL (ext:). npm test checks each output.",
+  "docs": [
+    {
+      "template": "docs/THESIS.template.md",
+      "output": "THESIS.md",
+      "footnotes": true
+    },
+    {
+      "template": "docs/templates/README.template.md",
+      "output": "README.md",
+      "footnotes": true
+    }
+  ]
+}
