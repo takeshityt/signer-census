@@ -7,9 +7,9 @@
       "data/derived/sample_parsed.csv": "cc05335c07c83db89526e74b7d8dc6ef2e4cfbb6e648baf973f62b72d6a358a0",
       "data/derived/sample_clusters.csv": "4145eb3e823fd04f0d675dd09c3feca5574fa321f390271ab18cd557544c8061",
       "data/derived/proximity_cutoffs.json": "4a4dc0e0df1d93a3e28f047fb93e2a584d78897408c17d4ba2e0d116c7d3fdea",
-      "config/estimate.json": "15fde3cb57ceb1ec48e87a93fe41703c2283772ef493c4b435723966b42da52d",
+      "config/estimate.json": "cd8f9e718219521569a87db64101968d55c13fbe3a680ec91b2284aecc55e11f",
       "config/proximity_reported.json": "6e3e3de50205f3ce55cef9776554a32c1990ff3241469fff65de3a3ec4b751e9",
-      "labels.yaml": "a8e5024e128494ad787d16d0f9eb0bc2d642c0f831e815e2675be604a95da782",
+      "labels.yaml": "29ad91f42e8cad4b15a5536696981def3279399485659c53afb2a53e00b4f758",
       "config/chain_rules.yaml": "4bb209ab745fc6b18bee8cb1b7ddb6e218712dbdc81a428a8214c103b1de6450",
       "docs/evidence/gate1/window-223900000-223900300/summary.json": "6131b6f98286763c31dbd79321a31eb6afd020030dff99f4fb55b1b1b94d2926",
       "docs/evidence/gate1/window-223960000-223960300/summary.json": "87834fb1ee74734b4742434a7e475e12d8c2d04d195ca2355e87579549cd23c7",
@@ -37,6 +37,9 @@
       "requester": "predecessor_id of the sign receipt (not the tx signer)",
       "requests_est": "exact monthly tx total x (sign receipts per tx in the sample); ESTIMATE, not an exact count. Headline text should say '≈' and use rounded values.",
       "requests_excluding_benchmark_est": "requests minus requests of accounts labeled or suspected as benchmark/test in labels.yaml (tx-bench.near)",
+      "series_requests_est": "all; excluding_benchmark (minus suspected/confirmed benchmark accounts); structural (minus benchmark and minus fast-auth.near); bridges (omni.bridge.near + btc-connector.bridge.near + zcash-connector.bridge.near). Definitions in config/estimate.json.",
+      "concentration": "computed over ALL requesters of the period: top1/top3 share of requests, HHI = sum of squared shares (0..1), number of requesters with >= 1% share",
+      "target_groups_share": "near_native = chain family 'near'; other_chains = bitcoin/zcash/evm/solana/multi/other; unknown = no evidence-backed rule (config/chain_rules.yaml)",
       "other_request_types": "request-type calls on v1.signer other than `sign`, counted as receipts per tx x exact tx total; never added to the request count"
     },
     "sample": {
@@ -593,6 +596,89 @@
             0.458722
           ]
         }
+      }
+    },
+    "concentration": {
+      "top1_share": {
+        "value": 0.435204,
+        "ci95": [
+          0.414355,
+          0.45413
+        ]
+      },
+      "top3_share": {
+        "value": 0.74006,
+        "ci95": [
+          0.72529,
+          0.754002
+        ]
+      },
+      "hhi": {
+        "value": 0.254531,
+        "ci95": [
+          0.241069,
+          0.267847
+        ]
+      },
+      "requesters_ge_1pct": {
+        "value": 7,
+        "ci95": [
+          6,
+          8
+        ]
+      }
+    },
+    "series_requests_est": {
+      "all": {
+        "value": 6432762,
+        "ci95": [
+          6417414,
+          6447496
+        ]
+      },
+      "excluding_benchmark": {
+        "value": 5205925,
+        "ci95": [
+          5150698,
+          5260879
+        ]
+      },
+      "structural": {
+        "value": 2406363,
+        "ci95": [
+          2299888,
+          2523139
+        ]
+      },
+      "bridges": {
+        "value": 1225724,
+        "ci95": [
+          1142679,
+          1315713
+        ]
+      }
+    },
+    "target_groups_share": {
+      "near_native": {
+        "value": 0.463835,
+        "ci95": [
+          0.444433,
+          0.481858
+        ]
+      },
+      "other_chains": {
+        "value": 0.310918,
+        "ci95": [
+          0.296136,
+          0.327546
+        ]
+      },
+      "unknown": {
+        "value": 0.225247,
+        "ci95": [
+          0.214947,
+          0.234854
+        ]
       }
     },
     "relayer_share_of_requester": {
@@ -1870,6 +1956,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.938462,
+          "ci95": [
+            0.938462,
+            0.938462
+          ]
+        },
+        "top3_share": {
+          "value": 0.976923,
+          "ci95": [
+            0.976923,
+            0.976923
+          ]
+        },
+        "hhi": {
+          "value": 0.881657,
+          "ci95": [
+            0.881657,
+            0.881657
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 3,
+          "ci95": [
+            3,
+            3
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 130,
+          "ci95": [
+            130,
+            130
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 130,
+          "ci95": [
+            130,
+            130
+          ]
+        },
+        "structural": {
+          "value": 130,
+          "ci95": [
+            130,
+            130
+          ]
+        },
+        "bridges": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "unknown": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -2445,6 +2614,89 @@
               1
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.844492,
+          "ci95": [
+            0.844492,
+            0.844492
+          ]
+        },
+        "top3_share": {
+          "value": 0.933045,
+          "ci95": [
+            0.933045,
+            0.933045
+          ]
+        },
+        "hhi": {
+          "value": 0.718427,
+          "ci95": [
+            0.718427,
+            0.718427
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 5,
+          "ci95": [
+            5,
+            5
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 926,
+          "ci95": [
+            926,
+            926
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 926,
+          "ci95": [
+            926,
+            926
+          ]
+        },
+        "structural": {
+          "value": 926,
+          "ci95": [
+            926,
+            926
+          ]
+        },
+        "bridges": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "unknown": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -3024,6 +3276,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.979436,
+          "ci95": [
+            0.962373,
+            0.992816
+          ]
+        },
+        "top3_share": {
+          "value": 0.994739,
+          "ci95": [
+            0.99065,
+            1
+          ]
+        },
+        "hhi": {
+          "value": 0.959431,
+          "ci95": [
+            0.926796,
+            0.985703
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 1,
+          "ci95": [
+            1,
+            3
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 6176,
+          "ci95": [
+            5913,
+            6586
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 6176,
+          "ci95": [
+            5913,
+            6586
+          ]
+        },
+        "structural": {
+          "value": 6176,
+          "ci95": [
+            5913,
+            6586
+          ]
+        },
+        "bridges": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "unknown": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -3601,6 +3936,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.953892,
+          "ci95": [
+            0.935516,
+            0.971726
+          ]
+        },
+        "top3_share": {
+          "value": 0.983143,
+          "ci95": [
+            0.974007,
+            0.991031
+          ]
+        },
+        "hhi": {
+          "value": 0.910406,
+          "ci95": [
+            0.876317,
+            0.944417
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 3,
+          "ci95": [
+            1,
+            3
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 11259,
+          "ci95": [
+            11181,
+            11404
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 11259,
+          "ci95": [
+            11181,
+            11404
+          ]
+        },
+        "structural": {
+          "value": 11259,
+          "ci95": [
+            11181,
+            11404
+          ]
+        },
+        "bridges": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "unknown": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -4176,6 +4594,89 @@
               1
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.969319,
+          "ci95": [
+            0.949977,
+            0.987284
+          ]
+        },
+        "top3_share": {
+          "value": 0.99185,
+          "ci95": [
+            0.986732,
+            0.999531
+          ]
+        },
+        "hhi": {
+          "value": 0.939894,
+          "ci95": [
+            0.903354,
+            0.974813
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 2,
+          "ci95": [
+            1,
+            3
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 9604,
+          "ci95": [
+            8967,
+            10474
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 9604,
+          "ci95": [
+            8967,
+            10474
+          ]
+        },
+        "structural": {
+          "value": 9604,
+          "ci95": [
+            8967,
+            10474
+          ]
+        },
+        "bridges": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "unknown": {
+          "value": 1,
+          "ci95": [
+            1,
+            1
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -4763,6 +5264,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.567231,
+          "ci95": [
+            0.374441,
+            0.770459
+          ]
+        },
+        "top3_share": {
+          "value": 0.771912,
+          "ci95": [
+            0.661025,
+            0.89243
+          ]
+        },
+        "hhi": {
+          "value": 0.353392,
+          "ci95": [
+            0.205421,
+            0.60197
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 9,
+          "ci95": [
+            6,
+            11
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 4883,
+          "ci95": [
+            4874,
+            4893
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 4883,
+          "ci95": [
+            4874,
+            4893
+          ]
+        },
+        "structural": {
+          "value": 4883,
+          "ci95": [
+            4874,
+            4893
+          ]
+        },
+        "bridges": {
+          "value": 85,
+          "ci95": [
+            34,
+            146
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.002988,
+          "ci95": [
+            0,
+            0.007956
+          ]
+        },
+        "other_chains": {
+          "value": 0.01743,
+          "ci95": [
+            0.006979,
+            0.029851
+          ]
+        },
+        "unknown": {
+          "value": 0.979582,
+          "ci95": [
+            0.966169,
+            0.99153
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -5340,6 +5924,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.730619,
+          "ci95": [
+            0.521158,
+            0.865527
+          ]
+        },
+        "top3_share": {
+          "value": 0.870008,
+          "ci95": [
+            0.775,
+            0.944444
+          ]
+        },
+        "hhi": {
+          "value": 0.547699,
+          "ci95": [
+            0.318609,
+            0.752868
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 6,
+          "ci95": [
+            4,
+            9
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 9116,
+          "ci95": [
+            6936,
+            11913
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 9116,
+          "ci95": [
+            6936,
+            11913
+          ]
+        },
+        "structural": {
+          "value": 9116,
+          "ci95": [
+            6936,
+            11913
+          ]
+        },
+        "bridges": {
+          "value": 935,
+          "ci95": [
+            376,
+            1631
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.019577,
+          "ci95": [
+            0.005155,
+            0.04357
+          ]
+        },
+        "other_chains": {
+          "value": 0.102584,
+          "ci95": [
+            0.03617,
+            0.205908
+          ]
+        },
+        "unknown": {
+          "value": 0.877839,
+          "ci95": [
+            0.760827,
+            0.954424
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -5915,6 +6582,89 @@
               1
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.300917,
+          "ci95": [
+            0.23277,
+            0.45823
+          ]
+        },
+        "top3_share": {
+          "value": 0.663611,
+          "ci95": [
+            0.611908,
+            0.783951
+          ]
+        },
+        "hhi": {
+          "value": 0.179176,
+          "ci95": [
+            0.156597,
+            0.264394
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 10,
+          "ci95": [
+            8,
+            13
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 2732,
+          "ci95": [
+            2385,
+            3091
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 2732,
+          "ci95": [
+            2385,
+            3091
+          ]
+        },
+        "structural": {
+          "value": 2732,
+          "ci95": [
+            2385,
+            3091
+          ]
+        },
+        "bridges": {
+          "value": 872,
+          "ci95": [
+            412,
+            1421
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.031088,
+          "ci95": [
+            0.010076,
+            0.061154
+          ]
+        },
+        "other_chains": {
+          "value": 0.319251,
+          "ci95": [
+            0.15811,
+            0.493628
+          ]
+        },
+        "unknown": {
+          "value": 0.649661,
+          "ci95": [
+            0.480861,
+            0.802779
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -6516,6 +7266,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.473317,
+          "ci95": [
+            0.413896,
+            0.5333
+          ]
+        },
+        "top3_share": {
+          "value": 0.712718,
+          "ci95": [
+            0.67179,
+            0.788365
+          ]
+        },
+        "hhi": {
+          "value": 0.269797,
+          "ci95": [
+            0.22736,
+            0.324564
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 9,
+          "ci95": [
+            8,
+            10
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 3392,
+          "ci95": [
+            3367,
+            3433
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 3132,
+          "ci95": [
+            2915,
+            3325
+          ]
+        },
+        "structural": {
+          "value": 3132,
+          "ci95": [
+            2915,
+            3325
+          ]
+        },
+        "bridges": {
+          "value": 716,
+          "ci95": [
+            521,
+            937
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.473317,
+          "ci95": [
+            0.413896,
+            0.5333
+          ]
+        },
+        "other_chains": {
+          "value": 0.210973,
+          "ci95": [
+            0.152087,
+            0.276723
+          ]
+        },
+        "unknown": {
+          "value": 0.315711,
+          "ci95": [
+            0.252008,
+            0.383225
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -7099,6 +7932,89 @@
               1
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.552828,
+          "ci95": [
+            0.451699,
+            0.647842
+          ]
+        },
+        "top3_share": {
+          "value": 0.760406,
+          "ci95": [
+            0.721812,
+            0.868449
+          ]
+        },
+        "hhi": {
+          "value": 0.339234,
+          "ci95": [
+            0.270073,
+            0.446218
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 9,
+          "ci95": [
+            6,
+            10
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 6862,
+          "ci95": [
+            6723,
+            7001
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 3069,
+          "ci95": [
+            2402,
+            3775
+          ]
+        },
+        "structural": {
+          "value": 3069,
+          "ci95": [
+            2402,
+            3775
+          ]
+        },
+        "bridges": {
+          "value": 795,
+          "ci95": [
+            590,
+            1007
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.048559,
+          "ci95": [
+            0.010753,
+            0.100052
+          ]
+        },
+        "other_chains": {
+          "value": 0.115795,
+          "ci95": [
+            0.084826,
+            0.147585
+          ]
+        },
+        "unknown": {
+          "value": 0.835646,
+          "ci95": [
+            0.775835,
+            0.89036
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -7686,6 +8602,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.487382,
+          "ci95": [
+            0.408037,
+            0.612395
+          ]
+        },
+        "top3_share": {
+          "value": 0.881703,
+          "ci95": [
+            0.825886,
+            0.940984
+          ]
+        },
+        "hhi": {
+          "value": 0.343681,
+          "ci95": [
+            0.297829,
+            0.431396
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 5,
+          "ci95": [
+            4,
+            7
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 18913,
+          "ci95": [
+            18078,
+            20295
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 9695,
+          "ci95": [
+            7209,
+            11942
+          ]
+        },
+        "structural": {
+          "value": 9695,
+          "ci95": [
+            7209,
+            11942
+          ]
+        },
+        "bridges": {
+          "value": 984,
+          "ci95": [
+            457,
+            1790
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.086751,
+          "ci95": [
+            0.03348,
+            0.145272
+          ]
+        },
+        "other_chains": {
+          "value": 0.05205,
+          "ci95": [
+            0.024698,
+            0.088889
+          ]
+        },
+        "unknown": {
+          "value": 0.861199,
+          "ci95": [
+            0.774784,
+            0.93141
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -8271,6 +9270,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.79582,
+          "ci95": [
+            0.675218,
+            0.891935
+          ]
+        },
+        "top3_share": {
+          "value": 0.956592,
+          "ci95": [
+            0.938437,
+            0.979636
+          ]
+        },
+        "hhi": {
+          "value": 0.654496,
+          "ci95": [
+            0.525239,
+            0.800447
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 4,
+          "ci95": [
+            3,
+            6
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 65979,
+          "ci95": [
+            65060,
+            66828
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 13472,
+          "ci95": [
+            7107,
+            21215
+          ]
+        },
+        "structural": {
+          "value": 13472,
+          "ci95": [
+            7107,
+            21215
+          ]
+        },
+        "bridges": {
+          "value": 1803,
+          "ci95": [
+            990,
+            2758
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.143087,
+          "ci95": [
+            0.057662,
+            0.259259
+          ]
+        },
+        "other_chains": {
+          "value": 0.027331,
+          "ci95": [
+            0.015102,
+            0.041981
+          ]
+        },
+        "unknown": {
+          "value": 0.829582,
+          "ci95": [
+            0.71284,
+            0.922501
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -8846,6 +9928,89 @@
               1
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.864347,
+          "ci95": [
+            0.812405,
+            0.909366
+          ]
+        },
+        "top3_share": {
+          "value": 0.921836,
+          "ci95": [
+            0.895665,
+            0.955623
+          ]
+        },
+        "hhi": {
+          "value": 0.749556,
+          "ci95": [
+            0.66548,
+            0.828033
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 4,
+          "ci95": [
+            3,
+            7
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 50852,
+          "ci95": [
+            50544,
+            51134
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 6898,
+          "ci95": [
+            4616,
+            9514
+          ]
+        },
+        "structural": {
+          "value": 6898,
+          "ci95": [
+            4616,
+            9514
+          ]
+        },
+        "bridges": {
+          "value": 1462,
+          "ci95": [
+            564,
+            2513
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.038326,
+          "ci95": [
+            0.019182,
+            0.063508
+          ]
+        },
+        "other_chains": {
+          "value": 0.028744,
+          "ci95": [
+            0.011128,
+            0.049414
+          ]
+        },
+        "unknown": {
+          "value": 0.93293,
+          "ci95": [
+            0.892137,
+            0.966349
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -9433,6 +10598,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.948397,
+          "ci95": [
+            0.931727,
+            0.963427
+          ]
+        },
+        "top3_share": {
+          "value": 0.972946,
+          "ci95": [
+            0.964357,
+            0.98497
+          ]
+        },
+        "hhi": {
+          "value": 0.899878,
+          "ci95": [
+            0.86895,
+            0.928415
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 3,
+          "ci95": [
+            2,
+            4
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 46146,
+          "ci95": [
+            45961,
+            46239
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 2381,
+          "ci95": [
+            1688,
+            3144
+          ]
+        },
+        "structural": {
+          "value": 2381,
+          "ci95": [
+            1688,
+            3144
+          ]
+        },
+        "bridges": {
+          "value": 532,
+          "ci95": [
+            301,
+            786
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.013026,
+          "ci95": [
+            0.001004,
+            0.027
+          ]
+        },
+        "other_chains": {
+          "value": 0.011523,
+          "ci95": [
+            0.0065,
+            0.017103
+          ]
+        },
+        "unknown": {
+          "value": 0.975451,
+          "ci95": [
+            0.962926,
+            0.9855
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -10008,6 +11256,89 @@
               0.993487
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.737425,
+          "ci95": [
+            0.684131,
+            0.788394
+          ]
+        },
+        "top3_share": {
+          "value": 0.945171,
+          "ci95": [
+            0.920603,
+            0.968969
+          ]
+        },
+        "hhi": {
+          "value": 0.576413,
+          "ci95": [
+            0.514976,
+            0.642312
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 4,
+          "ci95": [
+            3,
+            6
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 63216,
+          "ci95": [
+            62485,
+            63598
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 16599,
+          "ci95": [
+            13356,
+            19906
+          ]
+        },
+        "structural": {
+          "value": 16599,
+          "ci95": [
+            13356,
+            19906
+          ]
+        },
+        "bridges": {
+          "value": 1972,
+          "ci95": [
+            636,
+            3720
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.011569,
+          "ci95": [
+            0,
+            0.031047
+          ]
+        },
+        "other_chains": {
+          "value": 0.208249,
+          "ci95": [
+            0.148465,
+            0.267401
+          ]
+        },
+        "unknown": {
+          "value": 0.780181,
+          "ci95": [
+            0.725717,
+            0.835335
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -10587,6 +11918,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.630777,
+          "ci95": [
+            0.580595,
+            0.687011
+          ]
+        },
+        "top3_share": {
+          "value": 0.971113,
+          "ci95": [
+            0.948415,
+            0.988011
+          ]
+        },
+        "hhi": {
+          "value": 0.493482,
+          "ci95": [
+            0.452823,
+            0.545053
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 3,
+          "ci95": [
+            3,
+            5
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 91618,
+          "ci95": [
+            88538,
+            94264
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 33827,
+          "ci95": [
+            28053,
+            39120
+          ]
+        },
+        "structural": {
+          "value": 33827,
+          "ci95": [
+            28053,
+            39120
+          ]
+        },
+        "bridges": {
+          "value": 3031,
+          "ci95": [
+            1877,
+            4186
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0.340336,
+          "ci95": [
+            0.29008,
+            0.384257
+          ]
+        },
+        "unknown": {
+          "value": 0.659664,
+          "ci95": [
+            0.61491,
+            0.709783
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -11162,6 +12576,89 @@
               0.612383
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.732601,
+          "ci95": [
+            0.688353,
+            0.772132
+          ]
+        },
+        "top3_share": {
+          "value": 0.979069,
+          "ci95": [
+            0.956748,
+            0.992697
+          ]
+        },
+        "hhi": {
+          "value": 0.583425,
+          "ci95": [
+            0.526687,
+            0.635351
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 3,
+          "ci95": [
+            2,
+            4
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 121353,
+          "ci95": [
+            119321,
+            123004
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 32450,
+          "ci95": [
+            27751,
+            37784
+          ]
+        },
+        "structural": {
+          "value": 32450,
+          "ci95": [
+            27751,
+            37784
+          ]
+        },
+        "bridges": {
+          "value": 4001,
+          "ci95": [
+            1143,
+            7684
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "other_chains": {
+          "value": 0.252747,
+          "ci95": [
+            0.216402,
+            0.291971
+          ]
+        },
+        "unknown": {
+          "value": 0.747253,
+          "ci95": [
+            0.707652,
+            0.783359
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -11749,6 +13246,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.58393,
+          "ci95": [
+            0.5261,
+            0.638505
+          ]
+        },
+        "top3_share": {
+          "value": 0.905322,
+          "ci95": [
+            0.878571,
+            0.951157
+          ]
+        },
+        "hhi": {
+          "value": 0.422278,
+          "ci95": [
+            0.369053,
+            0.483267
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 5,
+          "ci95": [
+            4,
+            6
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 148959,
+          "ci95": [
+            148349,
+            149492
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 61977,
+          "ci95": [
+            53668,
+            70668
+          ]
+        },
+        "structural": {
+          "value": 61977,
+          "ci95": [
+            53668,
+            70668
+          ]
+        },
+        "bridges": {
+          "value": 6175,
+          "ci95": [
+            1982,
+            12121
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.052201,
+          "ci95": [
+            0.017427,
+            0.094436
+          ]
+        },
+        "other_chains": {
+          "value": 0.319345,
+          "ci95": [
+            0.286881,
+            0.353815
+          ]
+        },
+        "unknown": {
+          "value": 0.628454,
+          "ci95": [
+            0.57514,
+            0.677783
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -12324,6 +13904,89 @@
               0.75243
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.400102,
+          "ci95": [
+            0.374299,
+            0.479775
+          ]
+        },
+        "top3_share": {
+          "value": 0.933401,
+          "ci95": [
+            0.903504,
+            0.957274
+          ]
+        },
+        "hhi": {
+          "value": 0.328636,
+          "ci95": [
+            0.306981,
+            0.372736
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 5,
+          "ci95": [
+            5,
+            5
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 210711,
+          "ci95": [
+            209051,
+            211942
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 126405,
+          "ci95": [
+            113950,
+            139294
+          ]
+        },
+        "structural": {
+          "value": 126405,
+          "ci95": [
+            113950,
+            139294
+          ]
+        },
+        "bridges": {
+          "value": 1178,
+          "ci95": [
+            536,
+            1928
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.051347,
+          "ci95": [
+            0.031996,
+            0.077118
+          ]
+        },
+        "other_chains": {
+          "value": 0.383833,
+          "ci95": [
+            0.296899,
+            0.478039
+          ]
+        },
+        "unknown": {
+          "value": 0.56482,
+          "ci95": [
+            0.477215,
+            0.647687
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -12903,6 +14566,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.494106,
+          "ci95": [
+            0.437183,
+            0.556305
+          ]
+        },
+        "top3_share": {
+          "value": 0.925679,
+          "ci95": [
+            0.889788,
+            0.952869
+          ]
+        },
+        "hhi": {
+          "value": 0.353308,
+          "ci95": [
+            0.314064,
+            0.408861
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 6,
+          "ci95": [
+            5,
+            7
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 300853,
+          "ci95": [
+            295147,
+            304862
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 210027,
+          "ci95": [
+            198615,
+            222363
+          ]
+        },
+        "structural": {
+          "value": 210027,
+          "ci95": [
+            198615,
+            222363
+          ]
+        },
+        "bridges": {
+          "value": 925,
+          "ci95": [
+            308,
+            1696
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.035366,
+          "ci95": [
+            0.02459,
+            0.050613
+          ]
+        },
+        "other_chains": {
+          "value": 0.497181,
+          "ci95": [
+            0.439409,
+            0.559444
+          ]
+        },
+        "unknown": {
+          "value": 0.467453,
+          "ci95": [
+            0.401343,
+            0.529291
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0,
@@ -13478,6 +15224,89 @@
               0.436299
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.47923,
+          "ci95": [
+            0.35094,
+            0.59798
+          ]
+        },
+        "top3_share": {
+          "value": 0.944782,
+          "ci95": [
+            0.915142,
+            0.970187
+          ]
+        },
+        "hhi": {
+          "value": 0.340399,
+          "ci95": [
+            0.287752,
+            0.428613
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 7,
+          "ci95": [
+            3,
+            7
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 721238,
+          "ci95": [
+            715392,
+            726718
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 574725,
+          "ci95": [
+            531246,
+            615281
+          ]
+        },
+        "structural": {
+          "value": 229086,
+          "ci95": [
+            177204,
+            283526
+          ]
+        },
+        "bridges": {
+          "value": 1096,
+          "ci95": [
+            0,
+            2192
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.503546,
+          "ci95": [
+            0.384106,
+            0.617043
+          ]
+        },
+        "other_chains": {
+          "value": 0.263931,
+          "ci95": [
+            0.212658,
+            0.316139
+          ]
+        },
+        "unknown": {
+          "value": 0.232523,
+          "ci95": [
+            0.166329,
+            0.304723
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -14057,6 +15886,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.628943,
+          "ci95": [
+            0.567716,
+            0.679519
+          ]
+        },
+        "top3_share": {
+          "value": 0.907862,
+          "ci95": [
+            0.863568,
+            0.948474
+          ]
+        },
+        "hhi": {
+          "value": 0.441538,
+          "ci95": [
+            0.382346,
+            0.497499
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 5,
+          "ci95": [
+            4,
+            6
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 896949,
+          "ci95": [
+            891559,
+            902338
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 802178,
+          "ci95": [
+            791848,
+            812958
+          ]
+        },
+        "structural": {
+          "value": 238048,
+          "ci95": [
+            189091,
+            295989
+          ]
+        },
+        "bridges": {
+          "value": 61982,
+          "ci95": [
+            30542,
+            100609
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.647471,
+          "ci95": [
+            0.592907,
+            0.69397
+          ]
+        },
+        "other_chains": {
+          "value": 0.242364,
+          "ci95": [
+            0.193806,
+            0.300151
+          ]
+        },
+        "unknown": {
+          "value": 0.110165,
+          "ci95": [
+            0.100701,
+            0.12004
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 1,
@@ -14632,6 +16544,89 @@
               0.290581
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.629202,
+          "ci95": [
+            0.581755,
+            0.672172
+          ]
+        },
+        "top3_share": {
+          "value": 0.857501,
+          "ci95": [
+            0.825978,
+            0.889945
+          ]
+        },
+        "hhi": {
+          "value": 0.427338,
+          "ci95": [
+            0.379637,
+            0.476938
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 8,
+          "ci95": [
+            6,
+            8
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 792882,
+          "ci95": [
+            789699,
+            796064
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 701778,
+          "ci95": [
+            693821,
+            709735
+          ]
+        },
+        "structural": {
+          "value": 202895,
+          "ci95": [
+            166294,
+            243474
+          ]
+        },
+        "bridges": {
+          "value": 71610,
+          "ci95": [
+            42568,
+            103039
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.675866,
+          "ci95": [
+            0.632663,
+            0.716365
+          ]
+        },
+        "other_chains": {
+          "value": 0.203713,
+          "ci95": [
+            0.159537,
+            0.252383
+          ]
+        },
+        "unknown": {
+          "value": 0.120421,
+          "ci95": [
+            0.109055,
+            0.132028
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -15211,6 +17206,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.645969,
+          "ci95": [
+            0.596579,
+            0.69354
+          ]
+        },
+        "top3_share": {
+          "value": 0.89985,
+          "ci95": [
+            0.8667,
+            0.929217
+          ]
+        },
+        "hhi": {
+          "value": 0.45422,
+          "ci95": [
+            0.402888,
+            0.509425
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 4,
+          "ci95": [
+            4,
+            4
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 798631,
+          "ci95": [
+            792632,
+            804230
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 698252,
+          "ci95": [
+            681056,
+            714249
+          ]
+        },
+        "structural": {
+          "value": 182361,
+          "ci95": [
+            150768,
+            213955
+          ]
+        },
+        "bridges": {
+          "value": 156367,
+          "ci95": [
+            123574,
+            189560
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.667001,
+          "ci95": [
+            0.618263,
+            0.713283
+          ]
+        },
+        "other_chains": {
+          "value": 0.200801,
+          "ci95": [
+            0.160544,
+            0.241259
+          ]
+        },
+        "unknown": {
+          "value": 0.132198,
+          "ci95": [
+            0.113397,
+            0.152305
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0.999225,
@@ -15786,6 +17864,89 @@
               0.440941
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.526898,
+          "ci95": [
+            0.490462,
+            0.565743
+          ]
+        },
+        "top3_share": {
+          "value": 0.871795,
+          "ci95": [
+            0.863591,
+            0.899198
+          ]
+        },
+        "hhi": {
+          "value": 0.355425,
+          "ci95": [
+            0.330282,
+            0.386639
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 4,
+          "ci95": [
+            4,
+            4
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 800688,
+          "ci95": [
+            795052,
+            806324
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 709307,
+          "ci95": [
+            698841,
+            718566
+          ]
+        },
+        "structural": {
+          "value": 287426,
+          "ci95": [
+            254014,
+            319228
+          ]
+        },
+        "bridges": {
+          "value": 276155,
+          "ci95": [
+            242340,
+            307554
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.538964,
+          "ci95": [
+            0.503009,
+            0.577465
+          ]
+        },
+        "other_chains": {
+          "value": 0.344897,
+          "ci95": [
+            0.303473,
+            0.383493
+          ]
+        },
+        "unknown": {
+          "value": 0.116139,
+          "ci95": [
+            0.10529,
+            0.126683
+          ]
         }
       },
       "relayer_share_of_requester": {
@@ -16365,6 +18526,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.378873,
+          "ci95": [
+            0.318413,
+            0.436706
+          ]
+        },
+        "top3_share": {
+          "value": 0.73032,
+          "ci95": [
+            0.709497,
+            0.776429
+          ]
+        },
+        "hhi": {
+          "value": 0.236354,
+          "ci95": [
+            0.215025,
+            0.268357
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 5,
+          "ci95": [
+            5,
+            6
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 641947,
+          "ci95": [
+            636078,
+            647163
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 574785,
+          "ci95": [
+            560766,
+            591086
+          ]
+        },
+        "structural": {
+          "value": 331569,
+          "ci95": [
+            286578,
+            375583
+          ]
+        },
+        "bridges": {
+          "value": 302879,
+          "ci95": [
+            259843,
+            347218
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.405282,
+          "ci95": [
+            0.346897,
+            0.461695
+          ]
+        },
+        "other_chains": {
+          "value": 0.471813,
+          "ci95": [
+            0.404774,
+            0.541709
+          ]
+        },
+        "unknown": {
+          "value": 0.122905,
+          "ci95": [
+            0.098884,
+            0.14498
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0.99866,
@@ -16942,6 +19186,89 @@
           }
         }
       },
+      "concentration": {
+        "top1_share": {
+          "value": 0.360756,
+          "ci95": [
+            0.31063,
+            0.429588
+          ]
+        },
+        "top3_share": {
+          "value": 0.77721,
+          "ci95": [
+            0.755897,
+            0.810494
+          ]
+        },
+        "hhi": {
+          "value": 0.244538,
+          "ci95": [
+            0.226525,
+            0.273113
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 7,
+          "ci95": [
+            5,
+            9
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 447378,
+          "ci95": [
+            443491,
+            450349
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 427946,
+          "ci95": [
+            423831,
+            431375
+          ]
+        },
+        "structural": {
+          "value": 266552,
+          "ci95": [
+            235233,
+            292156
+          ]
+        },
+        "bridges": {
+          "value": 237062,
+          "ci95": [
+            207115,
+            263580
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.400613,
+          "ci95": [
+            0.341037,
+            0.469388
+          ]
+        },
+        "other_chains": {
+          "value": 0.529893,
+          "ci95": [
+            0.462009,
+            0.591074
+          ]
+        },
+        "unknown": {
+          "value": 0.069494,
+          "ci95": [
+            0.060513,
+            0.078332
+          ]
+        }
+      },
       "relayer_share_of_requester": {
         "fast-auth.near via sweat-relayer.near": {
           "value": 0.998584,
@@ -17517,6 +19844,89 @@
               0.697769
             ]
           }
+        }
+      },
+      "concentration": {
+        "top1_share": {
+          "value": 0.362671,
+          "ci95": [
+            0.326427,
+            0.426113
+          ]
+        },
+        "top3_share": {
+          "value": 0.792109,
+          "ci95": [
+            0.770749,
+            0.823143
+          ]
+        },
+        "hhi": {
+          "value": 0.25165,
+          "ci95": [
+            0.236471,
+            0.276226
+          ]
+        },
+        "requesters_ge_1pct": {
+          "value": 7,
+          "ci95": [
+            5,
+            9
+          ]
+        }
+      },
+      "series_requests_est": {
+        "all": {
+          "value": 159370,
+          "ci95": [
+            158564,
+            160096
+          ]
+        },
+        "excluding_benchmark": {
+          "value": 152196,
+          "ci95": [
+            150664,
+            153728
+          ]
+        },
+        "structural": {
+          "value": 103667,
+          "ci95": [
+            91495,
+            113744
+          ]
+        },
+        "bridges": {
+          "value": 93107,
+          "ci95": [
+            79081,
+            104393
+          ]
+        }
+      },
+      "target_groups_share": {
+        "near_native": {
+          "value": 0.341932,
+          "ci95": [
+            0.279939,
+            0.414807
+          ]
+        },
+        "other_chains": {
+          "value": 0.584219,
+          "ci95": [
+            0.495679,
+            0.654738
+          ]
+        },
+        "unknown": {
+          "value": 0.073849,
+          "ci95": [
+            0.061049,
+            0.088742
+          ]
         }
       },
       "relayer_share_of_requester": {

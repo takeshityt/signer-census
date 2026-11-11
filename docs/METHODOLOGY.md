@@ -168,3 +168,30 @@ All confidence intervals in this repository are **sampling-only** (cluster boots
 ## 12. Dependencies
 
 * `vitest` (dev): test runner required by CLAUDE.md. `yaml` (runtime): parses `labels.yaml` and `config/chain_rules.yaml`, the human-editable formats chosen for evidence-bearing data. No other dependencies; Node built-ins elsewhere.
+
+## 13. Thesis metrics (GATE 3)
+
+* **Concentration** (`months[].concentration`, `totals.concentration`): computed over all requesters of the period from the sampled sign receipts (scaled per month for the totals): top-1 and top-3 share of requests,
+  Herfindahl-Hirschman index (sum of squared shares, 0..1), number of requesters with a share of at least 1%. Bootstrap intervals as for every other estimate.
+* **Series** (`series_requests_est`, definitions in config/estimate.json): `all`; `excluding_benchmark` (minus accounts labeled or *suspected* benchmark-test in labels.yaml, today only tx-bench.near);
+  `structural` (minus benchmark and minus fast-auth.near, the integration whose dominant integrator ends in its present form on 2026-12-30); `bridges` (omni.bridge.near + btc-connector.bridge.near + zcash-connector.bridge.near).
+* **Target groups** (`target_groups_share`): `near_native` = chain family `near`; `other_chains` = bitcoin, zcash, evm, solana, multi, other; `unknown` = no evidence-backed rule. Key types are reported separately.
+* **Relayer share** (`relayer_share_of_requester`): share of a requester's sign receipts whose tx was signed by a given account; used for fast-auth.near via sweat-relayer.near.
+
+## 14. Scenarios (not forecasts)
+
+`assumptions.yaml` (editable) + `src/scenario.mjs`; run by `npm run reproduce` (or `node scripts/scenario.mjs`) → out/scenarios.json.
+Baseline = the last full month in out/metrics.json, split into fast-auth.near, benchmark (suspected) and structural requests. For each combination of fast-auth.near retention after the end month,
+benchmark kept/removed and a monthly growth rate g of structural demand: structural_k = structural_baseline × (1+g)^k; fast-auth.near stays at the baseline until the end month and is multiplied by the retention afterwards;
+the benchmark stays at the baseline or is removed. Point estimates only (the baseline intervals are copied into the output for reference). These numbers show consequences of assumptions; they are not predictions.
+
+## 15. Independent verification (`npm run verify -- --sample 50`)
+
+A seeded random sample of txs that hold sign receipts (from data/derived/sample_parsed.csv.gz; a tx present in two overlapping clusters is taken from one cluster) is checked against two independent public sources:
+archival RPC `EXPERIMENTAL_tx_status` (+ `block` for the height) and NearBlocks (`/v1/txns/<hash>`, `/v2/txns/<hash>/receipts`). Per tx it compares the tx signer, the tx block height and the multiset of
+(requester, status) of `sign` receipts on v1.signer. Exit code 1 on any mismatch or unreachable source. Runs are saved in docs/evidence/verify/ (a first run with a grouping bug in the verifier itself is kept in `superseded/`).
+
+## 16. THESIS.md
+
+THESIS.md is rendered from docs/THESIS.template.md by `npm run reproduce`. Every number is a placeholder resolved from out/metrics.json or out/scenarios.json (with a footnote giving the JSON path),
+a declared literal (dates and thresholds we define) or an external figure with its URL. `npm test` fails if THESIS.md differs from the rendering or contains any other digit.

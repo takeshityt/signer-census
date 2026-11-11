@@ -9,6 +9,8 @@ import { parseLabels } from "./labels.mjs";
 import { parseChainRules, keyTypeOf, FAMILIES } from "./chains.mjs";
 import { compareProximity } from "./proximity.mjs";
 import { densityWeighted, censusReplay, windowComparison } from "./robustness.mjs";
+import { writeScenarios } from "../scripts/scenario.mjs";
+import { render } from "./thesis.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const read = (p) => readFileSync(ROOT + p);
@@ -42,8 +44,10 @@ const drivers = ranked.slice(0, cfg.driversTop);
 const labeled = [...labels.byAccount.keys()];
 const topFailed = Object.entries(probe.totals.failed_by_requester.est).sort((a, b) => b[1] - a[1]).slice(0, 8).map(([k]) => k); // requesters with the most contract-rejected sign receipts
 const benchmark = labels.benchmarkAccounts();
+const seriesDefs = Object.fromEntries(Object.entries(cfg.series ?? {}).map(([k, d]) => [k, d.include ? { include: d.include } : { exclude: (d.exclude ?? []).flatMap((a) => (a === "@benchmark" ? benchmark : [a])) }]));
+const seriesTracked = Object.values(seriesDefs).flatMap((d) => d.include ?? d.exclude ?? []);
 const { point, ci, monthsList, names } = estimateWithBootstrap(clusters, totals, {
-  seed: cfg.seed, replicates: cfg.bootstrapReplicates, requesters: [...new Set([...labeled, ...topFailed, ...ranked.slice(0, cfg.topRequestersTotal + 10)])], extraRequesters: 0, drivers, benchmarkAccounts: benchmark, pairs: cfg.pairs ?? [],
+  seed: cfg.seed, replicates: cfg.bootstrapReplicates, requesters: [...new Set([...labeled, ...seriesTracked, ...topFailed, ...ranked.slice(0, cfg.topRequestersTotal + 10)])], extraRequesters: 0, drivers, benchmarkAccounts: benchmark, pairs: cfg.pairs ?? [], series: seriesDefs, chainGroups: cfg.chainGroups ?? {},
 });
 const flat = flatten(point);
 
@@ -86,6 +90,9 @@ function block(prefix, provenance) {
     target_chain_families: group(prefix, "chains", names.chains),
     target_chain_rule_confidence: group(prefix, "chain_confidences", names.chain_confidences),
     key_types: group(prefix, "keytypes", names.keytypes),
+    concentration: { top1_share: V(`${prefix}.concentration.top1_share`), top3_share: V(`${prefix}.concentration.top3_share`), hhi: V(`${prefix}.concentration.hhi`), requesters_ge_1pct: V(`${prefix}.concentration.requesters_ge_1pct`, 0) },
+    series_requests_est: Object.fromEntries(Object.keys(seriesDefs).map((k) => [k, V(`${prefix}.series.${k}`, 0)])),
+    target_groups_share: Object.fromEntries(Object.keys(cfg.chainGroups ?? {}).map((k) => [k, V(`${prefix}.chain_groups_share.${k}`)])),
     relayer_share_of_requester: Object.fromEntries((cfg.pairs ?? []).map(([a, b]) => [`${a} via ${b}`, V(`${prefix}.pairs.${esc(`${a}<-${b}`)}`)])),
     other_request_types_receipts_est: Object.fromEntries(REQUEST_LIKE_OTHER.filter((m) => names.methods.includes(m)).map((m) => [m, V(`${prefix}.methods.est.${m}`, 0)])),
   };
@@ -164,6 +171,9 @@ const out = {
       requester: "predecessor_id of the sign receipt (not the tx signer)",
       requests_est: "exact monthly tx total x (sign receipts per tx in the sample); ESTIMATE, not an exact count. Headline text should say '≈' and use rounded values.",
       requests_excluding_benchmark_est: `requests minus requests of accounts labeled or suspected as benchmark/test in labels.yaml (${benchmark.join(", ") || "none"})`,
+      series_requests_est: "all; excluding_benchmark (minus suspected/confirmed benchmark accounts); structural (minus benchmark and minus fast-auth.near); bridges (omni.bridge.near + btc-connector.bridge.near + zcash-connector.bridge.near). Definitions in config/estimate.json.",
+      concentration: "computed over ALL requesters of the period: top1/top3 share of requests, HHI = sum of squared shares (0..1), number of requesters with >= 1% share",
+      target_groups_share: "near_native = chain family 'near'; other_chains = bitcoin/zcash/evm/solana/multi/other; unknown = no evidence-backed rule (config/chain_rules.yaml)",
       other_request_types: "request-type calls on v1.signer other than `sign`, counted as receipts per tx x exact tx total; never added to the request count",
     },
     sample: allSample,
@@ -191,3 +201,9 @@ const text = JSON.stringify(out, null, 2) + "\n";
 writeFileSync(ROOT + "out/metrics.json", text);
 console.log(`out/metrics.json written. sha256 ${sha256(Buffer.from(text))}`);
 console.log(`months: ${months.length}, clusters: ${allSample.n_clusters}, sampled txs: ${allSample.n_txs}, estimated requests: ${out.totals.requests_est.value} (95% CI ${out.totals.requests_est.ci95.join(" – ")})`);
+const sc = writeScenarios(); // scenarios (NOT forecasts) from out/metrics.json + assumptions.yaml
+console.log(`out/scenarios.json written (${sc.count} scenarios, baseline ${sc.baseline}). sha256 ${sc.sha256}`);
+// THESIS.md is rendered from docs/THESIS.template.md: every number in it comes from out/metrics.json or out/scenarios.json
+const thesis = render(readFileSync(ROOT + "docs/THESIS.template.md", "utf8"), { metrics: JSON.parse(readFileSync(ROOT + "out/metrics.json", "utf8")), scenarios: JSON.parse(readFileSync(ROOT + "out/scenarios.json", "utf8")) });
+writeFileSync(ROOT + "THESIS.md", thesis);
+console.log(`THESIS.md rendered from docs/THESIS.template.md. sha256 ${sha256(Buffer.from(thesis))}`);

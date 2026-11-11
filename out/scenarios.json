@@ -1,0 +1,1148 @@
+{
+  "note": "SCENARIOS, not forecasts. Change assumptions.yaml and re-run `npm run reproduce`.",
+  "assumptions_file": "assumptions.yaml",
+  "label": "SCENARIOS, not forecasts",
+  "baseline": {
+    "month": "2026-10",
+    "all": 447378,
+    "benchmark": 19432,
+    "fastauth": 161394,
+    "structural": 266552,
+    "ci95": {
+      "all": [
+        443491,
+        450349
+      ],
+      "structural": [
+        235233,
+        292156
+      ],
+      "excluding_benchmark": [
+        423831,
+        431375
+      ]
+    }
+  },
+  "horizon": {
+    "from": "2026-11",
+    "to": "2027-06"
+  },
+  "scenarios": [
+    {
+      "id": "fastauth0_bench-kept_g-5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0,
+        "benchmark": "kept",
+        "structural_monthly_growth": -0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 253224,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 434050
+        },
+        "2026-12": {
+          "structural": 240563,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 421389
+        },
+        "2027-01": {
+          "structural": 228535,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 247967
+        },
+        "2027-02": {
+          "structural": 217108,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 236540
+        },
+        "2027-03": {
+          "structural": 206253,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 225685
+        },
+        "2027-04": {
+          "structural": 195940,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 215372
+        },
+        "2027-05": {
+          "structural": 186143,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 205575
+        },
+        "2027-06": {
+          "structural": 176836,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 196268
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 196268,
+      "end_month_vs_baseline": -0.5612926876153945,
+      "cumulative_requests": 2182847
+    },
+    {
+      "id": "fastauth0_bench-kept_g+0",
+      "assumptions": {
+        "fastauth_retention_after_end": 0,
+        "benchmark": "kept",
+        "structural_monthly_growth": 0
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2026-12": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-01": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 285984
+        },
+        "2027-02": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 285984
+        },
+        "2027-03": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 285984
+        },
+        "2027-04": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 285984
+        },
+        "2027-05": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 285984
+        },
+        "2027-06": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 285984
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 285984,
+      "end_month_vs_baseline": -0.3607553344151925,
+      "cumulative_requests": 2610660
+    },
+    {
+      "id": "fastauth0_bench-kept_g+5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0,
+        "benchmark": "kept",
+        "structural_monthly_growth": 0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 279880,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 460706
+        },
+        "2026-12": {
+          "structural": 293874,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 474700
+        },
+        "2027-01": {
+          "structural": 308567,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 327999
+        },
+        "2027-02": {
+          "structural": 323996,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 343428
+        },
+        "2027-03": {
+          "structural": 340195,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 359627
+        },
+        "2027-04": {
+          "structural": 357205,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 376637
+        },
+        "2027-05": {
+          "structural": 375065,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 394497
+        },
+        "2027-06": {
+          "structural": 393819,
+          "fastauth": 0,
+          "benchmark": 19432,
+          "total": 413251
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 413251,
+      "end_month_vs_baseline": -0.07628224901537406,
+      "cumulative_requests": 3150845
+    },
+    {
+      "id": "fastauth0_bench-removed_g-5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0,
+        "benchmark": "removed",
+        "structural_monthly_growth": -0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 253224,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 414618
+        },
+        "2026-12": {
+          "structural": 240563,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 401957
+        },
+        "2027-01": {
+          "structural": 228535,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 228535
+        },
+        "2027-02": {
+          "structural": 217108,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 217108
+        },
+        "2027-03": {
+          "structural": 206253,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 206253
+        },
+        "2027-04": {
+          "structural": 195940,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 195940
+        },
+        "2027-05": {
+          "structural": 186143,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 186143
+        },
+        "2027-06": {
+          "structural": 176836,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 176836
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 176836,
+      "end_month_vs_baseline": -0.6047279928829759,
+      "cumulative_requests": 2027391
+    },
+    {
+      "id": "fastauth0_bench-removed_g+0",
+      "assumptions": {
+        "fastauth_retention_after_end": 0,
+        "benchmark": "removed",
+        "structural_monthly_growth": 0
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2026-12": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-01": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 266552
+        },
+        "2027-02": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 266552
+        },
+        "2027-03": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 266552
+        },
+        "2027-04": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 266552
+        },
+        "2027-05": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 266552
+        },
+        "2027-06": {
+          "structural": 266552,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 266552
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 266552,
+      "end_month_vs_baseline": -0.4041906396827738,
+      "cumulative_requests": 2455204
+    },
+    {
+      "id": "fastauth0_bench-removed_g+5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0,
+        "benchmark": "removed",
+        "structural_monthly_growth": 0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 279880,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 441274
+        },
+        "2026-12": {
+          "structural": 293874,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 455268
+        },
+        "2027-01": {
+          "structural": 308567,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 308567
+        },
+        "2027-02": {
+          "structural": 323996,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 323996
+        },
+        "2027-03": {
+          "structural": 340195,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 340195
+        },
+        "2027-04": {
+          "structural": 357205,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 357205
+        },
+        "2027-05": {
+          "structural": 375065,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 375065
+        },
+        "2027-06": {
+          "structural": 393819,
+          "fastauth": 0,
+          "benchmark": 0,
+          "total": 393819
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 393819,
+      "end_month_vs_baseline": -0.11971755428295539,
+      "cumulative_requests": 2995389
+    },
+    {
+      "id": "fastauth25_bench-kept_g-5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0.25,
+        "benchmark": "kept",
+        "structural_monthly_growth": -0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 253224,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 434050
+        },
+        "2026-12": {
+          "structural": 240563,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 421389
+        },
+        "2027-01": {
+          "structural": 228535,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 288316
+        },
+        "2027-02": {
+          "structural": 217108,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 276889
+        },
+        "2027-03": {
+          "structural": 206253,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 266033
+        },
+        "2027-04": {
+          "structural": 195940,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 255721
+        },
+        "2027-05": {
+          "structural": 186143,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 245924
+        },
+        "2027-06": {
+          "structural": 176836,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 236617
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 236617,
+      "end_month_vs_baseline": -0.4711027363884679,
+      "cumulative_requests": 2424938
+    },
+    {
+      "id": "fastauth25_bench-kept_g+0",
+      "assumptions": {
+        "fastauth_retention_after_end": 0.25,
+        "benchmark": "kept",
+        "structural_monthly_growth": 0
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2026-12": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-01": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 326333
+        },
+        "2027-02": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 326333
+        },
+        "2027-03": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 326333
+        },
+        "2027-04": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 326333
+        },
+        "2027-05": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 326333
+        },
+        "2027-06": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 326333
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 326333,
+      "end_month_vs_baseline": -0.27056538318826584,
+      "cumulative_requests": 2852751
+    },
+    {
+      "id": "fastauth25_bench-kept_g+5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0.25,
+        "benchmark": "kept",
+        "structural_monthly_growth": 0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 279880,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 460706
+        },
+        "2026-12": {
+          "structural": 293874,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 474700
+        },
+        "2027-01": {
+          "structural": 308567,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 368348
+        },
+        "2027-02": {
+          "structural": 323996,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 383776
+        },
+        "2027-03": {
+          "structural": 340195,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 399976
+        },
+        "2027-04": {
+          "structural": 357205,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 416986
+        },
+        "2027-05": {
+          "structural": 375065,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 434846
+        },
+        "2027-06": {
+          "structural": 393819,
+          "fastauth": 40349,
+          "benchmark": 19432,
+          "total": 453599
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 453599,
+      "end_month_vs_baseline": 0.013905466965295599,
+      "cumulative_requests": 3392936
+    },
+    {
+      "id": "fastauth25_bench-removed_g-5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0.25,
+        "benchmark": "removed",
+        "structural_monthly_growth": -0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 253224,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 414618
+        },
+        "2026-12": {
+          "structural": 240563,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 401957
+        },
+        "2027-01": {
+          "structural": 228535,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 268884
+        },
+        "2027-02": {
+          "structural": 217108,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 257457
+        },
+        "2027-03": {
+          "structural": 206253,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 246601
+        },
+        "2027-04": {
+          "structural": 195940,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 236289
+        },
+        "2027-05": {
+          "structural": 186143,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 226492
+        },
+        "2027-06": {
+          "structural": 176836,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 217185
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 217185,
+      "end_month_vs_baseline": -0.5145380416560492,
+      "cumulative_requests": 2269482
+    },
+    {
+      "id": "fastauth25_bench-removed_g+0",
+      "assumptions": {
+        "fastauth_retention_after_end": 0.25,
+        "benchmark": "removed",
+        "structural_monthly_growth": 0
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2026-12": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-01": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 306901
+        },
+        "2027-02": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 306901
+        },
+        "2027-03": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 306901
+        },
+        "2027-04": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 306901
+        },
+        "2027-05": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 306901
+        },
+        "2027-06": {
+          "structural": 266552,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 306901
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 306901,
+      "end_month_vs_baseline": -0.31400068845584717,
+      "cumulative_requests": 2697295
+    },
+    {
+      "id": "fastauth25_bench-removed_g+5",
+      "assumptions": {
+        "fastauth_retention_after_end": 0.25,
+        "benchmark": "removed",
+        "structural_monthly_growth": 0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 279880,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 441274
+        },
+        "2026-12": {
+          "structural": 293874,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 455268
+        },
+        "2027-01": {
+          "structural": 308567,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 348916
+        },
+        "2027-02": {
+          "structural": 323996,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 364344
+        },
+        "2027-03": {
+          "structural": 340195,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 380544
+        },
+        "2027-04": {
+          "structural": 357205,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 397554
+        },
+        "2027-05": {
+          "structural": 375065,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 415414
+        },
+        "2027-06": {
+          "structural": 393819,
+          "fastauth": 40349,
+          "benchmark": 0,
+          "total": 434167
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 434167,
+      "end_month_vs_baseline": -0.029529838302285727,
+      "cumulative_requests": 3237480
+    },
+    {
+      "id": "fastauth100_bench-kept_g-5",
+      "assumptions": {
+        "fastauth_retention_after_end": 1,
+        "benchmark": "kept",
+        "structural_monthly_growth": -0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 253224,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 434050
+        },
+        "2026-12": {
+          "structural": 240563,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 421389
+        },
+        "2027-01": {
+          "structural": 228535,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 409361
+        },
+        "2027-02": {
+          "structural": 217108,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 397934
+        },
+        "2027-03": {
+          "structural": 206253,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 387079
+        },
+        "2027-04": {
+          "structural": 195940,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 376766
+        },
+        "2027-05": {
+          "structural": 186143,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 366969
+        },
+        "2027-06": {
+          "structural": 176836,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 357662
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 357662,
+      "end_month_vs_baseline": -0.20053735320020205,
+      "cumulative_requests": 3151211
+    },
+    {
+      "id": "fastauth100_bench-kept_g+0",
+      "assumptions": {
+        "fastauth_retention_after_end": 1,
+        "benchmark": "kept",
+        "structural_monthly_growth": 0
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2026-12": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-01": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-02": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-03": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-04": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-05": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        },
+        "2027-06": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 447378
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 447378,
+      "end_month_vs_baseline": 0,
+      "cumulative_requests": 3579024
+    },
+    {
+      "id": "fastauth100_bench-kept_g+5",
+      "assumptions": {
+        "fastauth_retention_after_end": 1,
+        "benchmark": "kept",
+        "structural_monthly_growth": 0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 279880,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 460706
+        },
+        "2026-12": {
+          "structural": 293874,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 474700
+        },
+        "2027-01": {
+          "structural": 308567,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 489393
+        },
+        "2027-02": {
+          "structural": 323996,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 504822
+        },
+        "2027-03": {
+          "structural": 340195,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 521021
+        },
+        "2027-04": {
+          "structural": 357205,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 538031
+        },
+        "2027-05": {
+          "structural": 375065,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 555891
+        },
+        "2027-06": {
+          "structural": 393819,
+          "fastauth": 161394,
+          "benchmark": 19432,
+          "total": 574645
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 574645,
+      "end_month_vs_baseline": 0.2844730853998185,
+      "cumulative_requests": 4119209
+    },
+    {
+      "id": "fastauth100_bench-removed_g-5",
+      "assumptions": {
+        "fastauth_retention_after_end": 1,
+        "benchmark": "removed",
+        "structural_monthly_growth": -0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 253224,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 414618
+        },
+        "2026-12": {
+          "structural": 240563,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 401957
+        },
+        "2027-01": {
+          "structural": 228535,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 389929
+        },
+        "2027-02": {
+          "structural": 217108,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 378502
+        },
+        "2027-03": {
+          "structural": 206253,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 367647
+        },
+        "2027-04": {
+          "structural": 195940,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 357334
+        },
+        "2027-05": {
+          "structural": 186143,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 347537
+        },
+        "2027-06": {
+          "structural": 176836,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 338230
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 338230,
+      "end_month_vs_baseline": -0.24397265846778338,
+      "cumulative_requests": 2995755
+    },
+    {
+      "id": "fastauth100_bench-removed_g+0",
+      "assumptions": {
+        "fastauth_retention_after_end": 1,
+        "benchmark": "removed",
+        "structural_monthly_growth": 0
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2026-12": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-01": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-02": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-03": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-04": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-05": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        },
+        "2027-06": {
+          "structural": 266552,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 427946
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 427946,
+      "end_month_vs_baseline": -0.043435305267581326,
+      "cumulative_requests": 3423568
+    },
+    {
+      "id": "fastauth100_bench-removed_g+5",
+      "assumptions": {
+        "fastauth_retention_after_end": 1,
+        "benchmark": "removed",
+        "structural_monthly_growth": 0.05
+      },
+      "projection": {
+        "2026-11": {
+          "structural": 279880,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 441274
+        },
+        "2026-12": {
+          "structural": 293874,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 455268
+        },
+        "2027-01": {
+          "structural": 308567,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 469961
+        },
+        "2027-02": {
+          "structural": 323996,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 485390
+        },
+        "2027-03": {
+          "structural": 340195,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 501589
+        },
+        "2027-04": {
+          "structural": 357205,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 518599
+        },
+        "2027-05": {
+          "structural": 375065,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 536459
+        },
+        "2027-06": {
+          "structural": 393819,
+          "fastauth": 161394,
+          "benchmark": 0,
+          "total": 555213
+        }
+      },
+      "end_month": "2027-06",
+      "end_month_total": 555213,
+      "end_month_vs_baseline": 0.2410377801322372,
+      "cumulative_requests": 3963753
+    }
+  ]
+}
