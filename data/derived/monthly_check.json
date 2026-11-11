@@ -1,0 +1,10 @@
+{
+  "snapshot_height": 224053625,
+  "snapshot_time_utc": "2026-11-11T10:35:50.401Z",
+  "sum_of_months": 13015559,
+  "total_up_to_snapshot_no_lower_bound": 13015559,
+  "gap_sum_vs_bounded_total": 0,
+  "total_now_unbounded": 13015693,
+  "new_txs_after_snapshot": 134,
+  "note": "gap_sum_vs_bounded_total > 0 would mean txs before the first month boundary (2024-07-01) or lost by boundary arithmetic."
+}

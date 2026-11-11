@@ -88,14 +88,14 @@ const listed = [];
 let resume;
 let countWanted; // txs_count for the narrow window [FROM, TO)
 {
-  const c = await postJson(`${FASTNEAR_TX}/v0/account`, { ...listBody, limit: 1, from_tx_block_height: FROM, to_tx_block_height: TO });
+  const c = await postJson(`${FASTNEAR_TX}/v0/account`, { ...listBody, limit: 1, from_tx_block_height: FROM, to_tx_block_height: TO - 1 }); // `to` is inclusive in FastNEAR (see docs/evidence/gate1b)
   countWanted = c.txs_count;
 }
 do {
   const page = await postJson(`${FASTNEAR_TX}/v0/account`, {
     ...listBody,
     from_tx_block_height: FROM - MARGIN,
-    to_tx_block_height: TO,
+    to_tx_block_height: TO - 1,
     ...(resume ? { resume_token: resume } : {}),
   });
   listed.push(...page.account_txs);

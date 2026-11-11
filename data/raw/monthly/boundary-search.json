@@ -1,0 +1,1137 @@
+[
+ {
+  "asked": 100000000,
+  "height": 100000000,
+  "timestamp_nanosec": "1693394692463909482"
+ },
+ {
+  "asked": 132423021,
+  "height": 132423021,
+  "timestamp_nanosec": "1731292873786031881"
+ },
+ {
+  "asked": 122583681,
+  "height": 122583681,
+  "timestamp_nanosec": "1720064569073239422"
+ },
+ {
+  "asked": 111291840,
+  "height": 111291840,
+  "timestamp_nanosec": "1706198001343987057"
+ },
+ {
+  "asked": 122361722,
+  "height": 122361722,
+  "timestamp_nanosec": "1719800876941226382"
+ },
+ {
+  "asked": 122354498,
+  "height": 122354498,
+  "timestamp_nanosec": "1719792276698338947"
+ },
+ {
+  "asked": 116823169,
+  "height": 116823169,
+  "timestamp_nanosec": "1713093427610986371"
+ },
+ {
+  "asked": 122354269,
+  "height": 122354269,
+  "timestamp_nanosec": "1719792015954339130"
+ },
+ {
+  "asked": 122354255,
+  "height": 122354255,
+  "timestamp_nanosec": "1719792000303106611"
+ },
+ {
+  "asked": 119588712,
+  "height": 119588712,
+  "timestamp_nanosec": "1716498092702847532"
+ },
+ {
+  "asked": 122354254,
+  "height": 122354254,
+  "timestamp_nanosec": "1719791999438343788"
+ },
+ {
+  "asked": 126005550,
+  "height": 126005550,
+  "timestamp_nanosec": "1723944966095708825"
+ },
+ {
+  "asked": 124709108,
+  "height": 124709108,
+  "timestamp_nanosec": "1722457454788982882"
+ },
+ {
+  "asked": 125357329,
+  "height": 125357329,
+  "timestamp_nanosec": "1723179298416181050"
+ },
+ {
+  "asked": 124720732,
+  "height": 124720732,
+  "timestamp_nanosec": "1722470285049484729"
+ },
+ {
+  "asked": 124720835,
+  "height": 124720835,
+  "timestamp_nanosec": "1722470390909955304"
+ },
+ {
+  "asked": 125039082,
+  "height": 125039082,
+  "timestamp_nanosec": "1722825280122278345"
+ },
+ {
+  "asked": 124720843,
+  "height": 124720843,
+  "timestamp_nanosec": "1722470398852060683"
+ },
+ {
+  "asked": 124720844,
+  "height": 124720844,
+  "timestamp_nanosec": "1722470399939038470"
+ },
+ {
+  "asked": 124879963,
+  "height": 124879963,
+  "timestamp_nanosec": "1722650365701094492"
+ },
+ {
+  "asked": 124720845,
+  "height": 124720845,
+  "timestamp_nanosec": "1722470400972484768"
+ },
+ {
+  "asked": 128419982,
+  "height": 128419982,
+  "timestamp_nanosec": "1726757692907485456"
+ },
+ {
+  "asked": 127031806,
+  "height": 127031806,
+  "timestamp_nanosec": "1725178366457035841"
+ },
+ {
+  "asked": 125876325,
+  "height": 125876325,
+  "timestamp_nanosec": "1723781250141876972"
+ },
+ {
+  "asked": 127007353,
+  "height": 127007353,
+  "timestamp_nanosec": "1725151231059963731"
+ },
+ {
+  "asked": 127005345,
+  "height": 127005345,
+  "timestamp_nanosec": "1725149030080791796"
+ },
+ {
+  "asked": 126440835,
+  "height": 126440835,
+  "timestamp_nanosec": "1724480178289981789"
+ },
+ {
+  "asked": 127005150,
+  "height": 127005150,
+  "timestamp_nanosec": "1725148812646878594"
+ },
+ {
+  "asked": 127005139,
+  "height": 127005139,
+  "timestamp_nanosec": "1725148800584775883"
+ },
+ {
+  "asked": 126722987,
+  "height": 126722987,
+  "timestamp_nanosec": "1724815408018862121"
+ },
+ {
+  "asked": 127005138,
+  "height": 127005138,
+  "timestamp_nanosec": "1725148799626577647"
+ },
+ {
+  "asked": 130637910,
+  "height": 130637910,
+  "timestamp_nanosec": "1729261745332287853"
+ },
+ {
+  "asked": 129294530,
+  "height": 129294530,
+  "timestamp_nanosec": "1727764116199854321"
+ },
+ {
+  "asked": 128149834,
+  "height": 128149834,
+  "timestamp_nanosec": "1726447947610623722"
+ },
+ {
+  "asked": 129274251,
+  "height": 129274251,
+  "timestamp_nanosec": "1727740968302664492"
+ },
+ {
+  "asked": 129274104,
+  "height": 129274104,
+  "timestamp_nanosec": "1727740790235157213"
+ },
+ {
+  "asked": 129274177,
+  "height": 129274177,
+  "timestamp_nanosec": "1727740875462805173"
+ },
+ {
+  "asked": 129274112,
+  "height": 129274112,
+  "timestamp_nanosec": "1727740799076384647"
+ },
+ {
+  "asked": 129274113,
+  "height": 129274113,
+  "timestamp_nanosec": "1727740800222165142"
+ },
+ {
+  "asked": 133082781,
+  "height": 133082781,
+  "timestamp_nanosec": "1732052117828175976"
+ },
+ {
+  "asked": 131640242,
+  "height": 131640242,
+  "timestamp_nanosec": "1730390542679151679"
+ },
+ {
+  "asked": 132361511,
+  "height": 132361511,
+  "timestamp_nanosec": "1731224130110892255"
+ },
+ {
+  "asked": 131665038,
+  "height": 131665038,
+  "timestamp_nanosec": "1730418064484247946"
+ },
+ {
+  "asked": 131666019,
+  "height": 131666019,
+  "timestamp_nanosec": "1730419146252828920"
+ },
+ {
+  "asked": 132013765,
+  "height": 132013765,
+  "timestamp_nanosec": "1730807923334412341"
+ },
+ {
+  "asked": 131666067,
+  "height": 131666067,
+  "timestamp_nanosec": "1730419197551086420"
+ },
+ {
+  "asked": 131666069,
+  "height": 131666069,
+  "timestamp_nanosec": "1730419199917208097"
+ },
+ {
+  "asked": 131839917,
+  "height": 131839917,
+  "timestamp_nanosec": "1730613683769708303"
+ },
+ {
+  "asked": 131666070,
+  "height": 131666070,
+  "timestamp_nanosec": "1730419201067599205"
+ },
+ {
+  "asked": 135409277,
+  "height": 135409277,
+  "timestamp_nanosec": "1734696272262032766"
+ },
+ {
+  "asked": 133934535,
+  "height": 133934535,
+  "timestamp_nanosec": "1733007528399937144"
+ },
+ {
+  "asked": 134671906,
+  "height": 134671906,
+  "timestamp_nanosec": "1733845196650996450"
+ },
+ {
+  "asked": 133937766,
+  "height": 133937766,
+  "timestamp_nanosec": "1733011094067099014"
+ },
+ {
+  "asked": 133937859,
+  "height": 133937859,
+  "timestamp_nanosec": "1733011198500378767"
+ },
+ {
+  "asked": 134304882,
+  "height": 134304882,
+  "timestamp_nanosec": "1733426907753974269"
+ },
+ {
+  "asked": 133937860,
+  "height": 133937860,
+  "timestamp_nanosec": "1733011199765798956"
+ },
+ {
+  "asked": 133937861,
+  "height": 133937861,
+  "timestamp_nanosec": "1733011200999096724"
+ },
+ {
+  "asked": 137870046,
+  "height": 137870046,
+  "timestamp_nanosec": "1737458371610161956"
+ },
+ {
+  "asked": 136306099,
+  "height": 136306099,
+  "timestamp_nanosec": "1735701206195172721"
+ },
+ {
+  "asked": 135121979,
+  "height": 135121979,
+  "timestamp_nanosec": "1734364134874768674"
+ },
+ {
+  "asked": 136295820,
+  "height": 136295820,
+  "timestamp_nanosec": "1735689862656690450"
+ },
+ {
+  "asked": 136295587,
+  "height": 136295587,
+  "timestamp_nanosec": "1735689602621660803"
+ },
+ {
+  "asked": 135708783,
+  "height": 135708783,
+  "timestamp_nanosec": "1735033552795626485"
+ },
+ {
+  "asked": 136295584,
+  "height": 136295584,
+  "timestamp_nanosec": "1735689599119054687"
+ },
+ {
+  "asked": 136295585,
+  "height": 136295585,
+  "timestamp_nanosec": "1735689600136428477"
+ },
+ {
+  "asked": 140299607,
+  "height": 140299607,
+  "timestamp_nanosec": "1740189911513710963"
+ },
+ {
+  "asked": 138678613,
+  "height": 138678613,
+  "timestamp_nanosec": "1738374681249936168"
+ },
+ {
+  "asked": 137487098,
+  "height": 137487098,
+  "timestamp_nanosec": "1737025794410736839"
+ },
+ {
+  "asked": 138672711,
+  "height": 138672711,
+  "timestamp_nanosec": "1738367928928619004"
+ },
+ {
+  "asked": 138672773,
+  "height": 138672773,
+  "timestamp_nanosec": "1738367998859013682"
+ },
+ {
+  "asked": 138675693,
+  "height": 138675693,
+  "timestamp_nanosec": "1738371338104357167"
+ },
+ {
+  "asked": 138672774,
+  "height": 138672774,
+  "timestamp_nanosec": "1738367999891495952"
+ },
+ {
+  "asked": 138672775,
+  "height": 138672775,
+  "timestamp_nanosec": "1738368000835297421"
+ },
+ {
+  "asked": 142359557,
+  "height": 142359557,
+  "timestamp_nanosec": "1742556637602277151"
+ },
+ {
+  "asked": 140802121,
+  "height": 140802121,
+  "timestamp_nanosec": "1740760611215213692"
+ },
+ {
+  "asked": 141580839,
+  "height": 141580839,
+  "timestamp_nanosec": "1741673010671944056"
+ },
+ {
+  "asked": 140824814,
+  "height": 140824814,
+  "timestamp_nanosec": "1740786310941659160"
+ },
+ {
+  "asked": 140825572,
+  "height": 140825572,
+  "timestamp_nanosec": "1740787126847387042"
+ },
+ {
+  "asked": 141203205,
+  "height": 141203205,
+  "timestamp_nanosec": "1741226453900191956"
+ },
+ {
+  "asked": 140825634,
+  "height": 140825634,
+  "timestamp_nanosec": "1740787194497761994"
+ },
+ {
+  "asked": 140825638,
+  "height": 140825638,
+  "timestamp_nanosec": "1740787199201013195"
+ },
+ {
+  "asked": 141014421,
+  "height": 141014421,
+  "timestamp_nanosec": "1740999660487726640"
+ },
+ {
+  "asked": 140825639,
+  "height": 140825639,
+  "timestamp_nanosec": "1740787200210996221"
+ },
+ {
+  "asked": 144984076,
+  "height": 144984076,
+  "timestamp_nanosec": "1745519015277318910"
+ },
+ {
+  "asked": 143179483,
+  "height": 143179483,
+  "timestamp_nanosec": "1743476015423712875"
+ },
+ {
+  "asked": 142002560,
+  "height": 142002560,
+  "timestamp_nanosec": "1742149849441101376"
+ },
+ {
+  "asked": 143170239,
+  "height": 143170239,
+  "timestamp_nanosec": "1743464562322699811"
+ },
+ {
+  "asked": 143171076,
+  "height": 143171076,
+  "timestamp_nanosec": "1743465505985181977"
+ },
+ {
+  "asked": 143175279,
+  "height": 143175279,
+  "timestamp_nanosec": "1743470777818065348"
+ },
+ {
+  "asked": 143171150,
+  "height": 143171150,
+  "timestamp_nanosec": "1743465596318971104"
+ },
+ {
+  "asked": 143171152,
+  "height": 143171152,
+  "timestamp_nanosec": "1743465598112725694"
+ },
+ {
+  "asked": 143173215,
+  "height": 143173215,
+  "timestamp_nanosec": "1743468183915792795"
+ },
+ {
+  "asked": 143171153,
+  "height": 143171153,
+  "timestamp_nanosec": "1743465599328466712"
+ },
+ {
+  "asked": 143171154,
+  "height": 143171154,
+  "timestamp_nanosec": "1743465600637840581"
+ },
+ {
+  "asked": 147287718,
+  "height": 147287718,
+  "timestamp_nanosec": "1747584041779838387"
+ },
+ {
+  "asked": 145761972,
+  "height": 145761972,
+  "timestamp_nanosec": "1746390613299309816"
+ },
+ {
+  "asked": 144466562,
+  "height": 144466562,
+  "timestamp_nanosec": "1744942795654889700"
+ },
+ {
+  "asked": 145464014,
+  "height": 145464014,
+  "timestamp_nanosec": "1746055993009834021"
+ },
+ {
+  "asked": 145465444,
+  "height": 145465444,
+  "timestamp_nanosec": "1746057573960950821"
+ },
+ {
+  "asked": 145613708,
+  "height": 145613708,
+  "timestamp_nanosec": "1746227892076239396"
+ },
+ {
+  "asked": 145465466,
+  "height": 145465466,
+  "timestamp_nanosec": "1746057597984667050"
+ },
+ {
+  "asked": 145465467,
+  "height": 145465467,
+  "timestamp_nanosec": "1746057599177141583"
+ },
+ {
+  "asked": 145539587,
+  "height": 145539587,
+  "timestamp_nanosec": "1746144520060875505"
+ },
+ {
+  "asked": 145465468,
+  "height": 145465468,
+  "timestamp_nanosec": "1746057600361469690"
+ },
+ {
+  "asked": 149820226,
+  "height": 149820226,
+  "timestamp_nanosec": "1749139255431370348"
+ },
+ {
+  "asked": 149250376,
+  "height": 149250376,
+  "timestamp_nanosec": "1748789111830369772"
+ },
+ {
+  "asked": 147357921,
+  "height": 147357921,
+  "timestamp_nanosec": "1747627019269156817"
+ },
+ {
+  "asked": 149163883,
+  "height": 149163883,
+  "timestamp_nanosec": "1748736139145253902"
+ },
+ {
+  "asked": 149163656,
+  "height": 149163656,
+  "timestamp_nanosec": "1748735999525298374"
+ },
+ {
+  "asked": 149163769,
+  "height": 149163769,
+  "timestamp_nanosec": "1748736068237649437"
+ },
+ {
+  "asked": 149163657,
+  "height": 149163657,
+  "timestamp_nanosec": "1748736000139998743"
+ },
+ {
+  "asked": 153415213,
+  "height": 153415213,
+  "timestamp_nanosec": "1751363392786592899"
+ },
+ {
+  "asked": 153357941,
+  "height": 153357941,
+  "timestamp_nanosec": "1751328125064196258"
+ },
+ {
+  "asked": 151260798,
+  "height": 151260798,
+  "timestamp_nanosec": "1750020072186587801"
+ },
+ {
+  "asked": 153357740,
+  "height": 153357740,
+  "timestamp_nanosec": "1751327999361021637"
+ },
+ {
+  "asked": 153357741,
+  "height": 153357741,
+  "timestamp_nanosec": "1751327999938490865"
+ },
+ {
+  "asked": 153357841,
+  "height": 153357841,
+  "timestamp_nanosec": "1751328061674106776"
+ },
+ {
+  "asked": 153357742,
+  "height": 153357742,
+  "timestamp_nanosec": "1751328001232428556"
+ },
+ {
+  "asked": 157754590,
+  "height": 157754590,
+  "timestamp_nanosec": "1754050104334934927"
+ },
+ {
+  "asked": 157683997,
+  "height": 157683997,
+  "timestamp_nanosec": "1754007159378987660"
+ },
+ {
+  "asked": 155520869,
+  "height": 155520869,
+  "timestamp_nanosec": "1752686907778313125"
+ },
+ {
+  "asked": 157682752,
+  "height": 157682752,
+  "timestamp_nanosec": "1754006406732346014"
+ },
+ {
+  "asked": 157682740,
+  "height": 157682740,
+  "timestamp_nanosec": "1754006399434631417"
+ },
+ {
+  "asked": 157682746,
+  "height": 157682746,
+  "timestamp_nanosec": "1754006403096231197"
+ },
+ {
+  "asked": 157682741,
+  "height": 157682741,
+  "timestamp_nanosec": "1754006399960876202"
+ },
+ {
+  "asked": 157682742,
+  "height": 157682742,
+  "timestamp_nanosec": "1754006400580436025"
+ },
+ {
+  "asked": 162084355,
+  "height": 162084355,
+  "timestamp_nanosec": "1756693490911384502"
+ },
+ {
+  "asked": 162070118,
+  "height": 162070118,
+  "timestamp_nanosec": "1756684957783007923"
+ },
+ {
+  "asked": 159876429,
+  "height": 159876429,
+  "timestamp_nanosec": "1755345622067372809"
+ },
+ {
+  "asked": 162069859,
+  "height": 162069859,
+  "timestamp_nanosec": "1756684804843154301"
+ },
+ {
+  "asked": 162069851,
+  "height": 162069851,
+  "timestamp_nanosec": "1756684800277328218"
+ },
+ {
+  "asked": 160973140,
+  "height": 160973140,
+  "timestamp_nanosec": "1756017503102194333"
+ },
+ {
+  "asked": 162069850,
+  "height": 162069850,
+  "timestamp_nanosec": "1756684799572052526"
+ },
+ {
+  "asked": 166330474,
+  "height": 166330474,
+  "timestamp_nanosec": "1759272654071842356"
+ },
+ {
+  "asked": 166337288,
+  "height": 166337288,
+  "timestamp_nanosec": "1759276789009862382"
+ },
+ {
+  "asked": 195195456,
+  "height": 195195456,
+  "timestamp_nanosec": "1776913339925886067"
+ },
+ {
+  "asked": 166337305,
+  "height": 166337305,
+  "timestamp_nanosec": "1759276799265969088"
+ },
+ {
+  "asked": 166337306,
+  "height": 166337306,
+  "timestamp_nanosec": "1759276800013165590"
+ },
+ {
+  "asked": 170739429,
+  "height": 170739429,
+  "timestamp_nanosec": "1761979458889719895"
+ },
+ {
+  "asked": 170699915,
+  "height": 170699915,
+  "timestamp_nanosec": "1761955620120629103"
+ },
+ {
+  "asked": 168518610,
+  "height": 168518610,
+  "timestamp_nanosec": "1760609318182868854"
+ },
+ {
+  "asked": 170699234,
+  "height": 170699234,
+  "timestamp_nanosec": "1761955221483188159"
+ },
+ {
+  "asked": 170699199,
+  "height": 170699199,
+  "timestamp_nanosec": "1761955201126920081"
+ },
+ {
+  "asked": 169608904,
+  "height": 169608904,
+  "timestamp_nanosec": "1761281618244934336"
+ },
+ {
+  "asked": 170699197,
+  "height": 170699197,
+  "timestamp_nanosec": "1761955200025389295"
+ },
+ {
+  "asked": 170699196,
+  "height": 170699196,
+  "timestamp_nanosec": "1761955199419930574"
+ },
+ {
+  "asked": 174962531,
+  "height": 174962531,
+  "timestamp_nanosec": "1764574066126732932"
+ },
+ {
+  "asked": 174918794,
+  "height": 174918794,
+  "timestamp_nanosec": "1764547607324967455"
+ },
+ {
+  "asked": 172808995,
+  "height": 172808995,
+  "timestamp_nanosec": "1763253598695953424"
+ },
+ {
+  "asked": 174918129,
+  "height": 174918129,
+  "timestamp_nanosec": "1764547210963032437"
+ },
+ {
+  "asked": 174918111,
+  "height": 174918111,
+  "timestamp_nanosec": "1764547200282330168"
+ },
+ {
+  "asked": 173863553,
+  "height": 173863553,
+  "timestamp_nanosec": "1763901561052337108"
+ },
+ {
+  "asked": 174918110,
+  "height": 174918110,
+  "timestamp_nanosec": "1764547199664694517"
+ },
+ {
+  "asked": 179327542,
+  "height": 179327542,
+  "timestamp_nanosec": "1767304508396788263"
+ },
+ {
+  "asked": 179201353,
+  "height": 179201353,
+  "timestamp_nanosec": "1767226928323350707"
+ },
+ {
+  "asked": 177059731,
+  "height": 177059731,
+  "timestamp_nanosec": "1765878723943378287"
+ },
+ {
+  "asked": 179199242,
+  "height": 179199242,
+  "timestamp_nanosec": "1767225662644469165"
+ },
+ {
+  "asked": 179199142,
+  "height": 179199142,
+  "timestamp_nanosec": "1767225603815551426"
+ },
+ {
+  "asked": 178129436,
+  "height": 178129436,
+  "timestamp_nanosec": "1766547993824345362"
+ },
+ {
+  "asked": 179199135,
+  "height": 179199135,
+  "timestamp_nanosec": "1767225599726239885"
+ },
+ {
+  "asked": 179199136,
+  "height": 179199136,
+  "timestamp_nanosec": "1767225600442673525"
+ },
+ {
+  "asked": 183621226,
+  "height": 183621226,
+  "timestamp_nanosec": "1769926635789281880"
+ },
+ {
+  "asked": 183584167,
+  "height": 183584167,
+  "timestamp_nanosec": "1769903951785708850"
+ },
+ {
+  "asked": 183602696,
+  "height": 183602696,
+  "timestamp_nanosec": "1769915320885277463"
+ },
+ {
+  "asked": 183584245,
+  "height": 183584245,
+  "timestamp_nanosec": "1769903998119173130"
+ },
+ {
+  "asked": 183584248,
+  "height": 183584248,
+  "timestamp_nanosec": "1769903999751500630"
+ },
+ {
+  "asked": 183593472,
+  "height": 183593472,
+  "timestamp_nanosec": "1769909657405708774"
+ },
+ {
+  "asked": 183584249,
+  "height": 183584249,
+  "timestamp_nanosec": "1769904000365275634"
+ },
+ {
+  "asked": 187582048,
+  "height": 187582048,
+  "timestamp_nanosec": "1772328194278040758"
+ },
+ {
+  "asked": 187573811,
+  "height": 187573811,
+  "timestamp_nanosec": "1772323145436225252"
+ },
+ {
+  "asked": 187577929,
+  "height": 187577929,
+  "timestamp_nanosec": "1772325659387740241"
+ },
+ {
+  "asked": 187573900,
+  "height": 187573900,
+  "timestamp_nanosec": "1772323199484636443"
+ },
+ {
+  "asked": 187573901,
+  "height": 187573901,
+  "timestamp_nanosec": "1772323200044231819"
+ },
+ {
+  "asked": 192001024,
+  "height": 192001024,
+  "timestamp_nanosec": "1774993849920810189"
+ },
+ {
+  "asked": 192013828,
+  "height": 192013828,
+  "timestamp_nanosec": "1775001500545630133"
+ },
+ {
+  "asked": 208033726,
+  "height": 208033726,
+  "timestamp_nanosec": "1784712648050167620"
+ },
+ {
+  "asked": 192013992,
+  "height": 192013992,
+  "timestamp_nanosec": "1775001598313244352"
+ },
+ {
+  "asked": 192013994,
+  "height": 192013994,
+  "timestamp_nanosec": "1775001599792227791"
+ },
+ {
+  "asked": 200023860,
+  "height": 200023860,
+  "timestamp_nanosec": "1779818887482705003"
+ },
+ {
+  "asked": 192013995,
+  "height": 192013995,
+  "timestamp_nanosec": "1775001600329493628"
+ },
+ {
+  "asked": 196296574,
+  "height": 196296574,
+  "timestamp_nanosec": "1777569759237021616"
+ },
+ {
+  "asked": 196335908,
+  "height": 196335908,
+  "timestamp_nanosec": "1777592985346974511"
+ },
+ {
+  "asked": 210194766,
+  "height": 210194766,
+  "timestamp_nanosec": "1786034604871820192"
+ },
+ {
+  "asked": 196336917,
+  "height": 196336917,
+  "timestamp_nanosec": "1777593578160699806"
+ },
+ {
+  "asked": 196336952,
+  "height": 196336952,
+  "timestamp_nanosec": "1777593599106206645"
+ },
+ {
+  "asked": 203265859,
+  "height": 203265859,
+  "timestamp_nanosec": "1781803832854594671"
+ },
+ {
+  "asked": 196336953,
+  "height": 196336953,
+  "timestamp_nanosec": "1777593599747553947"
+ },
+ {
+  "asked": 196336954,
+  "height": 196336954,
+  "timestamp_nanosec": "1777593600251109507"
+ },
+ {
+  "asked": 200755848,
+  "height": 200755848,
+  "timestamp_nanosec": "1780261095399062274"
+ },
+ {
+  "asked": 200773824,
+  "height": 200773824,
+  "timestamp_nanosec": "1780271946043926909"
+ },
+ {
+  "asked": 212413724,
+  "height": 212413724,
+  "timestamp_nanosec": "1787393039701171722"
+ },
+ {
+  "asked": 200773912,
+  "height": 200773912,
+  "timestamp_nanosec": "1780271999284862905"
+ },
+ {
+  "asked": 200773913,
+  "height": 200773913,
+  "timestamp_nanosec": "1780271999769134637"
+ },
+ {
+  "asked": 206593818,
+  "height": 206593818,
+  "timestamp_nanosec": "1783824147573081273"
+ },
+ {
+  "asked": 200773914,
+  "height": 200773914,
+  "timestamp_nanosec": "1780272000033646618"
+ },
+ {
+  "asked": 205046947,
+  "height": 205046947,
+  "timestamp_nanosec": "1782878465947954810"
+ },
+ {
+  "asked": 205023231,
+  "height": 205023231,
+  "timestamp_nanosec": "1782864363211617949"
+ },
+ {
+  "asked": 202898572,
+  "height": 202898572,
+  "timestamp_nanosec": "1781581666484664754"
+ },
+ {
+  "asked": 205022629,
+  "height": 205022629,
+  "timestamp_nanosec": "1782864006281477146"
+ },
+ {
+  "asked": 205022618,
+  "height": 205022618,
+  "timestamp_nanosec": "1782863999950762130"
+ },
+ {
+  "asked": 205022623,
+  "height": 205022623,
+  "timestamp_nanosec": "1782864002801863778"
+ },
+ {
+  "asked": 205022619,
+  "height": 205022619,
+  "timestamp_nanosec": "1782864000553414356"
+ },
+ {
+  "asked": 209443738,
+  "height": 209443738,
+  "timestamp_nanosec": "1785573261662999889"
+ },
+ {
+  "asked": 209393376,
+  "height": 209393376,
+  "timestamp_nanosec": "1785542411832296492"
+ },
+ {
+  "asked": 207207997,
+  "height": 207207997,
+  "timestamp_nanosec": "1784203479217202490"
+ },
+ {
+  "asked": 209393356,
+  "height": 209393356,
+  "timestamp_nanosec": "1785542400052527483"
+ },
+ {
+  "asked": 209393355,
+  "height": 209393355,
+  "timestamp_nanosec": "1785542399424462455"
+ },
+ {
+  "asked": 213829722,
+  "height": 213829722,
+  "timestamp_nanosec": "1788263164521474369"
+ },
+ {
+  "asked": 213760644,
+  "height": 213760644,
+  "timestamp_nanosec": "1788220434617709595"
+ },
+ {
+  "asked": 213795183,
+  "height": 213795183,
+  "timestamp_nanosec": "1788241674307697587"
+ },
+ {
+  "asked": 213761238,
+  "height": 213761238,
+  "timestamp_nanosec": "1788220798060035103"
+ },
+ {
+  "asked": 213761241,
+  "height": 213761241,
+  "timestamp_nanosec": "1788220799923365214"
+ },
+ {
+  "asked": 213778212,
+  "height": 213778212,
+  "timestamp_nanosec": "1788231234405040136"
+ },
+ {
+  "asked": 213761242,
+  "height": 213761242,
+  "timestamp_nanosec": "1788220800624143615"
+ },
+ {
+  "asked": 218083256,
+  "height": 218083256,
+  "timestamp_nanosec": "1790873334269164198"
+ },
+ {
+  "asked": 217984622,
+  "height": 217984622,
+  "timestamp_nanosec": "1790812590706274090"
+ },
+ {
+  "asked": 218033939,
+  "height": 218033939,
+  "timestamp_nanosec": "1790841701826079081"
+ },
+ {
+  "asked": 217984976,
+  "height": 217984976,
+  "timestamp_nanosec": "1790812801361764428"
+ },
+ {
+  "asked": 217984973,
+  "height": 217984973,
+  "timestamp_nanosec": "1790812799562730410"
+ },
+ {
+  "asked": 217984974,
+  "height": 217984974,
+  "timestamp_nanosec": "1790812800172319287"
+ },
+ {
+  "asked": 222524576,
+  "height": 222524576,
+  "timestamp_nanosec": "1793510372518279407"
+ },
+ {
+  "asked": 222492311,
+  "height": 222492311,
+  "timestamp_nanosec": "1793491754142041627"
+ },
+ {
+  "asked": 220238642,
+  "height": 220238642,
+  "timestamp_nanosec": "1792163183332859064"
+ },
+ {
+  "asked": 222491371,
+  "height": 222491371,
+  "timestamp_nanosec": "1793491208535831923"
+ },
+ {
+  "asked": 222491356,
+  "height": 222491356,
+  "timestamp_nanosec": "1793491200175647275"
+ },
+ {
+  "asked": 221364999,
+  "height": 221364999,
+  "timestamp_nanosec": "1792831395050572320"
+ },
+ {
+  "asked": 222491355,
+  "height": 222491355,
+  "timestamp_nanosec": "1793491199613199537"
+ }
+]

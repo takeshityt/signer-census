@@ -1,0 +1,35 @@
+{
+ "request": {
+  "account_id": "v1.signer",
+  "is_real_receiver": true,
+  "is_function_call": true,
+  "limit": 1,
+  "from_tx_block_height": 222491356,
+  "to_tx_block_height": 224053625
+ },
+ "response": {
+  "account_txs": [
+   {
+    "account_id": "v1.signer",
+    "transaction_hash": "X3gDsGUsSD9bV3c94RpBxNqi5Fy8E4fYPGcqheQ79U5",
+    "tx_block_height": 224053601,
+    "tx_block_timestamp": "1794393337066626480",
+    "tx_index": 2,
+    "is_signer": false,
+    "is_delegated_signer": false,
+    "is_real_signer": false,
+    "is_any_signer": false,
+    "is_predecessor": false,
+    "is_explicit_refund_to": false,
+    "is_receiver": true,
+    "is_real_receiver": true,
+    "is_function_call": true,
+    "is_action_arg": false,
+    "is_event_log": false,
+    "is_success": true
+   }
+  ],
+  "resume_token": "962302888846032898",
+  "txs_count": 322449
+ }
+}
