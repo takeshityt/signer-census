@@ -40,8 +40,8 @@ body { margin: 0; background: var(--paper); color: var(--ink); font: 1rem/1.55 v
 a { color: inherit; text-decoration-thickness: 1px; text-underline-offset: 0.18em; }
 a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
-.skip { position: absolute; left: -999px; top: 0; background: var(--ink); color: var(--paper); padding: 0.6rem 1rem; z-index: 20; }
-.skip:focus { left: 0; }
+.skip { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--paper); padding: 0.6rem 1rem; z-index: 20; transform: translateY(-120%); }
+.skip:focus { transform: none; }
 .wrap { max-width: 68rem; margin-inline: auto; padding-inline: max(16px, 4vw); }
 code, pre { font-variant-ligatures: none; }
 code { font-family: var(--mono); font-size: 0.88em; background: color-mix(in srgb, var(--ink) 7%, transparent); padding: 0.08em 0.3em; border-radius: 3px; overflow-wrap: anywhere; }
@@ -51,7 +51,7 @@ code { font-family: var(--mono); font-size: 0.88em; background: color-mix(in srg
 .topbar { display: flex; align-items: center; gap: 1rem; min-height: 3.25rem; flex-wrap: wrap; padding-block: 0.35rem; }
 .brand { font: 700 1.05rem var(--display); letter-spacing: -0.01em; text-decoration: none; margin-right: auto; }
 .top nav { display: flex; gap: 0.15rem 0.9rem; flex-wrap: wrap; font-size: 0.9rem; }
-.top nav a { text-decoration: none; color: var(--muted); padding: 0.25rem 0; }
+.top nav a { text-decoration: none; color: var(--muted); padding: 0.45rem 0.1rem; }
 .top nav a:hover { color: var(--ink); text-decoration: underline; }
 #theme { font: inherit; font-size: 0.85rem; color: var(--ink); background: transparent; border: 1px solid var(--rule-strong); border-radius: 999px; padding: 0.3rem 0.8rem; cursor: pointer; }
 #theme:hover { background: color-mix(in srgb, var(--ink) 8%, transparent); }
@@ -118,7 +118,7 @@ table.rq td.num, table.rq th.num { text-align: right; font-variant-numeric: tabu
 .ci { display: block; color: var(--muted); font-size: 0.8rem; white-space: nowrap; }
 .conf { white-space: nowrap; font-size: 0.85rem; }
 .dots { letter-spacing: 0.1em; font-family: var(--mono); }
-table.rq details summary, .integ summary { cursor: pointer; font-size: 0.85rem; color: var(--muted); white-space: nowrap; width: max-content; }
+table.rq details summary, .integ summary, .tableview summary { cursor: pointer; font-size: 0.85rem; color: var(--muted); white-space: nowrap; width: max-content; padding-block: 0.3rem; min-height: 1.75rem; }
 .integ details { margin-top: 0.3rem; }
 table.rq details ul { margin: 0.4rem 0 0; padding-left: 1.1rem; font-size: 0.82rem; max-width: 46ch; }
 table.rq details li { margin-bottom: 0.4rem; }
@@ -166,7 +166,8 @@ pre { margin: 0; padding: 0.8rem 1rem; background: var(--ink); color: var(--pape
 
 /* phones: the requesters table becomes a list */
 @media (max-width: 760px) {
-  table.rq thead { position: absolute; left: -9999px; }
+  .top { position: static; } /* a three-row sticky bar would cover a fifth of a phone screen */
+  table.rq thead { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
   table.rq, table.rq tbody, table.rq tr, table.rq td { display: block; width: 100%; }
   table.rq tr.main { padding: 0.9rem 0 0.4rem; border-bottom: 0; }
   table.rq td { border: 0; padding: 0.15rem 0; text-align: left !important; }

@@ -1,0 +1,457 @@
+- generic [active] [ref=f30e1]:
+  - link "Skip to content" [ref=f30e2] [cursor=pointer]:
+    - /url: "#main"
+  - banner [ref=f30e3]:
+    - generic [ref=f30e4]:
+      - link "Signer Census" [ref=f30e5] [cursor=pointer]:
+        - /url: "#top"
+      - navigation "Sections" [ref=f30e6]:
+        - link "Usage" [ref=f30e7] [cursor=pointer]:
+          - /url: "#usage"
+        - link "Who" [ref=f30e8] [cursor=pointer]:
+          - /url: "#who"
+        - link "Chains" [ref=f30e9] [cursor=pointer]:
+          - /url: "#chains"
+        - link "Sweat sunset" [ref=f30e10] [cursor=pointer]:
+          - /url: "#sunset"
+        - link "Bridges" [ref=f30e11] [cursor=pointer]:
+          - /url: "#bridges"
+        - link "Thesis" [ref=f30e12] [cursor=pointer]:
+          - /url: "#thesis"
+        - link "Re-run" [ref=f30e13] [cursor=pointer]:
+          - /url: "#rerun"
+      - button "Color theme" [ref=f30e14] [cursor=pointer]: "Theme: auto"
+  - main [ref=f30e15]:
+    - 'region "NEAR Chain Signatures: who actually uses it" [ref=f30e16]':
+      - 'heading "NEAR Chain Signatures: who actually uses it" [level=1] [ref=f30e17]'
+      - paragraph [ref=f30e18]:
+        - text: ≈
+        - generic [ref=f30e19]: about
+        - text: 6.4M
+      - paragraph [ref=f30e20]: "signature requests on NEAR's MPC signer (v1.signer), Aug 2024 to 11 Nov 2026. An estimate: the 95% sampling interval is 6.42M–6.45M."
+      - 'figure "Estimated requests per month, Aug 2024 to Oct 2026. The ring marks the peak: May 2026, ≈897k. The dotted tail is Nov 2026, only counted to 11 Nov 2026." [ref=f30e21]':
+        - 'img "Estimated requests per month, Aug 2024 to Oct 2026. The ring marks the peak: May 2026, ≈897k. The dotted tail is Nov 2026, only counted to 11 Nov 2026." [ref=f30e22]'
+      - list [ref=f30e27]:
+        - listitem [ref=f30e28]:
+          - strong [ref=f30e29]: 99.9%
+          - text: of requests end with a successful signature
+        - listitem [ref=f30e30]:
+          - strong [ref=f30e31]: ≈5.2M
+          - text: if the suspected benchmark account is left out
+        - listitem [ref=f30e32]:
+          - strong [ref=f30e33]: ✓ 50/50 verified
+          - text: "sampled transactions re-checked against an archival RPC node and NearBlocks (11 Nov 2026). Re-run:"
+          - code [ref=f30e34]: npm run verify -- --sample 50
+    - region "Requests over time" [ref=f30e35]:
+      - heading "Requests over time" [level=2] [ref=f30e36]
+      - paragraph [ref=f30e37]: "Estimated signature requests per month, stacked by who sends them. Largest month: May 2026, ≈897k. Hover a bar for the 95% sampling interval, or open the table. Nov 2026 is partial (data to 11 Nov 2026) and drawn lighter."
+      - generic [ref=f30e39] [cursor=pointer]:
+        - checkbox "Exclude the suspected benchmark" [ref=f30e40]
+        - generic [ref=f30e41]: Exclude the suspected benchmark
+      - list "Legend" [ref=f30e42]:
+        - listitem [ref=f30e43]: FastAuth logins
+        - listitem [ref=f30e45]: Other applications
+        - listitem [ref=f30e47]: Omni bridge
+        - listitem [ref=f30e49]: Bitcoin connector
+        - listitem [ref=f30e51]: Zcash connector
+        - listitem [ref=f30e53]: Not identified
+        - listitem [ref=f30e55]: Suspected benchmark (tx-bench.near)
+      - img "Monthly signature requests stacked by who sends them" [ref=f30e58]
+      - group [ref=f30e59]:
+        - generic "Show as table" [ref=f30e60] [cursor=pointer]
+    - region "Who sends the requests" [ref=f30e61]:
+      - heading "Who sends the requests" [level=2] [ref=f30e62]
+      - paragraph [ref=f30e63]: The 15 largest requesters hold ≈99% of all requests. Share is of all requests since Aug 2024, with its 95% interval; the requester is the account that called sign, not the transaction signer. A label needs evidence, and every row links its sources.
+      - table [ref=f30e65]:
+        - rowgroup [ref=f30e66]:
+          - row [ref=f30e67]:
+            - columnheader "Requester" [ref=f30e68]
+            - columnheader "Share of requests" [ref=f30e69]
+            - columnheader "Requests" [ref=f30e70]
+            - columnheader "Label confidence" [ref=f30e71]
+            - columnheader "Evidence" [ref=f30e72]
+        - rowgroup [ref=f30e73]:
+          - row [ref=f30e74]:
+            - cell "fast-auth.near FastAuth (NEAR login layer) · Peersyst (operator of NEAR Auth / FastAuth per auth.near.org)" [ref=f30e75]:
+              - text: fast-auth.near
+              - generic [ref=f30e76]: FastAuth (NEAR login layer) · Peersyst (operator of NEAR Auth / FastAuth per auth.near.org)
+            - cell "Share ≈44%41.4%–45.4%" [ref=f30e77]
+            - cell "Requests ≈2.8M2.7M–2.9M" [ref=f30e78]
+            - cell "Confidence high" [ref=f30e79]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e80]:
+              - text: Evidence
+              - group [ref=f30e81]:
+                - generic "6 sources" [ref=f30e82] [cursor=pointer]
+          - row [ref=f30e83]:
+            - cell [ref=f30e84]:
+              - generic [ref=f30e85]:
+                - strong [ref=f30e86]: "Dominant integrator: Sweat Wallet (Sweat Foundation)"
+                - text: "(confidence medium). HIGH confidence that the dominant FastAuth issuer is the Sweat Foundation's login (swe.at domain + on-chain guard named \"sweat\"); MEDIUM that the traffic is specifically Sweat Wallet: the release says Sweat Wallet supports EVM chains \"through Chain Signatures\" but no source states that Sweat Wallet logins go through fast-auth.near."
+                - group [ref=f30e87]:
+                  - generic "Read the full note" [ref=f30e88] [cursor=pointer]
+                - group [ref=f30e89]:
+                  - generic "6 sources for this" [ref=f30e90] [cursor=pointer]
+          - row [ref=f30e91]:
+            - cell "tx-bench.near Unknown, suspected benchmark · not established" [ref=f30e92]:
+              - text: tx-bench.near
+              - generic [ref=f30e93]: Unknown, suspected benchmark · not established
+            - cell "Share ≈19%18.3%–19.9%" [ref=f30e94]
+            - cell "Requests ≈1.2M1.2M–1.3M" [ref=f30e95]
+            - cell "Confidence low" [ref=f30e96]: Confidence ●○○ low
+            - cell "Evidence" [ref=f30e97]:
+              - text: Evidence
+              - group [ref=f30e98]:
+                - generic "4 sources" [ref=f30e99] [cursor=pointer]
+          - row [ref=f30e100]:
+            - cell [ref=f30e101]:
+              - generic [ref=f30e102]:
+                - text: UNKNOWN, SUSPECTED BENCHMARK. Not labeled benchmark-test because no source names the account.
+                - group [ref=f30e103]:
+                  - generic "Read the full note" [ref=f30e104] [cursor=pointer]
+          - row [ref=f30e105]:
+            - cell "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora Third-party application · Relay Protocol (RelayAllocator on Aurora)" [ref=f30e106]:
+              - text: 7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora
+              - generic [ref=f30e107]: Third-party application · Relay Protocol (RelayAllocator on Aurora)
+            - cell "Share ≈11%10.4%–12.4%" [ref=f30e108]
+            - cell "Requests ≈734k672k–799k" [ref=f30e109]
+            - cell "Confidence high" [ref=f30e110]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e111]:
+              - text: Evidence
+              - group [ref=f30e112]:
+                - generic "3 sources" [ref=f30e113] [cursor=pointer]
+          - row [ref=f30e114]:
+            - cell "omni.bridge.near Omni bridge · Near One (Near-One/omni-bridge)" [ref=f30e115]:
+              - text: omni.bridge.near
+              - generic [ref=f30e116]: Omni bridge · Near One (Near-One/omni-bridge)
+            - cell "Share ≈10%9.5%–11.0%" [ref=f30e117]
+            - cell "Requests ≈659k612k–705k" [ref=f30e118]
+            - cell "Confidence high" [ref=f30e119]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e120]:
+              - text: Evidence
+              - group [ref=f30e121]:
+                - generic "3 sources" [ref=f30e122] [cursor=pointer]
+          - row [ref=f30e123]:
+            - cell "btc-connector.bridge.near Bitcoin bridge connector · Near One (Near-One/btc-bridge, satoshi-bridge contract, feature bitcoin)" [ref=f30e124]:
+              - text: btc-connector.bridge.near
+              - generic [ref=f30e125]: Bitcoin bridge connector · Near One (Near-One/btc-bridge, satoshi-bridge contract, feature bitcoin)
+            - cell "Share ≈6.5%5.6%–7.6%" [ref=f30e126]
+            - cell "Requests ≈421k363k–490k" [ref=f30e127]
+            - cell "Confidence high" [ref=f30e128]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e129]:
+              - text: Evidence
+              - group [ref=f30e130]:
+                - generic "3 sources" [ref=f30e131] [cursor=pointer]
+          - row [ref=f30e132]:
+            - cell "zcash-connector.bridge.near Zcash bridge connector · Near One (same Near-One/btc-bridge repo, feature zcash)" [ref=f30e133]:
+              - text: zcash-connector.bridge.near
+              - generic [ref=f30e134]: Zcash bridge connector · Near One (same Near-One/btc-bridge repo, feature zcash)
+            - cell "Share ≈2.3%1.8%–2.7%" [ref=f30e135]
+            - cell "Requests ≈146k116k–175k" [ref=f30e136]
+            - cell "Confidence high" [ref=f30e137]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e138]:
+              - text: Evidence
+              - group [ref=f30e139]:
+                - generic "2 sources" [ref=f30e140] [cursor=pointer]
+          - row [ref=f30e141]:
+            - cell "reflect-adam-mainnet-agent-contract.near Third-party application · not established (created by reflect-adam-account.near)" [ref=f30e142]:
+              - text: reflect-adam-mainnet-agent-contract.near
+              - generic [ref=f30e143]: Third-party application · not established (created by reflect-adam-account.near)
+            - cell "Share ≈1.3%0.8%–1.7%" [ref=f30e144]
+            - cell "Requests ≈82k53k–110k" [ref=f30e145]
+            - cell "Confidence medium" [ref=f30e146]: Confidence ●●○ medium
+            - cell "Evidence" [ref=f30e147]:
+              - text: Evidence
+              - group [ref=f30e148]:
+                - generic "3 sources" [ref=f30e149] [cursor=pointer]
+          - row [ref=f30e150]:
+            - cell "kernel-usdc.meteor-vaults.near Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)" [ref=f30e151]:
+              - text: kernel-usdc.meteor-vaults.near
+              - generic [ref=f30e152]: Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)
+            - cell "Share ≈0.9%0.7%–1.1%" [ref=f30e153]
+            - cell "Requests ≈56k42k–71k" [ref=f30e154]
+            - cell "Confidence high" [ref=f30e155]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e156]:
+              - text: Evidence
+              - group [ref=f30e157]:
+                - generic "3 sources" [ref=f30e158] [cursor=pointer]
+          - row [ref=f30e159]:
+            - cell "kernel-usdt.meteor-vaults.near Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)" [ref=f30e160]:
+              - text: kernel-usdt.meteor-vaults.near
+              - generic [ref=f30e161]: Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)
+            - cell "Share ≈0.8%0.6%–1.0%" [ref=f30e162]
+            - cell "Requests ≈53k40k–67k" [ref=f30e163]
+            - cell "Confidence high" [ref=f30e164]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e165]:
+              - text: Evidence
+              - group [ref=f30e166]:
+                - generic "1 source" [ref=f30e167] [cursor=pointer]
+          - row [ref=f30e168]:
+            - cell "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora Third-party application · probably Relay Protocol (earlier Allocator contract) - not stated by any document" [ref=f30e169]:
+              - text: e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora
+              - generic [ref=f30e170]: Third-party application · probably Relay Protocol (earlier Allocator contract) - not stated by any document
+            - cell "Share ≈0.6%0.5%–0.7%" [ref=f30e171]
+            - cell "Requests ≈40k35k–45k" [ref=f30e172]
+            - cell "Confidence medium" [ref=f30e173]: Confidence ●●○ medium
+            - cell "Evidence" [ref=f30e174]:
+              - text: Evidence
+              - group [ref=f30e175]:
+                - generic "2 sources" [ref=f30e176] [cursor=pointer]
+          - row [ref=f30e177]:
+            - cell "ping-account.near Unknown · not established (created by felipepessina.near)" [ref=f30e178]:
+              - text: ping-account.near
+              - generic [ref=f30e179]: Unknown · not established (created by felipepessina.near)
+            - cell "Share ≈0.6%0.5%–0.6%" [ref=f30e180]
+            - cell "Requests ≈36k33k–40k" [ref=f30e181]
+            - cell "Confidence low" [ref=f30e182]: Confidence ●○○ low
+            - cell "Evidence" [ref=f30e183]:
+              - text: Evidence
+              - group [ref=f30e184]:
+                - generic "2 sources" [ref=f30e185] [cursor=pointer]
+          - row [ref=f30e186]:
+            - cell "kernel-near.meteor-vaults.near Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)" [ref=f30e187]:
+              - text: kernel-near.meteor-vaults.near
+              - generic [ref=f30e188]: Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)
+            - cell "Share ≈0.5%0.3%–0.6%" [ref=f30e189]
+            - cell "Requests ≈31k22k–41k" [ref=f30e190]
+            - cell "Confidence high" [ref=f30e191]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e192]:
+              - text: Evidence
+              - group [ref=f30e193]:
+                - generic "1 source" [ref=f30e194] [cursor=pointer]
+          - row [ref=f30e195]:
+            - cell "kernel-zec.meteor-vaults.near Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)" [ref=f30e196]:
+              - text: kernel-zec.meteor-vaults.near
+              - generic [ref=f30e197]: Third-party application · Dew Finance (vault kernels deployed by meteor-vaults.near)
+            - cell "Share ≈0.4%0.4%–0.5%" [ref=f30e198]
+            - cell "Requests ≈28k23k–34k" [ref=f30e199]
+            - cell "Confidence high" [ref=f30e200]: Confidence ●●● high
+            - cell "Evidence" [ref=f30e201]:
+              - text: Evidence
+              - group [ref=f30e202]:
+                - generic "1 source" [ref=f30e203] [cursor=pointer]
+          - row [ref=f30e204]:
+            - 'cell "acc.ref-labs.near Third-party application · not established: no source ties ref-labs.near to Ref Finance or Satoshi Protocol" [ref=f30e205]':
+              - text: acc.ref-labs.near
+              - generic [ref=f30e206]: "Third-party application · not established: no source ties ref-labs.near to Ref Finance or Satoshi Protocol"
+            - cell "Share ≈0.3%0.2%–0.4%" [ref=f30e207]
+            - cell "Requests ≈17k11k–25k" [ref=f30e208]
+            - cell "Confidence medium" [ref=f30e209]: Confidence ●●○ medium
+            - cell "Evidence" [ref=f30e210]:
+              - text: Evidence
+              - group [ref=f30e211]:
+                - generic "2 sources" [ref=f30e212] [cursor=pointer]
+          - row [ref=f30e213]:
+            - cell "contract.stp-p0.near Not labeled" [ref=f30e214]:
+              - text: contract.stp-p0.near
+              - generic [ref=f30e215]: Not labeled
+            - cell "Share ≈0.2%0.0%–0.4%" [ref=f30e216]
+            - cell "Requests ≈14k2.7k–28k" [ref=f30e217]
+            - cell "Confidence no label" [ref=f30e218]
+            - cell "Evidence none" [ref=f30e219]
+    - region "Where the signatures go" [ref=f30e220]:
+      - heading "Where the signatures go" [level=2] [ref=f30e221]
+      - paragraph [ref=f30e222]: Share of requests by where the signature is used, per month. “NEAR itself” means keys of NEAR accounts (FastAuth logins); “other chains” are Bitcoin, Zcash and bridges that sign for several chains; “not known” means no evidence-backed rule. Over the whole period NEAR itself is ≈46% (interval 44%–48%).
+      - list "Legend" [ref=f30e223]:
+        - listitem [ref=f30e224]: NEAR itself
+        - listitem [ref=f30e226]: Other chains
+        - listitem [ref=f30e228]: Not known
+      - 'img "Monthly share of requests by destination: NEAR itself, other chains, not known" [ref=f30e231]'
+      - group [ref=f30e232]:
+        - generic "Show as table" [ref=f30e233] [cursor=pointer]
+      - generic [ref=f30e234]:
+        - generic [ref=f30e235]:
+          - generic [ref=f30e236]: NEAR itself
+          - generic [ref=f30e239]: ≈46% 44%–48%
+        - generic [ref=f30e240]:
+          - generic [ref=f30e241]: Not known
+          - generic [ref=f30e244]: ≈23% 21%–23%
+        - generic [ref=f30e245]:
+          - generic [ref=f30e246]: Several chains
+          - generic [ref=f30e249]: ≈22% 21%–23%
+        - generic [ref=f30e250]:
+          - generic [ref=f30e251]: Bitcoin
+          - generic [ref=f30e254]: ≈7% 6%–8%
+        - generic [ref=f30e255]:
+          - generic [ref=f30e256]: Zcash
+          - generic [ref=f30e259]: ≈2% 2%–3%
+    - region "The Sweat sunset and what it could do to the volume" [ref=f30e260]:
+      - heading "The Sweat sunset and what it could do to the volume" [level=2] [ref=f30e261]
+      - blockquote [ref=f30e262]:
+        - paragraph [ref=f30e263]: “Sweat Wallet and SWEAT in their present form will end on 30 December 2026.”
+        - generic [ref=f30e264]:
+          - text: "The Sweat Foundation Ltd (release of 2026-10-01). Date: 30 Dec 2026."
+          - link "Source" [ref=f30e265] [cursor=pointer]:
+            - /url: https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/
+      - paragraph [ref=f30e266]: ≈99.97% of FastAuth requests are relayed by sweat-relayer.near under the Sweat Foundation's login issuer, and FastAuth is ≈44% of all requests. Pick what happens to that traffic after 30 Dec 2026, whether the suspected benchmark keeps running, and how fast the rest (“structural” demand) grows. These are scenarios, not forecasts.
+      - form "Scenario assumptions" [ref=f30e267]:
+        - group "FastAuth traffic after 30 Dec 2026" [ref=f30e268]:
+          - generic [ref=f30e270]:
+            - generic [ref=f30e271]:
+              - radio "stops" [checked] [ref=f30e272] [cursor=pointer]
+              - generic [ref=f30e273]: stops
+            - generic [ref=f30e274]:
+              - radio "25% stays" [ref=f30e275] [cursor=pointer]
+              - generic [ref=f30e276]: 25% stays
+            - generic [ref=f30e277]:
+              - radio "all stays" [ref=f30e278] [cursor=pointer]
+              - generic [ref=f30e279]: all stays
+        - group "Suspected benchmark" [ref=f30e280]:
+          - generic [ref=f30e282]:
+            - generic [ref=f30e283]:
+              - radio "keeps running" [ref=f30e284] [cursor=pointer]
+              - generic [ref=f30e285]: keeps running
+            - generic [ref=f30e286]:
+              - radio "stops" [checked] [ref=f30e287] [cursor=pointer]
+              - generic [ref=f30e288]: stops
+        - group "Structural demand per month" [ref=f30e289]:
+          - generic [ref=f30e291]:
+            - generic [ref=f30e292]:
+              - radio "−5%" [ref=f30e293] [cursor=pointer]
+              - generic [ref=f30e294]: −5%
+            - generic [ref=f30e295]:
+              - radio "flat" [checked] [ref=f30e296] [cursor=pointer]
+              - generic [ref=f30e297]: flat
+            - generic [ref=f30e298]:
+              - radio "+5%" [ref=f30e299] [cursor=pointer]
+              - generic [ref=f30e300]: +5%
+      - paragraph [ref=f30e301]: "In Jun 2027 this scenario gives ≈267k requests a month, −40% against the baseline month Oct 2026 (≈447k). Cumulative from Nov 2026 to Jun 2027: ≈2.5M."
+      - list "Legend" [ref=f30e302]:
+        - listitem [ref=f30e303]: Estimated, recent months
+        - listitem [ref=f30e305]: "Scenario: all requests"
+        - listitem [ref=f30e307]: "Scenario: structural"
+        - listitem [ref=f30e309]: "Scenario: FastAuth"
+      - 'img "Monthly requests: recent history and the selected scenario" [ref=f30e312]'
+      - group [ref=f30e313]:
+        - generic "Show as table" [ref=f30e314] [cursor=pointer]
+      - paragraph [ref=f30e315]: "Baseline = Oct 2026, the last full month: ≈447k requests, of which FastAuth ≈161k, suspected benchmark ≈19k, structural ≈267k. 18 precomputed combinations; edit assumptions.yaml and run npm run reproduce to try others."
+    - 'region "Bridges: the structural signal" [ref=f30e316]':
+      - 'heading "Bridges: the structural signal" [level=2] [ref=f30e317]'
+      - paragraph [ref=f30e318]: The Omni, Bitcoin and Zcash connectors sign for bridge transfers. In Oct 2026 they made ≈237k requests, ≈89% of all structural requests (everything except the suspected benchmark and FastAuth). Over the whole period the three connectors made ≈1.2M requests.
+      - list "Legend" [ref=f30e319]:
+        - listitem [ref=f30e320]: Omni bridge
+        - listitem [ref=f30e322]: Bitcoin connector
+        - listitem [ref=f30e324]: Zcash connector
+        - listitem [ref=f30e326]: All structural requests (minus suspected benchmark and FastAuth)
+      - img "Monthly bridge connector requests, with all structural requests as a line" [ref=f30e329]
+      - group [ref=f30e330]:
+        - generic "Show as table" [ref=f30e331] [cursor=pointer]
+    - region "The thesis" [ref=f30e332]:
+      - heading "The thesis" [level=2] [ref=f30e333]
+      - list [ref=f30e334]:
+        - listitem [ref=f30e335]:
+          - strong [ref=f30e336]: "Reliable:"
+          - text: ≈6.4M signature requests since August 2024, ≈99.9% fulfilled.
+        - listitem [ref=f30e337]:
+          - strong [ref=f30e338]: "Narrow:"
+          - text: the three largest requesters hold ≈74% of requests; only 7 ever reach a share of one percent.
+        - listitem [ref=f30e339]:
+          - strong [ref=f30e340]: "One integration drove the boom:"
+          - code [ref=f30e341]: fast-auth.near
+          - text: (FastAuth logins issued by the Sweat Foundation's domain) added ≈346k requests in April 2026; the Sweat Wallet product ends "in its present form" on 30 December 2026 (
+          - link "source" [ref=f30e342] [cursor=pointer]:
+            - /url: https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/
+          - text: ).
+        - listitem [ref=f30e343]:
+          - strong [ref=f30e344]: "Mostly NEAR itself:"
+          - text: ≈46% of all signatures serve NEAR accounts; in October 2026 other chains lead (≈53% against ≈40%).
+        - listitem [ref=f30e345]:
+          - strong [ref=f30e346]: "Bridges are the structural signal:"
+          - text: ≈237k of ≈267k structural requests in October 2026 come from the Omni, Bitcoin and Zcash connectors.
+      - heading "What would prove us wrong" [level=3] [ref=f30e347]
+      - paragraph [ref=f30e348]: Each test can be checked by re-running this repository after the stated date.
+      - list [ref=f30e349]:
+        - listitem [ref=f30e350]:
+          - strong [ref=f30e351]: Narrow demand is wrong if
+          - text: in each month from January 2027 to March 2027 at least 15 requesters hold a share of at least 1% (
+          - code [ref=f30e352]: months[].concentration.requesters_ge_1pct
+          - text: )
+          - strong [ref=f30e353]: and
+          - text: the three largest requesters hold less than 50% (
+          - code [ref=f30e354]: months[].concentration.top3_share
+          - text: "). Today: 7 and ≈78%."
+        - listitem [ref=f30e355]:
+          - strong [ref=f30e356]: "\"The boom was one integration being wound down\" is wrong if"
+          - code [ref=f30e357]: fast-auth.near
+          - text: requests in both February 2027 and March 2027 are at least 75% of its October 2026 level of ≈161k (
+          - code [ref=f30e358]: months[].drivers_requests
+          - text: ).
+        - listitem [ref=f30e359]:
+          - strong [ref=f30e360]: "\"Bridges are the durable signal\" is wrong if"
+          - text: bridge requests (
+          - code [ref=f30e361]: months[].series_requests_est.bridges
+          - text: ) are below 100k in every month from January 2027 to March 2027 (today ≈237k), or if they fall below 50% of structural requests in each of those months.
+        - listitem [ref=f30e362]:
+          - strong [ref=f30e363]: "\"Cross-chain use is taking over\" is wrong if"
+          - text: the other-chains share (
+          - code [ref=f30e364]: months[].target_groups_share.other_chains
+          - text: ) is below 40% in every month from January 2027 to March 2027 (today ≈53%).
+        - listitem [ref=f30e365]:
+          - strong [ref=f30e366]: "\"Production-grade\" is wrong if"
+          - text: the fulfilled rate (
+          - code [ref=f30e367]: months[].fulfilled_rate
+          - text: ) is below 99% in any month from January 2027 to March 2027 (today ≈100.0%).
+    - region "Re-run it yourself" [ref=f30e368]:
+      - heading "Re-run it yourself" [level=2] [ref=f30e369]
+      - paragraph [ref=f30e370]: "Needs Node and nothing else: no account, no API key, no paid service."
+      - generic [ref=f30e371]:
+        - generic [ref=f30e372]:
+          - heading "npm test" [level=3] [ref=f30e373]
+          - paragraph [ref=f30e374]: Unit tests for parsing, labels, estimates, THESIS.md numbers, scenarios and this page's data. Ends with the vitest summary and exit code 0.
+        - generic [ref=f30e375]:
+          - heading "npm run reproduce" [level=3] [ref=f30e376]
+          - paragraph [ref=f30e377]: "Rebuilds out/metrics.json, out/scenarios.json and THESIS.md from the committed data, offline. It prints: out/metrics.json written. sha256 99d8c870b5f30456… (this page was built from that exact file)."
+        - generic [ref=f30e378]:
+          - heading "npm run verify -- --sample 50" [level=3] [ref=f30e379]
+          - paragraph [ref=f30e380]: "Draws 50 random transactions with sign receipts and re-checks signer, block height and sign receipts at an archival RPC node and at NearBlocks. Last run: 50/50 verified (RPC 50/50, NearBlocks 50/50)."
+        - generic [ref=f30e381]:
+          - heading "npm run build:site && npm run site" [level=3] [ref=f30e382]
+          - paragraph [ref=f30e383]: Copies the two JSON files into site/data/ with their sha256 and serves this page on http://127.0.0.1:4173/.
+    - region "Honest notes" [ref=f30e384]:
+      - heading "Honest notes" [level=2] [ref=f30e385]
+      - generic [ref=f30e386]:
+        - heading "Comparison with the existing dashboard" [level=3] [ref=f30e387]
+        - paragraph [ref=f30e388]:
+          - text: The Dune dashboard
+          - code [ref=f30e389]: proximity_team/v1signer
+          - text: shows 6,914,449 "total transactions" on 21 September 2026 (
+          - link "source" [ref=f30e390] [cursor=pointer]:
+            - /url: https://dune.com/proximity_team/v1signer
+          - text: ). Its SQL is not visible and the values were read from the public page, not verified in Dune, so its unit is unknown. On the same date our exact count of all transactions touching
+          - code [ref=f30e391]: v1.signer
+          - text: (from the dashboard's start date) is 11,451,646 and their figure is 1.22 times our estimated request count; early in the series it matched our all-transaction count instead. No single unit of ours reproduces their series (docs/evidence/reconcile-proximity.md). They also publish a TVL metric that this census does not measure.
+        - heading "What this census cannot measure" [level=3] [ref=f30e392]
+        - list [ref=f30e393]:
+          - listitem [ref=f30e394]: "The destination chain of each request from the Omni bridge and the Relay allocator (they sign for several chains; the chain is not in the sign arguments): reported as \"multi\"."
+          - listitem [ref=f30e395]:
+            - text: Whether
+            - code [ref=f30e396]: tx-bench.near
+            - text: is a benchmark; who operates it.
+          - listitem [ref=f30e397]: "Value moved, fees paid or any revenue to NEAR or the NEAR token: the census counts signature requests only."
+          - listitem [ref=f30e398]: "End users: one request is not one user, and FastAuth users cannot be counted from this data."
+          - listitem [ref=f30e399]:
+            - text: Other MPC signer contracts (for example
+            - code [ref=f30e400]: v1.sig-net.near
+            - text: ), testnet, and activity after the data snapshot.
+          - listitem [ref=f30e401]: "Private source code (Dew kernels, Near-Bridge-Lab contracts): their path conventions are not decoded."
+        - heading "Evidence against the thesis" [level=3] [ref=f30e402]
+        - list [ref=f30e403]:
+          - listitem [ref=f30e404]: The headline volume includes a suspected benchmark (≈19% of requests). It is labeled "unknown, suspected benchmark" because no source names it; if it is real usage, demand is less narrow than stated.
+          - listitem [ref=f30e405]:
+            - text: The Sweat link to FastAuth is strong on-chain (issuer domain, guard name, relayer) but no document says that Sweat Wallet logins go through
+            - code [ref=f30e406]: fast-auth.near
+            - text: ; and "ends in its present form" does not mean the traffic goes to zero.
+          - listitem [ref=f30e407]: Bridges are only ≈1.2M of ≈6.4M requests over the whole period; one quarter of strong growth is not a trend.
+          - listitem [ref=f30e408]: "Volume is not value: a bridge request can move large value and a login signature none; this census counts signatures, not value or fees."
+          - listitem [ref=f30e409]: Most of the volume is recent (see the monthly series in out/metrics.json), so the history behind the trend is short and month-to-month swings are large.
+        - heading "Read more" [level=3] [ref=f30e410]
+        - paragraph [ref=f30e411]:
+          - link "THESIS.md" [ref=f30e412] [cursor=pointer]:
+            - /url: docs/THESIS.md
+          - text: (full text, every number footnoted to its JSON path) ·
+          - link "METHODOLOGY.md" [ref=f30e413] [cursor=pointer]:
+            - /url: docs/METHODOLOGY.md
+          - text: (definitions, sampling, limits).
+  - contentinfo [ref=f30e414]:
+    - text: "Data: exact transaction counts as of block 224,053,625 (11 Nov 2026); requests are estimates from a cluster sample. metrics.json sha256"
+    - code [ref=f30e415]: 99d8c870b5f3045665d9df0381b97c659de658649a0498f5658a3c11f5cda845
+    - text: . No cookies, no tracking, no network requests beyond this server.

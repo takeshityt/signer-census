@@ -293,3 +293,4 @@ $("foot").innerHTML = `Data: exact transaction counts as of block ${int(metrics.
 
 renderCharts();
 document.documentElement.dataset.ready = "1";
+document.documentElement.dataset.readyMs = String(Math.round(performance.now())); // ms from navigation start to "all sections rendered" (used by the load-time check)
