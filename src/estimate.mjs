@@ -141,7 +141,7 @@ export function estimateFromSums(months, opts = {}) {
       receipts_per_tx: ratio(s.receipts, s.n_tx),
       fulfilled_rate: ratio(s.fulfilled, s.sign),
       sign_receipt_failed_rate: ratio(s.sign_failed, s.sign),
-      identified_share: ratio(s.sign - (s.categories.unknown ?? 0) - (s.categories.unlabeled ?? 0), s.sign), // requests whose requester has a known (not 'unknown'/unlabeled) category
+      identified_share: ratio(s.sign - Object.entries(s.categories).filter(([k]) => k === "unknown" || k === "unlabeled" || k.startsWith("suspected:")).reduce((a, [, v]) => a + v, 0), s.sign), // requests whose requester has an identified category (not unknown / unlabeled / suspected)
       duplicate_request_rate: ratio(s.dup_extra, s.sign),
       failed_respond_share_of_respond_receipts: ratio(s.respond_failed, s.respond_total),
     };

@@ -9,7 +9,7 @@ export function writeScenarios() {
   const metrics = JSON.parse(readFileSync(`${ROOT}out/metrics.json`, "utf8"));
   const a = parse(readFileSync(`${ROOT}assumptions.yaml`, "utf8"));
   const res = runScenarios(baselineFrom(metrics, a), a);
-  const text = JSON.stringify({ note: "SCENARIOS, not forecasts. Change assumptions.yaml and re-run `npm run reproduce`.", assumptions_file: "assumptions.yaml", ...res }, null, 2) + "\n";
+  const text = JSON.stringify({ note: "SCENARIOS, not forecasts. Change assumptions.yaml and re-run `npm run reproduce`.", assumptions_file: "assumptions.yaml", event: a.fastauth_sunset ?? null, fastauth_account: a.fastauth_account, fastauth_end_month: a.fastauth_end_month, ...res }, null, 2) + "\n";
   writeFileSync(`${ROOT}out/scenarios.json`, text);
   return { count: res.scenarios.length, sha256: sha256(Buffer.from(text)), baseline: res.baseline.month };
 }

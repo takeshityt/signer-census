@@ -25,6 +25,7 @@ describe("labels.yaml validation", () => {
     expect(l.categoryOf("a.near")).toBe("near-infra:bridge-omni");
     expect(l.confidenceOf("b.near")).toBe("low");
     expect(l.categoryOf("zzz")).toBe("unlabeled");
+    expect(l.categoryOf("b.near")).toBe("suspected:benchmark-test"); // unknown + suspected category gets its own bucket
     expect(l.confidenceOf("zzz")).toBe("unlabeled");
     expect(l.benchmarkAccounts()).toEqual(["b.near"]); // suspected benchmark is included in the 'excluding benchmark' headline variant
   });

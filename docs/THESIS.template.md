@@ -9,6 +9,14 @@ In the template every number is a placeholder: metric (out/metrics.json), scenar
 
 This is a measurement-based thesis about NEAR's MPC signer `v1.signer`, not a price prediction. "Request" = one executed `sign` receipt on `v1.signer` (definitions: docs/METHODOLOGY.md). All request numbers are **estimates** from a cluster sample scaled to exact monthly transaction counts; intervals are {{lit:95%}} sampling intervals only.
 
+## In five lines
+
+* **Reliable:** ≈{{m:totals.requests_est|M1}} signature requests since {{lit:August 2024}}, ≈{{m:totals.fulfilled_rate|pct1}} fulfilled.
+* **Narrow:** the three largest requesters hold ≈{{m:totals.concentration.top3_share|pct0}} of requests; only {{m:totals.concentration.requesters_ge_1pct|raw}} ever reach a share of one percent.
+* **One integration drove the boom:** `fast-auth.near` (FastAuth logins issued by the Sweat Foundation's domain) added ≈{{m:months[2026-04].drivers_requests."fast-auth.near"|k0}} requests in {{lit:April 2026}}; the Sweat Wallet product ends "in its present form" on {{ext:30 December 2026|https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/}}.
+* **Mostly NEAR itself:** ≈{{m:totals.target_groups_share.near_native|pct0}} of all signatures serve NEAR accounts; in {{lit:October 2026}} other chains lead (≈{{m:months[2026-10].target_groups_share.other_chains|pct0}} against ≈{{m:months[2026-10].target_groups_share.near_native|pct0}}).
+* **Bridges are the structural signal:** ≈{{m:months[2026-10].series_requests_est.bridges|k0}} of ≈{{m:months[2026-10].series_requests_est.structural|k0}} structural requests in {{lit:October 2026}} come from the Omni, Bitcoin and Zcash connectors.
+
 ## Key numbers
 
 * Requests since the contract went live: ≈{{m:totals.requests_est|M1}} (interval {{m:totals.requests_est|ci_M2}}), out of {{m:totals.tx_total|int}} transactions that touch `v1.signer` (exact count; one request normally needs a user-side and a node-side transaction).

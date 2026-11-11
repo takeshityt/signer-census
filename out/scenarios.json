@@ -1,6 +1,14 @@
 {
   "note": "SCENARIOS, not forecasts. Change assumptions.yaml and re-run `npm run reproduce`.",
   "assumptions_file": "assumptions.yaml",
+  "event": {
+    "date": "2026-12-30",
+    "statement": "Sweat Wallet and SWEAT in their present form will end on 30 December 2026.",
+    "issuer": "The Sweat Foundation Ltd (release of 2026-10-01)",
+    "source": "https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/"
+  },
+  "fastauth_account": "fast-auth.near",
+  "fastauth_end_month": "2026-12",
   "label": "SCENARIOS, not forecasts",
   "baseline": {
     "month": "2026-10",

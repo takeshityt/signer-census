@@ -30,6 +30,7 @@ const labels = parseLabels(labelsText);
 const chainRules = parseChainRules(rulesText);
 const reported = JSON.parse(read("config/proximity_reported.json"));
 const cutoffs = JSON.parse(read("data/derived/proximity_cutoffs.json"));
+const monthlyCheck = JSON.parse(read("data/derived/monthly_check.json"));
 
 const ctx = { categoryOf: labels.categoryOf, confidenceOf: labels.confidenceOf, chainOf: (r) => chainRules.chainOf(r), chainConfidenceOf: (r) => chainRules.confidenceOf(r), keyTypeOf };
 const clusters = clusterStats(rows, ctx);
@@ -161,6 +162,7 @@ const out = {
   meta: {
     title: "Signer Census metrics for v1.signer (NEAR Chain Signatures)",
     command: COMMAND,
+    snapshot: { block_height: monthlyCheck.snapshot_height, time_utc: monthlyCheck.snapshot_time_utc, note: "exact tx counts are as of this block; the last month is partial" },
     inputs: Object.fromEntries(inputFiles.map(([p, b]) => [p, sha256(b)])),
     method: { seed: cfg.seed, bootstrap_replicates: cfg.bootstrapReplicates, ci: "95% percentile interval, cluster bootstrap within each month; census months are exact (no sampling error)", drivers: drivers },
     definitions: {

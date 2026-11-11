@@ -35,7 +35,8 @@ export function parseLabels(text) {
   return {
     entries,
     byAccount,
-    categoryOf: (a) => byAccount.get(a)?.category ?? "unlabeled",
+    /** category bucket of a requester: its category, or "suspected:<category>" for an `unknown` entry with a suspected_category (kept apart so charts can show it separately) */
+    categoryOf: (a) => { const e = byAccount.get(a); return !e ? "unlabeled" : e.category === "unknown" && e.suspected_category ? `suspected:${e.suspected_category}` : e.category; },
     confidenceOf: (a) => byAccount.get(a)?.confidence ?? "unlabeled",
     /** accounts treated as benchmark/test for the headline variant: confirmed category or an explicit suspicion */
     benchmarkAccounts: () => entries.filter((e) => e.category === "benchmark-test" || e.suspected_category === "benchmark-test").map((e) => e.account),
