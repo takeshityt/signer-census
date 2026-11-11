@@ -2,6 +2,8 @@
   "seed": 424242,
   "bootstrapReplicates": 2000,
   "topRequestersTotal": 15,
-  "topRequestersPerMonth": 5,
+  "driversTop": 6,
+  "robustnessSeed": 777,
+  "robustnessReplicates": 2000,
   "note": "Cluster bootstrap: clusters (pages of <=200 consecutive txs) are resampled with replacement within each month; census months are not resampled."
 }

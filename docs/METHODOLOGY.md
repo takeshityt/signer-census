@@ -117,3 +117,54 @@ with (b) the tx list of FastNEAR and the full receipt tree of each tx from RPC `
 | `npm run sample` | (re)downloads the cluster sample, resumable | FastNEAR |
 | `npm run parse` | raw sample → `data/derived/sample_parsed.csv` | no |
 | `node scripts/reconcile-units.mjs --from H --to H2 --rpc https://archival-rpc.mainnet.fastnear.com --out DIR` | unit reconciliation on a block window | FastNEAR + archival RPC |
+
+
+## 8. Methods audit: only `sign` is a signature request (part C)
+
+Receipts executed on `v1.signer` in the sample, scaled to all txs (`totals.methods_receipts_est` in out/metrics.json, with the raw sample count next to each estimate):
+`sign` ≈ 6,432,762; `respond` ≈ 6,421,977; callbacks `return_signature_and_clean_state_on_success` ≈ 6,390,169 and (legacy) `return_signature_on_finish` ≈ 40,928
+with `sign_helper` / `clear_state_on_finish` of the legacy contract version; node/admin calls (`submit_participant_info`, `resolve_verification`, `vote_*`, `join`, `migrate`, ...); `fail_on_timeout` ≈ 10,424 (timeouts of pending requests).
+Only `sign` counts as a signature request. **Other request types are reported separately and never added to the request count:**
+`verify_foreign_transaction` ≈ 16,894 receipts (foreign-transaction verification requests, answered by `respond_verify_foreign_tx`), and
+`request_app_private_key` ≈ 400 (**1 receipt in the sample**: the estimate is near-meaningless, the CI starts at 0; answered by `respond_ckd`).
+`derived_public_key`, `public_key`, `latest_key_version` and `state` are view-style calls and are not requests. Rare methods have tiny sample counts; read `receipts_in_sample` before using their estimates.
+
+## 9. Attribution (labels.yaml, part D)
+
+* Every requester needed for ≥ 95% of estimated requests (8 accounts) plus all with ≥ 0.5% (11) are labeled; 15 accounts in total (also three smaller kernel/satoshi accounts and brg.toalice.near, the main cause of the 2025-03 rejection spike). 
+  Each entry has category, confidence, owner, note and evidence URLs; `npm test` fails if an entry has no evidence URL, a made-up category, or an `unknown` entry without a note.
+* **Coverage** (`totals.labeling_coverage`): requests of requesters that have any label ≈ 98.4% (98.1-98.7%);
+  requests whose requester is **identified** (category other than `unknown`) ≈ 78.7% (77.9-79.6%). By confidence: high ≈ 76.6%, medium ≈ 2.1%,
+  low ≈ 19.7% (this is dominated by tx-bench.near, an `unknown` entry), unlabeled ≈ 1.6%.
+* **tx-bench.near** (≈ 19.1% of requests) is deliberately *not* labeled benchmark-test: `category: unknown`, `suspected_category: benchmark-test`, confidence low. The evidence is behavioural (no contract, one key, empty path,
+  constant then random payloads, clockwork cadence, top-ups from n1-*.near accounts); no source names the account. The headline is shown both with and without it.
+* `aurora` is not used as a category: `*.aurora` accounts are only the NEAR-side transport of Aurora EVM contracts; the two found (7eda04…, e12bc5…) are Relay Protocol's allocators and are labeled `third-party-app`.
+* Evidence was collected by research sub-tasks and then **re-checked by us** (source lines, NEP-330 metadata, creation transactions, wasm strings, view calls); claims that were not re-checked are marked as such inside the label.
+  Unresolved items are written into each note (e.g. owner of relay.aurora, who "Reflect" is, whether fastauth.swe.at is Sweat Economy, who funds tx-bench.near).
+
+## 10. Target chains and key types (part F)
+
+* **Key type** (documented in near/mpc: domain_id 0 = secp256k1/ECDSA, 1 = ed25519/EdDSA; legacy sign arguments carry no domain and only secp256k1 is possible): secp256k1 ≈ 44.2%, ed25519 ≈ 55.8% of requests.
+* **Chain family** comes only from `config/chain_rules.yaml` (first match wins, each rule has evidence URLs and a confidence); everything else is the explicit `unknown` bucket. Families: `bitcoin`, `zcash`, `near`, `multi`, `unknown`
+  (`evm` and `solana` exist in the schema but no rule currently maps to them: the EVM-style paths found are not enough evidence).
+  `multi` = the requester is known from source to sign for several destination chains (Omni bridge, Relay allocators) but the chain of a single request is not in the sign arguments.
+* Result (`totals.target_chain_families`): near ≈ 46.4%, unknown ≈ 22.5%, multi ≈ 22.3%, bitcoin ≈ 6.5%, zcash ≈ 2.3%.
+  By rule confidence (`target_chain_rule_confidence`): high ≈ 28.2%, medium ≈ 46.7%, low ≈ 2.6%, no rule ≈ 22.5%.
+  **`near` is mostly FastAuth** (medium confidence: the derived Ed25519 key controls a NEAR account), i.e. a large part of the usage serves NEAR accounts rather than foreign chains. The `unknown` bucket is mostly tx-bench.near.
+* Not mapped on purpose: tx-bench.near (empty path), ping-account.near and the Reflect agent contract (EVM-style paths are a hint only), and the ~330 small requesters.
+
+## 11. Robustness of the estimator (part G)
+
+All confidence intervals in this repository are **sampling-only** (cluster bootstrap): they do not include start-point bias, label errors, definition risk or month-to-month dependence. Prose uses "≈" and rounded values.
+
+* **Fully enumerated months.** Replaying the sampling design (20 random start heights, pages of 200 txs) on the two census months gives, against the exact value:
+  2024-08: exact 130 requests, mean estimate 136.72, bias +5.2%, RMSE 5.5%;
+  2024-09: exact 926, mean 941.06, bias +1.6%, RMSE 2.0%. These months have only 255 and 1,796 txs (the real pipeline reads them completely); for large months no exact value exists, so this check says little about them.
+* **Reconciliation windows** (sign receipts per tx in 300-block windows vs the month's estimated ratio; a window is a small sample, so the comparison uses the window's binomial standard error, not the month's CI):
+  223900000-223900300 (2026-11): window 0.500 vs month 0.494 (+1.2%, within 2 SE: yes); 223960000-223960300 (2026-11): window 0.489 vs month 0.494 (-1.1%, within 2 SE: yes); 139464032-139464332 (2025-02): window 0.263 vs month 0.357 (-26.2%, within 2 SE: yes); 200296994-200297294 (2026-05): window 0.493 vs month 0.499 (-1.2%, within 2 SE: yes).
+* **Density weighting** (clusters weighted by 1/block-span to correct the block-uniform start bias): total ≈ 6,430,239 vs unweighted ≈ 6,432,762 (-0.04%).
+  Largest monthly deltas: 2025-02 -13.6%, 2025-03 -8.8%, 2024-10 -3.2%, 2025-06 -2.7%; every monthly density-weighted value lies inside the unweighted 95% CI. The bias matters in sparse, bursty months and is negligible in the total.
+
+## 12. Dependencies
+
+* `vitest` (dev): test runner required by CLAUDE.md. `yaml` (runtime): parses `labels.yaml` and `config/chain_rules.yaml`, the human-editable formats chosen for evidence-bearing data. No other dependencies; Node built-ins elsewhere.
