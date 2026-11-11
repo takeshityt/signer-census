@@ -1,0 +1,89 @@
+{
+ "note": "exact txs_count of [month start, end of cutoff UTC day] for each cutoff date",
+ "cutoffs": [
+  {
+   "date": "2024-10-31",
+   "end_height_exclusive": 131666070,
+   "month": "2024-10",
+   "month_start_height": 129274113,
+   "segment_txs_count": 11814
+  },
+  {
+   "date": "2025-03-31",
+   "end_height_exclusive": 143171154,
+   "month": "2025-03",
+   "month_start_height": 140825639,
+   "segment_txs_count": 4355
+  },
+  {
+   "date": "2025-06-30",
+   "end_height_exclusive": 153357742,
+   "month": "2025-06",
+   "month_start_height": 149163657,
+   "segment_txs_count": 39775
+  },
+  {
+   "date": "2025-09-30",
+   "end_height_exclusive": 166337306,
+   "month": "2025-09",
+   "month_start_height": 162069851,
+   "segment_txs_count": 92477
+  },
+  {
+   "date": "2025-12-31",
+   "end_height_exclusive": 179199136,
+   "month": "2025-12",
+   "month_start_height": 174918111,
+   "segment_txs_count": 254010
+  },
+  {
+   "date": "2026-03-31",
+   "end_height_exclusive": 192013995,
+   "month": "2026-03",
+   "month_start_height": 187573901,
+   "segment_txs_count": 616818
+  },
+  {
+   "date": "2026-04-30",
+   "end_height_exclusive": 196336954,
+   "month": "2026-04",
+   "month_start_height": 192013995,
+   "segment_txs_count": 1461475
+  },
+  {
+   "date": "2026-06-30",
+   "end_height_exclusive": 205022619,
+   "month": "2026-06",
+   "month_start_height": 200773914,
+   "segment_txs_count": 1591333
+  },
+  {
+   "date": "2026-08-31",
+   "end_height_exclusive": 213761242,
+   "month": "2026-08",
+   "month_start_height": 209393356,
+   "segment_txs_count": 1610232
+  },
+  {
+   "date": "2026-09-14",
+   "end_height_exclusive": 215706980,
+   "month": "2026-09",
+   "month_start_height": 213761242,
+   "segment_txs_count": 667531
+  },
+  {
+   "date": "2026-09-20",
+   "end_height_exclusive": 216553376,
+   "month": "2026-09",
+   "month_start_height": 213761242,
+   "segment_txs_count": 921963
+  },
+  {
+   "date": "2026-09-21",
+   "end_height_exclusive": 216696053,
+   "month": "2026-09",
+   "month_start_height": 213761242,
+   "segment_txs_count": 979109
+  }
+ ]
+}

@@ -1,0 +1,18 @@
+{
+  "source": "https://dune.com/proximity_team/v1signer (widget 1915729, query 5597462, column total_txns). Read from the public dashboard page on 2026-11-11 through an LLM-assisted page fetch; NOT verified against Dune itself and the SQL behind the query is not visible.",
+  "series": "cumulative, 718 rows, first row 2024-10-01 = 212, last row 2026-09-21 = 6914449",
+  "points": [
+    { "date": "2024-10-31", "total_txns": 11768 },
+    { "date": "2025-03-31", "total_txns": 87012 },
+    { "date": "2025-06-30", "total_txns": 135198 },
+    { "date": "2025-09-30", "total_txns": 435774 },
+    { "date": "2025-12-31", "total_txns": 926178 },
+    { "date": "2026-03-31", "total_txns": 1872779 },
+    { "date": "2026-04-30", "total_txns": 2696701 },
+    { "date": "2026-06-30", "total_txns": 4585348 },
+    { "date": "2026-08-31", "total_txns": 6381829 },
+    { "date": "2026-09-14", "total_txns": 6759434 },
+    { "date": "2026-09-20", "total_txns": 6905665 },
+    { "date": "2026-09-21", "total_txns": 6914449 }
+  ]
+}
