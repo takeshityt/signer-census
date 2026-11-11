@@ -4,7 +4,7 @@
     "command": "npm run reproduce",
     "inputs": {
       "data/derived/monthly_tx_totals.csv": "c6c2e5b374ced335fdd0ea3cc6eb20ec4d6dcff300e223773eca08bd28b3df7e",
-      "data/derived/sample_parsed.csv": "33171ce387e6fb78855551de61f794b64d1023af31d3832f81606484743f5b3b",
+      "data/derived/sample_parsed.csv": "cc05335c07c83db89526e74b7d8dc6ef2e4cfbb6e648baf973f62b72d6a358a0",
       "data/derived/sample_clusters.csv": "4145eb3e823fd04f0d675dd09c3feca5574fa321f390271ab18cd557544c8061",
       "config/estimate.json": "11a2162acb4ab47e18de44c58cfec4b4a200e439ce2d961c37f8b1410ada1b14"
     },
@@ -16,7 +16,8 @@
     "definitions": {
       "tx": "transaction touching v1.signer via a FunctionCall (exact count from FastNEAR txs_count)",
       "request": "executed `sign` receipt on v1.signer",
-      "fulfilled": "the request's tx contains a successful return_signature callback",
+      "fulfilled": "the callback (return_signature...) in the descendant receipts of THIS sign receipt succeeded",
+      "sign_receipt_failed_rate": "share of sign receipts that the contract itself rejected (receipt status Failure, e.g. 'Signature request has already been submitted')",
       "requester": "predecessor_id of the sign receipt (not the tx signer)",
       "requests_est": "exact monthly tx total x (sign receipts per tx in the sample); ESTIMATE, not an exact count"
     },
@@ -67,6 +68,13 @@
       "ci95": [
         0.998361,
         0.999442
+      ]
+    },
+    "sign_receipt_failed_rate": {
+      "value": 0.000259,
+      "ci95": [
+        0.000145,
+        0.000383
       ]
     },
     "duplicate_request_rate": {
@@ -435,6 +443,13 @@
           0.723077
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.038462,
+        "ci95": [
+          0.038462,
+          0.038462
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.861538,
         "ci95": [
@@ -635,6 +650,13 @@
         "ci95": [
           0.886609,
           0.886609
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0.018359,
+        "ci95": [
+          0.018359,
+          0.018359
         ]
       },
       "duplicate_request_rate": {
@@ -839,6 +861,13 @@
           0.982045
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.004304,
         "ci95": [
@@ -1039,6 +1068,13 @@
         "ci95": [
           0.961275,
           0.998501
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -1243,6 +1279,13 @@
           0.991045
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.002397,
+        "ci95": [
+          0,
+          0.00553
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.006711,
         "ci95": [
@@ -1443,6 +1486,13 @@
         "ci95": [
           0.993045,
           0.998503
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -1647,6 +1697,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.000783,
+        "ci95": [
+          0,
+          0.002346
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.034456,
         "ci95": [
@@ -1847,6 +1904,13 @@
         "ci95": [
           0.379491,
           0.721801
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0.451176,
+        "ci95": [
+          0.259705,
+          0.603578
         ]
       },
       "duplicate_request_rate": {
@@ -2051,6 +2115,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.007481,
+        "ci95": [
+          0,
+          0.022222
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.082294,
         "ci95": [
@@ -2251,6 +2322,13 @@
         "ci95": [
           0.998385,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0.000534,
+        "ci95": [
+          0,
+          0.001615
         ]
       },
       "duplicate_request_rate": {
@@ -2455,6 +2533,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.001052,
+        "ci95": [
+          0,
+          0.003207
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.347003,
         "ci95": [
@@ -2655,6 +2740,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -2859,6 +2951,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.001513,
+        "ci95": [
+          0,
+          0.004552
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.013111,
         "ci95": [
@@ -3059,6 +3158,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -3263,6 +3369,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.002515,
         "ci95": [
@@ -3463,6 +3576,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -3667,6 +3787,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0.002093,
+        "ci95": [
+          0,
+          0.006336
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0,
         "ci95": [
@@ -3867,6 +3994,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -4071,6 +4205,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.035587,
         "ci95": [
@@ -4271,6 +4412,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -4475,6 +4623,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.018237,
         "ci95": [
@@ -4675,6 +4830,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -4879,6 +5041,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.004516,
         "ci95": [
@@ -5079,6 +5248,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -5283,6 +5459,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.001006,
         "ci95": [
@@ -5483,6 +5666,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {
@@ -5687,6 +5877,13 @@
           1
         ]
       },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
       "duplicate_request_rate": {
         "value": 0.056208,
         "ci95": [
@@ -5887,6 +6084,13 @@
         "ci95": [
           1,
           1
+        ]
+      },
+      "sign_receipt_failed_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
         ]
       },
       "duplicate_request_rate": {

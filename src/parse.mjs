@@ -55,10 +55,33 @@ export function signerReceipts(tx) {
         method: a.FunctionCall.method_name,
         args: a.FunctionCall.args,
         status: statusOf(rc.execution_outcome?.outcome),
+        rc,
       });
     }
   }
   return out;
+}
+
+/** Callback of ONE sign receipt: breadth-first over its child receipts (outcome.receipt_ids), depth <= 4.
+ *  Current contract: sign -> return_signature_and_clean_state_on_success. Legacy: sign -> sign_helper -> return_signature_on_finish. */
+export function findCallback(tx, signRc) {
+  const byId = new Map((tx.receipts ?? []).map((rc) => [rc.receipt.receipt_id, rc]));
+  let frontier = [signRc];
+  for (let depth = 0; depth < 4 && frontier.length; depth++) {
+    const next = [];
+    for (const rc of frontier) {
+      for (const id of rc.execution_outcome?.outcome?.receipt_ids ?? []) {
+        const child = byId.get(id);
+        if (!child || child.receipt.receiver_id !== CONTRACT) continue;
+        const names = (child.receipt.receipt?.Action?.actions ?? []).filter((a) => a.FunctionCall).map((a) => a.FunctionCall.method_name);
+        const hit = names.find((n) => CALLBACKS.includes(n));
+        if (hit) return { receipt_id: child.receipt.receipt_id, method: hit, status: statusOf(child.execution_outcome?.outcome) };
+        next.push(child);
+      }
+    }
+    frontier = next;
+  }
+  return null;
 }
 
 export function txKind(methods) {
@@ -73,7 +96,6 @@ export function txKind(methods) {
 export function parseTx(tx) {
   const recs = signerReceipts(tx);
   const methods = recs.map((r) => r.method);
-  const callback = recs.find((r) => CALLBACKS.includes(r.method));
   const base = {
     tx_hash: tx.transaction.hash,
     tx_block_height: tx.execution_outcome.block_height,
@@ -83,9 +105,11 @@ export function parseTx(tx) {
   };
   return recs.map((r) => {
     const row = { ...base, receipt_id: r.receipt_id, method: r.method, predecessor: r.predecessor, receipt_status: r.status,
-      domain_id: "", key_version: "", path: "", payload_type: "", payload_hash: "", callback_method: "", callback_status: "", fulfilled: "" };
+      domain_id: "", key_version: "", path: "", payload_type: "", payload_hash: "", callback_receipt_id: "", callback_method: "", callback_status: "", fulfilled: "" };
     if (r.method === "sign") {
       Object.assign(row, parseSignArgs(decodeArgs(r.args)));
+      const callback = findCallback(tx, r.rc);
+      row.callback_receipt_id = callback?.receipt_id ?? "";
       row.callback_method = callback?.method ?? "";
       row.callback_status = callback?.status ?? "";
       row.fulfilled = callback && callback.status === "Success" ? 1 : 0;

@@ -5,11 +5,11 @@
 // Usage:
 //   node scripts/reconcile-units.mjs --from 223960000 --to 223960300 --out docs/evidence/gate1/window-A
 //
-// Read-only. No keys, no signing, no transactions. Rate limit: <= 3 requests/second (all hosts).
-// Dependencies: none (Node >= 18 built-ins only).
+// Read-only. No keys, no signing, no transactions. Rate limit: <= 3 requests/second (all hosts), see src/lib/http.mjs.
 
 import { mkdirSync, writeFileSync } from "node:fs";
 import { gzipSync } from "node:zlib";
+import { requestJson, rpcCall, stats } from "../src/lib/http.mjs";
 
 const CONTRACT = "v1.signer";
 const FASTNEAR_TX = "https://tx.main.fastnear.com";
@@ -28,44 +28,9 @@ if (!Number.isInteger(FROM) || !Number.isInteger(TO) || TO <= FROM || !OUT) {
   process.exit(2);
 }
 
-// ---- rate-limited fetch with retry --------------------------------------------------------
-const SPACING_MS = 350; // ~2.9 req/s, below the approved 4 req/s ceiling
-let nextSlot = 0;
-let calls = 0;
-const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
-async function paced(fn) {
-  const now = Date.now();
-  const wait = Math.max(0, nextSlot - now);
-  nextSlot = Math.max(now, nextSlot) + SPACING_MS;
-  if (wait) await sleep(wait);
-  calls++;
-  return fn();
-}
-async function postJson(url, body) {
-  let lastErr;
-  for (let attempt = 0; attempt < 6; attempt++) {
-    try {
-      const res = await paced(() =>
-        fetch(url, { method: "POST", headers: { "content-type": "application/json" }, body: JSON.stringify(body), signal: AbortSignal.timeout(60000) }),
-      );
-      if (res.status === 429 || res.status >= 500) throw new Error(`HTTP ${res.status}`);
-      return await res.json();
-    } catch (e) {
-      lastErr = e;
-      await sleep(1500 * (attempt + 1));
-    }
-  }
-  throw new Error(`giving up on ${url}: ${lastErr}`);
-}
-const rpc = async (method, params) => {
-  const d = await postJson(RPC, { jsonrpc: "2.0", id: 1, method, params });
-  if (d.error) {
-    const e = new Error(`${method}: ${JSON.stringify(d.error).slice(0, 200)}`);
-    e.rpc = d.error;
-    throw e;
-  }
-  return d.result;
-};
+// ---- rate-limited requests with exponential backoff (shared client, <= 3 req/s) -----------
+const postJson = (url, body) => requestJson(url, body);
+const rpc = (method, params) => rpcCall(RPC, method, params);
 
 // ---- 1. ground truth: receipts executed on v1.signer per block (from RPC state changes) ---
 const gt = new Map(); // receipt_id -> exec block height
@@ -192,6 +157,7 @@ for (const t of signTxs) {
 const checks = [
   { id: "A", what: "every receipt executed on v1.signer in window (RPC state changes) belongs to a tx listed by FastNEAR", pass: unmappedGt.length === 0, detail: `unmapped=${unmappedGt.length}` },
   { id: "B", what: "every tx-tree receipt on v1.signer executed in window appears in RPC ground truth", pass: treeInWindowButNotInGt.length === 0, detail: `missing_in_ground_truth=${treeInWindowButNotInGt.length}` },
+  { id: "B'", what: "post-hoc variant of B: every SUCCESSFUL tx-tree receipt on v1.signer executed in window appears in ground truth (account_changes does not record failed receipts)", pass: treeInWindowButNotInGt.filter((r) => r.status !== "Failure").length === 0, detail: `successful_missing=${treeInWindowButNotInGt.filter((r) => r.status !== "Failure").length}, failed_missing=${treeInWindowButNotInGt.filter((r) => r.status === "Failure").length}` },
   { id: "C", what: "FastNEAR txs_count for [from,to) equals the number of listed txs with tx block in [from,to)", pass: countWanted === inWindowTxs.length, detail: `txs_count=${countWanted} listed=${inWindowTxs.length}` },
   { id: "D", what: "every listed tx really contains a FunctionCall receipt on v1.signer (no false positives)", pass: falsePositiveTxs.length === 0, detail: `false_positive_txs=${falsePositiveTxs.length}` },
 ];
@@ -200,7 +166,7 @@ const summary = {
   contract: CONTRACT,
   rpc: RPC,
   window: { from: FROM, to_exclusive: TO, blocks: TO - FROM, skipped_heights: skipped.length },
-  requests_made: calls,
+  requests_made: stats.requests,
   units: {
     transactions_touching_contract_in_window: inWindowTxs.length,
     receipts_executed_on_contract_in_window: gt.size,
@@ -210,7 +176,8 @@ const summary = {
     sign_receipt_txs_and_their_outcome: signOutcome,
   },
   checks,
-  verdict: checks.every((c) => c.pass) ? "PASS" : "FAIL",
+  verdict: checks.filter((c) => c.id !== "B'").every((c) => c.pass) ? "PASS" : "FAIL", // literal pre-registered checks A, B, C, D
+  verdict_with_b_prime: checks.filter((c) => c.id !== "B").every((c) => c.pass) ? "PASS" : "FAIL", // A, B', C, D
 };
 
 mkdirSync(OUT, { recursive: true });

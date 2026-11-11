@@ -42,8 +42,8 @@ for (const [month, starts] of byMonthStarts) {
   if (distinct < starts.length) repeatedClusters[month] = starts.length - distinct;
 }
 const { nodes } = classifySigners(rows);
-const COLS = ["month", "cluster_id", "census", "tx_hash", "tx_block_height", "tx_time_utc", "tx_signer", "tx_signer_class", "tx_kind", "receipt_id", "method", "predecessor", "receipt_status",
-  "domain_id", "key_version", "path", "payload_type", "payload_hash", "callback_method", "callback_status", "fulfilled"];
+const COLS = ["month", "cluster_id", "census", "tx_hash", "tx_block_height", "tx_signer", "tx_signer_class", "tx_kind", "method", "predecessor", "receipt_status",
+  "domain_id", "key_version", "path", "payload_type", "payload_hash", "callback_receipt_id", "callback_method", "callback_status", "fulfilled"];
 writeFileSync(`${ROOT}data/derived/sample_parsed.csv`, toCsv(COLS, rows));
 writeFileSync(`${ROOT}data/derived/sample_clusters.csv`, toCsv(["cluster_id", "month", "census", "txs_listed", "txs_detailed", "missing_hashes", "first_tx_height", "last_tx_height"], clusters));
 writeFileSync(`${ROOT}data/derived/mpc_node_accounts.json`, JSON.stringify(nodes, null, 1) + "\n");

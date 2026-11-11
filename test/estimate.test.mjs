@@ -8,7 +8,7 @@ function rows(cluster, month, census, txs) {
   for (const t of txs) {
     const tx_hash = `tx${++txn}`;
     const base = { cluster_id: cluster, month, census: census ? 1 : 0, tx_hash, tx_kind: t.kind, tx_signer_class: t.cls ?? "other", receipt_status: "Success", callback_method: "", callback_status: "", fulfilled: "", payload_hash: "", domain_id: "", key_version: "", path: "" };
-    for (const [i, who] of (t.signs ?? []).entries()) out.push({ ...base, method: "sign", predecessor: who, fulfilled: t.fulfilled === false ? 0 : 1, payload_hash: t.sameKey ? "same" : `p${txn}_${i}`, path: "x" });
+    for (const [i, who] of (t.signs ?? []).entries()) out.push({ ...base, method: "sign", predecessor: who, receipt_status: t.signFailed ? "Failure" : "Success", fulfilled: t.fulfilled === false ? 0 : 1, payload_hash: t.sameKey ? "same" : `p${txn}_${i}`, path: "x" });
     if (t.kind === "respond") out.push({ ...base, method: "respond", predecessor: "node", receipt_status: t.failed ? "Failure" : "Success" });
     if (!t.signs && t.kind !== "respond") out.push({ ...base, method: "submit_participant_info", predecessor: "node" });
   }
@@ -23,6 +23,7 @@ describe("clusterStats", () => {
     expect(c.n_tx).toBe(5);
     expect(c.sign).toBe(3);
     expect(c.fulfilled).toBe(2);
+    expect(c.sign_failed).toBe(0);
     expect(c.dup_extra).toBe(1); // two sign receipts share one identical key
     expect(c.respond_total).toBe(2);
     expect(c.respond_failed).toBe(1);
@@ -83,6 +84,14 @@ describe("estimates", () => {
     expect(point.totals.requester_requests.A).toBeCloseTo(250, 9);
     const sumShares = Object.values(point.totals.requester_share).reduce((s, v) => s + v, 0);
     expect(sumShares).toBeCloseTo(1, 9);
+  });
+
+  it("sign receipts rejected by the contract are counted as requests and reported as a failed rate", () => {
+    const r = rows("F-c0", "2026-04", false, [req(1, "A"), req(1, "A", { signFailed: true, fulfilled: false }), { kind: "respond", cls: "mpc_node" }, { kind: "respond", cls: "mpc_node" }]);
+    const { point } = estimateWithBootstrap(clusterStats(r), [{ month: "2026-04", txs_count: "40", partial: "0" }], { seed: 1, replicates: 10 });
+    expect(point.totals.requests).toBeCloseTo(20, 9); // 2 signs / 4 txs x 40
+    expect(point.totals.sign_receipt_failed_rate).toBeCloseTo(0.5, 9);
+    expect(point.totals.fulfilled_rate).toBeCloseTo(0.5, 9);
   });
 
   it("estimateFromSums handles an empty sample safely", () => {

@@ -19,14 +19,18 @@ Observed anatomy of one signature (two reconciliation windows of 300 blocks each
 * a separate **node-response tx** signed by an MPC node holding a `respond` receipt.
 
 So one request is *roughly* two txs and three receipts, **but that is not a conversion ratio**. The ratio moves with failed duplicate responses and admin txs
-(window A: 88 txs for 43 requests; window B: 86 txs for 43 requests, 5 of 43 `respond` receipts failed). The census therefore never divides tx totals by two:
+(window A: 88 txs for 43 requests; window B: 86 txs for 43 requests, 5 of 43 `respond` receipts failed; early-2025 window: 38 txs for 10 requests, 17 of 26 `respond` receipts failed).
+The census therefore never divides tx totals by two:
 it measures the fraction of sign receipts per tx in a sample (section 4).
 
 ### Definitions
 
-* **request** = an executed `sign` receipt on `v1.signer` (its status may be a failure; the fulfilled rate is reported separately).
-* **fulfilled** = the request's tx contains a successful callback `return_signature_and_clean_state_on_success`
-  (contract version of 2024: `return_signature_on_finish`). Verified in both windows: 43/43 requests fulfilled each.
+* **request** = an executed `sign` receipt on `v1.signer`. Its own status may be a failure (the contract rejects a repeat of a still-pending identical request with
+  "Signature request has already been submitted"); such receipts still count as requests and are reported separately as `sign_receipt_failed_rate`
+  (sample: 2.3% of all sign receipts overall, 45% in 2025-03, ~0% in most other months).
+* **fulfilled** = the callback found among the descendant receipts of **that** sign receipt (breadth-first over `outcome.receipt_ids`, depth ≤ 4) succeeded.
+  Callback names: `return_signature_and_clean_state_on_success` (current; sampled from 2025-02 on) and `return_signature_on_finish` (legacy contract version, until 2025-02;
+  sign → sign_helper → return_signature_on_finish). A tx can hold several sign receipts (3,028 such txs in the sample), so the callback is matched per receipt, never per tx.
 * **requester** = `predecessor_id` of the `sign` receipt. **Not** the tx `signer_id`: tx signers are relayers, so the tx signer says nothing about who asked for the signature.
 * **`respond` receipts are never a request count.** Evidence (`docs/evidence/gate1b`, E1): all 7 failed `respond` receipts in window B were late duplicates; each had an earlier successful
   `respond` from another MPC node for the same (payload, tweak, domain). Also, identical requests (same payload, path, caller) can be closed by one `respond`
@@ -86,7 +90,8 @@ Every figure in `out/metrics.json` carries its interval, plus the source files, 
 
 `scripts/reconcile-units.mjs` compares, for a narrow block window, (a) receipts executed on `v1.signer` according to RPC state changes (`account_changes`, cause `receipt_processing`)
 with (b) the tx list of FastNEAR and the full receipt tree of each tx from RPC `tx_status`. Pre-registered checks A–D; window B failed check B literally because `account_changes` does not record failed receipts
-(explained in `docs/evidence/gate1/README.md`; B′ = "successful receipts only" passes). STEP 4 repeats the check on two old windows through the archival RPC (`docs/evidence/step4`).
+(explained in `docs/evidence/gate1/README.md`; B′ = "successful receipts only" passes). STEP 4 repeated the check on two old windows through the archival RPC
+(`docs/evidence/step4/README.md`): early 2025 (A, B′, C, D pass; B fails literally for the same reason, 17 failed duplicate `respond` receipts) and the busiest month 2026-05 (A, B, B′, C, D all pass).
 
 ## 6. Known limits and unknowns
 
@@ -94,6 +99,7 @@ with (b) the tx list of FastNEAR and the full receipt tree of each tx from RPC `
   The bootstrap interval does not include this bias, only between-cluster variability. Months with a few very bursty actors (e.g. the benchmark account `tx-bench.near`) have wider intervals.
 * **Overlap.** Clusters of one month can overlap when a month is small; overlapping txs are counted in both clusters (the bootstrap is then conservative).
 * **Month attribution.** A request is attributed to the month of its tx, not of the callback execution.
+* **Unmatched callbacks.** `fulfilled` is 0 when no callback is found in the descendant receipts (rejected or pending sign receipts); pending requests at the very tip of the chain are not separated from failed ones.
 * **Only successful lookups.** Txs whose details the API did not return are listed per cluster (`missing_hashes` in `sample_clusters.csv`).
 * **Independent months.** The bootstrap treats months as independent.
 * **Unknown:** the cause of request bursts (single actors vs. organic growth), the mapping of `path` strings to target chains (not part of this step), and the exact relation between identical requests and `respond` receipts (hypothesis: one respond can resolve several pending requests with the same key; not proven).

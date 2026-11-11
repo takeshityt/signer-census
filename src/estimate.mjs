@@ -16,7 +16,7 @@ export function clusterStats(rows) {
   }
   const out = [];
   for (const c of byCluster.values()) {
-    const s = { cluster_id: c.cluster_id, month: c.month, census: c.census, n_tx: 0, sign: 0, fulfilled: 0, dup_extra: 0, respond_failed: 0, respond_total: 0, kinds: {}, classes: {}, requesters: {} };
+    const s = { cluster_id: c.cluster_id, month: c.month, census: c.census, n_tx: 0, sign: 0, sign_failed: 0, fulfilled: 0, dup_extra: 0, respond_failed: 0, respond_total: 0, kinds: {}, classes: {}, requesters: {} };
     for (const k of KINDS) s.kinds[k] = 0;
     for (const k of CLASSES) s.classes[k] = 0;
     const seenTx = new Set();
@@ -30,6 +30,7 @@ export function clusterStats(rows) {
       }
       if (r.method === "sign") {
         s.sign++;
+        if (r.receipt_status === "Failure") s.sign_failed++; // the sign receipt itself was rejected by the contract (e.g. "already submitted")
         if (Number(r.fulfilled) === 1) s.fulfilled++;
         s.requesters[r.predecessor] = (s.requesters[r.predecessor] ?? 0) + 1;
         signKeys.add([r.payload_hash, r.domain_id, r.key_version, r.path, r.predecessor].join("|"));
@@ -43,10 +44,10 @@ export function clusterStats(rows) {
 }
 
 const addInto = (acc, s) => {
-  for (const k of ["n_tx", "sign", "fulfilled", "dup_extra", "respond_failed", "respond_total"]) acc[k] += s[k];
+  for (const k of ["n_tx", "sign", "sign_failed", "fulfilled", "dup_extra", "respond_failed", "respond_total"]) acc[k] += s[k];
   for (const g of ["kinds", "classes", "requesters"]) for (const [k, v] of Object.entries(s[g])) acc[g][k] = (acc[g][k] ?? 0) + v;
 };
-const emptySums = () => ({ n_tx: 0, sign: 0, fulfilled: 0, dup_extra: 0, respond_failed: 0, respond_total: 0, kinds: {}, classes: {}, requesters: {} });
+const emptySums = () => ({ n_tx: 0, sign: 0, sign_failed: 0, fulfilled: 0, dup_extra: 0, respond_failed: 0, respond_total: 0, kinds: {}, classes: {}, requesters: {} });
 export function sumClusters(list) { const a = emptySums(); for (const s of list) addInto(a, s); return a; }
 
 const ratio = (a, b) => (b > 0 ? a / b : 0);
@@ -54,7 +55,7 @@ const ratio = (a, b) => (b > 0 ? a / b : 0);
 /** Point estimates from per-month sums. `months`: [{month, txTotal, partial, sums}]. Returns a nested object of plain numbers. */
 export function estimateFromSums(months, topTotal = 15, topMonth = 5, keepRequesters = null) {
   const res = { months: {}, totals: {} };
-  const tot = { tx: 0, req: 0, fulfilled: 0, dup: 0, respondFailedTx: 0, kinds: {}, classes: {}, requesters: {} };
+  const tot = { tx: 0, req: 0, fulfilled: 0, signFailed: 0, dup: 0, respondFailedTx: 0, kinds: {}, classes: {}, requesters: {} };
   for (const m of months) {
     const { sums: s, txTotal: N } = m;
     const f = ratio(N, s.n_tx); // scale from sample txs to all txs of the month
@@ -64,6 +65,7 @@ export function estimateFromSums(months, topTotal = 15, topMonth = 5, keepReques
       requests: req,
       requests_per_tx: ratio(s.sign, s.n_tx),
       fulfilled_rate: ratio(s.fulfilled, s.sign),
+      sign_receipt_failed_rate: ratio(s.sign_failed, s.sign),
       duplicate_request_rate: ratio(s.dup_extra, s.sign),
       failed_respond_share_of_respond_receipts: ratio(s.respond_failed, s.respond_total),
       tx_kind_share: Object.fromEntries(KINDS.map((k) => [k, ratio(s.kinds[k] ?? 0, s.n_tx)])),
@@ -74,7 +76,7 @@ export function estimateFromSums(months, topTotal = 15, topMonth = 5, keepReques
     const names = keepRequesters ?? Object.keys(s.requesters);
     for (const p of names) { rec.requester_share[p] = ratio(s.requesters[p] ?? 0, s.sign); rec.requester_requests[p] = (s.requesters[p] ?? 0) * f; }
     res.months[m.month] = rec;
-    tot.tx += N; tot.req += req; tot.fulfilled += rec.fulfilled_rate * req; tot.dup += rec.duplicate_request_rate * req;
+    tot.tx += N; tot.req += req; tot.fulfilled += rec.fulfilled_rate * req; tot.signFailed += rec.sign_receipt_failed_rate * req; tot.dup += rec.duplicate_request_rate * req;
     for (const k of KINDS) tot.kinds[k] = (tot.kinds[k] ?? 0) + (s.kinds[k] ?? 0) * f;
     for (const k of CLASSES) tot.classes[k] = (tot.classes[k] ?? 0) + (s.classes[k] ?? 0) * f;
     for (const [p, v] of Object.entries(s.requesters)) tot.requesters[p] = (tot.requesters[p] ?? 0) + v * f;
@@ -84,6 +86,7 @@ export function estimateFromSums(months, topTotal = 15, topMonth = 5, keepReques
     requests: tot.req,
     requests_per_tx: ratio(tot.req, tot.tx),
     fulfilled_rate: ratio(tot.fulfilled, tot.req),
+    sign_receipt_failed_rate: ratio(tot.signFailed, tot.req),
     duplicate_request_rate: ratio(tot.dup, tot.req),
     tx_kind_share: Object.fromEntries(KINDS.map((k) => [k, ratio(tot.kinds[k] ?? 0, tot.tx)])),
     tx_signer_class_share: Object.fromEntries(CLASSES.map((k) => [k, ratio(tot.classes[k] ?? 0, tot.tx)])),

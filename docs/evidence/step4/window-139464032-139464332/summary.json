@@ -1,0 +1,64 @@
+{
+  "contract": "v1.signer",
+  "rpc": "https://archival-rpc.mainnet.fastnear.com",
+  "window": {
+    "from": 139464032,
+    "to_exclusive": 139464332,
+    "blocks": 300,
+    "skipped_heights": 0
+  },
+  "requests_made": 470,
+  "units": {
+    "transactions_touching_contract_in_window": 38,
+    "receipts_executed_on_contract_in_window": 47,
+    "receipts_by_method_in_window": {
+      "sign": 10,
+      "sign_helper": 10,
+      "respond": 9,
+      "clear_state_on_finish": 9,
+      "return_signature_on_finish": 9
+    },
+    "tx_shapes_in_window": {
+      "respond×1": 28,
+      "clear_state_on_finish×1 + return_signature_on_finish×1 + sign×1 + sign_helper×1": 10
+    },
+    "sign_receipts_in_window": 10,
+    "sign_receipt_txs_and_their_outcome": {
+      "sign+return(ok)": 10
+    }
+  },
+  "checks": [
+    {
+      "id": "A",
+      "what": "every receipt executed on v1.signer in window (RPC state changes) belongs to a tx listed by FastNEAR",
+      "pass": true,
+      "detail": "unmapped=0"
+    },
+    {
+      "id": "B",
+      "what": "every tx-tree receipt on v1.signer executed in window appears in RPC ground truth",
+      "pass": false,
+      "detail": "missing_in_ground_truth=17"
+    },
+    {
+      "id": "B'",
+      "what": "post-hoc variant of B: every SUCCESSFUL tx-tree receipt on v1.signer executed in window appears in ground truth (account_changes does not record failed receipts)",
+      "pass": true,
+      "detail": "successful_missing=0, failed_missing=17"
+    },
+    {
+      "id": "C",
+      "what": "FastNEAR txs_count for [from,to) equals the number of listed txs with tx block in [from,to)",
+      "pass": true,
+      "detail": "txs_count=38 listed=38"
+    },
+    {
+      "id": "D",
+      "what": "every listed tx really contains a FunctionCall receipt on v1.signer (no false positives)",
+      "pass": true,
+      "detail": "false_positive_txs=0"
+    }
+  ],
+  "verdict": "FAIL",
+  "verdict_with_b_prime": "PASS"
+}

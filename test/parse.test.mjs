@@ -43,6 +43,22 @@ describe("parseTx on real FastNEAR fixtures", () => {
     expect(bad[0].tx_kind).toBe("respond");
   });
 
+  it("multi-sign tx (real): each sign receipt is matched to ITS OWN callback receipt, not to the first callback of the tx", () => {
+    const rows = parseTx(fx.multi_sign_tx);
+    const signs = rows.filter((r) => r.method === "sign");
+    expect(signs.length).toBeGreaterThanOrEqual(2);
+    const cbIds = signs.map((r) => r.callback_receipt_id);
+    expect(cbIds.every(Boolean)).toBe(true);
+    expect(new Set(cbIds).size).toBe(signs.length); // one distinct callback per sign
+    for (const id of cbIds) expect(rows.some((r) => r.receipt_id === id)).toBe(true);
+  });
+
+  it("rejected sign (real, 'Signature request has already been submitted'): status Failure, no callback, fulfilled = 0", () => {
+    const sign = parseTx(fx.rejected_sign_already_submitted).filter((r) => r.method === "sign");
+    expect(sign.length).toBeGreaterThanOrEqual(1);
+    expect(sign.every((r) => r.receipt_status === "Failure" && r.callback_method === "" && r.fulfilled === 0)).toBe(true);
+  });
+
   it("admin tx is classified as admin_or_other", () => {
     expect(parseTx(fx.admin_submit_participant_info)[0].tx_kind).toBe("admin_or_other");
   });
