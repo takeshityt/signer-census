@@ -1,0 +1,7 @@
+{
+  "seed": 424242,
+  "bootstrapReplicates": 2000,
+  "topRequestersTotal": 15,
+  "topRequestersPerMonth": 5,
+  "note": "Cluster bootstrap: clusters (pages of <=200 consecutive txs) are resampled with replacement within each month; census months are not resampled."
+}

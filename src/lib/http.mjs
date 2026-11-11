@@ -1,7 +1,7 @@
 // Rate-limited JSON client with exponential backoff. Keyless, read-only.
 // Global budget: at most ~3 requests/second (CLAUDE.md). On HTTP 429 the spacing grows; it relaxes slowly on success.
 const MIN_SPACING_MS = 340;
-const MAX_SPACING_MS = 2500;
+const MAX_SPACING_MS = 700; // 429s were measured to be random server-side load shedding, not caused by our pace (docs/evidence/gate1b)
 let spacing = MIN_SPACING_MS;
 let nextSlot = 0;
 export const stats = { requests: 0, retries: 0, http429: 0, http5xx: 0, otherErrors: 0 };
@@ -30,14 +30,14 @@ export async function requestJson(url, body, { maxAttempts = 8, timeoutMs = 6000
       });
       if (res.status === 429) {
         stats.http429++;
-        spacing = Math.min(MAX_SPACING_MS, spacing * 1.5);
+        spacing = Math.min(MAX_SPACING_MS, spacing * 1.1);
         throw new Error("HTTP 429");
       }
       if (res.status >= 500) {
         stats.http5xx++;
         throw new Error(`HTTP ${res.status}`);
       }
-      spacing = Math.max(MIN_SPACING_MS, spacing * 0.97);
+      spacing = Math.max(MIN_SPACING_MS, spacing * 0.9);
       const text = await res.text();
       try {
         return JSON.parse(text);
@@ -48,7 +48,7 @@ export async function requestJson(url, body, { maxAttempts = 8, timeoutMs = 6000
       lastErr = e;
       if (!/HTTP 429|HTTP 5/.test(String(e))) stats.otherErrors++;
       stats.retries++;
-      await sleep(Math.min(60000, 1000 * 2 ** attempt) + Math.random() * 300);
+      await sleep(Math.min(60000, 700 * 2 ** attempt) + Math.random() * 300);
     }
   }
   throw new Error(`giving up on ${url}: ${lastErr}`);

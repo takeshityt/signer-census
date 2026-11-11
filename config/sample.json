@@ -1,0 +1,8 @@
+{
+  "seed": 20261111,
+  "clustersPerMonth": 20,
+  "pageSize": 200,
+  "detailBatch": 20,
+  "censusThresholdTxs": 4000,
+  "note": "Months with txs_count <= censusThresholdTxs (= clustersPerMonth * pageSize) are fetched completely (census, no sampling error). Other months: clustersPerMonth random start heights, one page of <= pageSize txs each."
+}
