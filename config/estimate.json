@@ -12,5 +12,46 @@
       "sweat-relayer.near"
     ]
   ],
-  "pairs_note": "share of a requester's sign receipts whose tx was signed by the given account (relayer); used for the FastAuth -> Sweat relayer evidence"
+  "pairs_note": "share of a requester's sign receipts whose tx was signed by the given account (relayer); used for the FastAuth -> Sweat relayer evidence",
+  "series": {
+    "all": {
+      "exclude": []
+    },
+    "excluding_benchmark": {
+      "exclude": [
+        "@benchmark"
+      ]
+    },
+    "structural": {
+      "exclude": [
+        "@benchmark",
+        "fast-auth.near"
+      ]
+    },
+    "bridges": {
+      "include": [
+        "omni.bridge.near",
+        "btc-connector.bridge.near",
+        "zcash-connector.bridge.near"
+      ]
+    }
+  },
+  "series_note": "@benchmark = accounts labeled or suspected benchmark-test in labels.yaml. structural = all requests minus benchmark/test and minus fast-auth.near (the integration being wound down).",
+  "chainGroups": {
+    "near_native": [
+      "near"
+    ],
+    "other_chains": [
+      "bitcoin",
+      "zcash",
+      "evm",
+      "solana",
+      "multi",
+      "other"
+    ],
+    "unknown": [
+      "unknown"
+    ]
+  },
+  "chainGroups_note": "share of requests by target: NEAR itself vs other chains vs explicit unknown (from config/chain_rules.yaml)"
 }

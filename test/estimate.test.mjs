@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { clusterStats, estimateWithBootstrap, estimateFromSums, sumClusters, flatten, trackedNames } from "../src/estimate.mjs";
+import { clusterStats, estimateWithBootstrap, estimateFromSums, sumClusters, flatten, trackedNames, concentration } from "../src/estimate.mjs";
 
 // helper: build parsed-row fixtures. tx spec: {kind, cls, signs: [requester...], fulfilled?, sameKey?, signFailed?, failed?, path?, domain?}
 let txn = 0;
@@ -127,6 +127,31 @@ describe("estimates", () => {
     const { point } = estimateWithBootstrap(clusterStats(r), [{ month: "2026-06", txs_count: "40", partial: "0" }], { seed: 1, replicates: 10, requesters: ["fa.near"], pairs: [["fa.near", "relayer-a.near"]] });
     expect(point.months["2026-06"].pairs["fa.near<-relayer-a.near"]).toBeCloseTo(0.75, 9);
     expect(point.totals.pairs["fa.near<-relayer-a.near"]).toBeCloseTo(0.75, 9);
+  });
+
+  it("concentration: top-1, top-3, HHI and requesters >= 1%", () => {
+    const c = concentration({ a: 50, b: 30, c: 15, d: 4, e: 0.5, f: 0.5 });
+    expect(c.top1_share).toBeCloseTo(0.5, 9);
+    expect(c.top3_share).toBeCloseTo(0.95, 9);
+    expect(c.hhi).toBeCloseTo(0.25 + 0.09 + 0.0225 + 0.0016 + 2 * 0.000025, 9);
+    expect(c.requesters_ge_1pct).toBe(4);
+    expect(concentration({}).hhi).toBe(0);
+  });
+
+  it("series (include / exclude) and target groups add up", () => {
+    const r = rows("S-c0", "2026-07", false, [req(2, "A", { path: "n" }), req(1, "B", { path: "x" }), req(1, "C", { path: "x" }), ...resp(4)]);
+    const ctx = { chainOf: (row) => (row.path === "n" ? "near" : "unknown") };
+    const { point } = estimateWithBootstrap(clusterStats(r, ctx), [{ month: "2026-07", txs_count: "80", partial: "0" }], {
+      ...OPT, series: { all: { exclude: [] }, noA: { exclude: ["A"] }, onlyB: { include: ["B"] } }, chainGroups: { near_native: ["near"], unknown: ["unknown"] } });
+    const m = point.months["2026-07"];
+    // 7 txs (A's tx holds 2 signs) with 4 signs; month total 80 -> scale 80/7
+    expect(m.series.all).toBeCloseTo(m.requests, 9);
+    expect(m.series.all).toBeCloseTo((4 * 80) / 7, 9);
+    expect(m.series.noA).toBeCloseTo((2 * 80) / 7, 9);
+    expect(m.series.onlyB).toBeCloseTo(80 / 7, 9);
+    expect(m.chain_groups_share.near_native + m.chain_groups_share.unknown).toBeCloseTo(1, 9);
+    expect(point.totals.series.noA).toBeCloseTo((2 * 80) / 7, 9);
+    expect(point.totals.concentration.top1_share).toBeCloseTo(0.5, 9);
   });
 
   it("estimateFromSums handles an empty sample safely", () => {

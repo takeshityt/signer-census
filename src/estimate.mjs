@@ -83,6 +83,19 @@ export function sumClusters(list, weights = null) { const a = emptySums(); list.
 
 const ratio = (a, b) => (b > 0 ? a / b : 0);
 
+/** Concentration of requests across requesters: top-1 and top-3 share, Herfindahl-Hirschman index (sum of squared shares, 0..1), number of requesters with >= 1% share. */
+export function concentration(counts) {
+  const vals = Object.values(counts).filter((v) => v > 0).sort((a, b) => b - a);
+  const tot = vals.reduce((a, b) => a + b, 0);
+  if (!tot) return { top1_share: 0, top3_share: 0, hhi: 0, requesters_ge_1pct: 0 };
+  const sh = vals.map((v) => v / tot);
+  return { top1_share: sh[0], top3_share: sh.slice(0, 3).reduce((a, b) => a + b, 0), hhi: sh.reduce((a, b) => a + b * b, 0), requesters_ge_1pct: sh.filter((x) => x >= 0.01).length };
+}
+const seriesValue = (def, counts, total, f) => {
+  if (def.include) return def.include.reduce((a, n) => a + (counts[n] ?? 0), 0) * f;
+  return total - (def.exclude ?? []).reduce((a, n) => a + (counts[n] ?? 0), 0) * f;
+};
+
 /** Names to track per group (stable key sets across bootstrap replicates). */
 export function trackedNames(clusters, { requesters = [], extraRequesters = 0 } = {}) {
   const tot = {};
@@ -106,12 +119,16 @@ export function estimateFromSums(months, opts = {}) {
   const names = opts.names ?? { kinds: KINDS, classes: CLASSES, methods: [], categories: [], confidences: [], chains: [], chain_confidences: [], keytypes: [], requesters: [] };
   const benchmark = opts.benchmarkAccounts ?? [];
   const drivers = opts.drivers ?? [];
+  const series = opts.series ?? {}; // { name: { include: [accounts] } | { exclude: [accounts] } }
+  const chainGroups = opts.chainGroups ?? {}; // { name: [chain families] }
   const pairs = opts.pairs ?? []; // [[requester, txSigner]]: share of the requester's sign receipts sent by that tx signer (e.g. a relayer)
   const trackedFailed = names.requesters;
   const res = { months: {}, totals: null };
   const T = { tx: 0, req: 0, receipts: 0, fulfilled: 0, signFailed: 0, dup: 0, respondFailed: 0, respondTotal: 0, identified: 0 };
   for (const g of ALL_GROUPS) T[g] = {};
   T.pairs = {};
+  T.allReq = {};
+  T.chainGroups = {};
   const nameSet = (g) => (g === "failed_by_requester" ? trackedFailed : names[g]);
 
   for (const m of months) {
@@ -138,6 +155,11 @@ export function estimateFromSums(months, opts = {}) {
       }
     }
     rec.sign_failed_est = s.sign_failed * f;
+    rec.concentration = concentration(s.requesters);
+    rec.series = Object.fromEntries(Object.entries(series).map(([k, d]) => [k, seriesValue(d, s.requesters, req, f)]));
+    rec.chain_groups_share = Object.fromEntries(Object.entries(chainGroups).map(([k, fams]) => [k, ratio(fams.reduce((a, x) => a + (s.chains[x] ?? 0), 0), s.sign)]));
+    for (const [a, v] of Object.entries(s.requesters)) T.allReq[a] = (T.allReq[a] ?? 0) + v * f;
+    for (const [k, fams] of Object.entries(chainGroups)) T.chainGroups[k] = (T.chainGroups[k] ?? 0) + fams.reduce((a, x) => a + (s.chains[x] ?? 0), 0) * f;
     if (pairs.length) { rec.pairs = {}; for (const [a, b] of pairs) rec.pairs[pairKey(a, b)] = ratio(s.req_signer[pairKey(a, b)] ?? 0, s.requesters[a] ?? 0); }
     for (const [a, b] of pairs) { T.pairs[pairKey(a, b)] = (T.pairs[pairKey(a, b)] ?? 0) + (s.req_signer[pairKey(a, b)] ?? 0) * f; }
     T.identified += rec.identified_share * req;
@@ -175,6 +197,9 @@ export function estimateFromSums(months, opts = {}) {
     for (const d of drivers) { const v = Object.values(res.months).reduce((a, r) => a + r.drivers[d], 0); tot.drivers[d] = v; used += v; }
     tot.drivers.__other = T.req - used;
   }
+  tot.concentration = concentration(T.allReq);
+  tot.series = Object.fromEntries(Object.keys(series).map((k) => [k, Object.values(res.months).reduce((a, r) => a + r.series[k], 0)]));
+  tot.chain_groups_share = Object.fromEntries(Object.keys(chainGroups).map((k) => [k, ratio(T.chainGroups[k] ?? 0, T.req)]));
   if (pairs.length) { tot.pairs = {}; for (const [a, b] of pairs) tot.pairs[pairKey(a, b)] = ratio(T.pairs[pairKey(a, b)] ?? 0, T.requesters[a] ?? 0); }
   res.totals = tot;
   return res;
@@ -206,7 +231,7 @@ export function estimateWithBootstrap(clusters, totals, opts) {
   for (const c of clusters) { if (!byMonth.has(c.month)) byMonth.set(c.month, []); byMonth.get(c.month).push(c); }
   const monthsList = totals.filter((t) => byMonth.has(t.month)).map((t) => ({ month: t.month, txTotal: Number(t.txs_count), partial: Number(t.partial) === 1, list: byMonth.get(t.month) }));
   const names = trackedNames(clusters, { requesters: [...(opts.requesters ?? []), ...(opts.drivers ?? [])], extraRequesters: opts.extraRequesters ?? 0 });
-  const eopts = { names, drivers: opts.drivers ?? [], benchmarkAccounts: opts.benchmarkAccounts ?? [], pairs: opts.pairs ?? [] };
+  const eopts = { names, drivers: opts.drivers ?? [], benchmarkAccounts: opts.benchmarkAccounts ?? [], pairs: opts.pairs ?? [], series: opts.series ?? {}, chainGroups: opts.chainGroups ?? {} };
   const toInput = (pick) => monthsList.map((m) => ({ month: m.month, txTotal: m.txTotal, sums: sumClusters(pick(m)) }));
 
   const point = estimateFromSums(toInput((m) => m.list), eopts);
