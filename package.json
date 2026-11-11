@@ -1,0 +1,22 @@
+{
+  "name": "signer-census",
+  "version": "0.1.0",
+  "description": "Reproducible, evidence-backed census of NEAR Chain Signatures usage (read-only).",
+  "type": "module",
+  "license": "MIT",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "vitest run",
+    "monthly": "node scripts/monthly-totals.mjs",
+    "sample": "node scripts/sample-details.mjs",
+    "parse": "node scripts/parse-sample.mjs",
+    "reproduce": "node src/reproduce.mjs",
+    "check:data": "node scripts/check-manifest.mjs"
+  },
+  "devDependencies": {
+    "vitest": "^5.1.0"
+  }
+}
