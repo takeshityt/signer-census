@@ -1,13 +1,13 @@
 # Signer Census — project rules (read before every task)
 
 ## What we build
-The first public, re-runnable census of NEAR Chain Signatures usage: how many signature requests, who requests them, for which chains, and how it changes over time — turned into an evidence-based long-term thesis for NEAR.
+A reproducible, evidence-backed census of NEAR Chain Signatures usage with a transparent methodology and a thesis: how many signature requests, who requests them, for which chains, and how it changes over time — turned into an evidence-based long-term thesis for NEAR. It acknowledges the existing proximity_team/v1signer Dune dashboard (cumulative tx counts, no labels, no chain breakdown) and never claims to be the "first public" dashboard.
 Hackathon: NEAR HACKATHON. Internal submit deadline 2026-11-13. Rules: https://nearhackathon.com/HACKATHON.md (they override everything here).
 Track: thesis ("Judged on the evidence, not the conviction").
 
 ## Hard rules
 - Read-only product. No private keys, seed phrases, signing or transactions. Ever.
-- Secrets (DUNE_API_KEY) only in .env, which is in .gitignore before the first commit; .env.example provided. Never read or print .env.
+- No API keys are needed anywhere (FastNEAR, public RPC and NearBlocks are used keyless); no paid services. Never create or commit keys. `.env` stays in .gitignore; never read or print it.
 - Never push, create/publish a repo, deploy, post on X or submit without my explicit "yes".
 - Every number in the dashboard, THESIS.md and README must be reproducible by a command and traceable to a query or a tx hash. If it can't be verified, don't show it.
 - No invented labels: every account label in labels.yaml has an evidence link.
@@ -15,6 +15,21 @@ Track: thesis ("Judged on the evidence, not the conviction").
 - Minimal dependencies; justify each new one in one line.
 - Unknowns are checked with real queries/calls, never assumed. If a fact is unverified, say so.
 - Tests (vitest) for core data logic: parsing, labeling, aggregation, verification.
+
+## Data sources (keyless)
+- Primary: FastNEAR tx API (`https://tx.main.fastnear.com`): exact `txs_count` per block range, tx lists, tx details.
+- Verification: `https://archival-rpc.mainnet.fastnear.com` (block, tx_status, account_changes) and NearBlocks API (`/v1/txns/<hash>`).
+- Not used: Dune (free plan is view-only, no API; MPP needs a wallet, which violates the no-keys rule), neardata (rate-limits quickly).
+- Client rate limit: at most 3 requests per second in total, exponential backoff on 429/5xx. FastNEAR `/v0/transactions` returns 429 at ~3 rps for ~30% of calls (docs/evidence/gate1b), so retries are mandatory.
+
+## Counting definitions (never mix these units)
+- transaction (tx) ≠ receipt ≠ request. One request normally = 2 txs (user-side sign tx + MPC-node respond tx) = 3 receipts, but this is NOT a conversion ratio: it varies with failed duplicates and admin txs.
+- request = an executed `sign` receipt on v1.signer.
+- fulfilled = that request's tx contains a successful `return_signature_and_clean_state_on_success` callback (legacy contract version: `return_signature_on_finish`).
+- requester = `predecessor_id` of the `sign` receipt. NOT the tx `signer_id`: tx signers are relayers (e.g. omni-relayer.bridge.near, sweat-relayer.near).
+- `respond` receipts are never a request count. A failed `respond` is a late duplicate answer (7/7 in docs/evidence/gate1b: each had an earlier successful respond for the same request).
+- Never use an unreconciled figure (26.4M NearBlocks receipts, 6.5M, 8.8M, Dune 6.9M) as a headline.
+- Sample-based numbers are always shown with a 95% confidence interval and never presented as exact totals.
 
 ## Working style
 - Work in GATEs. Stop at the end of every GATE and report in Russian:
@@ -25,3 +40,4 @@ Track: thesis ("Judged on the evidence, not the conviction").
 
 ## Positioning
 Not "nobody uses Chain Signatures". It is: "Chain Signatures is NEAR's invisible foundation — measured, with an honest section on what isn't there yet."
+Our claim: "a reproducible, evidence-backed census with transparent methodology and a thesis". Compare honestly with proximity_team/v1signer (and its TVL dashboard): they have a TVL metric we do not.
