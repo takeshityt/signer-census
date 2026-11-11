@@ -15,9 +15,13 @@
     "parse": "node scripts/parse-sample.mjs",
     "reproduce": "node src/reproduce.mjs",
     "check:data": "node scripts/check-manifest.mjs",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "build:site": "node scripts/build-site.mjs",
+    "site": "node scripts/serve-site.mjs"
   },
   "devDependencies": {
+    "@fontsource-variable/bricolage-grotesque": "^5.3.0",
+    "chart.js": "^4.6.1",
     "vitest": "^5.1.0"
   },
   "dependencies": {

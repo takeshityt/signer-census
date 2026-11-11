@@ -1,0 +1,13 @@
+{
+ "file": "verify-2026-11-11-seed20261112-n50.json",
+ "date": "2026-11-11",
+ "seed": 20261112,
+ "sample": 50,
+ "verified": 50,
+ "rpc_ok": 50,
+ "nearblocks_ok": 50,
+ "sources": [
+  "archival-rpc.mainnet.fastnear.com (EXPERIMENTAL_tx_status)",
+  "api.nearblocks.io (/v1/txns, /v2/txns/<hash>/receipts)"
+ ]
+}

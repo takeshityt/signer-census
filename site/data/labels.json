@@ -1,0 +1,349 @@
+[
+ {
+  "account": "fast-auth.near",
+  "category": "near-infra:fastauth",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Peersyst (operator of NEAR Auth / FastAuth per auth.near.org)",
+  "note": "FastAuth contract (operated by Peersyst): a JWT login maps to an MPC-derived Ed25519 key. Since 2026-04 ≈ 99.97% of its sign requests are sent by sweat-relayer.near and carry the issuer https://fastauth.swe.at (see dominant_integrator). The category stays FastAuth: the contract is shared NEAR infrastructure; Sweat is its dominant integrator. The Apr-2026 ramp has no announcement we could find.",
+  "evidence": [
+   {
+    "url": "https://auth.near.org",
+    "claim": "FAQ states \"NEAR Auth is built and operated by Peersyst as a public-good account-abstraction layer for the NEAR ecosystem\" and names the shared mainnet infrastructure \"fast-auth.near, jwt.fast-auth.near, v1.signer\"."
+   },
+   {
+    "url": "https://github.com/Peersyst/fast-auth/blob/main/contracts/fa/src/lib.rs",
+    "claim": "contracts/fa/src/lib.rs L539-540 build the MPC request as path: format!(\"{}#{}\", guard_id.clone(), user) with domain_id: self.mpc_domain_id (read on 2026-11-11)."
+   },
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call fast-auth.near.mpc_domain_id returned \"1\" (Ed25519 domain of v1.signer), matching domain_id=1 on all sampled sign receipts."
+   },
+   {
+    "url": "https://docs.near.org/web3-apps/tutorials/near-auth",
+    "claim": "NEAR docs: \"Each identity deterministically derives its own NEAR key, so the same login always controls the same account\"; the JS tab comment says \"A relayer submits action to fast-auth.near, which verifies the Auth0 JWT and returns the MPC signature\"."
+   },
+   {
+    "url": "https://nearblocks.io/txns/BgWu3Fp213hkpXkggJMB64FmKYH51ZqgtYFJiMrawvAy",
+    "claim": "Account created 2025-10-06T15:42:59Z by acarrera.near (create_account through the near top-level account); whether acarrera.near belongs to Peersyst was not verified."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample profile: 7845 of 7848 sampled sign rows use path jwt#https://fastauth.swe.at#<sub>, tx signer sweat-relayer.near; 3 rows use jwt#https://login.auth.near.org/#<sub> via relayer.nearmobile.near."
+   }
+  ],
+  "dominant_integrator": {
+   "name": "Sweat Wallet (Sweat Foundation)",
+   "confidence": "medium",
+   "note": "HIGH confidence that the dominant FastAuth issuer is the Sweat Foundation's login (swe.at domain + on-chain guard named \"sweat\"); MEDIUM that the traffic is specifically Sweat Wallet: the release says Sweat Wallet supports EVM chains \"through Chain Signatures\" but no source states that Sweat Wallet logins go through fast-auth.near. Who controls sweat-relayer.near is not stated by any source (created 2024-04-02 by meteor-relayer.near; not verified further).",
+   "evidence": [
+    {
+     "url": "https://rpc.mainnet.fastnear.com",
+     "claim": "view_state of jwt.fast-auth.near (block 224116390) maps issuer \"https://fastauth.swe.at\" to guard account \"sweat.jwt.fast-auth.near\" (and \"https://login.auth.near.org/\" to \"auth0.jwt.fast-auth.near\"); maintainer fast-auth-maintainer.sputnik-dao.near."
+    },
+    {
+     "url": "https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/",
+     "claim": "Issuer The Sweat Foundation Ltd, 1 October 2026: \"Sweat Wallet and SWEAT in their present form will end on 30 December 2026\"; Sweat Wallet has \"support for Ethereum, BSC, Base and Arbitrum through Chain Signatures\"; \"Details and FAQs are at https://update.swe.at\" and media contact update@swe.at (swe.at is the Foundation's domain)."
+    },
+    {
+     "url": "https://altfins.com/crypto-news/article/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026",
+     "claim": "Same release (same wording on the end date and on Chain Signatures), re-read on 2026-11-12."
+    },
+    {
+     "url": "https://api.nearblocks.io/v2/txns/6srbUUmwL1oMZAx2u1CL79fUTs5p2WfzutShRtzJmNTq/receipts",
+     "claim": "Receipt chain of a sampled request: sweat-relayer.near -> fast-auth.near.sign -> jwt.fast-auth.near.verify -> sweat.jwt.fast-auth.near.verify, then fast-auth.near -> v1.signer.sign (path jwt#https://fastauth.swe.at#<sub>, domain 1). Saved as test/fixtures/nearblocks_receipts_fastauth.json."
+    },
+    {
+     "url": "https://nearblocks.io/txns/4D3WeD62e6VtztRCsitPadwJh2RHUFdSM3ZYWh3snew4",
+     "claim": "sweat-relayer.near was created 2024-04-02T18:40:24Z by meteor-relayer.near (create_account through near); FastNEAR reports ≈ 253M txs for sweat-relayer.near."
+    },
+    {
+     "url": "https://github.com/takeshityt/signer-census/blob/main/out/metrics.json",
+     "claim": "months[].relayer_share_of_requester[\"fast-auth.near via sweat-relayer.near\"]: ≈ 99.9-100% of fast-auth.near sign requests in every month 2026-04..2026-11 (≈ 99.97% overall, 95% CI 99.92-100%); command npm run reproduce."
+    }
+   ]
+  }
+ },
+ {
+  "account": "tx-bench.near",
+  "category": "unknown",
+  "suspected_category": "benchmark-test",
+  "confidence": "low",
+  "owner": "not established",
+  "note": "UNKNOWN, SUSPECTED BENCHMARK. Not labeled benchmark-test because no source names the account. Supporting inferences (all from data/on-chain, none from an owner statement): not a contract (no code), one full-access key, signs its own txs, always path \"\" and a single sign call per tx with fixed gas, payloads are two constants in 2025-04/05 and random 32-byte values afterwards (14,880 distinct of 15,492 sampled), clockwork cadence (median ~96 blocks ~ 1 min between its txs, activity in every UTC hour), requests are 100% fulfilled, ECDSA and EdDSA coverage in a ~1:1 mix since 2025-12, repeated large top-ups from n1-payments*.near / n1-multichain.near (that \"n1-\" means Near One is NOT verified). Near One publishes a docker image nearone/transaction-bench (\"measure the end user latency of transactions\") but nothing ties it to this account or to sign calls. What would settle it: a statement by the operator, a public repo/config containing \"tx-bench.near\", or an identity link for the funders.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view_account tx-bench.near returned code_hash 11111111111111111111111111111111 (no contract); view_access_key_list returned a single FullAccess key ed25519:9XMdCmpw… (owner not established)."
+   },
+   {
+    "url": "https://nearblocks.io/txns/2y7oUAur5wJRr3ywPb1jDLbvVX9Avoo24drYtgYJCtmk",
+    "claim": "Created 2024-04-22T14:18:19Z by a create_account call to the near account, signed by the implicit account 6175a2a556635196d2d99b7416e49594dbcc729e0562adf8ba70d9c4e0a721c6 (funder identity not established)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample profile of 15,492 sign rows: path always empty, tx signer is itself, 100% fulfilled, median gap 96 blocks between consecutive txs (p10 13, p90 818), share of sampled sign receipts 95% in 2025-09 falling to 4.5% in 2026-11."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-tx-bench.json",
+    "claim": "Research notes (agent-collected, partly unverified: funders, web search results). Only the facts re-checked above are relied on."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Relay Protocol (RelayAllocator on Aurora)",
+  "note": "NEAR-side account of the Aurora EVM contract 0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f, \"RelayAllocator\" (verified source, author Relay Protocol, created 2025-11-28). It calls v1.signer.sign through Aurora cross-contract calls (all txs relayed by relay.aurora). Aurora is only the transport: the signatures authorize withdrawals from Relay depositories on other chains. Which request targets which chain is not decoded (only ECDSA vs EdDSA). The owner of relay.aurora is not verified.",
+  "evidence": [
+   {
+    "url": "https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f",
+    "claim": "Blockscout: verified contract named \"RelayAllocator\"; source header \"@author Relay Protocol\" and \"Manages cross-chain withdrawal requests and payload signing using NEAR MPC signer\"; signer account v1.signer."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-aurora-reflect.json",
+    "claim": "Research notes: docs.relay.link lists this address as Allocator on Aurora (page not re-fetched by us; our fetch of the cited docs path returned 404); XCC account naming from doc.aurora.dev via search snippet."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample profile: paths are 0x<40-hex> (EVM address), mixed domain_id 0/1, tx signer relay.aurora, active 2025-12..2026-07."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "omni.bridge.near",
+  "category": "near-infra:bridge-omni",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Near One (Near-One/omni-bridge)",
+  "note": "Omni bridge: signs transfer/metadata messages that destination-chain bridge contracts verify. All sign calls use the legacy request format with path \"bridge-1\" and key_version 0. The destination chain of a given request is not in the sign arguments (it is in the parent sign_transfer call), so it is not decoded.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call omni.bridge.near.contract_source_metadata returned link https://github.com/Near-One/omni-bridge/tree/83e3ac1eeef6b1330744f53d68dd037fa53aab0f, version 0.4.18."
+   },
+   {
+    "url": "https://github.com/Near-One/omni-bridge/blob/83e3ac1eeef6b1330744f53d68dd037fa53aab0f/near/omni-bridge/src/lib.rs",
+    "claim": "near/omni-bridge/src/lib.rs L84 const SIGN_PATH: &str = \"bridge-1\"; L372-373 and L480-481 call the MPC signer with path: SIGN_PATH.to_owned(), key_version: 0 (checked on main on 2026-11-11)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample profile: 3948 sign rows, all path bridge-1, legacy ECDSA bytes, tx signer mostly omni-relayer.bridge.near."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "btc-connector.bridge.near",
+  "category": "near-infra:bridge-btc",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Near One (Near-One/btc-bridge, satoshi-bridge contract, feature bitcoin)",
+  "note": "Bitcoin bridge connector: signs Bitcoin PSBT input sighashes with secp256k1 ECDSA through v1.signer. 64-hex paths are per-deposit-address keys (sha256 of the deposit message, per source); the literal path equal to the account id is the contract's own (change) key per source; this per-row mapping was not checked on-chain. Tx signers include omni-relayer.bridge.near and satoshi_op*.near accounts (relationship between them not established).",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call btc-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/7740fae0ed8dc56571adfe2aaf36bd4edee0d441, version 0.9.6."
+   },
+   {
+    "url": "https://github.com/Near-One/btc-bridge/blob/7740fae0ed8dc56571adfe2aaf36bd4edee0d441/contracts/satoshi-bridge/src/chain_signature.rs",
+    "claim": "At the deployed commit chain_signature.rs defines SignRequest{payload, path, key_version}, sign_promise() and to_btc_signature() (verified 2026-11-11)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-btc-zcash-ref.json",
+    "claim": "Research notes on deposit_msg.rs (64-hex path) and the change-address path; not re-verified line by line."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "zcash-connector.bridge.near",
+  "category": "near-infra:bridge-zcash",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Near One (same Near-One/btc-bridge repo, feature zcash)",
+  "note": "Same contract family as the BTC connector built for Zcash. Active in the sample only since 2026-09 although the account was created 2025-08 (gap unexplained). The Zcash sighash code was not read, so \"signs Zcash transactions\" is an inference from the build and wasm strings.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call zcash-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/37be7c6dfcb3a067ce8bedbe68052a8739e1445c, version 0.9.9."
+   },
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view_code of zcash-connector.bridge.near contains the string \"orchard\" 50 times and \"zcash\" 39 times; btc-connector.bridge.near contains \"orchard\" 0 times (counted 2026-11-11)."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "reflect-adam-mainnet-agent-contract.near",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "medium",
+  "owner": "not established (created by reflect-adam-account.near)",
+  "note": "A Shade-Agent-style \"agent contract\" (wasm exports request_signature, register_agent, whitelist_agent) that forwards one whitelisted agent's signing requests to v1.signer. Active 2026-01..2026-04, ECDSA only, path 0x<addr>-<uuid>. Who \"Reflect\" is, and the target chain, are NOT established. Not attested in a TEE per the research notes (not re-verified).",
+  "evidence": [
+   {
+    "url": "https://nearblocks.io/txns/3YGbqKk1vuR1CqieU2EAw9VMDUiwTtTUE6frdRxRoo46",
+    "claim": "Created 2025-12-26T14:05:39Z by reflect-adam-account.near (create_account through the near top-level account)."
+   },
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view_code of reflect-adam-mainnet-agent-contract.near contains the method names request_signature, register_agent and whitelist_agent (checked 2026-11-11)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-aurora-reflect.json",
+    "claim": "Research notes (owner_id, whitelisted agent, TEE flag) not re-verified by us."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "kernel-usdc.meteor-vaults.near",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Dew Finance (vault kernels deployed by meteor-vaults.near)",
+  "note": "Dew Kernel vault contract (same code hash as the other three kernels). Signs Ed25519 messages (NEAR Intents swap messages per the docs) and transactions via v1.signer. Paths near-1 / 1 / 2: the meaning is NOT established (no public source). Target chain per kernel not stated publicly.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call kernel-usdc.meteor-vaults.near.contract_source_metadata returned link https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958, version 0.1.0 (the repo returns 404: not public)."
+   },
+   {
+    "url": "https://docs.dew.finance/introduction/overview",
+    "claim": "Dew docs: \"Dew Finance is a chain-abstracted asset management framework powered by NEAR Intents and Chain Signatures\" (per research notes; page reachable, wording not re-checked)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-meteor-ping.json",
+    "claim": "Research notes: all four kernels created by meteor-vaults.near; identical code hash 36E2TZP6… confirmed by us via view_account on all four on 2026-11-11."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "kernel-usdt.meteor-vaults.near",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Dew Finance (vault kernels deployed by meteor-vaults.near)",
+  "note": "Same code hash as kernel-usdc.meteor-vaults.near (36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z, view_account 2026-11-11); see that entry for what is and is not established.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view_account kernel-usdt.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z, identical to kernel-usdc (whose NEP-330 link names Meteor-Wallet/dew-finance-contract)."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "medium",
+  "owner": "probably Relay Protocol (earlier Allocator contract) - not stated by any document",
+  "note": "NEAR-side account of Aurora EVM contract 0xE12Bc514E90E136cAd10413669a6Ccdeb9E3adB7, an \"Allocator\" with the same ABI and constructor arguments as RelayAllocator (v1.signer); active 2025-10..2025-12, followed by RelayAllocator from 2025-11-28. The Relay attribution is inferred from near-identical code and timing; no Relay document names this address.",
+  "evidence": [
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-aurora-reflect.json",
+    "claim": "Research notes from Aurora Blockscout: verified contract \"Allocator\" created 2025-09-30 with the same ABI (signWithdrawCallback, signerPath, nearSigner, hub) as RelayAllocator; not re-verified by us."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample: 949 sign rows, paths 0x<40-hex>, tx signer relay.aurora, active 2025-10..2025-12 only."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "ping-account.near",
+  "category": "unknown",
+  "suspected_category": null,
+  "confidence": "low",
+  "owner": "not established (created by felipepessina.near)",
+  "note": "UNKNOWN. A contract-less account sending one fixed-shape legacy sign call (path m/44'/60'/0'/0/0, a BIP-44 Ethereum path) from 2024-09 to 2025-02; ~97% of all requests in 2024-10..2024-12 but only ~0.56% overall. Created 2024-08-08 by felipepessina.near (identity of that account not established). Purpose unknown; the Ethereum path is only a hint of the target chain. Research notes report its last request went to a different MPC contract (v1.sig-net.near) in 2025-03 (not re-verified).",
+  "evidence": [
+   {
+    "url": "https://nearblocks.io/txns/3xoBXPzANz4R3gbwKpujRsc9TobmzZktH9MSXnj2RyzH",
+    "claim": "Created 2024-08-08T13:59:15Z by felipepessina.near (create_account through the near top-level account)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample: 8848 sign rows in 2024-09..2025-02, all path m/44'/60'/0'/0/0, legacy key_version 0, tx signer is the account itself."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "kernel-near.meteor-vaults.near",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Dew Finance (vault kernels deployed by meteor-vaults.near)",
+  "note": "Same code hash as the other kernels; created 2026-05-13 per research notes, active from 2026-05. See kernel-usdc.meteor-vaults.near.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view_account kernel-near.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z (same as kernel-usdc)."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "kernel-zec.meteor-vaults.near",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "high",
+  "owner": "Dew Finance (vault kernels deployed by meteor-vaults.near)",
+  "note": "Same code hash as the other kernels; created 2026-05-25 per research notes, active from 2026-05. See kernel-usdc.meteor-vaults.near.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view_account kernel-zec.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z (same as kernel-usdc)."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "acc.ref-labs.near",
+  "category": "third-party-app",
+  "suspected_category": null,
+  "confidence": "medium",
+  "owner": "not established: no source ties ref-labs.near to Ref Finance or Satoshi Protocol",
+  "note": "Not a BTC signer. It is a \"satoshi-account\" contract (NEP-330 repo Near-Bridge-Lab/btc-bridge-contract, private) with methods sign_near_transaction / request_sign_near_txs; get_config points at btc-connector.bridge.near, nbtc.bridge.near and v1.signer. So it lets nBTC/BTC key holders control NEAR accounts (signatures for NEAR transactions, inferred from the method names). Sampled txs are signed by satoshi_op*.near accounts (owner unknown). Active 2025-01..2025-10, ~0.26% of requests.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call acc.ref-labs.near.contract_source_metadata returned link https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/af06d696f87ea1294912d03e47eae35553c56ef7, version 0.1.3."
+   },
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call acc.ref-labs.near.get_config returned bridge_account_id btc-connector.bridge.near, nbtc_account_id nbtc.bridge.near, chain_signatures_account_id v1.signer; view_code contains sign_near_transaction, request_sign_near_txs, create_csna_and_inner_account and no sign_btc_transaction."
+   }
+  ],
+  "dominant_integrator": null
+ },
+ {
+  "account": "brg.toalice.near",
+  "category": "unknown",
+  "suspected_category": null,
+  "confidence": "low",
+  "owner": "not established",
+  "note": "UNKNOWN. A contract built from Near-Bridge-Lab/btc-bridge-contract (the same private repo family as acc.ref-labs.near), txs signed by satoshioperator.near, legacy ECDSA requests with 64-hex paths, active in the sample 2025-01..2025-05. 83% of its sampled sign receipts were rejected by the contract (\"Signature request has already been submitted\"), which is the main cause (with btc-connector.bridge.near) of the 2025-03 rejection spike. \"BTC bridge\" is inferred from the repo name only; the source is not public. Purpose and owner are not established.",
+  "evidence": [
+   {
+    "url": "https://rpc.mainnet.fastnear.com",
+    "claim": "view call brg.toalice.near.contract_source_metadata returned link https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/79ef8efb2a4eca49c1b44064699e9b2e7f286924, version 0.4.0 (nep330); view_account code_hash 5MuoSSgssY5iZCkU9tFvmhBnFzjzWpe4gqa7ZiY17Gkj (2026-11-11)."
+   },
+   {
+    "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",
+    "claim": "Sample profile: 872 sign rows 2025-01..2025-05, path 64-hex (851) or its own account id (21), tx signer satoshioperator.near, 83% of sampled sign receipts failed."
+   }
+  ],
+  "dominant_integrator": null
+ }
+]
