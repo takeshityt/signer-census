@@ -1,0 +1,52 @@
+verify: 50 seeded random txs with sign receipts (seed 20261112) from data/derived/sample_parsed.csv.gz
+  1 8vx6ByaV5YzQ8fWhkDS4z27te4fqTPc5xyrNBJUXHDvt 2025-08 signs=1  rpc:OK  nearblocks:OK
+  2 8DME8tcv69G9yPmVJx9yqaGZPBiR3eZdhrB1XsYFXPo1 2025-03 signs=1  rpc:OK  nearblocks:OK
+  3 6Q9UaP67JGmPE2Mh6WeMeSCXcyFwM5YBXPjccftCf8nZ 2025-07 signs=1  rpc:OK  nearblocks:OK
+  4 BvScmmtqadr2TTs4FRnEhRr7VcteE2ok7CGca52EnaBN 2025-02 signs=1  rpc:OK  nearblocks:OK
+  5 AparijN658dLaJSpXCRKdRxnpafhjxRaDqRZp5jUfsJ3 2026-04 signs=1  rpc:OK  nearblocks:OK
+  6 7EcjE5ASYfXLaQgto7KSPjoK9UK4KXJpDDTRoipzGLaQ 2026-05 signs=1  rpc:OK  nearblocks:OK
+  7 32JsTZ8GcuzgY4LbQfptVMPQxp38x8EFT3HSNPzFQH3j 2026-09 signs=1  rpc:OK  nearblocks:OK
+  8 C27x13NkTADeGvYecqeQjc2BuEEw3gxUtRb4yyP7H1mc 2026-06 signs=1  rpc:OK  nearblocks:OK
+  9 GzkrkryFQRHZRUfnungkub3tvvLX9EE2uNGXwBGSfWMi 2026-11 signs=1  rpc:OK  nearblocks:OK
+ 10 Ecdp9R5r5yK4dsbCrsaq1MuE8MEPfeKoWBqvPMXbxBEP 2025-01 signs=1  rpc:OK  nearblocks:OK
+ 11 A7CzN57hMymCYj2YDmF8GnPbPHmrmrZySn1TQ8Q1mcLT 2026-03 signs=1  rpc:OK  nearblocks:OK
+ 12 4bLHeopWfuYLPJteqpCoGcpTgYxVV3siCFtLdxVpZPcB 2026-04 signs=1  rpc:OK  nearblocks:OK
+ 13 DLt51CGREYSTMdwHeM9d9kdyZFyL44g314SSVguuTWge 2026-08 signs=1  rpc:OK  nearblocks:OK
+ 14 HoY2U9ngu7NryZTGy9YFdWWK3pT4vEo5X1wwftFBMm3A 2026-07 signs=1  rpc:OK  nearblocks:OK
+ 15 BjZazFEuW2gTytCff5suC7rRaSrF5DecxDnUQqusGxtU 2026-05 signs=1  rpc:OK  nearblocks:OK
+ 16 752c1eL6czQGjDXjCEy47V3d4kuRbeoewPmrqRvP8fMp 2026-07 signs=1  rpc:OK  nearblocks:OK
+ 17 9p4N828cJo4dvY3VmN4rUXZ3wrbiPU2WcfP2cxzZLxFv 2026-09 signs=1  rpc:OK  nearblocks:OK
+ 18 BUadfHhRRK3MqGhdN1eaBwaVPhzhFX2eVD6sfcFc8xEK 2026-10 signs=1  rpc:OK  nearblocks:OK
+ 19 DPQ6YaWchxGgu7eCxxK5c5fzC2Kb4e5e4AXJ1RGmVgU5 2026-02 signs=1  rpc:OK  nearblocks:OK
+ 20 HuFJJnGAv8ixh5o4cJ4yUD2FDKdxysMbG4wqYqinZ2xt 2026-03 signs=1  rpc:OK  nearblocks:OK
+ 21 BssdxRXnCsUzkagdJZ6dgU7rmRCmxXrF9QPxpVstLUZL 2026-05 signs=1  rpc:OK  nearblocks:OK
+ 22 CXWSqWEqumSRMogXBNBqm9sgJLLqYFbnujdAPGGTZm85 2026-07 signs=1  rpc:OK  nearblocks:OK
+ 23 BgM47SiVv7f6RCfgud6Nd21uYLED1zWhNADxx93P2PGi 2026-09 signs=1  rpc:OK  nearblocks:OK
+ 24 DkBiZraCLvLBcHchxbw7RenHo8uhwdainDErNhJ7ZPBZ 2025-05 signs=2  rpc:FAIL  nearblocks:FAIL  sign receipts ["enleap-test.near|Success"] != ["enleap-test.near|Success","enleap-test.near|Success"]; sign receipts ["enleap-test.near|Success"] != ["enleap-test.near|Success","enleap-test.near|Success"]
+ 25 2PUZP4bZjz1YiU5DFvQ8wa6ZrQMnAbj9xeLpWewhha3b 2026-05 signs=1  rpc:OK  nearblocks:OK
+ 26 GHJhB1gwTVrP8YyCyABy1eopQLrji5QZsbrYYvnBGxK9 2024-12 signs=1  rpc:OK  nearblocks:OK
+ 27 25HPh7LYwsTCaFLnfRoT4yHDEa6iq47fRYNGowJwwZsF 2025-12 signs=1  rpc:OK  nearblocks:OK
+ 28 6zcFEUf6Kf84NkKVSxPqz49tEB4isktKsNh52AgfeBy5 2025-11 signs=1  rpc:OK  nearblocks:OK
+ 29 BN3xyiGZJmNoEbLHQ6SLjmCTWPgwha7YFw3CH4Gzz9AT 2026-10 signs=1  rpc:OK  nearblocks:OK
+ 30 C9T9pJtz2ZUhkUZDusgjav63MXrkZc5QVLrRfDfx1jLT 2025-07 signs=1  rpc:OK  nearblocks:OK
+ 31 EeAGJxCw4QSsQUxm1due6d7M3q9sXaDEVLUjJUC8YkgY 2026-01 signs=1  rpc:OK  nearblocks:OK
+ 32 FBKvyfEN8nR2UMJiRZ4k9VST8C2PzynQM9jKp9z5y5zc 2026-02 signs=1  rpc:OK  nearblocks:OK
+ 33 BP2NNFLjXFwdTevFhtuURugBQHs85qQvrAr8EuEnP1fs 2026-02 signs=1  rpc:OK  nearblocks:OK
+ 34 FuqUCMAZGUibFoXsUhRwDSCP42kcUt4Tj9mNURBcPqux 2026-03 signs=1  rpc:OK  nearblocks:OK
+ 35 4txL1ArnBj2igRRuQTd3QdgGapEBMzxpe7bBHNRA2yo8 2026-07 signs=1  rpc:OK  nearblocks:OK
+ 36 H9ePqCpX1rGpoiFWCXEHeExzxUUeeiVWj3aUPYdByLmt 2026-07 signs=1  rpc:OK  nearblocks:OK
+ 37 zv78TmaUaaLfPRMn6Fsz9B44fBMsK566CGkRCpVF6Uy 2025-12 signs=1  rpc:OK  nearblocks:OK
+ 38 3L6zE6BZ1LG7LHgxunpthtaFcHr8Qr9kcWcMR5mxFSoq 2025-12 signs=1  rpc:OK  nearblocks:OK
+ 39 HXA1eysH9RNjYXKibSEYng9rtVHETnUtM2WxybYHV58 2025-10 signs=1  rpc:OK  nearblocks:OK
+ 40 4dxjVs5Sn1sdUscaNfkm5VXBKXXxC65wbbyGRzurp8Fu 2026-07 signs=1  rpc:OK  nearblocks:OK
+ 41 4cwwx3sfpCGiK4fEWmSXheAdW4ab51f15SgtTzz4ikyh 2026-11 signs=1  rpc:OK  nearblocks:FAIL  error: Error: giving up on https://api.nearblocks.io/v1/txns/4cwwx3sfpCGiK4fEWmSXheAdW4ab51f15SgtTzz4ikyh: TypeError: fetch failed
+ 42 8CFc45iakicBofj37oFaY2AWJMSWP183oSrMg6ZahEVc 2026-09 signs=1  rpc:OK  nearblocks:OK
+ 43 5mfdAQWPMrYaE87sUK6FnbLKU9AVt4vwaL66UgGZMomM 2025-01 signs=1  rpc:OK  nearblocks:OK
+ 44 E7nmuBzmGySVRVVZ4LqpJYMXmNUicm8mHgcjbU628uS6 2025-04 signs=2  rpc:FAIL  nearblocks:FAIL  sign receipts ["mindshare_contract.near|Success"] != ["mindshare_contract.near|Success","mindshare_contract.near|Success"]; sign receipts ["mindshare_contract.near|Success"] != ["mindshare_contract.near|Success","mindshare_contract.near|Success"]
+ 45 FpeSvtqZFquDyiSbGL6hipmC7JTmo5szKNvSjcfiKmHc 2025-10 signs=1  rpc:OK  nearblocks:OK
+ 46 3ZpsXvxG19NDq5uv7tNRM4oaDGD6orTqUC5ZwHKPH4qx 2026-02 signs=1  rpc:OK  nearblocks:OK
+ 47 FJwaX5YP3LhaJAvpVwKYKyw9AdPa8vd76QtmaJiX5X94 2026-04 signs=1  rpc:OK  nearblocks:OK
+ 48 PuvVYYt6tcCsu4ASXwNYb8U8aQcxA9BXDHDRLV2tXtS 2024-12 signs=1  rpc:OK  nearblocks:OK
+ 49 6as2nSb7c1hb6Ek4jN5awnNsPUuNJaNzCrM1jnmjnYuY 2024-10 signs=1  rpc:OK  nearblocks:OK
+ 50 ADb3fB9FCr5wtYtDtBq7YHMeCQRLnDbrWbcJvCDpnBVy 2024-09 signs=1  rpc:OK  nearblocks:OK
+47/50 verified (archival RPC 48/50, NearBlocks 47/50); requests made 236, HTTP 429 retries 18

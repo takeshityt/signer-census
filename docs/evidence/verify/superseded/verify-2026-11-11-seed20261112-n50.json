@@ -1,0 +1,771 @@
+{
+ "seed": 20261112,
+ "sample": 50,
+ "verified": 47,
+ "rpc_ok": 48,
+ "nearblocks_ok": 47,
+ "results": [
+  {
+   "tx_hash": "8vx6ByaV5YzQ8fWhkDS4z27te4fqTPc5xyrNBJUXHDvt",
+   "month": "2025-08",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "8DME8tcv69G9yPmVJx9yqaGZPBiR3eZdhrB1XsYFXPo1",
+   "month": "2025-03",
+   "expected_signs": [
+    "proxy-1740813177536.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "6Q9UaP67JGmPE2Mh6WeMeSCXcyFwM5YBXPjccftCf8nZ",
+   "month": "2025-07",
+   "expected_signs": [
+    "btc-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BvScmmtqadr2TTs4FRnEhRr7VcteE2ok7CGca52EnaBN",
+   "month": "2025-02",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "AparijN658dLaJSpXCRKdRxnpafhjxRaDqRZp5jUfsJ3",
+   "month": "2026-04",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "7EcjE5ASYfXLaQgto7KSPjoK9UK4KXJpDDTRoipzGLaQ",
+   "month": "2026-05",
+   "expected_signs": [
+    "btc-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "32JsTZ8GcuzgY4LbQfptVMPQxp38x8EFT3HSNPzFQH3j",
+   "month": "2026-09",
+   "expected_signs": [
+    "zcash-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "C27x13NkTADeGvYecqeQjc2BuEEw3gxUtRb4yyP7H1mc",
+   "month": "2026-06",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "GzkrkryFQRHZRUfnungkub3tvvLX9EE2uNGXwBGSfWMi",
+   "month": "2026-11",
+   "expected_signs": [
+    "btc-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "Ecdp9R5r5yK4dsbCrsaq1MuE8MEPfeKoWBqvPMXbxBEP",
+   "month": "2025-01",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "A7CzN57hMymCYj2YDmF8GnPbPHmrmrZySn1TQ8Q1mcLT",
+   "month": "2026-03",
+   "expected_signs": [
+    "reflect-adam-mainnet-agent-contract.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "4bLHeopWfuYLPJteqpCoGcpTgYxVV3siCFtLdxVpZPcB",
+   "month": "2026-04",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "DLt51CGREYSTMdwHeM9d9kdyZFyL44g314SSVguuTWge",
+   "month": "2026-08",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "HoY2U9ngu7NryZTGy9YFdWWK3pT4vEo5X1wwftFBMm3A",
+   "month": "2026-07",
+   "expected_signs": [
+    "kernel-usdc.meteor-vaults.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BjZazFEuW2gTytCff5suC7rRaSrF5DecxDnUQqusGxtU",
+   "month": "2026-05",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "752c1eL6czQGjDXjCEy47V3d4kuRbeoewPmrqRvP8fMp",
+   "month": "2026-07",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "9p4N828cJo4dvY3VmN4rUXZ3wrbiPU2WcfP2cxzZLxFv",
+   "month": "2026-09",
+   "expected_signs": [
+    "zcash-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BUadfHhRRK3MqGhdN1eaBwaVPhzhFX2eVD6sfcFc8xEK",
+   "month": "2026-10",
+   "expected_signs": [
+    "zcash-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "DPQ6YaWchxGgu7eCxxK5c5fzC2Kb4e5e4AXJ1RGmVgU5",
+   "month": "2026-02",
+   "expected_signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "HuFJJnGAv8ixh5o4cJ4yUD2FDKdxysMbG4wqYqinZ2xt",
+   "month": "2026-03",
+   "expected_signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BssdxRXnCsUzkagdJZ6dgU7rmRCmxXrF9QPxpVstLUZL",
+   "month": "2026-05",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "CXWSqWEqumSRMogXBNBqm9sgJLLqYFbnujdAPGGTZm85",
+   "month": "2026-07",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BgM47SiVv7f6RCfgud6Nd21uYLED1zWhNADxx93P2PGi",
+   "month": "2026-09",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "DkBiZraCLvLBcHchxbw7RenHo8uhwdainDErNhJ7ZPBZ",
+   "month": "2025-05",
+   "expected_signs": [
+    "enleap-test.near|Success",
+    "enleap-test.near|Success"
+   ],
+   "rpc": {
+    "ok": false,
+    "problems": [
+     "sign receipts [\"enleap-test.near|Success\"] != [\"enleap-test.near|Success\",\"enleap-test.near|Success\"]"
+    ]
+   },
+   "nearblocks": {
+    "ok": false,
+    "problems": [
+     "sign receipts [\"enleap-test.near|Success\"] != [\"enleap-test.near|Success\",\"enleap-test.near|Success\"]"
+    ]
+   }
+  },
+  {
+   "tx_hash": "2PUZP4bZjz1YiU5DFvQ8wa6ZrQMnAbj9xeLpWewhha3b",
+   "month": "2026-05",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "GHJhB1gwTVrP8YyCyABy1eopQLrji5QZsbrYYvnBGxK9",
+   "month": "2024-12",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "25HPh7LYwsTCaFLnfRoT4yHDEa6iq47fRYNGowJwwZsF",
+   "month": "2025-12",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "6zcFEUf6Kf84NkKVSxPqz49tEB4isktKsNh52AgfeBy5",
+   "month": "2025-11",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BN3xyiGZJmNoEbLHQ6SLjmCTWPgwha7YFw3CH4Gzz9AT",
+   "month": "2026-10",
+   "expected_signs": [
+    "omni.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "C9T9pJtz2ZUhkUZDusgjav63MXrkZc5QVLrRfDfx1jLT",
+   "month": "2025-07",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "EeAGJxCw4QSsQUxm1due6d7M3q9sXaDEVLUjJUC8YkgY",
+   "month": "2026-01",
+   "expected_signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "FBKvyfEN8nR2UMJiRZ4k9VST8C2PzynQM9jKp9z5y5zc",
+   "month": "2026-02",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "BP2NNFLjXFwdTevFhtuURugBQHs85qQvrAr8EuEnP1fs",
+   "month": "2026-02",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "FuqUCMAZGUibFoXsUhRwDSCP42kcUt4Tj9mNURBcPqux",
+   "month": "2026-03",
+   "expected_signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "4txL1ArnBj2igRRuQTd3QdgGapEBMzxpe7bBHNRA2yo8",
+   "month": "2026-07",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "H9ePqCpX1rGpoiFWCXEHeExzxUUeeiVWj3aUPYdByLmt",
+   "month": "2026-07",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "zv78TmaUaaLfPRMn6Fsz9B44fBMsK566CGkRCpVF6Uy",
+   "month": "2025-12",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "3L6zE6BZ1LG7LHgxunpthtaFcHr8Qr9kcWcMR5mxFSoq",
+   "month": "2025-12",
+   "expected_signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "HXA1eysH9RNjYXKibSEYng9rtVHETnUtM2WxybYHV58",
+   "month": "2025-10",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "4dxjVs5Sn1sdUscaNfkm5VXBKXXxC65wbbyGRzurp8Fu",
+   "month": "2026-07",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "4cwwx3sfpCGiK4fEWmSXheAdW4ab51f15SgtTzz4ikyh",
+   "month": "2026-11",
+   "expected_signs": [
+    "zcash-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": false,
+    "problems": [
+     "error: Error: giving up on https://api.nearblocks.io/v1/txns/4cwwx3sfpCGiK4fEWmSXheAdW4ab51f15SgtTzz4ikyh: TypeError: fetch failed"
+    ]
+   }
+  },
+  {
+   "tx_hash": "8CFc45iakicBofj37oFaY2AWJMSWP183oSrMg6ZahEVc",
+   "month": "2026-09",
+   "expected_signs": [
+    "btc-connector.bridge.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "5mfdAQWPMrYaE87sUK6FnbLKU9AVt4vwaL66UgGZMomM",
+   "month": "2025-01",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "E7nmuBzmGySVRVVZ4LqpJYMXmNUicm8mHgcjbU628uS6",
+   "month": "2025-04",
+   "expected_signs": [
+    "mindshare_contract.near|Success",
+    "mindshare_contract.near|Success"
+   ],
+   "rpc": {
+    "ok": false,
+    "problems": [
+     "sign receipts [\"mindshare_contract.near|Success\"] != [\"mindshare_contract.near|Success\",\"mindshare_contract.near|Success\"]"
+    ]
+   },
+   "nearblocks": {
+    "ok": false,
+    "problems": [
+     "sign receipts [\"mindshare_contract.near|Success\"] != [\"mindshare_contract.near|Success\",\"mindshare_contract.near|Success\"]"
+    ]
+   }
+  },
+  {
+   "tx_hash": "FpeSvtqZFquDyiSbGL6hipmC7JTmo5szKNvSjcfiKmHc",
+   "month": "2025-10",
+   "expected_signs": [
+    "tx-bench.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "3ZpsXvxG19NDq5uv7tNRM4oaDGD6orTqUC5ZwHKPH4qx",
+   "month": "2026-02",
+   "expected_signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "FJwaX5YP3LhaJAvpVwKYKyw9AdPa8vd76QtmaJiX5X94",
+   "month": "2026-04",
+   "expected_signs": [
+    "fast-auth.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "PuvVYYt6tcCsu4ASXwNYb8U8aQcxA9BXDHDRLV2tXtS",
+   "month": "2024-12",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "6as2nSb7c1hb6Ek4jN5awnNsPUuNJaNzCrM1jnmjnYuY",
+   "month": "2024-10",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  },
+  {
+   "tx_hash": "ADb3fB9FCr5wtYtDtBq7YHMeCQRLnDbrWbcJvCDpnBVy",
+   "month": "2024-09",
+   "expected_signs": [
+    "ping-account.near|Success"
+   ],
+   "rpc": {
+    "ok": true,
+    "problems": []
+   },
+   "nearblocks": {
+    "ok": true,
+    "problems": []
+   }
+  }
+ ]
+}

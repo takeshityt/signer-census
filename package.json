@@ -14,7 +14,8 @@
     "sample": "node scripts/sample-details.mjs",
     "parse": "node scripts/parse-sample.mjs",
     "reproduce": "node src/reproduce.mjs",
-    "check:data": "node scripts/check-manifest.mjs"
+    "check:data": "node scripts/check-manifest.mjs",
+    "verify": "node scripts/verify.mjs"
   },
   "devDependencies": {
     "vitest": "^5.1.0"

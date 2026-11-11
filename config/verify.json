@@ -1,0 +1,8 @@
+{
+  "seed": 20261112,
+  "defaultSample": 50,
+  "rpc": "https://archival-rpc.mainnet.fastnear.com",
+  "nearblocks": "https://api.nearblocks.io",
+  "nearblocksSpacingMs": 3500,
+  "note": "Sampled tx hashes are drawn (seeded) from sign receipts in data/derived/sample_parsed.csv.gz and checked against two independent public sources."
+}

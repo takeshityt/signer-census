@@ -28,6 +28,8 @@ labels:
           claim: 'Issuer The Sweat Foundation Ltd, 1 October 2026: "Sweat Wallet and SWEAT in their present form will end on 30 December 2026"; Sweat Wallet has "support for Ethereum, BSC, Base and Arbitrum through Chain Signatures"; "Details and FAQs are at https://update.swe.at" and media contact update@swe.at (swe.at is the Foundation''s domain).'
         - url: https://altfins.com/crypto-news/article/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026
           claim: 'Same release (same wording on the end date and on Chain Signatures), re-read on 2026-11-12.'
+        - url: https://api.nearblocks.io/v2/txns/6srbUUmwL1oMZAx2u1CL79fUTs5p2WfzutShRtzJmNTq/receipts
+          claim: 'Receipt chain of a sampled request: sweat-relayer.near -> fast-auth.near.sign -> jwt.fast-auth.near.verify -> sweat.jwt.fast-auth.near.verify, then fast-auth.near -> v1.signer.sign (path jwt#https://fastauth.swe.at#<sub>, domain 1). Saved as test/fixtures/nearblocks_receipts_fastauth.json.'
         - url: https://nearblocks.io/txns/4D3WeD62e6VtztRCsitPadwJh2RHUFdSM3ZYWh3snew4
           claim: 'sweat-relayer.near was created 2024-04-02T18:40:24Z by meteor-relayer.near (create_account through near); FastNEAR reports ≈ 253M txs for sweat-relayer.near.'
         - url: https://github.com/takeshityt/signer-census/blob/main/out/metrics.json
