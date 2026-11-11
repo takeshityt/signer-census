@@ -6,8 +6,9 @@ const root = new URL("..", import.meta.url).pathname;
 let bad = false;
 for (const m of ["data/MANIFEST.sha256", "data/MANIFEST.raw-sample.sha256"]) {
   if (m.includes("raw-sample") && !existsSync(root + m)) { console.log(`${m}: not present (skipped)`); continue; }
-  const r = checkManifest(root, root + m);
-  console.log(`${m}: ${r.ok ? "OK" : "FAIL"} (${r.checked} files checked)`);
+  const raw = m.includes("raw-sample");
+  const r = checkManifest(root, root + m, { allowMissing: raw }); // raw sample files are not committed (229 MB); verify those that exist
+  console.log(`${m}: ${r.ok ? "OK" : "FAIL"} (${r.checked} files checked${r.missing ? `, ${r.missing} not downloaded` : ""})`);
   for (const p of r.problems) console.log("  -", p);
   if (!r.ok) bad = true;
 }

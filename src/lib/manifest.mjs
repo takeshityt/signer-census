@@ -28,17 +28,17 @@ export function writeManifest(path, lines) {
 }
 
 /** Returns { ok, checked, problems[] }. Missing manifest => not ok. */
-export function checkManifest(root, manifestPath) {
+export function checkManifest(root, manifestPath, { allowMissing = false } = {}) {
   if (!existsSync(manifestPath)) return { ok: false, checked: 0, problems: [`missing ${manifestPath}`] };
   const problems = [];
-  let checked = 0;
+  let checked = 0, missing = 0;
   for (const line of readFileSync(manifestPath, "utf8").split("\n").filter(Boolean)) {
     const m = /^([0-9a-f]{64}) {2}(.+)$/.exec(line);
     if (!m) { problems.push(`bad line: ${line}`); continue; }
     const file = join(root, m[2]);
-    if (!existsSync(file)) { problems.push(`missing file: ${m[2]}`); continue; }
+    if (!existsSync(file)) { missing++; if (!allowMissing) problems.push(`missing file: ${m[2]}`); continue; }
     checked++;
     if (sha256(readFileSync(file)) !== m[1]) problems.push(`hash mismatch: ${m[2]}`);
   }
-  return { ok: problems.length === 0, checked, problems };
+  return { ok: problems.length === 0, checked, missing, problems };
 }

@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { clusterStats, estimateWithBootstrap, estimateFromSums, sumClusters } from "../src/estimate.mjs";
+import { clusterStats, estimateWithBootstrap, estimateFromSums, sumClusters, flatten } from "../src/estimate.mjs";
 
 // helper: build parsed-row fixtures. tx spec: {kind, cls, signs: [requester...], fulfilled?: bool}
 let txn = 0;
@@ -89,5 +89,9 @@ describe("estimates", () => {
     const r = estimateFromSums([{ month: "m", txTotal: 100, sums: sumClusters([]) }]);
     expect(r.totals.requests).toBe(0);
     expect(r.totals.fulfilled_rate).toBe(0);
+  });
+
+  it("flatten escapes dots in account ids but keeps the path separators", () => {
+    expect(flatten({ months: { "2026-01": { requester_share: { "a.near": 0.5 } } } })).toEqual({ "months.2026-01.requester_share.a|near": 0.5 });
   });
 });

@@ -21,18 +21,15 @@ const { point, ci, monthsList } = estimateWithBootstrap(clusters, totals, { seed
 const COMMAND = "npm run reproduce";
 const SOURCES = ["data/derived/monthly_tx_totals.csv", "data/derived/sample_parsed.csv"];
 const r6 = (x) => Math.round(x * 1e6) / 1e6;
-const key = (...p) => p.map((s) => String(s).replace(/\./g, "|")).join(".");
-const num = (path, digits = 6, exact = false) => {
-  const v = path.split(".").reduce((o, k) => o?.[k], flatLookup);
-  const out = { value: digits === 0 ? Math.round(v) : r6(v) };
-  if (!exact) { const [lo, hi] = ci[path]; out.ci95 = [digits === 0 ? Math.round(lo) : r6(lo), digits === 0 ? Math.round(hi) : r6(hi)]; }
-  return out;
-};
+// flatten() escapes dots inside account ids with "|"; the path prefix (e.g. "months.2026-02") must stay untouched
+const key = (prefix, ...rest) => [prefix, ...rest.map((x) => String(x).replace(/\./g, "|"))].join(".");
 const flatLookup = flatten(point); // flat map: path -> number
-const flatGet = (p) => flatLookup[p];
 const valueOf = (p, digits = 6, exact = false) => {
-  const v = flatGet(p); const o = { value: digits === 0 ? Math.round(v) : r6(v) };
-  if (!exact) { const [lo, hi] = ci[p]; o.ci95 = digits === 0 ? [Math.round(lo), Math.round(hi)] : [r6(lo), r6(hi)]; }
+  const v = flatLookup[p];
+  if (v === undefined) throw new Error(`no estimate for ${p}`);
+  const rd = (x) => (digits === 0 ? Math.round(x) : r6(x));
+  const o = { value: rd(v) };
+  if (!exact) { const [lo, hi] = ci[p]; o.ci95 = [rd(lo), rd(hi)]; }
   return o;
 };
 const topN = (shareObj, n) => Object.entries(shareObj).sort((a, b) => b[1] - a[1]).slice(0, n).map(([k]) => k);

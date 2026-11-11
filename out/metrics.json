@@ -1,0 +1,6055 @@
+{
+  "meta": {
+    "title": "Signer Census metrics for v1.signer (NEAR Chain Signatures)",
+    "command": "npm run reproduce",
+    "inputs": {
+      "data/derived/monthly_tx_totals.csv": "c6c2e5b374ced335fdd0ea3cc6eb20ec4d6dcff300e223773eca08bd28b3df7e",
+      "data/derived/sample_parsed.csv": "33171ce387e6fb78855551de61f794b64d1023af31d3832f81606484743f5b3b",
+      "data/derived/sample_clusters.csv": "4145eb3e823fd04f0d675dd09c3feca5574fa321f390271ab18cd557544c8061",
+      "config/estimate.json": "11a2162acb4ab47e18de44c58cfec4b4a200e439ce2d961c37f8b1410ada1b14"
+    },
+    "method": {
+      "seed": 424242,
+      "bootstrap_replicates": 2000,
+      "ci": "95% percentile interval, cluster bootstrap within each month; census months are exact (no sampling error)"
+    },
+    "definitions": {
+      "tx": "transaction touching v1.signer via a FunctionCall (exact count from FastNEAR txs_count)",
+      "request": "executed `sign` receipt on v1.signer",
+      "fulfilled": "the request's tx contains a successful return_signature callback",
+      "requester": "predecessor_id of the sign receipt (not the tx signer)",
+      "requests_est": "exact monthly tx total x (sign receipts per tx in the sample); ESTIMATE, not an exact count"
+    },
+    "sample": {
+      "n_clusters": 531,
+      "n_txs": 105534,
+      "census": false
+    },
+    "caveats": [
+      "Estimates come from clusters of consecutive txs starting at seeded random block heights; start points are uniform in block height, so txs that follow a long quiet gap are slightly over-represented.",
+      "The CI captures between-cluster variability only; it does not capture that bias or dependence between adjacent months.",
+      "Requests are attributed to the month of their tx, not of callback execution."
+    ]
+  },
+  "totals": {
+    "provenance": {
+      "source_files": [
+        "data/derived/monthly_tx_totals.csv",
+        "data/derived/sample_parsed.csv"
+      ],
+      "command": "npm run reproduce",
+      "sample": {
+        "n_clusters": 531,
+        "n_txs": 105534,
+        "census": false
+      }
+    },
+    "tx_total": {
+      "value": 13015559,
+      "exact": true
+    },
+    "requests_est": {
+      "value": 6432762,
+      "ci95": [
+        6417414,
+        6447496
+      ]
+    },
+    "requests_per_tx": {
+      "value": 0.494236,
+      "ci95": [
+        0.493057,
+        0.495368
+      ]
+    },
+    "fulfilled_rate": {
+      "value": 0.998955,
+      "ci95": [
+        0.998361,
+        0.999442
+      ]
+    },
+    "duplicate_request_rate": {
+      "value": 0.01675,
+      "ci95": [
+        0.013526,
+        0.020084
+      ]
+    },
+    "tx_kind_share": {
+      "request": {
+        "value": 0.494178,
+        "ci95": [
+          0.492999,
+          0.495306
+        ]
+      },
+      "verify_request": {
+        "value": 0.001298,
+        "ci95": [
+          0.000818,
+          0.001862
+        ]
+      },
+      "respond": {
+        "value": 0.493408,
+        "ci95": [
+          0.492083,
+          0.494584
+        ]
+      },
+      "respond_verify": {
+        "value": 0.001112,
+        "ci95": [
+          0.000688,
+          0.001599
+        ]
+      },
+      "admin_or_other": {
+        "value": 0.010005,
+        "ci95": [
+          0.009054,
+          0.011029
+        ]
+      }
+    },
+    "tx_signer_class_share": {
+      "mpc_node": {
+        "value": 0.504396,
+        "ci95": [
+          0.503334,
+          0.505455
+        ]
+      },
+      "request_side": {
+        "value": 0.495476,
+        "ci95": [
+          0.494403,
+          0.496529
+        ]
+      },
+      "other": {
+        "value": 0.000128,
+        "ci95": [
+          0.000052,
+          0.000235
+        ]
+      }
+    },
+    "top_requesters": [
+      {
+        "requester": "fast-auth.near",
+        "share_of_requests": {
+          "value": 0.435204,
+          "ci95": [
+            0.414355,
+            0.45413
+          ]
+        },
+        "requests_est": {
+          "value": 2799562,
+          "ci95": [
+            2665971,
+            2921146
+          ]
+        }
+      },
+      {
+        "requester": "tx-bench.near",
+        "share_of_requests": {
+          "value": 0.190717,
+          "ci95": [
+            0.182713,
+            0.198644
+          ]
+        },
+        "requests_est": {
+          "value": 1226837,
+          "ci95": [
+            1174881,
+            1276611
+          ]
+        }
+      },
+      {
+        "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+        "share_of_requests": {
+          "value": 0.114139,
+          "ci95": [
+            0.104428,
+            0.124312
+          ]
+        },
+        "requests_est": {
+          "value": 734232,
+          "ci95": [
+            672299,
+            799083
+          ]
+        }
+      },
+      {
+        "requester": "omni.bridge.near",
+        "share_of_requests": {
+          "value": 0.102495,
+          "ci95": [
+            0.095064,
+            0.109677
+          ]
+        },
+        "requests_est": {
+          "value": 659326,
+          "ci95": [
+            611905,
+            705229
+          ]
+        }
+      },
+      {
+        "requester": "btc-connector.bridge.near",
+        "share_of_requests": {
+          "value": 0.0654,
+          "ci95": [
+            0.056371,
+            0.07619
+          ]
+        },
+        "requests_est": {
+          "value": 420701,
+          "ci95": [
+            362552,
+            489790
+          ]
+        }
+      },
+      {
+        "requester": "zcash-connector.bridge.near",
+        "share_of_requests": {
+          "value": 0.022649,
+          "ci95": [
+            0.018124,
+            0.027203
+          ]
+        },
+        "requests_est": {
+          "value": 145697,
+          "ci95": [
+            116445,
+            175123
+          ]
+        }
+      },
+      {
+        "requester": "reflect-adam-mainnet-agent-contract.near",
+        "share_of_requests": {
+          "value": 0.01268,
+          "ci95": [
+            0.008231,
+            0.017077
+          ]
+        },
+        "requests_est": {
+          "value": 81567,
+          "ci95": [
+            52877,
+            109864
+          ]
+        }
+      },
+      {
+        "requester": "kernel-usdc.meteor-vaults.near",
+        "share_of_requests": {
+          "value": 0.008673,
+          "ci95": [
+            0.006539,
+            0.011101
+          ]
+        },
+        "requests_est": {
+          "value": 55793,
+          "ci95": [
+            42068,
+            71355
+          ]
+        }
+      },
+      {
+        "requester": "kernel-usdt.meteor-vaults.near",
+        "share_of_requests": {
+          "value": 0.008196,
+          "ci95": [
+            0.00622,
+            0.01037
+          ]
+        },
+        "requests_est": {
+          "value": 52725,
+          "ci95": [
+            40044,
+            66693
+          ]
+        }
+      },
+      {
+        "requester": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
+        "share_of_requests": {
+          "value": 0.006234,
+          "ci95": [
+            0.005408,
+            0.007032
+          ]
+        },
+        "requests_est": {
+          "value": 40105,
+          "ci95": [
+            34784,
+            45271
+          ]
+        }
+      },
+      {
+        "requester": "ping-account.near",
+        "share_of_requests": {
+          "value": 0.005645,
+          "ci95": [
+            0.00515,
+            0.006205
+          ]
+        },
+        "requests_est": {
+          "value": 36310,
+          "ci95": [
+            33115,
+            39930
+          ]
+        }
+      },
+      {
+        "requester": "kernel-near.meteor-vaults.near",
+        "share_of_requests": {
+          "value": 0.004794,
+          "ci95": [
+            0.003486,
+            0.006426
+          ]
+        },
+        "requests_est": {
+          "value": 30836,
+          "ci95": [
+            22442,
+            41326
+          ]
+        }
+      },
+      {
+        "requester": "kernel-zec.meteor-vaults.near",
+        "share_of_requests": {
+          "value": 0.004391,
+          "ci95": [
+            0.003645,
+            0.005285
+          ]
+        },
+        "requests_est": {
+          "value": 28244,
+          "ci95": [
+            23447,
+            33981
+          ]
+        }
+      },
+      {
+        "requester": "acc.ref-labs.near",
+        "share_of_requests": {
+          "value": 0.002577,
+          "ci95": [
+            0.001647,
+            0.003822
+          ]
+        },
+        "requests_est": {
+          "value": 16580,
+          "ci95": [
+            10586,
+            24591
+          ]
+        }
+      },
+      {
+        "requester": "contract.stp-p0.near",
+        "share_of_requests": {
+          "value": 0.002109,
+          "ci95": [
+            0.000419,
+            0.004366
+          ]
+        },
+        "requests_est": {
+          "value": 13566,
+          "ci95": [
+            2695,
+            28123
+          ]
+        }
+      }
+    ]
+  },
+  "months": [
+    {
+      "month": "2024-08",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 2,
+          "n_txs": 255,
+          "census": true
+        }
+      },
+      "tx_total": {
+        "value": 255,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 130,
+        "ci95": [
+          130,
+          130
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.509804,
+        "ci95": [
+          0.509804,
+          0.509804
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.723077,
+        "ci95": [
+          0.723077,
+          0.723077
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.861538,
+        "ci95": [
+          0.861538,
+          0.861538
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.010417,
+        "ci95": [
+          0.010417,
+          0.010417
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.509804,
+          "ci95": [
+            0.509804,
+            0.509804
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.376471,
+          "ci95": [
+            0.376471,
+            0.376471
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.113725,
+          "ci95": [
+            0.113725,
+            0.113725
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.435294,
+          "ci95": [
+            0.435294,
+            0.435294
+          ]
+        },
+        "request_side": {
+          "value": 0.509804,
+          "ci95": [
+            0.509804,
+            0.509804
+          ]
+        },
+        "other": {
+          "value": 0.054902,
+          "ci95": [
+            0.054902,
+            0.054902
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "serhii.near",
+          "share_of_requests": {
+            "value": 0.938462,
+            "ci95": [
+              0.938462,
+              0.938462
+            ]
+          },
+          "requests_est": {
+            "value": 122,
+            "ci95": [
+              122,
+              122
+            ]
+          }
+        },
+        {
+          "requester": "felipepessina.near",
+          "share_of_requests": {
+            "value": 0.023077,
+            "ci95": [
+              0.023077,
+              0.023077
+            ]
+          },
+          "requests_est": {
+            "value": 3,
+            "ci95": [
+              3,
+              3
+            ]
+          }
+        },
+        {
+          "requester": "margin-toward.kronos-heyelsa.near",
+          "share_of_requests": {
+            "value": 0.015385,
+            "ci95": [
+              0.015385,
+              0.015385
+            ]
+          },
+          "requests_est": {
+            "value": 2,
+            "ci95": [
+              2,
+              2
+            ]
+          }
+        },
+        {
+          "requester": "farmface.near",
+          "share_of_requests": {
+            "value": 0.007692,
+            "ci95": [
+              0.007692,
+              0.007692
+            ]
+          },
+          "requests_est": {
+            "value": 1,
+            "ci95": [
+              1,
+              1
+            ]
+          }
+        },
+        {
+          "requester": "d999f45e7cb8500d712ab1dfa85ddc0a931746c86e10e64381d42399e20517ab",
+          "share_of_requests": {
+            "value": 0.007692,
+            "ci95": [
+              0.007692,
+              0.007692
+            ]
+          },
+          "requests_est": {
+            "value": 1,
+            "ci95": [
+              1,
+              1
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2024-09",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 9,
+          "n_txs": 1796,
+          "census": true
+        }
+      },
+      "tx_total": {
+        "value": 1796,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 926,
+        "ci95": [
+          926,
+          926
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.51559,
+        "ci95": [
+          0.51559,
+          0.51559
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.886609,
+        "ci95": [
+          0.886609,
+          0.886609
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.074514,
+        "ci95": [
+          0.074514,
+          0.074514
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.51559,
+          "ci95": [
+            0.51559,
+            0.51559
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.458797,
+          "ci95": [
+            0.458797,
+            0.458797
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.025612,
+          "ci95": [
+            0.025612,
+            0.025612
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.469376,
+          "ci95": [
+            0.469376,
+            0.469376
+          ]
+        },
+        "request_side": {
+          "value": 0.51559,
+          "ci95": [
+            0.51559,
+            0.51559
+          ]
+        },
+        "other": {
+          "value": 0.015033,
+          "ci95": [
+            0.015033,
+            0.015033
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "ping-account.near",
+          "share_of_requests": {
+            "value": 0.844492,
+            "ci95": [
+              0.844492,
+              0.844492
+            ]
+          },
+          "requests_est": {
+            "value": 782,
+            "ci95": [
+              782,
+              782
+            ]
+          }
+        },
+        {
+          "requester": "gregx.near",
+          "share_of_requests": {
+            "value": 0.060475,
+            "ci95": [
+              0.060475,
+              0.060475
+            ]
+          },
+          "requests_est": {
+            "value": 56,
+            "ci95": [
+              56,
+              56
+            ]
+          }
+        },
+        {
+          "requester": "meomeocoj1103.near",
+          "share_of_requests": {
+            "value": 0.028078,
+            "ci95": [
+              0.028078,
+              0.028078
+            ]
+          },
+          "requests_est": {
+            "value": 26,
+            "ci95": [
+              26,
+              26
+            ]
+          }
+        },
+        {
+          "requester": "multichain-mpc-dev-v3.near",
+          "share_of_requests": {
+            "value": 0.020518,
+            "ci95": [
+              0.020518,
+              0.020518
+            ]
+          },
+          "requests_est": {
+            "value": 19,
+            "ci95": [
+              19,
+              19
+            ]
+          }
+        },
+        {
+          "requester": "serhii.near",
+          "share_of_requests": {
+            "value": 0.012959,
+            "ci95": [
+              0.012959,
+              0.012959
+            ]
+          },
+          "requests_est": {
+            "value": 12,
+            "ci95": [
+              12,
+              12
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2024-10",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 11814,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 6176,
+        "ci95": [
+          5913,
+          6586
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.52275,
+        "ci95": [
+          0.5005,
+          0.5575
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.904352,
+        "ci95": [
+          0.79025,
+          0.982045
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.004304,
+        "ci95": [
+          0,
+          0.009417
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.00106,
+        "ci95": [
+          0,
+          0.00265
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.52275,
+          "ci95": [
+            0.5005,
+            0.5575
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.4715,
+          "ci95": [
+            0.438,
+            0.49225
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00575,
+          "ci95": [
+            0.0005,
+            0.01275
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.4715,
+          "ci95": [
+            0.438,
+            0.49225
+          ]
+        },
+        "request_side": {
+          "value": 0.52275,
+          "ci95": [
+            0.5005,
+            0.5575
+          ]
+        },
+        "other": {
+          "value": 0.00575,
+          "ci95": [
+            0.0005,
+            0.01275
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "ping-account.near",
+          "share_of_requests": {
+            "value": 0.979436,
+            "ci95": [
+              0.962373,
+              0.992816
+            ]
+          },
+          "requests_est": {
+            "value": 6049,
+            "ci95": [
+              5745,
+              6471
+            ]
+          }
+        },
+        {
+          "requester": "jwt-chain-signatures.near",
+          "share_of_requests": {
+            "value": 0.009565,
+            "ci95": [
+              0,
+              0.022863
+            ]
+          },
+          "requests_est": {
+            "value": 59,
+            "ci95": [
+              0,
+              142
+            ]
+          }
+        },
+        {
+          "requester": "multichain-mpc-dev-v3.near",
+          "share_of_requests": {
+            "value": 0.005739,
+            "ci95": [
+              0,
+              0.012556
+            ]
+          },
+          "requests_est": {
+            "value": 35,
+            "ci95": [
+              0,
+              83
+            ]
+          }
+        },
+        {
+          "requester": "gregx.near",
+          "share_of_requests": {
+            "value": 0.002869,
+            "ci95": [
+              0,
+              0.008969
+            ]
+          },
+          "requests_est": {
+            "value": 18,
+            "ci95": [
+              0,
+              53
+            ]
+          }
+        },
+        {
+          "requester": "tyreerobinson.near",
+          "share_of_requests": {
+            "value": 0.001913,
+            "ci95": [
+              0,
+              0.004545
+            ]
+          },
+          "requests_est": {
+            "value": 12,
+            "ci95": [
+              0,
+              30
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2024-11",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 22328,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 11259,
+        "ci95": [
+          11181,
+          11404
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.50425,
+        "ci95": [
+          0.50075,
+          0.51075
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.985126,
+        "ci95": [
+          0.961275,
+          0.998501
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.000496,
+        "ci95": [
+          0,
+          0.001497
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.001009,
+        "ci95": [
+          0,
+          0.00252
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.50425,
+          "ci95": [
+            0.50075,
+            0.51075
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.49575,
+          "ci95": [
+            0.48925,
+            0.49925
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.49575,
+          "ci95": [
+            0.48925,
+            0.49925
+          ]
+        },
+        "request_side": {
+          "value": 0.50425,
+          "ci95": [
+            0.50075,
+            0.51075
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "ping-account.near",
+          "share_of_requests": {
+            "value": 0.953892,
+            "ci95": [
+              0.935516,
+              0.971726
+            ]
+          },
+          "requests_est": {
+            "value": 10740,
+            "ci95": [
+              10500,
+              10980
+            ]
+          }
+        },
+        {
+          "requester": "max-normal.near",
+          "share_of_requests": {
+            "value": 0.01884,
+            "ci95": [
+              0.007801,
+              0.030454
+            ]
+          },
+          "requests_est": {
+            "value": 212,
+            "ci95": [
+              89,
+              341
+            ]
+          }
+        },
+        {
+          "requester": "surgecode.near",
+          "share_of_requests": {
+            "value": 0.010412,
+            "ci95": [
+              0.00388,
+              0.018245
+            ]
+          },
+          "requests_est": {
+            "value": 117,
+            "ci95": [
+              45,
+              207
+            ]
+          }
+        },
+        {
+          "requester": "nate.near",
+          "share_of_requests": {
+            "value": 0.003471,
+            "ci95": [
+              0,
+              0.00935
+            ]
+          },
+          "requests_est": {
+            "value": 39,
+            "ci95": [
+              0,
+              106
+            ]
+          }
+        },
+        {
+          "requester": "e4m7g6.near",
+          "share_of_requests": {
+            "value": 0.002975,
+            "ci95": [
+              0,
+              0.008832
+            ]
+          },
+          "requests_est": {
+            "value": 33,
+            "ci95": [
+              0,
+              100
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2024-12",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 3905,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 17978,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 9604,
+        "ci95": [
+          8967,
+          10474
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.534187,
+        "ci95": [
+          0.49875,
+          0.582586
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.849952,
+        "ci95": [
+          0.699565,
+          0.991045
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.006711,
+        "ci95": [
+          0,
+          0.014659
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.027488,
+        "ci95": [
+          0,
+          0.086605
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.534187,
+          "ci95": [
+            0.49875,
+            0.582586
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.465813,
+          "ci95": [
+            0.417414,
+            0.501211
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.465813,
+          "ci95": [
+            0.417414,
+            0.501211
+          ]
+        },
+        "request_side": {
+          "value": 0.534187,
+          "ci95": [
+            0.49875,
+            0.582586
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "ping-account.near",
+          "share_of_requests": {
+            "value": 0.969319,
+            "ci95": [
+              0.949977,
+              0.987284
+            ]
+          },
+          "requests_est": {
+            "value": 9309,
+            "ci95": [
+              8701,
+              10099
+            ]
+          }
+        },
+        {
+          "requester": "stg1.btchive0.near",
+          "share_of_requests": {
+            "value": 0.014382,
+            "ci95": [
+              0.003749,
+              0.028544
+            ]
+          },
+          "requests_est": {
+            "value": 138,
+            "ci95": [
+              34,
+              274
+            ]
+          }
+        },
+        {
+          "requester": "e4m7g6.near",
+          "share_of_requests": {
+            "value": 0.00815,
+            "ci95": [
+              0,
+              0.019413
+            ]
+          },
+          "requests_est": {
+            "value": 78,
+            "ci95": [
+              0,
+              198
+            ]
+          }
+        },
+        {
+          "requester": "max-normal.near",
+          "share_of_requests": {
+            "value": 0.006232,
+            "ci95": [
+              0,
+              0.014399
+            ]
+          },
+          "requests_est": {
+            "value": 60,
+            "ci95": [
+              0,
+              138
+            ]
+          }
+        },
+        {
+          "requester": "fvear.near",
+          "share_of_requests": {
+            "value": 0.001438,
+            "ci95": [
+              0,
+              0.004578
+            ]
+          },
+          "requests_est": {
+            "value": 14,
+            "ci95": [
+              0,
+              42
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-01",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 9728,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 4883,
+        "ci95": [
+          4874,
+          4893
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.502,
+        "ci95": [
+          0.501,
+          0.503
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.996016,
+        "ci95": [
+          0.993045,
+          0.998503
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.015438,
+        "ci95": [
+          0.003984,
+          0.027875
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.001501,
+        "ci95": [
+          0,
+          0.002996
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49925,
+          "ci95": [
+            0.49725,
+            0.501
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.49975,
+          "ci95": [
+            0.4975,
+            0.502
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.001,
+          "ci95": [
+            0.00025,
+            0.002
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.5,
+          "ci95": [
+            0.498,
+            0.50225
+          ]
+        },
+        "request_side": {
+          "value": 0.49925,
+          "ci95": [
+            0.49725,
+            0.501
+          ]
+        },
+        "other": {
+          "value": 0.00075,
+          "ci95": [
+            0,
+            0.0015
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "ping-account.near",
+          "share_of_requests": {
+            "value": 0.567231,
+            "ci95": [
+              0.374441,
+              0.770459
+            ]
+          },
+          "requests_est": {
+            "value": 2770,
+            "ci95": [
+              1831,
+              3755
+            ]
+          }
+        },
+        {
+          "requester": "acc.toalice.near",
+          "share_of_requests": {
+            "value": 0.149402,
+            "ci95": [
+              0.054781,
+              0.249876
+            ]
+          },
+          "requests_est": {
+            "value": 730,
+            "ci95": [
+              268,
+              1221
+            ]
+          }
+        },
+        {
+          "requester": "max-normal.near",
+          "share_of_requests": {
+            "value": 0.055279,
+            "ci95": [
+              0.020896,
+              0.092583
+            ]
+          },
+          "requests_est": {
+            "value": 270,
+            "ci95": [
+              102,
+              452
+            ]
+          }
+        },
+        {
+          "requester": "stg1.btchive0.near",
+          "share_of_requests": {
+            "value": 0.055279,
+            "ci95": [
+              0.029895,
+              0.082669
+            ]
+          },
+          "requests_est": {
+            "value": 270,
+            "ci95": [
+              146,
+              404
+            ]
+          }
+        },
+        {
+          "requester": "nate.near",
+          "share_of_requests": {
+            "value": 0.040339,
+            "ci95": [
+              0.013917,
+              0.069686
+            ]
+          },
+          "requests_est": {
+            "value": 197,
+            "ci95": [
+              68,
+              340
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-02",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 3579,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 25550,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 9116,
+        "ci95": [
+          6936,
+          11913
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.356804,
+        "ci95": [
+          0.271452,
+          0.466275
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.70556,
+        "ci95": [
+          0.500666,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.034456,
+        "ci95": [
+          0.011111,
+          0.070163
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.604048,
+        "ci95": [
+          0.515952,
+          0.658182
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.356804,
+          "ci95": [
+            0.271452,
+            0.466275
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.635094,
+          "ci95": [
+            0.526059,
+            0.719986
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.008103,
+          "ci95": [
+            0.00283,
+            0.015432
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.640961,
+          "ci95": [
+            0.530402,
+            0.726619
+          ]
+        },
+        "request_side": {
+          "value": 0.356804,
+          "ci95": [
+            0.271452,
+            0.466275
+          ]
+        },
+        "other": {
+          "value": 0.002235,
+          "ci95": [
+            0.000513,
+            0.004871
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "ping-account.near",
+          "share_of_requests": {
+            "value": 0.730619,
+            "ci95": [
+              0.521158,
+              0.865527
+            ]
+          },
+          "requests_est": {
+            "value": 6661,
+            "ci95": [
+              3732,
+              9970
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.096319,
+            "ci95": [
+              0.034085,
+              0.195009
+            ]
+          },
+          "requests_est": {
+            "value": 878,
+            "ci95": [
+              355,
+              1545
+            ]
+          }
+        },
+        {
+          "requester": "acc.toalice.near",
+          "share_of_requests": {
+            "value": 0.04307,
+            "ci95": [
+              0.023795,
+              0.067156
+            ]
+          },
+          "requests_est": {
+            "value": 393,
+            "ci95": [
+              223,
+              583
+            ]
+          }
+        },
+        {
+          "requester": "v0.shadeagent.near",
+          "share_of_requests": {
+            "value": 0.033673,
+            "ci95": [
+              0.008078,
+              0.07623
+            ]
+          },
+          "requests_est": {
+            "value": 307,
+            "ci95": [
+              83,
+              597
+            ]
+          }
+        },
+        {
+          "requester": "law1912.near",
+          "share_of_requests": {
+            "value": 0.032106,
+            "ci95": [
+              0.005172,
+              0.074774
+            ]
+          },
+          "requests_est": {
+            "value": 293,
+            "ci95": [
+              45,
+              630
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-03",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 4355,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 2732,
+        "ci95": [
+          2385,
+          3091
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.62725,
+        "ci95": [
+          0.54775,
+          0.70975
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.532483,
+        "ci95": [
+          0.379491,
+          0.721801
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.470705,
+        "ci95": [
+          0.286527,
+          0.619561
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.103634,
+        "ci95": [
+          0.021192,
+          0.226693
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.62725,
+          "ci95": [
+            0.54775,
+            0.70975
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.3715,
+          "ci95": [
+            0.2885,
+            0.45125
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00125,
+          "ci95": [
+            0.00025,
+            0.0025
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.3715,
+          "ci95": [
+            0.2885,
+            0.45125
+          ]
+        },
+        "request_side": {
+          "value": 0.62725,
+          "ci95": [
+            0.54775,
+            0.70975
+          ]
+        },
+        "other": {
+          "value": 0.00125,
+          "ci95": [
+            0.00025,
+            0.0025
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "brg.toalice.near",
+          "share_of_requests": {
+            "value": 0.300917,
+            "ci95": [
+              0.135701,
+              0.45813
+            ]
+          },
+          "requests_est": {
+            "value": 822,
+            "ci95": [
+              354,
+              1328
+            ]
+          }
+        },
+        {
+          "requester": "mindshare_contract.near",
+          "share_of_requests": {
+            "value": 0.182144,
+            "ci95": [
+              0.071602,
+              0.314931
+            ]
+          },
+          "requests_est": {
+            "value": 498,
+            "ci95": [
+              211,
+              795
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.18055,
+            "ci95": [
+              0.035487,
+              0.358746
+            ]
+          },
+          "requests_est": {
+            "value": 493,
+            "ci95": [
+              87,
+              1065
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.138701,
+            "ci95": [
+              0.062624,
+              0.238875
+            ]
+          },
+          "requests_est": {
+            "value": 379,
+            "ci95": [
+              172,
+              629
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.031088,
+            "ci95": [
+              0.010076,
+              0.061154
+            ]
+          },
+          "requests_est": {
+            "value": 85,
+            "ci95": [
+              28,
+              155
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-04",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 6768,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 3392,
+        "ci95": [
+          3367,
+          3433
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.50125,
+        "ci95": [
+          0.4975,
+          0.50725
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.986035,
+        "ci95": [
+          0.963457,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.082294,
+        "ci95": [
+          0.028957,
+          0.144645
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.011546,
+        "ci95": [
+          0.00699,
+          0.017085
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.50125,
+          "ci95": [
+            0.4975,
+            0.50725
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.498,
+          "ci95": [
+            0.492,
+            0.50175
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00075,
+          "ci95": [
+            0,
+            0.00225
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.49875,
+          "ci95": [
+            0.49275,
+            0.5025
+          ]
+        },
+        "request_side": {
+          "value": 0.50125,
+          "ci95": [
+            0.4975,
+            0.50725
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.473317,
+            "ci95": [
+              0.413896,
+              0.5333
+            ]
+          },
+          "requests_est": {
+            "value": 1606,
+            "ci95": [
+              1401,
+              1812
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.162594,
+            "ci95": [
+              0.117822,
+              0.214499
+            ]
+          },
+          "requests_est": {
+            "value": 552,
+            "ci95": [
+              399,
+              724
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.076808,
+            "ci95": [
+              0.023187,
+              0.137845
+            ]
+          },
+          "requests_est": {
+            "value": 261,
+            "ci95": [
+              80,
+              469
+            ]
+          }
+        },
+        {
+          "requester": "acc.toalice.near",
+          "share_of_requests": {
+            "value": 0.07581,
+            "ci95": [
+              0.035874,
+              0.121635
+            ]
+          },
+          "requests_est": {
+            "value": 257,
+            "ci95": [
+              122,
+              413
+            ]
+          }
+        },
+        {
+          "requester": "mindshare_contract.near",
+          "share_of_requests": {
+            "value": 0.051372,
+            "ci95": [
+              0.037074,
+              0.066732
+            ]
+          },
+          "requests_est": {
+            "value": 174,
+            "ci95": [
+              125,
+              227
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-05",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 14647,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 6862,
+        "ci95": [
+          6723,
+          7001
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.4685,
+        "ci95": [
+          0.459,
+          0.478
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.999466,
+        "ci95": [
+          0.998385,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.161153,
+        "ci95": [
+          0.024946,
+          0.309207
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.097458,
+        "ci95": [
+          0.068323,
+          0.125405
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.4685,
+          "ci95": [
+            0.459,
+            0.478
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.531,
+          "ci95": [
+            0.52175,
+            0.54025
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.0005,
+          "ci95": [
+            0,
+            0.0015
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.5315,
+          "ci95": [
+            0.522,
+            0.541
+          ]
+        },
+        "request_side": {
+          "value": 0.4685,
+          "ci95": [
+            0.459,
+            0.478
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.552828,
+            "ci95": [
+              0.451699,
+              0.647842
+            ]
+          },
+          "requests_est": {
+            "value": 3794,
+            "ci95": [
+              3123,
+              4423
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.108324,
+            "ci95": [
+              0.077888,
+              0.141414
+            ]
+          },
+          "requests_est": {
+            "value": 743,
+            "ci95": [
+              538,
+              963
+            ]
+          }
+        },
+        {
+          "requester": "laikachainab.near",
+          "share_of_requests": {
+            "value": 0.099253,
+            "ci95": [
+              0.006445,
+              0.228541
+            ]
+          },
+          "requests_est": {
+            "value": 681,
+            "ci95": [
+              44,
+              1586
+            ]
+          }
+        },
+        {
+          "requester": "v2.shadeagent.near",
+          "share_of_requests": {
+            "value": 0.088047,
+            "ci95": [
+              0.01215,
+              0.195594
+            ]
+          },
+          "requests_est": {
+            "value": 604,
+            "ci95": [
+              84,
+              1326
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.048559,
+            "ci95": [
+              0.010753,
+              0.100052
+            ]
+          },
+          "requests_est": {
+            "value": 333,
+            "ci95": [
+              73,
+              688
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-06",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 39775,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 18913,
+        "ci95": [
+          18078,
+          20295
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.4755,
+        "ci95": [
+          0.4545,
+          0.51025
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.998948,
+        "ci95": [
+          0.996791,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.347003,
+        "ci95": [
+          0.205338,
+          0.489827
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.166189,
+        "ci95": [
+          0.152639,
+          0.178291
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.4755,
+          "ci95": [
+            0.4545,
+            0.51025
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.5235,
+          "ci95": [
+            0.48775,
+            0.5455
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.001,
+          "ci95": [
+            0,
+            0.003
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.5235,
+          "ci95": [
+            0.48775,
+            0.5455
+          ]
+        },
+        "request_side": {
+          "value": 0.4755,
+          "ci95": [
+            0.4545,
+            0.51025
+          ]
+        },
+        "other": {
+          "value": 0.001,
+          "ci95": [
+            0,
+            0.003
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.487382,
+            "ci95": [
+              0.367961,
+              0.612395
+            ]
+          },
+          "requests_est": {
+            "value": 9218,
+            "ci95": [
+              6871,
+              11614
+            ]
+          }
+        },
+        {
+          "requester": "laikachainab.near",
+          "share_of_requests": {
+            "value": 0.307571,
+            "ci95": [
+              0.159722,
+              0.4678
+            ]
+          },
+          "requests_est": {
+            "value": 5817,
+            "ci95": [
+              3142,
+              8572
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.086751,
+            "ci95": [
+              0.03348,
+              0.145272
+            ]
+          },
+          "requests_est": {
+            "value": 1641,
+            "ci95": [
+              607,
+              2874
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.045741,
+            "ci95": [
+              0.021161,
+              0.078961
+            ]
+          },
+          "requests_est": {
+            "value": 865,
+            "ci95": [
+              388,
+              1571
+            ]
+          }
+        },
+        {
+          "requester": "v2.shadeagent.near",
+          "share_of_requests": {
+            "value": 0.042061,
+            "ci95": [
+              0,
+              0.113992
+            ]
+          },
+          "requests_est": {
+            "value": 796,
+            "ci95": [
+              0,
+              2098
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-07",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 141435,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 65979,
+        "ci95": [
+          65060,
+          66828
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.4665,
+        "ci95": [
+          0.46,
+          0.4725
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.006967,
+        "ci95": [
+          0.000538,
+          0.016146
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.127891,
+        "ci95": [
+          0.112583,
+          0.144388
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.4665,
+          "ci95": [
+            0.46,
+            0.4725
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.52975,
+          "ci95": [
+            0.52375,
+            0.536
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00375,
+          "ci95": [
+            0,
+            0.011
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.52975,
+          "ci95": [
+            0.52375,
+            0.536
+          ]
+        },
+        "request_side": {
+          "value": 0.4665,
+          "ci95": [
+            0.46,
+            0.4725
+          ]
+        },
+        "other": {
+          "value": 0.00375,
+          "ci95": [
+            0,
+            0.011
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.79582,
+            "ci95": [
+              0.675218,
+              0.891935
+            ]
+          },
+          "requests_est": {
+            "value": 52508,
+            "ci95": [
+              44587,
+              58908
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.143087,
+            "ci95": [
+              0.057662,
+              0.259259
+            ]
+          },
+          "requests_est": {
+            "value": 9441,
+            "ci95": [
+              3783,
+              17184
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.017685,
+            "ci95": [
+              0.007487,
+              0.03027
+            ]
+          },
+          "requests_est": {
+            "value": 1167,
+            "ci95": [
+              495,
+              1980
+            ]
+          }
+        },
+        {
+          "requester": "g.morexrp.mmroot.near",
+          "share_of_requests": {
+            "value": 0.014469,
+            "ci95": [
+              0,
+              0.036702
+            ]
+          },
+          "requests_est": {
+            "value": 955,
+            "ci95": [
+              0,
+              2440
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.009646,
+            "ci95": [
+              0.004826,
+              0.015013
+            ]
+          },
+          "requests_est": {
+            "value": 636,
+            "ci95": [
+              318,
+              990
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-08",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 102576,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 50852,
+        "ci95": [
+          50544,
+          51134
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49575,
+        "ci95": [
+          0.49275,
+          0.4985
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.998487,
+        "ci95": [
+          0.995448,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.013111,
+        "ci95": [
+          0,
+          0.032861
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.01596,
+        "ci95": [
+          0.006507,
+          0.026342
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49575,
+          "ci95": [
+            0.49275,
+            0.4985
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.50125,
+          "ci95": [
+            0.499,
+            0.504
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.003,
+          "ci95": [
+            0,
+            0.0065
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.50125,
+          "ci95": [
+            0.499,
+            0.504
+          ]
+        },
+        "request_side": {
+          "value": 0.49575,
+          "ci95": [
+            0.49275,
+            0.4985
+          ]
+        },
+        "other": {
+          "value": 0.003,
+          "ci95": [
+            0,
+            0.0065
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.864347,
+            "ci95": [
+              0.812405,
+              0.909366
+            ]
+          },
+          "requests_est": {
+            "value": 43954,
+            "ci95": [
+              41236,
+              46313
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.038326,
+            "ci95": [
+              0.019182,
+              0.063508
+            ]
+          },
+          "requests_est": {
+            "value": 1949,
+            "ci95": [
+              974,
+              3231
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.019163,
+            "ci95": [
+              0.000505,
+              0.040445
+            ]
+          },
+          "requests_est": {
+            "value": 974,
+            "ci95": [
+              26,
+              2052
+            ]
+          }
+        },
+        {
+          "requester": "g.morexrp.mmroot.near",
+          "share_of_requests": {
+            "value": 0.017146,
+            "ci95": [
+              0.005043,
+              0.032372
+            ]
+          },
+          "requests_est": {
+            "value": 872,
+            "ci95": [
+              256,
+              1641
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.009581,
+            "ci95": [
+              0.005561,
+              0.014106
+            ]
+          },
+          "requests_est": {
+            "value": 487,
+            "ci95": [
+              282,
+              718
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-09",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 92477,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 46146,
+        "ci95": [
+          45961,
+          46239
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.499,
+        "ci95": [
+          0.497,
+          0.5
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.499,
+          "ci95": [
+            0.497,
+            0.5
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.49875,
+          "ci95": [
+            0.4965,
+            0.5
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00225,
+          "ci95": [
+            0,
+            0.0065
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.49875,
+          "ci95": [
+            0.4965,
+            0.5
+          ]
+        },
+        "request_side": {
+          "value": 0.499,
+          "ci95": [
+            0.497,
+            0.5
+          ]
+        },
+        "other": {
+          "value": 0.00225,
+          "ci95": [
+            0,
+            0.0065
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.948397,
+            "ci95": [
+              0.931727,
+              0.963427
+            ]
+          },
+          "requests_est": {
+            "value": 43765,
+            "ci95": [
+              42956,
+              44505
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.013026,
+            "ci95": [
+              0.001004,
+              0.027
+            ]
+          },
+          "requests_est": {
+            "value": 601,
+            "ci95": [
+              46,
+              1248
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.011523,
+            "ci95": [
+              0.0065,
+              0.017103
+            ]
+          },
+          "requests_est": {
+            "value": 532,
+            "ci95": [
+              301,
+              786
+            ]
+          }
+        },
+        {
+          "requester": "kelvintest.near",
+          "share_of_requests": {
+            "value": 0.009018,
+            "ci95": [
+              0.002515,
+              0.018036
+            ]
+          },
+          "requests_est": {
+            "value": 416,
+            "ci95": [
+              116,
+              832
+            ]
+          }
+        },
+        {
+          "requester": "hm-gnosis.near",
+          "share_of_requests": {
+            "value": 0.003507,
+            "ci95": [
+              0.001,
+              0.007
+            ]
+          },
+          "requests_est": {
+            "value": 162,
+            "ci95": [
+              46,
+              324
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-10",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 127196,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 63216,
+        "ci95": [
+          62485,
+          63598
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.497,
+        "ci95": [
+          0.49125,
+          0.5
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.002515,
+        "ci95": [
+          0,
+          0.006569
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.013917,
+        "ci95": [
+          0.001499,
+          0.036891
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.497,
+          "ci95": [
+            0.49125,
+            0.5
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.503,
+          "ci95": [
+            0.5,
+            0.50875
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.503,
+          "ci95": [
+            0.5,
+            0.50875
+          ]
+        },
+        "request_side": {
+          "value": 0.497,
+          "ci95": [
+            0.49125,
+            0.5
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.737425,
+            "ci95": [
+              0.684131,
+              0.788394
+            ]
+          },
+          "requests_est": {
+            "value": 46617,
+            "ci95": [
+              43215,
+              49956
+            ]
+          }
+        },
+        {
+          "requester": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
+          "share_of_requests": {
+            "value": 0.177062,
+            "ci95": [
+              0.128983,
+              0.221332
+            ]
+          },
+          "requests_est": {
+            "value": 11193,
+            "ci95": [
+              8172,
+              14023
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.030684,
+            "ci95": [
+              0.009557,
+              0.058883
+            ]
+          },
+          "requests_est": {
+            "value": 1940,
+            "ci95": [
+              604,
+              3720
+            ]
+          }
+        },
+        {
+          "requester": "acc.ref-labs.near",
+          "share_of_requests": {
+            "value": 0.011569,
+            "ci95": [
+              0,
+              0.031047
+            ]
+          },
+          "requests_est": {
+            "value": 731,
+            "ci95": [
+              0,
+              1972
+            ]
+          }
+        },
+        {
+          "requester": "dew-rneardefi-kernel.near",
+          "share_of_requests": {
+            "value": 0.008551,
+            "ci95": [
+              0.002001,
+              0.016591
+            ]
+          },
+          "requests_est": {
+            "value": 541,
+            "ci95": [
+              127,
+              1049
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-11",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 192474,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 91618,
+        "ci95": [
+          88538,
+          94264
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.476,
+        "ci95": [
+          0.46,
+          0.48975
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.001052,
+        "ci95": [
+          0,
+          0.002627
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.476,
+          "ci95": [
+            0.46,
+            0.48975
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.47525,
+          "ci95": [
+            0.4585,
+            0.48925
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.04875,
+          "ci95": [
+            0.021,
+            0.081
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.524,
+          "ci95": [
+            0.51025,
+            0.54
+          ]
+        },
+        "request_side": {
+          "value": 0.476,
+          "ci95": [
+            0.46,
+            0.48975
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.630777,
+            "ci95": [
+              0.580595,
+              0.687011
+            ]
+          },
+          "requests_est": {
+            "value": 57790,
+            "ci95": [
+              53989,
+              61977
+            ]
+          }
+        },
+        {
+          "requester": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
+          "share_of_requests": {
+            "value": 0.307248,
+            "ci95": [
+              0.265439,
+              0.344013
+            ]
+          },
+          "requests_est": {
+            "value": 28149,
+            "ci95": [
+              23771,
+              32143
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.033088,
+            "ci95": [
+              0.020968,
+              0.045336
+            ]
+          },
+          "requests_est": {
+            "value": 3031,
+            "ci95": [
+              1877,
+              4186
+            ]
+          }
+        },
+        {
+          "requester": "enleap-test.near",
+          "share_of_requests": {
+            "value": 0.007353,
+            "ci95": [
+              0,
+              0.022222
+            ]
+          },
+          "requests_est": {
+            "value": 674,
+            "ci95": [
+              0,
+              2021
+            ]
+          }
+        },
+        {
+          "requester": "dew-rneardefi-kernel.near",
+          "share_of_requests": {
+            "value": 0.004727,
+            "ci95": [
+              0,
+              0.011302
+            ]
+          },
+          "requests_est": {
+            "value": 433,
+            "ci95": [
+              0,
+              1010
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2025-12",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 254010,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 121353,
+        "ci95": [
+          119321,
+          123004
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.47775,
+        "ci95": [
+          0.46975,
+          0.48425
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 0.997907,
+        "ci95": [
+          0.993664,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0,
+        "ci95": [
+          0,
+          0
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.005744,
+        "ci95": [
+          0.00106,
+          0.011047
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.47775,
+          "ci95": [
+            0.46975,
+            0.48425
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.47875,
+          "ci95": [
+            0.47025,
+            0.486
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.0435,
+          "ci95": [
+            0.03,
+            0.0595
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.52225,
+          "ci95": [
+            0.51575,
+            0.53025
+          ]
+        },
+        "request_side": {
+          "value": 0.47775,
+          "ci95": [
+            0.46975,
+            0.48425
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.732601,
+            "ci95": [
+              0.688353,
+              0.772132
+            ]
+          },
+          "requests_est": {
+            "value": 88904,
+            "ci95": [
+              83252,
+              93920
+            ]
+          }
+        },
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.213501,
+            "ci95": [
+              0.179947,
+              0.24739
+            ]
+          },
+          "requests_est": {
+            "value": 25909,
+            "ci95": [
+              21781,
+              30037
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.032967,
+            "ci95": [
+              0.009395,
+              0.063443
+            ]
+          },
+          "requests_est": {
+            "value": 4001,
+            "ci95": [
+              1143,
+              7684
+            ]
+          }
+        },
+        {
+          "requester": "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora",
+          "share_of_requests": {
+            "value": 0.006279,
+            "ci95": [
+              0,
+              0.019007
+            ]
+          },
+          "requests_est": {
+            "value": 762,
+            "ci95": [
+              0,
+              2286
+            ]
+          }
+        },
+        {
+          "requester": "e9f278f8bb92f70bb88335bfbb83a12df6ce6ead286d53f358d1cafab75986a8",
+          "share_of_requests": {
+            "value": 0.002093,
+            "ci95": [
+              0,
+              0.006336
+            ]
+          },
+          "requests_est": {
+            "value": 254,
+            "ci95": [
+              0,
+              762
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-01",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 304931,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 148959,
+        "ci95": [
+          148349,
+          149492
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.4885,
+        "ci95": [
+          0.4865,
+          0.49025
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.001024,
+        "ci95": [
+          0,
+          0.002561
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.00617,
+        "ci95": [
+          0,
+          0.014925
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.4885,
+          "ci95": [
+            0.4865,
+            0.49025
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.48625,
+          "ci95": [
+            0.4835,
+            0.48875
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.02525,
+          "ci95": [
+            0.022,
+            0.02875
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.5115,
+          "ci95": [
+            0.50975,
+            0.5135
+          ]
+        },
+        "request_side": {
+          "value": 0.4885,
+          "ci95": [
+            0.4865,
+            0.49025
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.58393,
+            "ci95": [
+              0.5261,
+              0.638505
+            ]
+          },
+          "requests_est": {
+            "value": 86982,
+            "ci95": [
+              78443,
+              94986
+            ]
+          }
+        },
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.277892,
+            "ci95": [
+              0.248721,
+              0.306039
+            ]
+          },
+          "requests_est": {
+            "value": 41394,
+            "ci95": [
+              37049,
+              45587
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdt.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.043501,
+            "ci95": [
+              0.011317,
+              0.082653
+            ]
+          },
+          "requests_est": {
+            "value": 6480,
+            "ci95": [
+              1677,
+              12350
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.041453,
+            "ci95": [
+              0.013326,
+              0.081372
+            ]
+          },
+          "requests_est": {
+            "value": 6175,
+            "ci95": [
+              1982,
+              12121
+            ]
+          }
+        },
+        {
+          "requester": "66667945c34b399993ca834587886b8508db39b1.aurora",
+          "share_of_requests": {
+            "value": 0.018936,
+            "ci95": [
+              0,
+              0.056923
+            ]
+          },
+          "requests_est": {
+            "value": 2821,
+            "ci95": [
+              0,
+              8462
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-02",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 3999,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 428384,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 210711,
+        "ci95": [
+          209051,
+          211942
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.491873,
+        "ci95": [
+          0.488,
+          0.494747
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.035587,
+        "ci95": [
+          0.006599,
+          0.078893
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.009119,
+        "ci95": [
+          0,
+          0.027204
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.491873,
+          "ci95": [
+            0.488,
+            0.494747
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.493623,
+          "ci95": [
+            0.49,
+            0.4985
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.014504,
+          "ci95": [
+            0.011762,
+            0.01725
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.508127,
+          "ci95": [
+            0.505253,
+            0.512
+          ]
+        },
+        "request_side": {
+          "value": 0.491873,
+          "ci95": [
+            0.488,
+            0.494747
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.400102,
+            "ci95": [
+              0.335023,
+              0.459199
+            ]
+          },
+          "requests_est": {
+            "value": 84306,
+            "ci95": [
+              70273,
+              97029
+            ]
+          }
+        },
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.378241,
+            "ci95": [
+              0.290142,
+              0.473658
+            ]
+          },
+          "requests_est": {
+            "value": 79699,
+            "ci95": [
+              61167,
+              99517
+            ]
+          }
+        },
+        {
+          "requester": "reflect-adam-mainnet-agent-contract.near",
+          "share_of_requests": {
+            "value": 0.155058,
+            "ci95": [
+              0.086137,
+              0.229442
+            ]
+          },
+          "requests_est": {
+            "value": 32672,
+            "ci95": [
+              18108,
+              48407
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdc.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.032028,
+            "ci95": [
+              0.016352,
+              0.055724
+            ]
+          },
+          "requests_est": {
+            "value": 6749,
+            "ci95": [
+              3429,
+              11682
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdt.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.019319,
+            "ci95": [
+              0.013768,
+              0.026972
+            ]
+          },
+          "requests_est": {
+            "value": 4071,
+            "ci95": [
+              2893,
+              5678
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-03",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 616818,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 300853,
+        "ci95": [
+          295147,
+          304862
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.48775,
+        "ci95": [
+          0.4785,
+          0.49425
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.024603,
+        "ci95": [
+          0.010649,
+          0.041318
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.029116,
+        "ci95": [
+          0.002029,
+          0.068081
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.48775,
+          "ci95": [
+            0.4785,
+            0.49425
+          ]
+        },
+        "verify_request": {
+          "value": 0.0005,
+          "ci95": [
+            0,
+            0.0015
+          ]
+        },
+        "respond": {
+          "value": 0.498,
+          "ci95": [
+            0.4915,
+            0.50675
+          ]
+        },
+        "respond_verify": {
+          "value": 0.00025,
+          "ci95": [
+            0,
+            0.00075
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.0135,
+          "ci95": [
+            0.00975,
+            0.01725
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.51175,
+          "ci95": [
+            0.505,
+            0.52125
+          ]
+        },
+        "request_side": {
+          "value": 0.48825,
+          "ci95": [
+            0.47875,
+            0.495
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.494106,
+            "ci95": [
+              0.437183,
+              0.556305
+            ]
+          },
+          "requests_est": {
+            "value": 148653,
+            "ci95": [
+              131845,
+              167158
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.301896,
+            "ci95": [
+              0.267584,
+              0.335901
+            ]
+          },
+          "requests_est": {
+            "value": 90826,
+            "ci95": [
+              80803,
+              100696
+            ]
+          }
+        },
+        {
+          "requester": "reflect-adam-mainnet-agent-contract.near",
+          "share_of_requests": {
+            "value": 0.129677,
+            "ci95": [
+              0.064733,
+              0.197234
+            ]
+          },
+          "requests_est": {
+            "value": 39014,
+            "ci95": [
+              19276,
+              59215
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdc.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.02204,
+            "ci95": [
+              0.011364,
+              0.037583
+            ]
+          },
+          "requests_est": {
+            "value": 6631,
+            "ci95": [
+              3392,
+              11257
+            ]
+          }
+        },
+        {
+          "requester": "45348c213bf7ddb8e45f34ca4f333307a78ecb9a.aurora",
+          "share_of_requests": {
+            "value": 0.021527,
+            "ci95": [
+              0,
+              0.058163
+            ]
+          },
+          "requests_est": {
+            "value": 6477,
+            "ci95": [
+              0,
+              17579
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-04",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 1461475,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 721238,
+        "ci95": [
+          715392,
+          726718
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.4935,
+        "ci95": [
+          0.4895,
+          0.49725
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.018237,
+        "ci95": [
+          0.007583,
+          0.030395
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.007538,
+        "ci95": [
+          0.000505,
+          0.017422
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.493,
+          "ci95": [
+            0.48925,
+            0.49675
+          ]
+        },
+        "verify_request": {
+          "value": 0.0015,
+          "ci95": [
+            0,
+            0.00375
+          ]
+        },
+        "respond": {
+          "value": 0.4975,
+          "ci95": [
+            0.49375,
+            0.50125
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.008,
+          "ci95": [
+            0.00525,
+            0.01125
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.5055,
+          "ci95": [
+            0.50225,
+            0.50875
+          ]
+        },
+        "request_side": {
+          "value": 0.4945,
+          "ci95": [
+            0.49125,
+            0.49775
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.47923,
+            "ci95": [
+              0.349746,
+              0.59798
+            ]
+          },
+          "requests_est": {
+            "value": 345639,
+            "ci95": [
+              251739,
+              432962
+            ]
+          }
+        },
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.262411,
+            "ci95": [
+              0.21042,
+              0.315549
+            ]
+          },
+          "requests_est": {
+            "value": 189261,
+            "ci95": [
+              151993,
+              226894
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.203141,
+            "ci95": [
+              0.149975,
+              0.260538
+            ]
+          },
+          "requests_est": {
+            "value": 146513,
+            "ci95": [
+              108515,
+              187434
+            ]
+          }
+        },
+        {
+          "requester": "reflect-adam-mainnet-agent-contract.near",
+          "share_of_requests": {
+            "value": 0.013171,
+            "ci95": [
+              0,
+              0.035931
+            ]
+          },
+          "requests_est": {
+            "value": 9500,
+            "ci95": [
+              0,
+              25941
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdc.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.012665,
+            "ci95": [
+              0.00607,
+              0.022245
+            ]
+          },
+          "requests_est": {
+            "value": 9134,
+            "ci95": [
+              4384,
+              16076
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-05",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 1796592,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 896949,
+        "ci95": [
+          891559,
+          902338
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49925,
+        "ci95": [
+          0.49625,
+          0.50225
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.009014,
+        "ci95": [
+          0.002997,
+          0.018081
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.006543,
+        "ci95": [
+          0,
+          0.017964
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49925,
+          "ci95": [
+            0.49625,
+            0.50225
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.49675,
+          "ci95": [
+            0.49325,
+            0.5
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.004,
+          "ci95": [
+            0.00225,
+            0.00625
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.50075,
+          "ci95": [
+            0.49775,
+            0.50375
+          ]
+        },
+        "request_side": {
+          "value": 0.49925,
+          "ci95": [
+            0.49625,
+            0.50225
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.628943,
+            "ci95": [
+              0.567716,
+              0.679519
+            ]
+          },
+          "requests_est": {
+            "value": 564130,
+            "ci95": [
+              509783,
+              609494
+            ]
+          }
+        },
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.17326,
+            "ci95": [
+              0.139418,
+              0.20995
+            ]
+          },
+          "requests_est": {
+            "value": 155405,
+            "ci95": [
+              124863,
+              189091
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.105658,
+            "ci95": [
+              0.097,
+              0.113842
+            ]
+          },
+          "requests_est": {
+            "value": 94770,
+            "ci95": [
+              87135,
+              101957
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.068102,
+            "ci95": [
+              0.032533,
+              0.111558
+            ]
+          },
+          "requests_est": {
+            "value": 61084,
+            "ci95": [
+              29195,
+              99711
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdt.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.010516,
+            "ci95": [
+              0.002003,
+              0.022466
+            ]
+          },
+          "requests_est": {
+            "value": 9432,
+            "ci95": [
+              1797,
+              20212
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-06",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 1591333,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 792882,
+        "ci95": [
+          789699,
+          796064
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49825,
+        "ci95": [
+          0.49625,
+          0.50025
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.004516,
+        "ci95": [
+          0.001006,
+          0.008517
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.000505,
+        "ci95": [
+          0,
+          0.001519
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49825,
+          "ci95": [
+            0.49625,
+            0.50025
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.4955,
+          "ci95": [
+            0.49325,
+            0.4975
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00625,
+          "ci95": [
+            0.0045,
+            0.008
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.50175,
+          "ci95": [
+            0.49975,
+            0.50375
+          ]
+        },
+        "request_side": {
+          "value": 0.49825,
+          "ci95": [
+            0.49625,
+            0.50025
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.629202,
+            "ci95": [
+              0.581755,
+              0.672172
+            ]
+          },
+          "requests_est": {
+            "value": 498883,
+            "ci95": [
+              461884,
+              533097
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.114902,
+            "ci95": [
+              0.105316,
+              0.124311
+            ]
+          },
+          "requests_est": {
+            "value": 91104,
+            "ci95": [
+              83545,
+              98663
+            ]
+          }
+        },
+        {
+          "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+          "share_of_requests": {
+            "value": 0.113397,
+            "ci95": [
+              0.076653,
+              0.152771
+            ]
+          },
+          "requests_est": {
+            "value": 89910,
+            "ci95": [
+              60868,
+              121339
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.063723,
+            "ci95": [
+              0.037242,
+              0.094141
+            ]
+          },
+          "requests_est": {
+            "value": 50525,
+            "ci95": [
+              29440,
+              74395
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.026593,
+            "ci95": [
+              0.005519,
+              0.05308
+            ]
+          },
+          "requests_est": {
+            "value": 21085,
+            "ci95": [
+              4376,
+              42170
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-07",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 1599661,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 798631,
+        "ci95": [
+          792632,
+          804230
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49925,
+        "ci95": [
+          0.4955,
+          0.50275
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.004507,
+        "ci95": [
+          0.000998,
+          0.009543
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.001009,
+        "ci95": [
+          0,
+          0.003036
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49925,
+          "ci95": [
+            0.4955,
+            0.50275
+          ]
+        },
+        "verify_request": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "respond": {
+          "value": 0.4955,
+          "ci95": [
+            0.49325,
+            0.498
+          ]
+        },
+        "respond_verify": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.00525,
+          "ci95": [
+            0.003,
+            0.00775
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.5005,
+          "ci95": [
+            0.497,
+            0.50425
+          ]
+        },
+        "request_side": {
+          "value": 0.49925,
+          "ci95": [
+            0.4955,
+            0.50275
+          ]
+        },
+        "other": {
+          "value": 0.00025,
+          "ci95": [
+            0,
+            0.00075
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.645969,
+            "ci95": [
+              0.596579,
+              0.69354
+            ]
+          },
+          "requests_est": {
+            "value": 515891,
+            "ci95": [
+              476299,
+              552683
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.128192,
+            "ci95": [
+              0.105025,
+              0.150275
+            ]
+          },
+          "requests_est": {
+            "value": 102378,
+            "ci95": [
+              83582,
+              120374
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.125689,
+            "ci95": [
+              0.107107,
+              0.144935
+            ]
+          },
+          "requests_est": {
+            "value": 100379,
+            "ci95": [
+              85582,
+              115576
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.067601,
+            "ci95": [
+              0.037074,
+              0.102771
+            ]
+          },
+          "requests_est": {
+            "value": 53989,
+            "ci95": [
+              29594,
+              81983
+            ]
+          }
+        },
+        {
+          "requester": "kernel-usdc.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.00651,
+            "ci95": [
+              0.004042,
+              0.008487
+            ]
+          },
+          "requests_est": {
+            "value": 5199,
+            "ci95": [
+              3199,
+              6799
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-08",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 1610232,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 800688,
+        "ci95": [
+          795052,
+          806324
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49725,
+        "ci95": [
+          0.49375,
+          0.50075
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.001006,
+        "ci95": [
+          0,
+          0.002513
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.002052,
+        "ci95": [
+          0,
+          0.004611
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49725,
+          "ci95": [
+            0.49375,
+            0.50075
+          ]
+        },
+        "verify_request": {
+          "value": 0.004,
+          "ci95": [
+            0.0015,
+            0.00675
+          ]
+        },
+        "respond": {
+          "value": 0.48725,
+          "ci95": [
+            0.48225,
+            0.49175
+          ]
+        },
+        "respond_verify": {
+          "value": 0.004,
+          "ci95": [
+            0.0015,
+            0.00675
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.0075,
+          "ci95": [
+            0.00525,
+            0.0095
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.49875,
+          "ci95": [
+            0.4955,
+            0.50175
+          ]
+        },
+        "request_side": {
+          "value": 0.50125,
+          "ci95": [
+            0.49825,
+            0.5045
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.526898,
+            "ci95": [
+              0.490462,
+              0.565743
+            ]
+          },
+          "requests_est": {
+            "value": 421881,
+            "ci95": [
+              393299,
+              452073
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.223731,
+            "ci95": [
+              0.193044,
+              0.250126
+            ]
+          },
+          "requests_est": {
+            "value": 179138,
+            "ci95": [
+              154582,
+              200474
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.121166,
+            "ci95": [
+              0.08665,
+              0.159681
+            ]
+          },
+          "requests_est": {
+            "value": 97016,
+            "ci95": [
+              69240,
+              127611
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.114128,
+            "ci95": [
+              0.103431,
+              0.125125
+            ]
+          },
+          "requests_est": {
+            "value": 91381,
+            "ci95": [
+              82524,
+              100237
+            ]
+          }
+        },
+        {
+          "requester": "kernel-zec.meteor-vaults.near",
+          "share_of_requests": {
+            "value": 0.004022,
+            "ci95": [
+              0.002015,
+              0.00603
+            ]
+          },
+          "requests_est": {
+            "value": 3220,
+            "ci95": [
+              1610,
+              4831
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-09",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 1304107,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 641947,
+        "ci95": [
+          636078,
+          647163
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49225,
+        "ci95": [
+          0.48775,
+          0.49625
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.030472,
+        "ci95": [
+          0.012742,
+          0.050556
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.007669,
+        "ci95": [
+          0.00355,
+          0.012807
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49225,
+          "ci95": [
+            0.48775,
+            0.49625
+          ]
+        },
+        "verify_request": {
+          "value": 0.0035,
+          "ci95": [
+            0.001,
+            0.0065
+          ]
+        },
+        "respond": {
+          "value": 0.489,
+          "ci95": [
+            0.48525,
+            0.4925
+          ]
+        },
+        "respond_verify": {
+          "value": 0.0035,
+          "ci95": [
+            0.001,
+            0.0065
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.01175,
+          "ci95": [
+            0.00875,
+            0.01525
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.50425,
+          "ci95": [
+            0.501,
+            0.50775
+          ]
+        },
+        "request_side": {
+          "value": 0.49575,
+          "ci95": [
+            0.49225,
+            0.499
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.378873,
+            "ci95": [
+              0.318413,
+              0.436706
+            ]
+          },
+          "requests_est": {
+            "value": 243216,
+            "ci95": [
+              204093,
+              280383
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.227527,
+            "ci95": [
+              0.196029,
+              0.261578
+            ]
+          },
+          "requests_est": {
+            "value": 146060,
+            "ci95": [
+              126172,
+              167252
+            ]
+          }
+        },
+        {
+          "requester": "zcash-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.123921,
+            "ci95": [
+              0.08557,
+              0.162107
+            ]
+          },
+          "requests_est": {
+            "value": 79551,
+            "ci95": [
+              55099,
+              104003
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.120366,
+            "ci95": [
+              0.08731,
+              0.155917
+            ]
+          },
+          "requests_est": {
+            "value": 77268,
+            "ci95": [
+              56077,
+              100090
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.104622,
+            "ci95": [
+              0.080122,
+              0.126847
+            ]
+          },
+          "requests_est": {
+            "value": 67162,
+            "ci95": [
+              51512,
+              81507
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-10",
+      "partial_month": false,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 914415,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 447378,
+        "ci95": [
+          443491,
+          450349
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.48925,
+        "ci95": [
+          0.485,
+          0.4925
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.056208,
+        "ci95": [
+          0.040879,
+          0.072597
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.023699,
+        "ci95": [
+          0.014455,
+          0.034501
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.48925,
+          "ci95": [
+            0.485,
+            0.4925
+          ]
+        },
+        "verify_request": {
+          "value": 0.003,
+          "ci95": [
+            0.001,
+            0.00525
+          ]
+        },
+        "respond": {
+          "value": 0.48525,
+          "ci95": [
+            0.4785,
+            0.49125
+          ]
+        },
+        "respond_verify": {
+          "value": 0.003,
+          "ci95": [
+            0.001,
+            0.00525
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.0195,
+          "ci95": [
+            0.01525,
+            0.02475
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.50775,
+          "ci95": [
+            0.50525,
+            0.5105
+          ]
+        },
+        "request_side": {
+          "value": 0.49225,
+          "ci95": [
+            0.4895,
+            0.49475
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.360756,
+            "ci95": [
+              0.303371,
+              0.429588
+            ]
+          },
+          "requests_est": {
+            "value": 161394,
+            "ci95": [
+              135333,
+              192484
+            ]
+          }
+        },
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.287174,
+            "ci95": [
+              0.245685,
+              0.322975
+            ]
+          },
+          "requests_est": {
+            "value": 128475,
+            "ci95": [
+              109958,
+              144249
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.12928,
+            "ci95": [
+              0.089149,
+              0.17804
+            ]
+          },
+          "requests_est": {
+            "value": 57837,
+            "ci95": [
+              39777,
+              79097
+            ]
+          }
+        },
+        {
+          "requester": "zcash-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.113439,
+            "ci95": [
+              0.084659,
+              0.144553
+            ]
+          },
+          "requests_est": {
+            "value": 50750,
+            "ci95": [
+              37948,
+              64695
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.043434,
+            "ci95": [
+              0.037697,
+              0.049314
+            ]
+          },
+          "requests_est": {
+            "value": 19431,
+            "ci95": [
+              16917,
+              22175
+            ]
+          }
+        }
+      ]
+    },
+    {
+      "month": "2026-11",
+      "partial_month": true,
+      "provenance": {
+        "source_files": [
+          "data/derived/monthly_tx_totals.csv",
+          "data/derived/sample_parsed.csv"
+        ],
+        "command": "npm run reproduce",
+        "sample": {
+          "n_clusters": 20,
+          "n_txs": 4000,
+          "census": false
+        }
+      },
+      "tx_total": {
+        "value": 322449,
+        "exact": true
+      },
+      "requests_est": {
+        "value": 159370,
+        "ci95": [
+          158564,
+          160096
+        ]
+      },
+      "requests_per_tx": {
+        "value": 0.49425,
+        "ci95": [
+          0.49175,
+          0.4965
+        ]
+      },
+      "fulfilled_rate": {
+        "value": 1,
+        "ci95": [
+          1,
+          1
+        ]
+      },
+      "duplicate_request_rate": {
+        "value": 0.047547,
+        "ci95": [
+          0.033045,
+          0.061741
+        ]
+      },
+      "failed_respond_share_of_respond_receipts": {
+        "value": 0.015792,
+        "ci95": [
+          0.009114,
+          0.022831
+        ]
+      },
+      "tx_kind_share": {
+        "request": {
+          "value": 0.49425,
+          "ci95": [
+            0.49175,
+            0.4965
+          ]
+        },
+        "verify_request": {
+          "value": 0.002,
+          "ci95": [
+            0.0005,
+            0.004
+          ]
+        },
+        "respond": {
+          "value": 0.49075,
+          "ci95": [
+            0.4875,
+            0.494
+          ]
+        },
+        "respond_verify": {
+          "value": 0.00175,
+          "ci95": [
+            0.0005,
+            0.00325
+          ]
+        },
+        "admin_or_other": {
+          "value": 0.01125,
+          "ci95": [
+            0.0075,
+            0.015
+          ]
+        }
+      },
+      "tx_signer_class_share": {
+        "mpc_node": {
+          "value": 0.50375,
+          "ci95": [
+            0.50225,
+            0.5055
+          ]
+        },
+        "request_side": {
+          "value": 0.49625,
+          "ci95": [
+            0.4945,
+            0.49775
+          ]
+        },
+        "other": {
+          "value": 0,
+          "ci95": [
+            0,
+            0
+          ]
+        }
+      },
+      "top_requesters": [
+        {
+          "requester": "omni.bridge.near",
+          "share_of_requests": {
+            "value": 0.362671,
+            "ci95": [
+              0.29727,
+              0.425907
+            ]
+          },
+          "requests_est": {
+            "value": 57799,
+            "ci95": [
+              47319,
+              67795
+            ]
+          }
+        },
+        {
+          "requester": "fast-auth.near",
+          "share_of_requests": {
+            "value": 0.304502,
+            "ci95": [
+              0.246465,
+              0.373676
+            ]
+          },
+          "requests_est": {
+            "value": 48529,
+            "ci95": [
+              39339,
+              59492
+            ]
+          }
+        },
+        {
+          "requester": "btc-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.124937,
+            "ci95": [
+              0.084264,
+              0.169114
+            ]
+          },
+          "requests_est": {
+            "value": 19911,
+            "ci95": [
+              13462,
+              26924
+            ]
+          }
+        },
+        {
+          "requester": "zcash-connector.bridge.near",
+          "share_of_requests": {
+            "value": 0.096611,
+            "ci95": [
+              0.068618,
+              0.124622
+            ]
+          },
+          "requests_est": {
+            "value": 15397,
+            "ci95": [
+              10963,
+              19831
+            ]
+          }
+        },
+        {
+          "requester": "tx-bench.near",
+          "share_of_requests": {
+            "value": 0.045018,
+            "ci95": [
+              0.037898,
+              0.052658
+            ]
+          },
+          "requests_est": {
+            "value": 7174,
+            "ci95": [
+              6046,
+              8384
+            ]
+          }
+        }
+      ]
+    }
+  ]
+}
