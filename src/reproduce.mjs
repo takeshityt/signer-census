@@ -1,6 +1,7 @@
 #!/usr/bin/env node
 // `npm run reproduce`: rebuilds out/metrics.json offline from the committed data (data/derived/*.csv). No network.
 import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { gunzipSync } from "node:zlib";
 import { parseCsv } from "./lib/csv.mjs";
 import { checkManifest, sha256 } from "./lib/manifest.mjs";
 import { clusterStats, estimateWithBootstrap, flatten } from "./estimate.mjs";
@@ -13,7 +14,8 @@ if (!man.ok) { console.error("data/MANIFEST.sha256 check FAILED:\n" + man.proble
 
 const cfg = JSON.parse(read("config/estimate.json"));
 const totals = parseCsv(read("data/derived/monthly_tx_totals.csv").toString());
-const rows = parseCsv(read("data/derived/sample_parsed.csv").toString());
+const sampleCsv = gunzipSync(read("data/derived/sample_parsed.csv.gz")); // stored gzipped (repo size); logical name stays data/derived/sample_parsed.csv
+const rows = parseCsv(sampleCsv.toString());
 const clusters = clusterStats(rows);
 const { point, ci, monthsList } = estimateWithBootstrap(clusters, totals, { seed: cfg.seed, replicates: cfg.bootstrapReplicates });
 
@@ -66,7 +68,7 @@ const out = {
   meta: {
     title: "Signer Census metrics for v1.signer (NEAR Chain Signatures)",
     command: COMMAND,
-    inputs: Object.fromEntries(["data/derived/monthly_tx_totals.csv", "data/derived/sample_parsed.csv", "data/derived/sample_clusters.csv", "config/estimate.json"].map((p) => [p, sha256(read(p))])),
+    inputs: Object.fromEntries([["data/derived/monthly_tx_totals.csv", read("data/derived/monthly_tx_totals.csv")], ["data/derived/sample_parsed.csv", sampleCsv], ["data/derived/sample_clusters.csv", read("data/derived/sample_clusters.csv")], ["config/estimate.json", read("config/estimate.json")]].map(([p, b]) => [p, sha256(b)])),
     method: { seed: cfg.seed, bootstrap_replicates: cfg.bootstrapReplicates, ci: "95% percentile interval, cluster bootstrap within each month; census months are exact (no sampling error)" },
     definitions: {
       tx: "transaction touching v1.signer via a FunctionCall (exact count from FastNEAR txs_count)",
