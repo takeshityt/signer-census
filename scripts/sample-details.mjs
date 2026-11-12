@@ -2,7 +2,8 @@
 // STEP 2: cluster sample of v1.signer transactions with full details (raw, gzip, verbatim API responses).
 //  - months with few txs: complete census (pages of 200 until the month is exhausted)
 //  - other months: `clustersPerMonth` random start heights (seeded), one page (<= pageSize txs) per cluster
-// Resumable and idempotent: a cluster whose file already exists is skipped. <= 3 req/s with exponential backoff (src/lib/http.mjs).
+// Resumable and idempotent: a cluster whose file already exists for the SAME block range is skipped; a file left from an
+// earlier run with other boundaries (e.g. the month was partial then) is re-fetched and overwritten. <= 3 req/s with exponential backoff (src/lib/http.mjs).
 // Output: data/raw/sample/<month>/<cluster_id>.json.gz and data/MANIFEST.raw-sample.sha256
 import { existsSync, mkdirSync, readFileSync, writeFileSync, statSync } from "node:fs";
 import { gzipSync, gunzipSync } from "node:zlib";
@@ -28,6 +29,15 @@ const listBody = (m, from, resume) => ({
   ...(resume ? { resume_token: resume } : {}),
 });
 const fileOf = (m, id) => `${ROOT}data/raw/sample/${m.month}/${id}.json.gz`;
+let stale = 0;
+/** existing file usable only if it was fetched for the same block range (start height for sampled clusters, end height for both) */
+function existingMatches(m, id, body, census) {
+  if (!existsSync(fileOf(m, id))) return null;
+  const f = JSON.parse(gunzipSync(readFileSync(fileOf(m, id))));
+  const ok = f.list_request?.to_tx_block_height === body.to_tx_block_height && (census || f.list_request?.from_tx_block_height === body.from_tx_block_height);
+  if (!ok) { stale++; console.error(`stale ${id}: fetched for another block range, re-fetching`); return null; }
+  return f;
+}
 
 async function fetchCluster(m, id, body, census) {
   const list = await requestJson(`${FASTNEAR}/v0/account`, body);
@@ -71,7 +81,8 @@ for (const m of monthly) {
     for (;;) {
       const id = `${m.month}-p${String(page).padStart(3, "0")}`;
       let list;
-      if (existsSync(fileOf(m, id))) { list = JSON.parse(gunzipSync(readFileSync(fileOf(m, id)))).list_response; skipped++; }
+      const prev = existingMatches(m, id, listBody(m, m.start, resume), true);
+      if (prev) { list = prev.list_response; skipped++; }
       else { const r = await fetchCluster(m, id, listBody(m, m.start, resume), true); list = r.list; done++; txs += r.n; missingTotal += r.missing; }
       if (!list.resume_token || list.account_txs.length < cfg.pageSize) break;
       resume = list.resume_token; page++;
@@ -85,7 +96,7 @@ else {
   await Promise.all(Array.from({ length: 5 }, async () => {
     while (cursor < tasks.length) {
       const t = tasks[cursor++];
-      if (existsSync(fileOf(t.m, t.id))) { skipped++; continue; }
+      if (existingMatches(t.m, t.id, listBody(t.m, t.from), false)) { skipped++; continue; }
       try { const r = await fetchCluster(t.m, t.id, listBody(t.m, t.from), false); done++; txs += r.n; missingTotal += r.missing; }
       catch (e) { failed.push({ cluster: t.id, error: String(e) }); console.error("FAILED", t.id, String(e)); }
       if ((done + skipped) % 10 === 0) note(`${t.id}`);
@@ -96,5 +107,5 @@ if (!dry) {
   writeManifest(`${ROOT}data/MANIFEST.raw-sample.sha256`, buildManifest(ROOT, "data/raw/sample"));
   const lines = buildManifest(ROOT, "data/raw/sample");
   const bytes = lines.reduce((s, l) => s + statSync(ROOT + l.slice(66)).size, 0);
-  console.log(JSON.stringify({ clusters_fetched_this_run: done, clusters_skipped_existing: skipped, txs_fetched_this_run: txs, missing_hashes: missingTotal, failed, raw_files: lines.length, raw_gz_bytes: bytes, minutes: +((Date.now() - t0) / 60000).toFixed(1), http: stats }, null, 2));
+  console.log(JSON.stringify({ clusters_fetched_this_run: done, clusters_skipped_existing: skipped, clusters_refetched_stale: stale, txs_fetched_this_run: txs, missing_hashes: missingTotal, failed, raw_files: lines.length, raw_gz_bytes: bytes, minutes: +((Date.now() - t0) / 60000).toFixed(1), http: stats }, null, 2));
 }
