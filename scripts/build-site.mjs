@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 // `npm run build:site`: prepares site/ (static, no runtime network). Copies out/metrics.json and out/scenarios.json into site/data/,
-// exports labels.yaml, the verify result and the thesis sections as JSON, vendors Chart.js and the font, writes site/data/manifest.json (sha256 of everything copied).
+// exports labels.yaml, the verify result and the thesis sections as JSON, vendors the two variable fonts, writes site/data/manifest.json (sha256 of everything copied).
 // Deterministic output (no timestamps) so the committed site/ can be compared with a fresh build.
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
@@ -67,10 +67,10 @@ export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   emit("data/thesis.json", parseThesis(readFileSync(join(root, "THESIS.md"), "utf8")), "THESIS.md");
   copy("THESIS.md", "docs/THESIS.md");
   copy("docs/METHODOLOGY.md", "docs/METHODOLOGY.md");
-  copy("node_modules/chart.js/dist/chart.umd.min.js", "vendor/chart.umd.min.js");
-  copy("node_modules/chart.js/LICENSE.md", "vendor/LICENSE-chartjs.md");
-  copy("node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2", "vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2");
-  copy("node_modules/@fontsource-variable/bricolage-grotesque/LICENSE", "vendor/fonts/LICENSE-OFL-bricolage-grotesque.txt");
+  for (const [pkg, file] of [["newsreader", "newsreader-latin-wght-normal"], ["schibsted-grotesk", "schibsted-grotesk-latin-wght-normal"]]) {
+    copy(`node_modules/@fontsource-variable/${pkg}/files/${file}.woff2`, `vendor/fonts/${file}.woff2`);
+    copy(`node_modules/@fontsource-variable/${pkg}/LICENSE`, `vendor/fonts/LICENSE-OFL-${pkg}.txt`);
+  }
   manifest.files = Object.fromEntries(Object.entries(manifest.files).sort());
   manifest.sources = Object.fromEntries(Object.entries(manifest.sources).sort());
   writeFileSync(join(siteDir, "data/manifest.json"), JSON.stringify(manifest, null, 1) + "\n");

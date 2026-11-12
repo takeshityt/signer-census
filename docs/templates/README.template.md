@@ -77,7 +77,7 @@ Details and the full comparison table: `docs/evidence/reconcile-proximity.md`.
 
 * **AI-generated code.** The code, documentation and analysis were written with Claude Code (Anthropic's Claude models, Claude Sonnet and Claude Opus). Research sub-agents inside Claude Code collected attribution evidence. In `labels.yaml` every claim says how it was checked; claims we re-checked say so, and claims we did not re-check are marked "not re-verified by us" or "wording not re-checked". An independent review re-checked the evidence links.
 * **Human role.** The author (takeshityt) set the scope and positioning, decided what may be claimed, chose the data sources, and approved every gate and every push.
-* **Libraries.** vitest (MIT, tests only), yaml (ISC, parses labels and rules), Chart.js (MIT, vendored in `site/vendor/` with its license), the Bricolage Grotesque font (SIL Open Font License, via `@fontsource-variable`, vendored with its license). Everything else uses Node built-ins.
+* **Libraries.** vitest (MIT, tests only), yaml (ISC, parses labels and rules), the Newsreader and Schibsted Grotesk fonts (SIL Open Font License, via `@fontsource-variable`, vendored in `site/vendor/fonts/` with their licenses). The charts are plain SVG drawn by `site/js/charts.js`, with no chart library. Everything else uses Node built-ins.
 * **Data sources.** FastNEAR transaction API and RPC (including the archival node), NearBlocks API (transaction details and the daily network chart), NEAR public RPC, the public page of the `proximity_team/v1signer` Dune dashboard (values read from the rendered public page; its SQL is not visible), the Sweat Foundation press release (Chainwire, altfins), project documentation and source repositories linked in `labels.yaml`.
 * **Hackathon window.** All commits were made during NEAR HACKATHON; there is no pre-hackathon code. Some groups of commits share the same second: the agent committed several finished parts with one scripted sequence of `git commit` calls (visible as separate `commit` entries in `git reflog`); each commit still holds one part.
 
@@ -104,4 +104,4 @@ See [ROADMAP.md](ROADMAP.md).
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Third-party licenses for the vendored Chart.js and font are in `site/vendor/`.
+MIT, see [LICENSE](LICENSE). Licenses of the vendored fonts are in `site/vendor/fonts/`.

@@ -5,103 +5,122 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Signer Census: NEAR Chain Signatures, measured</title>
 <meta name="description" content="A reproducible, evidence-backed census of who uses NEAR Chain Signatures (the v1.signer MPC contract), with the numbers, the evidence and the commands to re-run it.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%230f1b2a%27/%3E%3Cpath d=%27M5 22 C9 8 12 8 14 18 S20 26 27 9%27 fill=%27none%27 stroke=%27%23f7f8fa%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
-<link rel="preload" href="vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%2315191d%27/%3E%3Cpath d=%27M5 22 C9 8 12 8 14 18 S20 26 27 9%27 fill=%27none%27 stroke=%27%23f5f6f7%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preload" href="vendor/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 <header class="top">
   <div class="wrap topbar">
     <a class="brand" href="#top">Signer Census</a>
-    <nav aria-label="Sections">
-      <a href="#usage">Usage</a><a href="#who">Who</a><a href="#chains">Chains</a><a href="#sunset">Sweat sunset</a><a href="#bridges">Bridges</a><a href="#thesis">Thesis</a><a href="#rerun">Re-run</a>
+    <nav aria-label="Chapters" id="nav">
+      <a href="#works">It works</a><a href="#who">Who uses it</a><a href="#boom">The boom</a><a href="#bridges">Bridges</a><a href="#watch">What to watch</a><a href="#rerun">Re-run it</a><a href="#evidence">Evidence</a>
     </nav>
-    <button id="theme" type="button" aria-label="Color theme">Theme: auto</button>
+    <button id="theme" type="button" aria-label="Color theme"></button>
   </div>
 </header>
 
 <main id="main">
   <section id="top" class="hero wrap" aria-labelledby="h1">
-    <h1 id="h1">NEAR Chain Signatures works, but its demand is narrow: one login integration drove the boom, the largest third-party app left, and bridges are the signal to watch</h1>
-    <p class="big" id="hero-number" aria-live="polite">…</p>
-    <p class="lede" id="hero-lede">Loading the census…</p>
+    <h1 id="h1"></h1>
+    <p class="deck" id="deck"></p>
     <figure class="stroke">
-      <svg id="stroke" role="img" aria-labelledby="stroke-caption"></svg>
+      <div id="hero-stroke"></div>
       <figcaption id="stroke-caption"></figcaption>
     </figure>
-    <ul class="facts" id="facts"></ul>
+    <dl class="stats" id="facts"></dl>
   </section>
 
-  <section id="usage" class="section wrap" aria-labelledby="h-usage">
-    <h2 id="h-usage">Requests over time</h2>
-    <p class="intro" id="usage-intro"></p>
-    <div class="controls"><label class="switch"><input type="checkbox" id="excl-bench"><span>Exclude the suspected benchmark</span></label></div>
-    <ul class="legend" id="legend-usage" aria-label="Legend"></ul>
-    <div class="chart"><canvas id="chart-usage" role="img" aria-label="Monthly signature requests stacked by who sends them"></canvas></div>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-usage"></div></details>
+  <section id="works" class="chapter wrap" aria-labelledby="h-works">
+    <h2 id="h-works"></h2>
+    <p class="lede" id="works-intro"></p>
+    <div class="controls"><label class="switch"><input type="checkbox" id="excl-bench"><span>Leave out the suspected benchmark</span></label></div>
+    <figure class="chartfig">
+      <div id="chart-volume"></div>
+      <ul class="key" id="key-volume"></ul>
+      <figcaption id="cap-volume"></figcaption>
+    </figure>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-volume"></div></details>
+    <h3 id="h-fulfilled"></h3>
+    <p class="note" id="fulfilled-intro"></p>
+    <figure class="chartfig short">
+      <div id="chart-fulfilled"></div>
+    </figure>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-fulfilled"></div></details>
   </section>
 
-  <section id="who" class="section wrap" aria-labelledby="h-who">
-    <h2 id="h-who">Who sends the requests</h2>
-    <p class="intro" id="who-intro"></p>
-    <div id="who-table"></div>
+  <section id="who" class="chapter wrap" aria-labelledby="h-who">
+    <h2 id="h-who"></h2>
+    <p class="lede" id="who-intro"></p>
+    <div id="who-list" class="ranked"></div>
+    <p class="note" id="who-note"></p>
   </section>
 
-  <section id="chains" class="section wrap" aria-labelledby="h-chains">
-    <h2 id="h-chains">Where the signatures go</h2>
-    <p class="intro" id="chains-intro"></p>
-    <ul class="legend" id="legend-chains" aria-label="Legend"></ul>
-    <div class="chart"><canvas id="chart-chains" role="img" aria-label="Monthly share of requests by destination: NEAR itself, other chains, not known"></canvas></div>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-chains"></div></details>
-    <div id="families" class="families"></div>
-  </section>
-
-  <section id="sunset" class="section wrap" aria-labelledby="h-sunset">
-    <h2 id="h-sunset">The Sweat sunset and what it could do to the volume</h2>
-    <blockquote class="callout" id="sunset-callout"></blockquote>
-    <p class="intro" id="sunset-intro"></p>
+  <section id="boom" class="chapter wrap" aria-labelledby="h-boom">
+    <h2 id="h-boom"></h2>
+    <p class="lede" id="boom-intro"></p>
+    <figure class="chartfig">
+      <div id="chart-boom"></div>
+      <ul class="key" id="key-boom"></ul>
+    </figure>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-boom"></div></details>
+    <blockquote class="pull" id="sunset-callout"></blockquote>
+    <h3 id="h-scenario">What could happen to the volume after that date</h3>
+    <p class="note" id="sunset-intro"></p>
     <form class="scenario" id="scenario" aria-label="Scenario assumptions"></form>
     <p class="result" id="scenario-result" aria-live="polite"></p>
-    <ul class="legend" id="legend-scenario" aria-label="Legend"></ul>
-    <div class="chart"><canvas id="chart-scenario" role="img" aria-label="Monthly requests: recent history and the selected scenario"></canvas></div>
+    <figure class="chartfig">
+      <div id="chart-scenario"></div>
+      <ul class="key" id="key-scenario"></ul>
+    </figure>
     <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-scenario"></div></details>
-    <p class="note" id="scenario-note"></p>
+    <details class="more"><summary>How the scenarios work, and their simplifications</summary><p class="note" id="scenario-note"></p></details>
   </section>
 
-  <section id="bridges" class="section wrap" aria-labelledby="h-bridges">
-    <h2 id="h-bridges">Bridges: the structural signal</h2>
-    <p class="intro" id="bridges-intro"></p>
-    <ul class="legend" id="legend-bridges" aria-label="Legend"></ul>
-    <div class="chart"><canvas id="chart-bridges" role="img" aria-label="Monthly bridge connector requests, with all structural requests as a line"></canvas></div>
+  <section id="bridges" class="chapter wrap" aria-labelledby="h-bridges">
+    <h2 id="h-bridges"></h2>
+    <p class="lede" id="bridges-intro"></p>
+    <figure class="chartfig">
+      <div id="chart-bridges"></div>
+      <ul class="key" id="key-bridges"></ul>
+    </figure>
     <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-bridges"></div></details>
+    <h3 id="h-chains"></h3>
+    <p class="note" id="chains-intro"></p>
+    <figure class="chartfig">
+      <div id="chart-chains"></div>
+      <ul class="key" id="key-chains"></ul>
+    </figure>
+    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-chains"></div></details>
+    <details class="more"><summary>Where the signatures go, by chain family (whole period)</summary><div id="families" class="families"></div></details>
   </section>
 
-  <section id="thesis" class="section wrap" aria-labelledby="h-thesis">
-    <h2 id="h-thesis">The thesis</h2>
-    <ul class="fivelines" id="fivelines"></ul>
+  <section id="watch" class="chapter wrap" aria-labelledby="h-watch">
+    <h2 id="h-watch">What to watch, and what would prove us wrong</h2>
     <h3>What this means for a long-term NEAR view</h3>
-    <ul class="fivelines" id="nearview"></ul>
+    <ul class="view" id="nearview"></ul>
     <h3>What would prove us wrong</h3>
-    <p class="intro" id="wrong-intro">Each test can be checked by re-running this repository after the stated date. The point estimate decides; thresholds sit just beyond what the data has shown so far, so each test can fail.</p>
-    <ul class="wrong" id="wrong"></ul>
+    <p class="note" id="wrong-intro"></p>
+    <div class="tests" id="wrong"></div>
   </section>
 
-  <section id="rerun" class="section wrap" aria-labelledby="h-rerun">
-    <h2 id="h-rerun">Re-run it yourself</h2>
-    <p class="intro">Needs Node and nothing else: no account, no API key, no paid service.</p>
-    <div id="rerun-steps"></div>
+  <section id="rerun" class="chapter wrap" aria-labelledby="h-rerun">
+    <h2 id="h-rerun">Don’t take our word for it: re-run it</h2>
+    <p class="lede">Needs Node and nothing else: no account, no API key, no paid service.</p>
+    <div id="rerun-steps" class="steps"></div>
   </section>
 
-  <section id="honest" class="section wrap" aria-labelledby="h-honest">
-    <h2 id="h-honest">Honest notes</h2>
-    <div id="honest-body"></div>
+  <section id="evidence" class="chapter wrap" aria-labelledby="h-evidence">
+    <h2 id="h-evidence">Evidence and honest notes</h2>
+    <div id="honest-body" class="honest"></div>
   </section>
 </main>
 
 <footer class="foot wrap" id="foot"></footer>
 
-<script src="vendor/chart.umd.min.js"></script>
 <script type="module" src="js/main.js"></script>
 <noscript><p class="wrap">This page needs JavaScript to draw the charts. The numbers are in site/data/metrics.json and docs/THESIS.md.</p></noscript>
 </body>
