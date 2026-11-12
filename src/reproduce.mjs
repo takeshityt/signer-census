@@ -92,7 +92,7 @@ function block(prefix, provenance) {
     target_chain_families: group(prefix, "chains", names.chains),
     target_chain_rule_confidence: group(prefix, "chain_confidences", names.chain_confidences),
     key_types: group(prefix, "keytypes", names.keytypes),
-    concentration: { top1_share: V(`${prefix}.concentration.top1_share`), top3_share: V(`${prefix}.concentration.top3_share`), hhi: V(`${prefix}.concentration.hhi`), requesters_ge_1pct: V(`${prefix}.concentration.requesters_ge_1pct`, 0) },
+    concentration: { top1_share: V(`${prefix}.concentration.top1_share`), top3_share: V(`${prefix}.concentration.top3_share`), hhi: V(`${prefix}.concentration.hhi`), requesters_ge_1pct: V(`${prefix}.concentration.requesters_ge_1pct`, 0), ...(prefix === "totals" ? { requesters_ge_1pct_any_month: V("totals.concentration.requesters_ge_1pct_any_month", 0) } : {}) },
     series_requests_est: Object.fromEntries(Object.keys(seriesDefs).map((k) => [k, V(`${prefix}.series.${k}`, 0)])),
     target_groups_share: Object.fromEntries(Object.keys(cfg.chainGroups ?? {}).map((k) => [k, V(`${prefix}.chain_groups_share.${k}`)])),
     relayer_share_of_requester: Object.fromEntries((cfg.pairs ?? []).map(([a, b]) => [`${a} via ${b}`, V(`${prefix}.pairs.${esc(`${a}<-${b}`)}`)])),
@@ -110,6 +110,13 @@ const months = monthsList.map((m) => ({
 }));
 
 const allSample = sampleOf(clusters);
+{ // transactions holding more than one sign receipt, counted once per (cluster, tx); overlapping clusters can repeat a tx, so per-hash counting over the whole file would double-count
+  const perTx = new Map();
+  for (const r of rows) if (r.method === "sign") { const k = `${r.cluster_id}|${r.tx_hash}`; perTx.set(k, (perTx.get(k) ?? 0) + 1); }
+  allSample.txs_with_sign = perTx.size;
+  allSample.txs_with_multiple_sign_receipts = [...perTx.values()].filter((v) => v > 1).length;
+  allSample.max_sign_receipts_in_one_tx = Math.max(0, ...perTx.values());
+}
 const sampleMethods = sumClusters(clusters).methods; // raw receipt counts in the sample, shown next to the estimates so small-n methods are visible
 const topTotal = ranked.slice(0, cfg.topRequestersTotal);
 const labeledShare = 1 - flat["totals.categories.share.unlabeled"];
@@ -128,6 +135,23 @@ const totalsOut = {
 };
 
 // ---------------------------------------------------------------- comparisons and robustness
+// Scale against the whole network (scripts/network-totals.mjs): exact v1.signer txs vs NearBlocks daily network txs summed per UTC month,
+// with a FastNEAR block-sample estimate as an independent cross-check. Both are counts of transactions (same unit as tx_total).
+const networkRows = existsSync(ROOT + "data/derived/network_monthly_txns.csv") ? parseCsv(read("data/derived/network_monthly_txns.csv").toString()).filter((r) => r.nearblocks_txns !== "") : [];
+const network = networkRows.length ? (() => {
+  const rowsOut = networkRows.map((r) => ({ month: r.month, near_txs_nearblocks: Number(r.nearblocks_txns), near_txs_fastnear_block_sample_est: Number(r.fastnear_est_txns), v1signer_txs: Number(r.v1signer_txs),
+    v1signer_share_of_near_txs: r6(Number(r.v1signer_txs) / Number(r.nearblocks_txns)), fastnear_over_nearblocks: r6(Number(r.fastnear_est_txns) / Number(r.nearblocks_txns)) }));
+  const sum = (k) => rowsOut.reduce((a, r) => a + r[k], 0);
+  const ratios = rowsOut.map((r) => r.fastnear_over_nearblocks);
+  return {
+    source: "NearBlocks GET https://api.nearblocks.io/v1/charts (field txns, daily, summed per UTC month; third-party aggregate, keyless). Cross-check: FastNEAR POST /v0/blocks num_transactions on 12 seeded 100-block windows per month, scaled to the month's height span (estimate). Command: node scripts/network-totals.mjs",
+    note: "Transactions, not requests. v1.signer transactions include the MPC nodes' respond transactions. Months are UTC calendar months; v1.signer months start at the first block of the month, NearBlocks days at 00:00 UTC.",
+    from: rowsOut[0].month, to: rowsOut.at(-1).month,
+    totals: { near_txs_nearblocks: sum("near_txs_nearblocks"), v1signer_txs: sum("v1signer_txs"), v1signer_share_of_near_txs: r6(sum("v1signer_txs") / sum("near_txs_nearblocks")) },
+    cross_check: { fastnear_over_nearblocks_min: Math.min(...ratios), fastnear_over_nearblocks_max: Math.max(...ratios) },
+    months: Object.fromEntries(rowsOut.map((r) => [r.month, r])),
+  };
+})() : null;
 const proximity = compareProximity(point, totals, reported, cutoffs).map((r) => ({
   date: r.date, theirs_total_txns: r.theirs,
   ours: Object.fromEntries(Object.entries(r.ours).map(([k, v]) => [k, Math.round(v)])),
@@ -157,8 +181,40 @@ const robustness = {
 const inputFiles = [
   ["data/derived/monthly_tx_totals.csv", read("data/derived/monthly_tx_totals.csv")], ["data/derived/sample_parsed.csv", sampleCsv], ["data/derived/sample_clusters.csv", read("data/derived/sample_clusters.csv")],
   ["data/derived/proximity_cutoffs.json", read("data/derived/proximity_cutoffs.json")], ["config/estimate.json", read("config/estimate.json")], ["config/proximity_reported.json", read("config/proximity_reported.json")],
+  ...(networkRows.length ? [["data/derived/network_monthly_txns.csv", read("data/derived/network_monthly_txns.csv")]] : []),
   ["labels.yaml", Buffer.from(labelsText)], ["config/chain_rules.yaml", Buffer.from(rulesText)], ...summaries.map((s) => [s.source_file, read(s.source_file)]),
 ];
+// ---------------------------------------------------------------- derived facts for THESIS.md (monthly extremes, trend, exits); full months only, point estimates
+const fullMonths = months.filter((m) => !m.partial_month);
+const pick = (f, better) => fullMonths.reduce((best, m) => (best === null || better(f(m), best.value) ? { month: m.month, value: f(m) } : best), null);
+const dcfg = cfg.derived ?? {};
+const derived = {
+  note: "Point estimates over full months (the partial current month is excluded). Inputs in config/estimate.json 'derived'. Used to set and explain the thresholds of the falsification tests.",
+  months_from: fullMonths[0].month, months_to: fullMonths.at(-1).month,
+  top3_share_lowest_month: pick((m) => m.concentration.top3_share.value, (a, b) => a < b),
+  requesters_ge_1pct_highest_month: pick((m) => m.concentration.requesters_ge_1pct.value, (a, b) => a > b),
+  bridges_peak_month: pick((m) => m.series_requests_est.bridges.value, (a, b) => a > b),
+};
+derived.bridges_last_full_vs_peak = r6(fullMonths.at(-1).series_requests_est.bridges.value / derived.bridges_peak_month.value - 1);
+if (dcfg.reliableSince) derived.fulfilled_rate_lowest_month_since = { since: dcfg.reliableSince, ...(() => { const l = fullMonths.filter((m) => m.month >= dcfg.reliableSince).reduce((b, m) => (!b || m.fulfilled_rate.value < b.value ? { month: m.month, value: m.fulfilled_rate.value } : b), null); return l; })() };
+derived.fulfilled_rate_lowest_month = pick((m) => m.fulfilled_rate.value, (a, b) => a < b);
+if (dcfg.fastauthTrend) {
+  const t = dcfg.fastauthTrend, get = (mo) => fullMonths.find((m) => m.month === mo).drivers_requests[t.account].value;
+  const steps = fullMonths.findIndex((m) => m.month === t.to) - fullMonths.findIndex((m) => m.month === t.from);
+  const rate = (get(t.to) / get(t.from)) ** (1 / steps) - 1;
+  const monthsAfter = (mo) => (Number(mo.slice(0, 4)) - Number(t.to.slice(0, 4))) * 12 + Number(mo.slice(5)) - Number(t.to.slice(5));
+  derived.fastauth_trend = { account: t.account, from: t.from, to: t.to, from_value: get(t.from), to_value: get(t.to), monthly_change: r6(rate),
+    projection: Object.fromEntries(t.project.map((mo) => [mo, Math.round(get(t.to) * (1 + rate) ** monthsAfter(mo))])),
+    half_projection: Object.fromEntries(t.project.map((mo) => [mo, Math.round((get(t.to) * (1 + rate) ** monthsAfter(mo)) / 2)])) }; // threshold of the FastAuth falsification test
+}
+derived.exits = (dcfg.exits ?? []).map((a) => {
+  const series = fullMonths.map((m) => ({ month: m.month, value: m.drivers_requests[a]?.value ?? 0 }));
+  const peak = series.reduce((b, x) => (x.value > b.value ? x : b), series[0]);
+  const lastActive = [...series].reverse().find((x) => x.value > 0);
+  const i = series.findIndex((x) => x === lastActive);
+  return { requester: a, share_of_all_requests: totalsOut.top_requesters.find((r) => r.requester === a)?.share_of_requests.value ?? null, peak_month: peak.month, peak_value: peak.value, last_active_month: lastActive.month, last_active_value: lastActive.value, zero_from: series[i + 1]?.month ?? null, zero_months: series.length - i - 1 };
+});
+
 const out = {
   meta: {
     title: "Signer Census metrics for v1.signer (NEAR Chain Signatures)",
@@ -175,7 +231,7 @@ const out = {
       requests_est: "exact monthly tx total x (sign receipts per tx in the sample); ESTIMATE, not an exact count. Headline text should say '≈' and use rounded values.",
       requests_excluding_benchmark_est: `requests minus requests of accounts labeled or suspected as benchmark/test in labels.yaml (${benchmark.join(", ") || "none"})`,
       series_requests_est: "all; excluding_benchmark (minus suspected/confirmed benchmark accounts); structural (minus benchmark and minus fast-auth.near); bridges (omni.bridge.near + btc-connector.bridge.near + zcash-connector.bridge.near). Definitions in config/estimate.json.",
-      concentration: "computed over ALL requesters of the period: top1/top3 share of requests, HHI = sum of squared shares (0..1), number of requesters with >= 1% share",
+      concentration: "totals: computed over ALL requesters of the whole period (top1/top3 share of requests, HHI = sum of squared shares 0..1, requesters_ge_1pct = requesters with >= 1% of ALL requests of the period); totals.requesters_ge_1pct_any_month = requesters with >= 1% of requests in at least one single month (including the partial current month). months[]: the same within that month",
       target_groups_share: "near_native = chain family 'near'; other_chains = bitcoin/zcash/evm/solana/multi/other; unknown = no evidence-backed rule (config/chain_rules.yaml)",
       other_request_types: "request-type calls on v1.signer other than `sign`, counted as receipts per tx x exact tx total; never added to the request count",
     },
@@ -189,6 +245,7 @@ const out = {
   },
   totals: totalsOut,
   months,
+  derived,
   comparisons: {
     proximity_team_v1signer: {
       reported_source: reported.source,
@@ -196,6 +253,7 @@ const out = {
       note: "Their query/SQL is not visible, so the unit they count is unknown. 'closest_unit' only says which of our units is numerically closest at that date.",
       rows: proximity,
     },
+    ...(network ? { network_scale: network } : {}),
   },
   robustness,
 };

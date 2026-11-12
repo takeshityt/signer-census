@@ -129,6 +129,7 @@ export function estimateFromSums(months, opts = {}) {
   T.pairs = {};
   T.allReq = {};
   T.chainGroups = {};
+  const geOnePctAnyMonth = new Set(); // requesters with >= 1% of requests in at least one month
   const nameSet = (g) => (g === "failed_by_requester" ? trackedFailed : names[g]);
 
   for (const m of months) {
@@ -156,6 +157,7 @@ export function estimateFromSums(months, opts = {}) {
     }
     rec.sign_failed_est = s.sign_failed * f;
     rec.concentration = concentration(s.requesters);
+    for (const [a, v] of Object.entries(s.requesters)) if (s.sign > 0 && v / s.sign >= 0.01) geOnePctAnyMonth.add(a);
     rec.series = Object.fromEntries(Object.entries(series).map(([k, d]) => [k, seriesValue(d, s.requesters, req, f)]));
     rec.chain_groups_share = Object.fromEntries(Object.entries(chainGroups).map(([k, fams]) => [k, ratio(fams.reduce((a, x) => a + (s.chains[x] ?? 0), 0), s.sign)]));
     for (const [a, v] of Object.entries(s.requesters)) T.allReq[a] = (T.allReq[a] ?? 0) + v * f;
@@ -197,7 +199,7 @@ export function estimateFromSums(months, opts = {}) {
     for (const d of drivers) { const v = Object.values(res.months).reduce((a, r) => a + r.drivers[d], 0); tot.drivers[d] = v; used += v; }
     tot.drivers.__other = T.req - used;
   }
-  tot.concentration = concentration(T.allReq);
+  tot.concentration = { ...concentration(T.allReq), requesters_ge_1pct_any_month: geOnePctAnyMonth.size };
   tot.series = Object.fromEntries(Object.keys(series).map((k) => [k, Object.values(res.months).reduce((a, r) => a + r.series[k], 0)]));
   tot.chain_groups_share = Object.fromEntries(Object.keys(chainGroups).map((k) => [k, ratio(T.chainGroups[k] ?? 0, T.req)]));
   if (pairs.length) { tot.pairs = {}; for (const [a, b] of pairs) tot.pairs[pairKey(a, b)] = ratio(T.pairs[pairKey(a, b)] ?? 0, T.requesters[a] ?? 0); }

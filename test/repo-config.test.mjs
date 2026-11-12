@@ -36,4 +36,10 @@ describe("committed labels.yaml and config/chain_rules.yaml", () => {
       for (const a of d.accounts) for (const e of a.evidence ?? []) if (/^https?:\/\//.test(e.url ?? "")) expect(e.url, `${f}: ${a.account}`).not.toMatch(/\s/);
     }
   });
+  it("METHODOLOGY.md states the multi-sign transaction count that out/metrics.json reports", () => {
+    const m = JSON.parse(readFileSync(new URL("../out/metrics.json", import.meta.url), "utf8"));
+    const doc = readFileSync(new URL("../docs/METHODOLOGY.md", import.meta.url), "utf8");
+    const { txs_with_multiple_sign_receipts: n, max_sign_receipts_in_one_tx: max } = m.meta.sample;
+    expect(doc).toContain(`(${n} such txs in the sample, at most ${max} sign receipts each`);
+  });
 });

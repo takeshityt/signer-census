@@ -154,6 +154,14 @@ describe("estimates", () => {
     expect(point.totals.concentration.top1_share).toBeCloseTo(0.5, 9);
   });
 
+  it("counts requesters at >= 1% of the whole period separately from requesters that reached 1% in any single month", () => {
+    const sums = (n, reqs) => { const t = sumClusters([]); t.n_tx = n; t.sign = Object.values(reqs).reduce((a, b) => a + b, 0); t.requesters = reqs; return t; };
+    // month 1: small, B holds 10%; month 2: large, B absent -> B is below 1% of the period but reached 1% in one month
+    const r = estimateFromSums([{ month: "m1", txTotal: 20, sums: sums(20, { A: 9, B: 1 }) }, { month: "m2", txTotal: 2000, sums: sums(2000, { A: 1000 }) }]);
+    expect(r.totals.concentration.requesters_ge_1pct).toBe(1);
+    expect(r.totals.concentration.requesters_ge_1pct_any_month).toBe(2);
+  });
+
   it("estimateFromSums handles an empty sample safely", () => {
     const r = estimateFromSums([{ month: "m", txTotal: 100, sums: sumClusters([]) }]);
     expect(r.totals.requests).toBe(0);

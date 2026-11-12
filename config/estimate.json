@@ -53,5 +53,22 @@
       "unknown"
     ]
   },
-  "chainGroups_note": "share of requests by target: NEAR itself vs other chains vs explicit unknown (from config/chain_rules.yaml)"
+  "chainGroups_note": "share of requests by target: NEAR itself vs other chains vs explicit unknown (from config/chain_rules.yaml)",
+  "derived": {
+    "fastauthTrend": {
+      "account": "fast-auth.near",
+      "from": "2026-05",
+      "to": "2026-10",
+      "project": [
+        "2027-01",
+        "2027-02",
+        "2027-03"
+      ]
+    },
+    "reliableSince": "2025-05",
+    "exits": [
+      "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora"
+    ]
+  },
+  "derived_note": "Inputs of the 'derived' block of out/metrics.json (used by the falsification tests in THESIS.md): fastauthTrend = average monthly change of fast-auth.near requests between two months (geometric) and its continuation; reliableSince = first month of the period over which the lowest monthly fulfilled rate is reported; exits = requesters whose last active month is reported."
 }
