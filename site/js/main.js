@@ -47,11 +47,11 @@ const withCi = (v, ci, f = approx, r = range) => `${f(v)}${ci ? ` (95% interval 
 
 /* ------------------------------------------------------------------ hero */
 $("hero-number").innerHTML = `<span aria-hidden="true">≈</span><span class="sr-only">about </span>${esc(compact(hero.requests))}`;
-$("hero-lede").textContent = `signature requests on NEAR's MPC signer (v1.signer), ${monthLabel(hero.firstMonth)} to ${snapshotDay}. An estimate: the 95% sampling interval is ${range(hero.requestsCi, precise)}.`;
+$("hero-lede").textContent = `signature requests on NEAR's MPC signer (v1.signer), ${monthLabel(hero.firstMonth)} to ${snapshotDay}: the volume behind the finding above. An estimate: the 95% interval of sampling error only is ${range(hero.requestsCi, precise)}.`;
 $("facts").innerHTML = `
-  <li><strong>${pct(hero.fulfilled, 1)}</strong>of requests end with a successful signature</li>
+  <li><strong>${pct(hero.fulfilled, 1)}</strong>of sampled requests end with a successful signature callback (latency and downtime not measured)</li>
   <li><strong>${approx(hero.withoutBenchmark)}</strong>if the suspected benchmark account is left out</li>
-  <li class="badge"><strong>${hero.verified}/${hero.sample} verified</strong>sampled transactions re-checked against an archival RPC node and NearBlocks (${dayLabel(hero.verifyDate)}). Re-run: <code>npm run verify -- --sample ${hero.sample}</code></li>`;
+  <li class="badge"><strong>${hero.verified}/${hero.sample} parsed correctly</strong>sampled transactions whose parsing matches an archival RPC node and NearBlocks (${dayLabel(hero.verifyDate)}); a check of the parsing, not of the estimate. Re-run: <code>npm run verify -- --sample ${hero.sample}</code></li>`;
 let strokeAnimated = false;
 function drawStroke() {
   // Drawn in real pixels of the container (no non-uniform SVG scaling, which kept the page repainting every frame); redrawn on resize.
@@ -261,7 +261,7 @@ $("scenario").addEventListener("change", (e) => {
   sel[g.key] = g.values.find((v) => String(v) === e.target.value);
   scenarioView(palette());
 });
-$("scenario-note").textContent = `Baseline = ${monthLabel(scenarios.baseline.month)}, the last full month: ${approx(scenarios.baseline.all)} requests, of which FastAuth ${approx(scenarios.baseline.fastauth)}, suspected benchmark ${approx(scenarios.baseline.benchmark)}, structural ${approx(scenarios.baseline.structural)}. ${scenarios.scenarios.length} precomputed combinations; edit assumptions.yaml and run npm run reproduce to try others.`;
+$("scenario-note").textContent = `Baseline = ${monthLabel(scenarios.baseline.month)}, the last full month: ${approx(scenarios.baseline.all)} requests, of which FastAuth ${approx(scenarios.baseline.fastauth)}, suspected benchmark ${approx(scenarios.baseline.benchmark)}, structural ${approx(scenarios.baseline.structural)}. ${scenarios.scenarios.length} precomputed combinations; edit assumptions.yaml and run npm run reproduce to try others. Two simplifications to keep in mind: FastAuth is held at its ${monthLabel(scenarios.baseline.month)} level until the Sweat end date although it has been falling every month, and the default selection (FastAuth stops, benchmark stops, flat structural demand) removes both large non-structural parts; it is a cautious view, not a forecast (shrinking structural demand would be lower still).`;
 
 /* ------------------------------------------------------------------ bridges */
 {
@@ -269,18 +269,20 @@ $("scenario-note").textContent = `Baseline = ${monthLabel(scenarios.baseline.mon
   const lastFull = fullMonths(metrics).at(-1).month;
   const i = b.months.indexOf(lastFull);
   const sum = b.series.reduce((a, s) => a + s.values[i], 0);
-  $("bridges-intro").textContent = `The Omni, Bitcoin and Zcash connectors sign for bridge transfers. In ${monthLabel(lastFull)} they made ${approx(sum)} requests, ${approxPct(sum / b.structural.values[i])} of all structural requests (everything except the suspected benchmark and FastAuth). Over the whole period the three connectors made ${approx(metrics.totals.series_requests_est.bridges.value)} requests.`;
+  const pk = metrics.derived.bridges_peak_month;
+  $("bridges-intro").textContent = `The Omni, Bitcoin and Zcash connectors sign for bridge transfers. They peaked in ${monthLabel(pk.month)} at ${approx(pk.value)} requests, and in ${monthLabel(lastFull)} made ${approx(sum)} (${approxPct(Math.abs(metrics.derived.bridges_last_full_vs_peak))} below the peak), ${approxPct(sum / b.structural.values[i])} of all structural requests (everything except the suspected benchmark and FastAuth). Every month is in the chart and the table. Over the whole period the three connectors made ${approx(metrics.totals.series_requests_est.bridges.value)} requests.`;
 }
 
 /* ------------------------------------------------------------------ thesis, re-run, honest notes */
 const S = thesis.sections;
 $("fivelines").innerHTML = S["in-five-lines"].bullets.map((b) => `<li>${inline(b)}</li>`).join("");
+$("nearview").innerHTML = S["what-this-means-for-a-long-term-near-view"].bullets.map((b) => `<li>${inline(b)}</li>`).join("");
 $("wrong").innerHTML = S["what-would-prove-this-thesis-wrong"].bullets.map((b) => `<li>${inline(b)}</li>`).join("");
 const hash = manifest.files["data/metrics.json"];
 $("rerun-steps").innerHTML = [
   ["npm test", "Unit tests for parsing, labels, estimates, THESIS.md numbers, scenarios and this page's data. Ends with the vitest summary and exit code 0."],
   ["npm run reproduce", `Rebuilds out/metrics.json, out/scenarios.json and THESIS.md from the committed data, offline. It prints: out/metrics.json written. sha256 ${hash.slice(0, 16)}… (this page was built from that exact file).`],
-  [`npm run verify -- --sample ${verify.sample}`, `Draws ${verify.sample} random transactions with sign receipts and re-checks signer, block height and sign receipts at an archival RPC node and at NearBlocks. Last run: ${verify.verified}/${verify.sample} verified (RPC ${verify.rpc_ok}/${verify.sample}, NearBlocks ${verify.nearblocks_ok}/${verify.sample}).`],
+  [`npm run verify -- --sample ${verify.sample}`, `Draws ${verify.sample} seeded random transactions with sign receipts and re-checks signer, block height and sign receipts at an archival RPC node and at NearBlocks (add --seed <n> for another draw). It checks the parsing, not the estimate. Last run: ${verify.verified}/${verify.sample} verified (RPC ${verify.rpc_ok}/${verify.sample}, NearBlocks ${verify.nearblocks_ok}/${verify.sample}).`],
   ["npm run build:site && npm run site", "Copies the two JSON files into site/data/ with their sha256 and serves this page on http://127.0.0.1:4173/."],
 ].map(([cmd, what]) => `<div class="step"><h3>${esc(cmd)}</h3><p>${esc(what)}</p></div>`).join("");
 const para = (md) => md.split(/\n\n+/).filter((p) => !p.startsWith("*")).map((p) => `<p>${inline(p.replace(/\n/g, " "))}</p>`).join("");

@@ -1,13 +1,13 @@
 {
  "note": "sha256 of every file the dashboard reads; `sources` are the files they were copied from",
  "files": {
-  "data/labels.json": "308a3c00aeb2c125d59ab03d152c781939da75076160119dda1f7b48e8c21080",
-  "data/metrics.json": "99d8c870b5f3045665d9df0381b97c659de658649a0498f5658a3c11f5cda845",
+  "data/labels.json": "289a57dba3f93d667c707982b4d4600e58ad19ac350b3b70106d0469e1e022b0",
+  "data/metrics.json": "6e4ce7ca28a067c480c9759964aa93a6b4dac9b87b9dba492adf0a43e785fb0c",
   "data/scenarios.json": "b5860f099c5c130d53aa6512a2d654a66d9d8ce40e435788d4eb0cab69e835fb",
-  "data/thesis.json": "a6e7656c12e1417019c280f819d94e998de1e79bc879f402d4f21e3c57647981",
+  "data/thesis.json": "9812c03a7e590f2ed0221fd0e669738f3c229c7035c31c3356c7cbdeeef9f752",
   "data/verify.json": "1ced2a7636c1ec0cdd9c780f9aa4f293aaf74e95d4baf5d7d2950bd72d512b8b",
-  "docs/METHODOLOGY.md": "04d2ed7cfbd71a6918054121715c1170cd017f66efab8e3ad9435955ae82e4f9",
-  "docs/THESIS.md": "8a2d40577e423a6666075c9d790c72ba7aea05718f8b313ace2b5435838348e1",
+  "docs/METHODOLOGY.md": "d571cf607f733c91c2e5a89ab367df7e30f4c49266e0578e43d6c5966a7ce5bc",
+  "docs/THESIS.md": "9572c2d8798cc5d181cfb7b85dca887938bfe8a65d183700e53c2ecc6cc57b7f",
   "vendor/LICENSE-chartjs.md": "41a84aa2caba645f966a18d9c2056b73e6d3a81d80bc0046bc0011a2634d4cce",
   "vendor/chart.umd.min.js": "87364cc2b2a76a6684929e7d6b80b18a897794db38400caff1fcf1791c6925d2",
   "vendor/fonts/LICENSE-OFL-bricolage-grotesque.txt": "923f4ddf0fd39f9b7794ab0df7332f3d95dc43e8ad7ec2289d6d9e8491177f51",

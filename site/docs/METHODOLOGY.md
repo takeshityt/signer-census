@@ -30,7 +30,9 @@ it measures the fraction of sign receipts per tx in a sample (section 4).
   (sample: 2.3% of all sign receipts overall, 45% in 2025-03, ~0% in most other months).
 * **fulfilled** = the callback found among the descendant receipts of **that** sign receipt (breadth-first over `outcome.receipt_ids`, depth ≤ 4) succeeded.
   Callback names: `return_signature_and_clean_state_on_success` (current; sampled from 2025-02 on) and `return_signature_on_finish` (legacy contract version, until 2025-02;
-  sign → sign_helper → return_signature_on_finish). A tx can hold several sign receipts (3,028 such txs in the sample), so the callback is matched per receipt, never per tx.
+  sign → sign_helper → return_signature_on_finish). A tx can hold several sign receipts (13 such txs in the sample, at most 2 sign receipts each: `meta.sample.txs_with_multiple_sign_receipts` and
+  `max_sign_receipts_in_one_tx` in out/metrics.json, counted once per (cluster, tx); `test/repo-config.test.mjs` checks this sentence against them), so the callback is matched per receipt, never per tx.
+  An earlier version of this file said 3,028: that count was per tx hash over the whole file, where a tx that sits in two overlapping clusters appears twice, so most of those "multiple" sign receipts were the same receipt counted twice.
 * **requester** = `predecessor_id` of the `sign` receipt. **Not** the tx `signer_id`: tx signers are relayers, so the tx signer says nothing about who asked for the signature.
 * **`respond` receipts are never a request count.** Evidence (`docs/evidence/gate1b`, E1): all 7 failed `respond` receipts in window B were late duplicates; each had an earlier successful
   `respond` from another MPC node for the same (payload, tweak, domain). Also, identical requests (same payload, path, caller) can be closed by one `respond`
@@ -85,6 +87,11 @@ Shares (tx kinds, tx signer classes, requesters, fulfilled rate, duplicate rate)
 **Confidence intervals:** 95% percentile intervals from a **cluster bootstrap** (`config/estimate.json`: seed, 2,000 replicates). Clusters, not individual txs, are resampled with replacement inside each month
 (txs inside a cluster are time-adjacent and strongly dependent, so resampling single txs would give intervals that are far too narrow). Census months are not resampled. Months are resampled independently and then summed for the totals.
 Every figure in `out/metrics.json` carries its interval, plus the source files, the command and the sample size.
+
+**Why the headline interval is so narrow (and what it leaves out):** the total's interval is about ±0.25%. It is narrow mainly because the share of sign receipts per transaction is structurally close to one half
+(one user-side and one node-side transaction per request), so it varies little between clusters, not because the sample is large: it reads under one percent of all transactions, with 20 clusters per sampled month.
+With 20 clusters per month and no small-sample correction, intervals for individual requesters' shares are likely somewhat too narrow, and a burst by an account that falls between the sampled clusters is not in any interval.
+The dashboard and THESIS.md therefore label every interval "sampling error only".
 
 ## 5. Reconciliation (why we trust the definition)
 
@@ -173,6 +180,17 @@ All confidence intervals in this repository are **sampling-only** (cluster boots
 
 * **Concentration** (`months[].concentration`, `totals.concentration`): computed over all requesters of the period from the sampled sign receipts (scaled per month for the totals): top-1 and top-3 share of requests,
   Herfindahl-Hirschman index (sum of squared shares, 0..1), number of requesters with a share of at least 1%. Bootstrap intervals as for every other estimate.
+  Two different "1%" counts exist, and they must not be mixed: `totals.concentration.requesters_ge_1pct` = requesters holding at least 1% of ALL requests of the whole period;
+  `totals.concentration.requesters_ge_1pct_any_month` = requesters that reached at least 1% of requests in at least one single month (including the partial current month). The first is small, the second much larger
+  (an account such as ping-account.near dominated a few small early months). `months[].concentration.requesters_ge_1pct` is the count within one month.
+* **Derived facts** (`derived`, inputs in config/estimate.json `derived`): monthly extremes over full months (lowest top-3 share, highest count of requesters at 1%, bridge peak, lowest fulfilled rate overall and since a given month),
+  the average monthly change of fast-auth.near between two months and its continuation (`fastauth_trend`, with half of it as the falsification threshold), and requesters that stopped (`exits`: last month with requests in the sample).
+  They exist so that the thresholds of the falsification tests in THESIS.md come from the data, with the reason written next to each.
+* **Network scale** (`comparisons.network_scale`, `node scripts/network-totals.mjs`, network): all NEAR transactions per UTC month from NearBlocks' public daily chart (`GET https://api.nearblocks.io/v1/charts`, field `txns`),
+  divided into the exact v1.signer transaction count of the month (same unit: transactions; v1.signer transactions include the MPC nodes' respond transactions). NearBlocks is a third-party aggregate, so the script also
+  estimates each month from FastNEAR (`POST /v0/blocks`, `num_transactions` of 12 seeded random 100-block windows, scaled to the month's height span). The two agree within the range given in
+  `comparisons.network_scale.cross_check` (a small block sample is noisy) and both show the network's transaction count falling about fourfold between 2026-03 and 2026-04, so v1.signer's share since then is
+  higher partly because the rest of the network shrank. Not measured: fees, value, active accounts.
 * **Series** (`series_requests_est`, definitions in config/estimate.json): `all`; `excluding_benchmark` (minus accounts labeled or *suspected* benchmark-test in labels.yaml, today only tx-bench.near);
   `structural` (minus benchmark and minus fast-auth.near, the integration whose dominant integrator ends in its present form on 2026-12-30); `bridges` (omni.bridge.near + btc-connector.bridge.near + zcash-connector.bridge.near).
 * **Target groups** (`target_groups_share`): `near_native` = chain family `near`; `other_chains` = bitcoin, zcash, evm, solana, multi, other; `unknown` = no evidence-backed rule. Key types are reported separately.
@@ -190,6 +208,20 @@ the benchmark stays at the baseline or is removed. Point estimates only (the bas
 A seeded random sample of txs that hold sign receipts (from data/derived/sample_parsed.csv.gz; a tx present in two overlapping clusters is taken from one cluster) is checked against two independent public sources:
 archival RPC `EXPERIMENTAL_tx_status` (+ `block` for the height) and NearBlocks (`/v1/txns/<hash>`, `/v2/txns/<hash>/receipts`). Per tx it compares the tx signer, the tx block height and the multiset of
 (requester, status) of `sign` receipts on v1.signer. Exit code 1 on any mismatch or unreachable source. Runs are saved in docs/evidence/verify/ (a first run with a grouping bug in the verifier itself is kept in `superseded/`).
+
+What it proves and what it does not:
+* It proves that, for the drawn transactions, our parsed rows (signer, height, sign receipts with requester and status) match two independent sources.
+* It does not look for sign receipts in transactions where our parser found none (only transactions that already have a sign receipt are drawn), so a systematic miss would not show up.
+* It does not compare the `fulfilled` flag (the callback match), and it does not touch the scaling from the sample to the monthly totals, so the request estimate itself is not checked by it.
+  The estimate rests on the exact monthly counts (§3), the reconciliation windows (§5) and the robustness checks (§11).
+* The default seed (config/verify.json) always draws the same transactions; `npm run verify -- --sample 50 --seed <any number>` draws others.
+
+## 15a. Refreshing the data
+
+The raw sample (`data/raw/sample/`, 531 cluster files, about 220 MB) is not committed; only its manifest and the parsed result are. Re-checking the falsification tests in 2027 therefore means a full
+re-download: `npm run monthly`, then `npm run sample` (all months, about 5,800 API requests at the current size: one list request per cluster plus the detail batches; at the client's limit of 3 requests per second
+that is at least about 32 minutes, more with FastNEAR's frequent HTTP 429 answers), `npm run parse` and `npm run reproduce`. A cluster file is reused only if it was fetched for the same block range:
+after `npm run monthly` moves the end of a month that was partial before, its old cluster files are re-fetched instead of being reused (`scripts/sample-details.mjs`).
 
 ## 16. THESIS.md
 

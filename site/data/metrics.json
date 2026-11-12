@@ -12,10 +12,11 @@
       "data/derived/sample_parsed.csv": "cc05335c07c83db89526e74b7d8dc6ef2e4cfbb6e648baf973f62b72d6a358a0",
       "data/derived/sample_clusters.csv": "4145eb3e823fd04f0d675dd09c3feca5574fa321f390271ab18cd557544c8061",
       "data/derived/proximity_cutoffs.json": "4a4dc0e0df1d93a3e28f047fb93e2a584d78897408c17d4ba2e0d116c7d3fdea",
-      "config/estimate.json": "cd8f9e718219521569a87db64101968d55c13fbe3a680ec91b2284aecc55e11f",
+      "config/estimate.json": "4721d83502c355e9c18701fa702335a8cf6d981406791bd52765207f9e0381ef",
       "config/proximity_reported.json": "6e3e3de50205f3ce55cef9776554a32c1990ff3241469fff65de3a3ec4b751e9",
-      "labels.yaml": "29ad91f42e8cad4b15a5536696981def3279399485659c53afb2a53e00b4f758",
-      "config/chain_rules.yaml": "4bb209ab745fc6b18bee8cb1b7ddb6e218712dbdc81a428a8214c103b1de6450",
+      "data/derived/network_monthly_txns.csv": "0c4712e220a638ca1d0729f7c8ff1fe55f3283fbedd22592121552dae9830eee",
+      "labels.yaml": "b4684f28f4048677638dd8651e5b338c59bbca58bccd9e5361c887d3b08279af",
+      "config/chain_rules.yaml": "8d95684074e178f32e17f92d94fe6fadfe8d47f9d20d083a44a668c0465e9595",
       "docs/evidence/gate1/window-223900000-223900300/summary.json": "6131b6f98286763c31dbd79321a31eb6afd020030dff99f4fb55b1b1b94d2926",
       "docs/evidence/gate1/window-223960000-223960300/summary.json": "87834fb1ee74734b4742434a7e475e12d8c2d04d195ca2355e87579549cd23c7",
       "docs/evidence/step4/window-139464032-139464332/summary.json": "82b258a15b135be8f7bbff0637f3da1c819f1cd3f99c9a388f05f6d1ac8ef8a6",
@@ -43,14 +44,17 @@
       "requests_est": "exact monthly tx total x (sign receipts per tx in the sample); ESTIMATE, not an exact count. Headline text should say '≈' and use rounded values.",
       "requests_excluding_benchmark_est": "requests minus requests of accounts labeled or suspected as benchmark/test in labels.yaml (tx-bench.near)",
       "series_requests_est": "all; excluding_benchmark (minus suspected/confirmed benchmark accounts); structural (minus benchmark and minus fast-auth.near); bridges (omni.bridge.near + btc-connector.bridge.near + zcash-connector.bridge.near). Definitions in config/estimate.json.",
-      "concentration": "computed over ALL requesters of the period: top1/top3 share of requests, HHI = sum of squared shares (0..1), number of requesters with >= 1% share",
+      "concentration": "totals: computed over ALL requesters of the whole period (top1/top3 share of requests, HHI = sum of squared shares 0..1, requesters_ge_1pct = requesters with >= 1% of ALL requests of the period); totals.requesters_ge_1pct_any_month = requesters with >= 1% of requests in at least one single month (including the partial current month). months[]: the same within that month",
       "target_groups_share": "near_native = chain family 'near'; other_chains = bitcoin/zcash/evm/solana/multi/other; unknown = no evidence-backed rule (config/chain_rules.yaml)",
       "other_request_types": "request-type calls on v1.signer other than `sign`, counted as receipts per tx x exact tx total; never added to the request count"
     },
     "sample": {
       "n_clusters": 531,
       "n_txs": 105534,
-      "census": false
+      "census": false,
+      "txs_with_sign": 52185,
+      "txs_with_multiple_sign_receipts": 13,
+      "max_sign_receipts_in_one_tx": 2
     },
     "caveats": [
       "Estimates come from clusters of consecutive txs starting at seeded random block heights; start points are uniform in block height, so txs that follow a long quiet gap are slightly over-represented (see robustness.density_weighted).",
@@ -71,7 +75,10 @@
       "sample": {
         "n_clusters": 531,
         "n_txs": 105534,
-        "census": false
+        "census": false,
+        "txs_with_sign": 52185,
+        "txs_with_multiple_sign_receipts": 13,
+        "max_sign_receipts_in_one_tx": 2
       }
     },
     "requests_est": {
@@ -374,17 +381,17 @@
     "label_confidence": {
       "high": {
         "est": {
-          "value": 4927115,
+          "value": 4025286,
           "ci95": [
-            4861500,
-            4994200
+            3912942,
+            4128690
           ]
         },
         "share": {
-          "value": 0.765941,
+          "value": 0.625748,
           "ci95": [
-            0.756294,
-            0.775939
+            0.608525,
+            0.641661
           ]
         }
       },
@@ -406,17 +413,17 @@
       },
       "medium": {
         "est": {
-          "value": 138251,
+          "value": 1040080,
           "ci95": [
-            109769,
-            168349
+            964208,
+            1118090
           ]
         },
         "share": {
-          "value": 0.021492,
+          "value": 0.161685,
           "ci95": [
-            0.017074,
-            0.02617
+            0.149882,
+            0.173766
           ]
         }
       },
@@ -647,6 +654,13 @@
           6,
           8
         ]
+      },
+      "requesters_ge_1pct_any_month": {
+        "value": 44,
+        "ci95": [
+          41,
+          51
+        ]
       }
     },
     "series_requests_est": {
@@ -779,7 +793,7 @@
         "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
         "label": {
           "category": "third-party-app",
-          "confidence": "high"
+          "confidence": "medium"
         },
         "share_of_requests": {
           "value": 0.114139,
@@ -884,7 +898,7 @@
         "requester": "kernel-usdc.meteor-vaults.near",
         "label": {
           "category": "third-party-app",
-          "confidence": "high"
+          "confidence": "medium"
         },
         "share_of_requests": {
           "value": 0.008673,
@@ -905,7 +919,7 @@
         "requester": "kernel-usdt.meteor-vaults.near",
         "label": {
           "category": "third-party-app",
-          "confidence": "high"
+          "confidence": "medium"
         },
         "share_of_requests": {
           "value": 0.008196,
@@ -968,7 +982,7 @@
         "requester": "kernel-near.meteor-vaults.near",
         "label": {
           "category": "third-party-app",
-          "confidence": "high"
+          "confidence": "medium"
         },
         "share_of_requests": {
           "value": 0.004794,
@@ -989,7 +1003,7 @@
         "requester": "kernel-zec.meteor-vaults.near",
         "label": {
           "category": "third-party-app",
-          "confidence": "high"
+          "confidence": "medium"
         },
         "share_of_requests": {
           "value": 0.004391,
@@ -1338,10 +1352,10 @@
       },
       "by_confidence": {
         "high": {
-          "value": 0.765941,
+          "value": 0.625748,
           "ci95": [
-            0.756294,
-            0.775939
+            0.608525,
+            0.641661
           ]
         },
         "low": {
@@ -1352,10 +1366,10 @@
           ]
         },
         "medium": {
-          "value": 0.021492,
+          "value": 0.161685,
           "ci95": [
-            0.017074,
-            0.02617
+            0.149882,
+            0.173766
           ]
         },
         "unlabeled": {
@@ -12626,17 +12640,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 29910,
+            "value": 4001,
             "ci95": [
-              25909,
-              34355
+              1143,
+              7684
             ]
           },
           "share": {
-            "value": 0.246468,
+            "value": 0.032967,
             "ci95": [
-              0.213876,
-              0.282267
+              0.009395,
+              0.063443
             ]
           }
         },
@@ -12658,17 +12672,17 @@
         },
         "medium": {
           "est": {
-            "value": 762,
+            "value": 26671,
             "ci95": [
-              0,
-              2286
+              23178,
+              30545
             ]
           },
           "share": {
-            "value": 0.006279,
+            "value": 0.21978,
             "ci95": [
-              0,
-              0.019007
+              0.191941,
+              0.250131
             ]
           }
         },
@@ -13310,17 +13324,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 55345,
+            "value": 6175,
             "ci95": [
-              47874,
-              63349
+              1982,
+              12121
             ]
           },
           "share": {
-            "value": 0.371546,
+            "value": 0.041453,
             "ci95": [
-              0.321869,
-              0.424847
+              0.013326,
+              0.081372
             ]
           }
         },
@@ -13342,17 +13356,17 @@
         },
         "medium": {
           "est": {
-            "value": 381,
+            "value": 49551,
             "ci95": [
-              0,
-              1067
+              41471,
+              58471
             ]
           },
           "share": {
-            "value": 0.002559,
+            "value": 0.332651,
             "ci95": [
-              0,
-              0.007172
+              0.279177,
+              0.392437
             ]
           }
         },
@@ -13986,17 +14000,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 91697,
+            "value": 1178,
             "ci95": [
-              74325,
-              109562
+              536,
+              1928
             ]
           },
           "share": {
-            "value": 0.43518,
+            "value": 0.005592,
             "ci95": [
-              0.352249,
-              0.522388
+              0.002535,
+              0.009132
             ]
           }
         },
@@ -14018,17 +14032,17 @@
         },
         "medium": {
           "est": {
-            "value": 32672,
+            "value": 123191,
             "ci95": [
-              18108,
-              48407
+              110202,
+              136440
             ]
           },
           "share": {
-            "value": 0.155058,
+            "value": 0.584647,
             "ci95": [
-              0.086137,
-              0.229442
+              0.522509,
+              0.649311
             ]
           }
         },
@@ -14662,17 +14676,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 160218,
+            "value": 925,
             "ci95": [
-              142485,
-              179494
+              308,
+              1696
             ]
           },
           "share": {
-            "value": 0.532547,
+            "value": 0.003075,
             "ci95": [
-              0.470498,
-              0.598385
+              0.001011,
+              0.00567
             ]
           }
         },
@@ -14694,17 +14708,17 @@
         },
         "medium": {
           "est": {
-            "value": 39014,
+            "value": 198307,
             "ci95": [
-              19276,
-              59215
+              185816,
+              211723
             ]
           },
           "share": {
-            "value": 0.129677,
+            "value": 0.659149,
             "ci95": [
-              0.064733,
-              0.197234
+              0.619388,
+              0.701446
             ]
           }
         },
@@ -15338,17 +15352,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 553534,
+            "value": 346735,
             "ci95": [
-              499824,
-              603589
+              252470,
+              434058
             ]
           },
           "share": {
-            "value": 0.767477,
+            "value": 0.48075,
             "ci95": [
-              0.695253,
-              0.83367
+              0.350761,
+              0.599495
             ]
           }
         },
@@ -15370,17 +15384,17 @@
         },
         "medium": {
           "est": {
-            "value": 9500,
+            "value": 216298,
             "ci95": [
-              0,
-              25941
+              167704,
+              267815
             ]
           },
           "share": {
-            "value": 0.013171,
+            "value": 0.299899,
             "ci95": [
-              0,
-              0.035931
+              0.232008,
+              0.372959
             ]
           }
         },
@@ -16014,17 +16028,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 798136,
+            "value": 626112,
             "ci95": [
-              786907,
-              809365
+              595121,
+              655756
             ]
           },
           "share": {
-            "value": 0.889835,
+            "value": 0.698047,
             "ci95": [
-              0.87996,
-              0.899252
+              0.661692,
+              0.7325
             ]
           }
         },
@@ -16046,17 +16060,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 172024,
             "ci95": [
-              0,
-              0
+              138338,
+              208405
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.191788,
             "ci95": [
-              0,
-              0
+              0.154386,
+              0.23192
             ]
           }
         },
@@ -16690,17 +16704,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 697402,
+            "value": 570493,
             "ci95": [
-              687854,
-              706552
+              530312,
+              606696
             ]
           },
           "share": {
-            "value": 0.879579,
+            "value": 0.719518,
             "ci95": [
-              0.867972,
-              0.8909
+              0.669674,
+              0.764647
             ]
           }
         },
@@ -16722,17 +16736,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 126909,
             "ci95": [
-              0,
-              0
+              91502,
+              166692
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.16006,
             "ci95": [
-              0,
-              0
+              0.115173,
+              0.210526
             ]
           }
         },
@@ -17366,17 +17380,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 693053,
+            "value": 672258,
             "ci95": [
-              675857,
-              709850
+              653062,
+              690654
             ]
           },
           "share": {
-            "value": 0.867802,
+            "value": 0.841763,
             "ci95": [
-              0.847652,
-              0.8865
+              0.818591,
+              0.8635
             ]
           }
         },
@@ -17398,17 +17412,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 20796,
             "ci95": [
-              0,
-              0
+              15997,
+              25994
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.026039,
             "ci95": [
-              0,
-              0
+              0.01998,
+              0.03268
             ]
           }
         },
@@ -18042,17 +18056,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 707697,
+            "value": 698036,
             "ci95": [
-              698036,
-              716553
+              687569,
+              708100
             ]
           },
           "share": {
-            "value": 0.883861,
+            "value": 0.871795,
             "ci95": [
-              0.873296,
-              0.89471
+              0.85985,
+              0.883942
             ]
           }
         },
@@ -18074,17 +18088,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 9661,
             "ci95": [
-              0,
-              0
+              7246,
+              12077
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.012066,
             "ci95": [
-              0,
-              0
+              0.009077,
+              0.015083
             ]
           }
         },
@@ -18718,17 +18732,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 563048,
+            "value": 546095,
             "ci95": [
-              548703,
-              578697
+              530446,
+              563374
             ]
           },
           "share": {
-            "value": 0.877095,
+            "value": 0.850686,
             "ci95": [
-              0.85502,
-              0.900869
+              0.825954,
+              0.877033
             ]
           }
         },
@@ -18750,17 +18764,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 16953,
             "ci95": [
-              0,
-              0
+              14019,
+              19888
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.026409,
             "ci95": [
-              0,
-              0
+              0.021805,
+              0.030902
             ]
           }
         },
@@ -19394,17 +19408,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 416287,
+            "value": 398456,
             "ci95": [
-              412173,
-              420402
+              393884,
+              403028
             ]
           },
           "share": {
-            "value": 0.930506,
+            "value": 0.890649,
             "ci95": [
-              0.921509,
-              0.939425
+              0.879776,
+              0.901076
             ]
           }
         },
@@ -19426,17 +19440,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 17831,
             "ci95": [
-              0,
-              0
+              15774,
+              20117
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.039857,
             "ci95": [
-              0,
-              0
+              0.035348,
+              0.044875
             ]
           }
         },
@@ -20070,17 +20084,17 @@
       "label_confidence": {
         "high": {
           "est": {
-            "value": 147601,
+            "value": 141636,
             "ci95": [
-              144860,
-              149939
+              138089,
+              144699
             ]
           },
           "share": {
-            "value": 0.926151,
+            "value": 0.88872,
             "ci95": [
-              0.911258,
-              0.938858
+              0.868193,
+              0.905918
             ]
           }
         },
@@ -20102,17 +20116,17 @@
         },
         "medium": {
           "est": {
-            "value": 0,
+            "value": 5965,
             "ci95": [
-              0,
-              0
+              4917,
+              6933
             ]
           },
           "share": {
-            "value": 0,
+            "value": 0.03743,
             "ci95": [
-              0,
-              0
+              0.030839,
+              0.043655
             ]
           }
         },
@@ -20426,6 +20440,63 @@
       "failed_sign_requests_est_by_requester": {}
     }
   ],
+  "derived": {
+    "note": "Point estimates over full months (the partial current month is excluded). Inputs in config/estimate.json 'derived'. Used to set and explain the thresholds of the falsification tests.",
+    "months_from": "2024-08",
+    "months_to": "2026-10",
+    "top3_share_lowest_month": {
+      "month": "2025-03",
+      "value": 0.663611
+    },
+    "requesters_ge_1pct_highest_month": {
+      "month": "2025-03",
+      "value": 10
+    },
+    "bridges_peak_month": {
+      "month": "2026-09",
+      "value": 302879
+    },
+    "bridges_last_full_vs_peak": -0.217305,
+    "fulfilled_rate_lowest_month_since": {
+      "since": "2025-05",
+      "month": "2025-12",
+      "value": 0.997907
+    },
+    "fulfilled_rate_lowest_month": {
+      "month": "2025-03",
+      "value": 0.532483
+    },
+    "fastauth_trend": {
+      "account": "fast-auth.near",
+      "from": "2026-05",
+      "to": "2026-10",
+      "from_value": 564130,
+      "to_value": 161394,
+      "monthly_change": -0.221423,
+      "projection": {
+        "2027-01": 76171,
+        "2027-02": 59305,
+        "2027-03": 46174
+      },
+      "half_projection": {
+        "2027-01": 38086,
+        "2027-02": 29653,
+        "2027-03": 23087
+      }
+    },
+    "exits": [
+      {
+        "requester": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+        "share_of_all_requests": 0.114139,
+        "peak_month": "2026-04",
+        "peak_value": 189261,
+        "last_active_month": "2026-07",
+        "last_active_value": 3999,
+        "zero_from": "2026-08",
+        "zero_months": 3
+      }
+    ]
+  },
   "comparisons": {
     "proximity_team_v1signer": {
       "reported_source": "https://dune.com/proximity_team/v1signer (widget 1915729, query 5597462, column total_txns). Read from the public dashboard page on 2026-11-11 through an LLM-assisted page fetch; NOT verified against Dune itself and the SQL behind the query is not visible.",
@@ -20661,6 +20732,239 @@
           "closest_unit": "sign_receipts"
         }
       ]
+    },
+    "network_scale": {
+      "source": "NearBlocks GET https://api.nearblocks.io/v1/charts (field txns, daily, summed per UTC month; third-party aggregate, keyless). Cross-check: FastNEAR POST /v0/blocks num_transactions on 12 seeded 100-block windows per month, scaled to the month's height span (estimate). Command: node scripts/network-totals.mjs",
+      "note": "Transactions, not requests. v1.signer transactions include the MPC nodes' respond transactions. Months are UTC calendar months; v1.signer months start at the first block of the month, NearBlocks days at 00:00 UTC.",
+      "from": "2024-08",
+      "to": "2026-10",
+      "totals": {
+        "near_txs_nearblocks": 3533954659,
+        "v1signer_txs": 12693110,
+        "v1signer_share_of_near_txs": 0.003592
+      },
+      "cross_check": {
+        "fastnear_over_nearblocks_min": 0.675481,
+        "fastnear_over_nearblocks_max": 1.346429
+      },
+      "months": {
+        "2024-08": {
+          "month": "2024-08",
+          "near_txs_nearblocks": 197528870,
+          "near_txs_fastnear_block_sample_est": 201272951,
+          "v1signer_txs": 255,
+          "v1signer_share_of_near_txs": 0.000001,
+          "fastnear_over_nearblocks": 1.018955
+        },
+        "2024-09": {
+          "month": "2024-09",
+          "near_txs_nearblocks": 215693780,
+          "near_txs_fastnear_block_sample_est": 240409140,
+          "v1signer_txs": 1796,
+          "v1signer_share_of_near_txs": 0.000008,
+          "fastnear_over_nearblocks": 1.114585
+        },
+        "2024-10": {
+          "month": "2024-10",
+          "near_txs_nearblocks": 216751919,
+          "near_txs_fastnear_block_sample_est": 232683597,
+          "v1signer_txs": 11814,
+          "v1signer_share_of_near_txs": 0.000055,
+          "fastnear_over_nearblocks": 1.073502
+        },
+        "2024-11": {
+          "month": "2024-11",
+          "near_txs_nearblocks": 216072469,
+          "near_txs_fastnear_block_sample_est": 198088816,
+          "v1signer_txs": 22328,
+          "v1signer_share_of_near_txs": 0.000103,
+          "fastnear_over_nearblocks": 0.91677
+        },
+        "2024-12": {
+          "month": "2024-12",
+          "near_txs_nearblocks": 255882809,
+          "near_txs_fastnear_block_sample_est": 230251396,
+          "v1signer_txs": 17978,
+          "v1signer_share_of_near_txs": 0.00007,
+          "fastnear_over_nearblocks": 0.899831
+        },
+        "2025-01": {
+          "month": "2025-01",
+          "near_txs_nearblocks": 222309266,
+          "near_txs_fastnear_block_sample_est": 215852814,
+          "v1signer_txs": 9728,
+          "v1signer_share_of_near_txs": 0.000044,
+          "fastnear_over_nearblocks": 0.970957
+        },
+        "2025-02": {
+          "month": "2025-02",
+          "near_txs_nearblocks": 192353815,
+          "near_txs_fastnear_block_sample_est": 201753856,
+          "v1signer_txs": 25550,
+          "v1signer_share_of_near_txs": 0.000133,
+          "fastnear_over_nearblocks": 1.048868
+        },
+        "2025-03": {
+          "month": "2025-03",
+          "near_txs_nearblocks": 204459064,
+          "near_txs_fastnear_block_sample_est": 222923609,
+          "v1signer_txs": 4355,
+          "v1signer_share_of_near_txs": 0.000021,
+          "fastnear_over_nearblocks": 1.090309
+        },
+        "2025-04": {
+          "month": "2025-04",
+          "near_txs_nearblocks": 187849986,
+          "near_txs_fastnear_block_sample_est": 218080281,
+          "v1signer_txs": 6768,
+          "v1signer_share_of_near_txs": 0.000036,
+          "fastnear_over_nearblocks": 1.160928
+        },
+        "2025-05": {
+          "month": "2025-05",
+          "near_txs_nearblocks": 162672900,
+          "near_txs_fastnear_block_sample_est": 173035181,
+          "v1signer_txs": 14647,
+          "v1signer_share_of_near_txs": 0.00009,
+          "fastnear_over_nearblocks": 1.0637
+        },
+        "2025-06": {
+          "month": "2025-06",
+          "near_txs_nearblocks": 146815770,
+          "near_txs_fastnear_block_sample_est": 131414663,
+          "v1signer_txs": 39775,
+          "v1signer_share_of_near_txs": 0.000271,
+          "fastnear_over_nearblocks": 0.895099
+        },
+        "2025-07": {
+          "month": "2025-07",
+          "near_txs_nearblocks": 148950170,
+          "near_txs_fastnear_block_sample_est": 154798958,
+          "v1signer_txs": 141435,
+          "v1signer_share_of_near_txs": 0.00095,
+          "fastnear_over_nearblocks": 1.039267
+        },
+        "2025-08": {
+          "month": "2025-08",
+          "near_txs_nearblocks": 155580573,
+          "near_txs_fastnear_block_sample_est": 140456951,
+          "v1signer_txs": 102576,
+          "v1signer_share_of_near_txs": 0.000659,
+          "fastnear_over_nearblocks": 0.902792
+        },
+        "2025-09": {
+          "month": "2025-09",
+          "near_txs_nearblocks": 140330930,
+          "near_txs_fastnear_block_sample_est": 123706408,
+          "v1signer_txs": 92477,
+          "v1signer_share_of_near_txs": 0.000659,
+          "fastnear_over_nearblocks": 0.881533
+        },
+        "2025-10": {
+          "month": "2025-10",
+          "near_txs_nearblocks": 140982405,
+          "near_txs_fastnear_block_sample_est": 95230985,
+          "v1signer_txs": 127196,
+          "v1signer_share_of_near_txs": 0.000902,
+          "fastnear_over_nearblocks": 0.675481
+        },
+        "2025-11": {
+          "month": "2025-11",
+          "near_txs_nearblocks": 128032427,
+          "near_txs_fastnear_block_sample_est": 114346632,
+          "v1signer_txs": 192474,
+          "v1signer_share_of_near_txs": 0.001503,
+          "fastnear_over_nearblocks": 0.893107
+        },
+        "2025-12": {
+          "month": "2025-12",
+          "near_txs_nearblocks": 119122904,
+          "near_txs_fastnear_block_sample_est": 102427091,
+          "v1signer_txs": 254010,
+          "v1signer_share_of_near_txs": 0.002132,
+          "fastnear_over_nearblocks": 0.859844
+        },
+        "2026-01": {
+          "month": "2026-01",
+          "near_txs_nearblocks": 108680994,
+          "near_txs_fastnear_block_sample_est": 146331221,
+          "v1signer_txs": 304931,
+          "v1signer_share_of_near_txs": 0.002806,
+          "fastnear_over_nearblocks": 1.346429
+        },
+        "2026-02": {
+          "month": "2026-02",
+          "near_txs_nearblocks": 97681097,
+          "near_txs_fastnear_block_sample_est": 93846589,
+          "v1signer_txs": 428384,
+          "v1signer_share_of_near_txs": 0.004386,
+          "fastnear_over_nearblocks": 0.960745
+        },
+        "2026-03": {
+          "month": "2026-03",
+          "near_txs_nearblocks": 107857335,
+          "near_txs_fastnear_block_sample_est": 109655521,
+          "v1signer_txs": 616818,
+          "v1signer_share_of_near_txs": 0.005719,
+          "fastnear_over_nearblocks": 1.016672
+        },
+        "2026-04": {
+          "month": "2026-04",
+          "near_txs_nearblocks": 28398312,
+          "near_txs_fastnear_block_sample_est": 26780731,
+          "v1signer_txs": 1461475,
+          "v1signer_share_of_near_txs": 0.051463,
+          "fastnear_over_nearblocks": 0.94304
+        },
+        "2026-05": {
+          "month": "2026-05",
+          "near_txs_nearblocks": 24893046,
+          "near_txs_fastnear_block_sample_est": 24063113,
+          "v1signer_txs": 1796592,
+          "v1signer_share_of_near_txs": 0.072172,
+          "fastnear_over_nearblocks": 0.96666
+        },
+        "2026-06": {
+          "month": "2026-06",
+          "near_txs_nearblocks": 24415046,
+          "near_txs_fastnear_block_sample_est": 24345080,
+          "v1signer_txs": 1591333,
+          "v1signer_share_of_near_txs": 0.065178,
+          "fastnear_over_nearblocks": 0.997134
+        },
+        "2026-07": {
+          "month": "2026-07",
+          "near_txs_nearblocks": 22874925,
+          "near_txs_fastnear_block_sample_est": 20957684,
+          "v1signer_txs": 1599661,
+          "v1signer_share_of_near_txs": 0.069931,
+          "fastnear_over_nearblocks": 0.916186
+        },
+        "2026-08": {
+          "month": "2026-08",
+          "near_txs_nearblocks": 21131379,
+          "near_txs_fastnear_block_sample_est": 22294418,
+          "v1signer_txs": 1610232,
+          "v1signer_share_of_near_txs": 0.076201,
+          "fastnear_over_nearblocks": 1.055038
+        },
+        "2026-09": {
+          "month": "2026-09",
+          "near_txs_nearblocks": 24004533,
+          "near_txs_fastnear_block_sample_est": 30041294,
+          "v1signer_txs": 1304107,
+          "v1signer_share_of_near_txs": 0.054328,
+          "fastnear_over_nearblocks": 1.251484
+        },
+        "2026-10": {
+          "month": "2026-10",
+          "near_txs_nearblocks": 22627935,
+          "near_txs_fastnear_block_sample_est": 19831836,
+          "v1signer_txs": 914415,
+          "v1signer_share_of_near_txs": 0.040411,
+          "fastnear_over_nearblocks": 0.876432
+        }
+      }
     }
   },
   "robustness": {
