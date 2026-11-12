@@ -1,0 +1,33 @@
+# Deploys the static dashboard (site/) to GitHub Pages on every push to main.
+# It only uploads the committed site/ folder (built by `npm run build:site`); it does not rebuild data and uses no secrets.
+# Pages itself must be enabled by the repository owner (Settings → Pages → Source: GitHub Actions); this workflow does not enable it.
+name: Deploy dashboard to GitHub Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+      - id: deployment
+        uses: actions/deploy-pages@v4
