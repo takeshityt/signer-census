@@ -67,5 +67,5 @@ rules:
       requester: [kernel-usdc.meteor-vaults.near, kernel-usdt.meteor-vaults.near, kernel-near.meteor-vaults.near, kernel-zec.meteor-vaults.near]
       key_type: ed25519
     evidence:
-      - url: https://docs.dew.finance/introduction/overview
-        claim: "Dew docs describe ChainSigMessage as signing messages for NEAR Intents swaps (Ed25519 / NEP-413 style); the exact target chain per kernel is not stated publicly, hence low (research notes; wording not re-checked)."
+      - url: https://docs.dew.finance/core_concepts/policy/chainsig_message_signing_policy
+        claim: "Dew docs (fetched 2026-11-12): the ChainSigMessage policy is for signing messages on NEAR Intents to execute swaps; the only supported sign_method is NearIntentsSwap. The page does not mention Ed25519 or NEP-413: mapping the kernels' Ed25519 requests to NEAR is our inference, and the target chain per kernel is not stated publicly, hence low."

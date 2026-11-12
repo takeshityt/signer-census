@@ -4,6 +4,9 @@
 # Coverage: every requester needed to reach >= 95% of estimated requests, plus all with >= 0.5% (see out/metrics.json totals.labeling_coverage).
 # On-chain facts below were re-checked with public RPC (https://rpc.mainnet.fastnear.com) on 2026-11-11; the exact call is written in each claim.
 # Data-derived facts come from `node scripts/requester-profile.mjs` (docs/evidence/attribution/requester-profiles.json).
+# Source links from contract_source_metadata (NEP-330) are self-declared by the deployer: these builds are not reproducible (no build_info / non-reproducible-wasm),
+# so "the deployed code is this commit" is the deployer's statement, not something we verified by rebuilding.
+# Claims marked "not re-verified by us" or "wording not re-checked" rest on research notes only; everything else was re-checked as written.
 
 labels:
   - account: fast-auth.near
@@ -18,7 +21,7 @@ labels:
       name: "Sweat Wallet (Sweat Foundation)"
       confidence: medium
       note: >
-        HIGH confidence that the dominant FastAuth issuer is the Sweat Foundation's login (swe.at domain + on-chain guard named "sweat"); MEDIUM that the traffic is specifically Sweat Wallet:
+        Strong inference (no source states it directly; https://fastauth.swe.at itself answers HTTP 403) that the dominant FastAuth issuer is the Sweat Foundation's login (swe.at domain + on-chain guard named "sweat"); MEDIUM that the traffic is specifically Sweat Wallet:
         the release says Sweat Wallet supports EVM chains "through Chain Signatures" but no source states that Sweat Wallet logins go through fast-auth.near.
         Who controls sweat-relayer.near is not stated by any source (created 2024-04-02 by meteor-relayer.near; not verified further).
       evidence:
@@ -38,7 +41,7 @@ labels:
       - url: https://auth.near.org
         claim: 'FAQ states "NEAR Auth is built and operated by Peersyst as a public-good account-abstraction layer for the NEAR ecosystem" and names the shared mainnet infrastructure "fast-auth.near, jwt.fast-auth.near, v1.signer".'
       - url: https://github.com/Peersyst/fast-auth/blob/main/contracts/fa/src/lib.rs
-        claim: 'contracts/fa/src/lib.rs L539-540 build the MPC request as path: format!("{}#{}", guard_id.clone(), user) with domain_id: self.mpc_domain_id (read on 2026-11-11).'
+        claim: 'contracts/fa/src/lib.rs L539-540 build the MPC request as path: format!("{}#{}", guard_id.clone(), user) with domain_id: self.mpc_domain_id (read on main on 2026-11-11). fast-auth.near.contract_source_metadata links https://github.com/Peersyst/fast-auth with build_info null, so that the deployed code matches main is not proven; the observed paths (jwt#<issuer>#<sub>) are consistent with it.'
       - url: https://rpc.mainnet.fastnear.com
         claim: 'view call fast-auth.near.mpc_domain_id returned "1" (Ed25519 domain of v1.signer), matching domain_id=1 on all sampled sign receipts.'
       - url: https://docs.near.org/web3-apps/tutorials/near-auth
@@ -72,12 +75,14 @@ labels:
 
   - account: 7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora
     category: third-party-app
-    confidence: high
+    confidence: medium
     owner: "Relay Protocol (RelayAllocator on Aurora)"
     note: >
       NEAR-side account of the Aurora EVM contract 0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f, "RelayAllocator" (verified source, author Relay Protocol, created 2025-11-28).
       It calls v1.signer.sign through Aurora cross-contract calls (all txs relayed by relay.aurora). Aurora is only the transport: the signatures authorize withdrawals from Relay depositories on other chains.
       Which request targets which chain is not decoded (only ECDSA vs EdDSA). The owner of relay.aurora is not verified.
+      Confidence medium: the Relay attribution rests on the "@author Relay Protocol" tag in source uploaded by the deployer; Relay's own contracts page
+      (https://docs.relay.link/references/protocol/contracts, fetched 2026-11-12) does not list this address. No independent source names it.
     evidence:
       - url: https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f
         claim: 'Blockscout: verified contract named "RelayAllocator"; source header "@author Relay Protocol" and "Manages cross-chain withdrawal requests and payload signing using NEAR MPC signer"; signer account v1.signer.'
@@ -97,7 +102,7 @@ labels:
       - url: https://rpc.mainnet.fastnear.com
         claim: 'view call omni.bridge.near.contract_source_metadata returned link https://github.com/Near-One/omni-bridge/tree/83e3ac1eeef6b1330744f53d68dd037fa53aab0f, version 0.4.18.'
       - url: https://github.com/Near-One/omni-bridge/blob/83e3ac1eeef6b1330744f53d68dd037fa53aab0f/near/omni-bridge/src/lib.rs
-        claim: 'near/omni-bridge/src/lib.rs L84 const SIGN_PATH: &str = "bridge-1"; L372-373 and L480-481 call the MPC signer with path: SIGN_PATH.to_owned(), key_version: 0 (checked on main on 2026-11-11).'
+        claim: 'near/omni-bridge/src/lib.rs L84 const SIGN_PATH: &str = "bridge-1"; L372-373 and L480-481 call the MPC signer with path: SIGN_PATH.to_owned(), key_version: 0 (line numbers at the pinned commit 83e3ac1e, checked 2026-11-11).'
       - url: https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json
         claim: 'Sample profile: 3948 sign rows, all path bridge-1, legacy ECDSA bytes, tx signer mostly omni-relayer.bridge.near.'
 
@@ -128,7 +133,7 @@ labels:
       - url: https://rpc.mainnet.fastnear.com
         claim: 'view call zcash-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/37be7c6dfcb3a067ce8bedbe68052a8739e1445c, version 0.9.9.'
       - url: https://rpc.mainnet.fastnear.com
-        claim: 'view_code of zcash-connector.bridge.near contains the string "orchard" 50 times and "zcash" 39 times; btc-connector.bridge.near contains "orchard" 0 times (counted 2026-11-11).'
+        claim: 'view_code of zcash-connector.bridge.near (block 224191358) contains "orchard" 12 times and "zcash" 19 times case-sensitive (50 and 39 ignoring case); btc-connector.bridge.near contains "orchard" 0 times and "zcash" 2 times case-sensitive (7 ignoring case) (counted 2026-11-12).'
 
   - account: reflect-adam-mainnet-agent-contract.near
     category: third-party-app
@@ -147,11 +152,12 @@ labels:
 
   - account: kernel-usdc.meteor-vaults.near
     category: third-party-app
-    confidence: high
+    confidence: medium
     owner: "Dew Finance (vault kernels deployed by meteor-vaults.near)"
     note: >
       Dew Kernel vault contract (same code hash as the other three kernels). Signs Ed25519 messages (NEAR Intents swap messages per the docs) and transactions via v1.signer.
       Paths near-1 / 1 / 2: the meaning is NOT established (no public source). Target chain per kernel not stated publicly.
+      Confidence medium: the NEP-330 link points to a private repo (404) and the Dew docs do not name these accounts; the link is the deployer's own statement.
     evidence:
       - url: https://rpc.mainnet.fastnear.com
         claim: 'view call kernel-usdc.meteor-vaults.near.contract_source_metadata returned link https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958, version 0.1.0 (the repo returns 404: not public).'
@@ -162,7 +168,7 @@ labels:
 
   - account: kernel-usdt.meteor-vaults.near
     category: third-party-app
-    confidence: high
+    confidence: medium
     owner: "Dew Finance (vault kernels deployed by meteor-vaults.near)"
     note: "Same code hash as kernel-usdc.meteor-vaults.near (36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z, view_account 2026-11-11); see that entry for what is and is not established."
     evidence:
@@ -172,13 +178,15 @@ labels:
   - account: e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora
     category: third-party-app
     confidence: medium
-    owner: "probably Relay Protocol (earlier Allocator contract) - not stated by any document"
+    owner: "Relay Protocol per the author tag of its verified source (earlier Allocator contract); no Relay document names this address"
     note: >
       NEAR-side account of Aurora EVM contract 0xE12Bc514E90E136cAd10413669a6Ccdeb9E3adB7, an "Allocator" with the same ABI and constructor arguments as RelayAllocator (v1.signer);
-      active 2025-10..2025-12, followed by RelayAllocator from 2025-11-28. The Relay attribution is inferred from near-identical code and timing; no Relay document names this address.
+      active 2025-10..2025-12, followed by RelayAllocator from 2025-11-28. Same strength of evidence as RelayAllocator: author tag in deployer-uploaded source, near-identical code and timing.
     evidence:
+      - url: https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0xE12Bc514E90E136cAd10413669a6Ccdeb9E3adB7
+        claim: 'Blockscout (fetched 2026-11-12): verified contract named "Allocator"; its source contains "@author Relay Protocol".'
       - url: https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-aurora-reflect.json
-        claim: 'Research notes from Aurora Blockscout: verified contract "Allocator" created 2025-09-30 with the same ABI (signWithdrawCallback, signerPath, nearSigner, hub) as RelayAllocator; not re-verified by us.'
+        claim: 'Research notes: created 2025-09-30 with the same ABI (signWithdrawCallback, signerPath, nearSigner, hub) as RelayAllocator; creation date not re-verified by us.'
       - url: https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json
         claim: 'Sample: 949 sign rows, paths 0x<40-hex>, tx signer relay.aurora, active 2025-10..2025-12 only.'
 
@@ -198,7 +206,7 @@ labels:
 
   - account: kernel-near.meteor-vaults.near
     category: third-party-app
-    confidence: high
+    confidence: medium
     owner: "Dew Finance (vault kernels deployed by meteor-vaults.near)"
     note: "Same code hash as the other kernels; created 2026-05-13 per research notes, active from 2026-05. See kernel-usdc.meteor-vaults.near."
     evidence:
@@ -207,7 +215,7 @@ labels:
 
   - account: kernel-zec.meteor-vaults.near
     category: third-party-app
-    confidence: high
+    confidence: medium
     owner: "Dew Finance (vault kernels deployed by meteor-vaults.near)"
     note: "Same code hash as the other kernels; created 2026-05-25 per research notes, active from 2026-05. See kernel-usdc.meteor-vaults.near."
     evidence:
