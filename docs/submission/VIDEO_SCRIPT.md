@@ -31,17 +31,17 @@ Draft for the author, who records and posts the video. Record the dashboard (`np
 
 **On screen:** "The thesis" with the five lines, then "What would prove us wrong".
 
-**Narration:** "Our thesis: Chain Signatures is production-grade, but demand is narrow, and bridges are the durable signal. We publish what would prove it wrong: for example, if bridge requests fall below 100k a month from January to March 2027, or if demand spreads out: at least 15 requesters with 1% or more each, and the three largest under half of all requests."
+**Narration:** "Our thesis: Chain Signatures works, but demand is narrow, the largest third-party app has left, and bridges are the signal to watch. For a long-term NEAR view that means: working infrastructure, not yet broad adoption. We publish what would prove it wrong: for example, if bridge requests fall below 150k in two of the months January to March 2027, or if demand spreads out more than ever measured: the three largest under 60%, or at least 11 requesters with 1% or more in a month."
 
-**Перевод:** «Наш тезис: Chain Signatures готов к продакшену, но спрос узкий, а устойчивый сигнал — мосты. Мы публикуем, что опровергло бы тезис: например, если запросы мостов упадут ниже 100 тыс. в месяц с января по март 2027 года, или если спрос расползётся: не меньше 15 запрашивающих с долей от 1% каждый, а три крупнейших — меньше половины всех запросов.»
+**Перевод:** «Наш тезис: Chain Signatures работает, но спрос узкий, крупнейшее стороннее приложение ушло, а следить нужно за мостами. Для долгосрочного взгляда на NEAR это значит: работающая инфраструктура, но ещё не широкое распространение. Мы публикуем, что опровергло бы тезис: например, если запросы мостов упадут ниже 150 тыс. в двух из месяцев январь–март 2027 года, или если спрос станет шире, чем когда-либо: три крупнейших меньше 60% или не меньше 11 запрашивающих с долей от 1% за месяц.»
 
 ## 50–60 s: re-run it yourself
 
 **On screen:** the terminal: `npm run reproduce` (the `sha256` line), then the last line of `npm run verify -- --sample 50`; end on the repository URL.
 
-**Narration:** "Every number re-runs from public NEAR data. npm run reproduce rebuilds it offline; npm run verify re-checks sampled transactions against two sources: 50 out of 50. Built at NEAR HACKATHON."
+**Narration:** "Every number re-runs from public NEAR data. npm run reproduce rebuilds it offline; npm run verify re-checks the parsing of sampled transactions against two sources: 50 out of 50. Built at NEAR HACKATHON."
 
-**Перевод:** «Каждое число пересчитывается из публичных данных NEAR. npm run reproduce пересобирает всё оффлайн; npm run verify перепроверяет выборку транзакций по двум источникам: 50 из 50. Сделано на NEAR HACKATHON.»
+**Перевод:** «Каждое число пересчитывается из публичных данных NEAR. npm run reproduce пересобирает всё оффлайн; npm run verify перепроверяет разбор выборки транзакций по двум источникам: 50 из 50. Сделано на NEAR HACKATHON.»
 
 ## Recording notes
 
