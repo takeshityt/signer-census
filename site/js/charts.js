@@ -308,7 +308,7 @@ export function createChart(host, init) {
 /** The hero pen stroke: one smooth line with dated markers whose labels sit in lanes above it. */
 export function createHeroStroke(host, { months, values, tailTo = null, events = [], peakIndex = -1, aria }) {
   host.classList.add("hero-stroke");
-  host.innerHTML = `<svg aria-hidden="true"><defs><clipPath id="hsc"><rect x="-10" y="-40" width="0" height="600"/></clipPath></defs><g class="b"></g><g class="p" clip-path="url(#hsc)"></g></svg><div class="ann-layer on"></div>`;
+  host.innerHTML = `<svg aria-hidden="true"><defs><clipPath id="hsc"><rect x="-10" y="-40" width="0" height="600"/></clipPath></defs><g class="b"></g><g class="p" clip-path="url(#hsc)"></g></svg><div class="ann-layer"></div>`;
   host.setAttribute("role", "img"); host.setAttribute("aria-label", aria ?? "Monthly requests");
   const svg = host.querySelector("svg"), gB = svg.querySelector(".b"), gP = svg.querySelector(".p"), layer = host.querySelector(".ann-layer"), rect = svg.querySelector("rect");
   let progress = reducedMotion() ? 1 : 0, started = false, W = 0, shown = new Set();
