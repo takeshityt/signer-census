@@ -1,7 +1,7 @@
 <!-- Rendered from docs/templates/VIDEO_SCRIPT.template.md by `npm run reproduce`. Every number comes from out/metrics.json, out/scenarios.json or repository facts. -->
 # Demo video script (about one minute)
 
-Draft for the author, who records and posts the video. Record the dashboard (`npm run build:site && npm run site`, desktop width, light theme) and one terminal window. Speak slowly; the cuts follow the sections of the page from top to bottom. Each block has the English narration and a Russian translation for the author.
+Draft for the author, who records and posts the video. Record the live dashboard (https://takeshityt.github.io/signer-census/, or locally `npm run build:site && npm run site`; desktop width, light theme) and one terminal window. Speak slowly; the cuts follow the sections of the page from top to bottom. Each block has the English narration and a Russian translation for the author.
 
 ## 0–5 s: the headline
 
@@ -13,15 +13,15 @@ Draft for the author, who records and posts the video. Record the dashboard (`np
 
 ## 5–20 s: who really uses it
 
-**On screen:** "Requests over time", then click "Exclude the suspected benchmark"; scroll to "Who sends the requests" and stop on `fast-auth.near` with the Sweat note.
+**On screen:** the chapter "Almost every request ends in a signature", then tick "Hide the suspected benchmark"; scroll to "Who" and hover the coral FastAuth squares of the waffle, then stop on the `fast-auth.near` row with its sparkline.
 
-**Narration:** "Three requesters make about 74% of all requests. The April 2026 boom is mostly one integration: FastAuth logins from the Sweat Foundation's login domain, about 346k requests in its first month. Another 19% is a suspected benchmark; this switch removes it."
+**Narration:** "Three requesters make about 74% of all requests. The April 2026 boom is mostly one integration: FastAuth logins from the Sweat Foundation's login domain, about 346k requests in its first month. Another 19% is a suspected benchmark; this tick removes it."
 
-**Перевод:** «Три запрашивающих дают около 74% всех запросов. Бум апреля 2026 года — в основном одна интеграция: вход через FastAuth с домена Sweat Foundation, около 346k запросов в первый же месяц. Ещё 19% — подозреваемый бенчмарк; этот переключатель его убирает.»
+**Перевод:** «Три запрашивающих дают около 74% всех запросов. Бум апреля 2026 года — в основном одна интеграция: вход через FastAuth с домена Sweat Foundation, около 346k запросов в первый же месяц. Ещё 19% — подозреваемый бенчмарк; эта галочка его убирает.»
 
 ## 20–35 s: the Sweat sunset and the bridges
 
-**On screen:** the Sweat callout; click "stops" for FastAuth traffic, "stops" for the benchmark, "flat" for growth; then the "Bridges" chart.
+**On screen:** "The boom" chart; drag the slider "FastAuth after the end date" to zero, leave the benchmark off and other demand at zero, and show the result line; then the "Bridges" chapter.
 
 **Narration:** "Sweat Wallet ends in its present form on 30 December 2026. If that traffic stops, monthly volume in 2027-06 is about 267k, -40% against October 2026: a scenario, not a forecast. What remains is structural, and most of it is bridges: about 237k of 267k structural requests in October."
 
@@ -29,7 +29,7 @@ Draft for the author, who records and posts the video. Record the dashboard (`np
 
 ## 35–50 s: the thesis and what would prove it wrong
 
-**On screen:** "The thesis" with the five lines, then "What would prove us wrong".
+**On screen:** the hero headline once more, then "What would prove us wrong": the four cards with their countdown.
 
 **Narration:** "Our thesis: Chain Signatures works, but demand is narrow, the largest third-party app has left, and bridges are the signal to watch. For a long-term NEAR view that means: working infrastructure, not yet broad adoption. We publish what would prove it wrong: for example, if bridge requests fall below 150k in two of the months January to March 2027, or if demand spreads out more than ever measured: the three largest under 60%, or at least 11 requesters with 1% or more in a month."
 
@@ -37,11 +37,11 @@ Draft for the author, who records and posts the video. Record the dashboard (`np
 
 ## 50–60 s: re-run it yourself
 
-**On screen:** the terminal: `npm run reproduce` (the `sha256` line), then the last line of `npm run verify -- --sample 50`; end on the repository URL.
+**On screen:** the chapter "Verify it yourself": press "Check a random transaction" and wait for the three check marks; then the terminal: `npm run reproduce` (the `sha256` line), then the last line of `npm run verify -- --sample 50`; end on the repository URL.
 
-**Narration:** "Every number re-runs from public NEAR data. npm run reproduce rebuilds it offline; npm run verify re-checks the parsing of sampled transactions against two sources: 50 out of 50. Built at NEAR HACKATHON."
+**Narration:** "Every number re-runs from public NEAR data. Press this button and your browser checks a sampled transaction on a public node. npm run reproduce rebuilds it offline; npm run verify re-checks the parsing of sampled transactions against two sources: 50 out of 50. Built at NEAR HACKATHON."
 
-**Перевод:** «Каждое число пересчитывается из публичных данных NEAR. npm run reproduce пересобирает всё оффлайн; npm run verify перепроверяет разбор выборки транзакций по двум источникам: 50 из 50. Сделано на NEAR HACKATHON.»
+**Перевод:** «Каждое число пересчитывается из публичных данных NEAR. Эта кнопка проверяет в вашем браузере случайную транзакцию на публичном узле. npm run reproduce пересобирает всё оффлайн; npm run verify перепроверяет разбор выборки транзакций по двум источникам: 50 из 50. Сделано на NEAR HACKATHON.»
 
 ## Recording notes
 
