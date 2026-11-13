@@ -3,6 +3,8 @@ In the template every number is a placeholder: metric (out/metrics.json), scenar
 `npm test` fails if THESIS.md contains any other digit or differs from the rendering. Syntax: see src/thesis.mjs. -->
 # Thesis: Chain Signatures works, but its demand is narrow — bridges are the signal to watch
 
+**For a long-term NEAR investor:** Chain Signatures works (≈{{m:totals.fulfilled_rate|pct1}} of sampled requests end with a successful signature), but three requesters make ≈{{m:totals.concentration.top3_share|pct0}} of its ≈{{m:totals.requests_est|M1}} requests, so it is working infrastructure, not yet broad adoption.
+
 ## Headline
 
 Chain Signatures works. Its demand is narrow — and its biggest user is winding down.

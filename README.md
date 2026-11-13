@@ -2,18 +2,22 @@
 Every number is a placeholder (metrics, scenarios, repository facts, declared literal or external figure with URL); `npm test` fails on any other digit. -->
 # Signer Census
 
+**For a long-term NEAR investor:** Chain Signatures works (≈99.9%<sup>[1]</sup> of sampled requests end with a successful signature), but three requesters make ≈74%<sup>[2]</sup> of its ≈6.4M<sup>[3]</sup> requests, so it is working infrastructure, not yet broad adoption.
+
+[![CI](https://github.com/takeshityt/signer-census/actions/workflows/ci.yml/badge.svg)](https://github.com/takeshityt/signer-census/actions/workflows/ci.yml)
+
 A reproducible, evidence-backed census of who uses NEAR Chain Signatures (the `v1.signer` MPC contract): how many signature requests there are, who sends them and for which chains, turned into a long-term thesis for NEAR. Read-only: no keys, no transactions, no paid services.
 
-**Finding:** Chain Signatures works (≈6.4M<sup>[1]</sup> signature requests since August 2024, ≈5.2M<sup>[2]</sup> without a suspected benchmark account; ≈99.9%<sup>[3]</sup> of sampled requests end with a successful signature callback), but real demand is narrow: the 2026 boom came mostly from one consumer integration whose product ends in its present form on 30 December 2026 ([source](https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/)), and the largest third-party app (Relay) stopped. The signal to watch is the bridge connectors (Omni, Bitcoin, Zcash): the most persistent demand we observe, peaking in 2026-09<sup>[4]</sup>.
+**Finding:** Chain Signatures works (≈6.4M<sup>[3]</sup> signature requests since August 2024, ≈5.2M<sup>[4]</sup> without a suspected benchmark account; ≈99.9%<sup>[1]</sup> of sampled requests end with a successful signature callback), but real demand is narrow: the 2026 boom came mostly from one consumer integration whose product ends in its present form on 30 December 2026 ([source](https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/)), and the largest third-party app (Relay) stopped. The signal to watch is the bridge connectors (Omni, Bitcoin, Zcash): the most persistent demand we observe, peaking in 2026-09<sup>[5]</sup>.
 
 ## What this means for a long-term NEAR view
 
 * **What the data supports:** Chain Signatures is live production infrastructure that NEAR's own products depend on: FastAuth logins and the Near One bridges (Omni, Bitcoin, Zcash) are the main users, and the signer answers almost every request it accepts. A long-term view can treat it as working plumbing, not as a promise.
-* **What it does not support:** the headline volume is not broad adoption. Over the whole period ≈44%<sup>[5]</sup> of requests came from one login integration whose main product ends in its present form, ≈19%<sup>[6]</sup> from a suspected benchmark, and the largest third-party application has stopped. "Many chain-abstraction apps are signing through NEAR" is not what we measure. Nor does the census measure value, fees or any revenue to NEAR or the NEAR token.
-* **Scale against the whole network:** transactions touching `v1.signer` are ≈0.36%<sup>[7]</sup> of all NEAR transactions from 2024-08<sup>[8]</sup> to 2026-10<sup>[9]</sup> and ≈4.0%<sup>[10]</sup> in October 2026. The recent share is higher partly because the network's own count fell from ≈107.9M<sup>[11]</sup> transactions in March 2026 to ≈28.4M<sup>[12]</sup> in April 2026. Network counts are NearBlocks' daily figures; a FastNEAR block sample lands within 0.68<sup>[13]</sup>–1.35<sup>[14]</sup> times NearBlocks in every month and shows the same drop (`node scripts/network-totals.mjs`). So Chain Signatures is a small but, since April 2026, visible part of network activity; transactions are not value, and the census does not measure fees.
+* **What it does not support:** the headline volume is not broad adoption. Over the whole period ≈44%<sup>[6]</sup> of requests came from one login integration whose main product ends in its present form, ≈19%<sup>[7]</sup> from a suspected benchmark, and the largest third-party application has stopped. "Many chain-abstraction apps are signing through NEAR" is not what we measure. Nor does the census measure value, fees or any revenue to NEAR or the NEAR token.
+* **Scale against the whole network:** transactions touching `v1.signer` are ≈0.36%<sup>[8]</sup> of all NEAR transactions from 2024-08<sup>[9]</sup> to 2026-10<sup>[10]</sup> and ≈4.0%<sup>[11]</sup> in October 2026. The recent share is higher partly because the network's own count fell from ≈107.9M<sup>[12]</sup> transactions in March 2026 to ≈28.4M<sup>[13]</sup> in April 2026. Network counts are NearBlocks' daily figures; a FastNEAR block sample lands within 0.68<sup>[14]</sup>–1.35<sup>[15]</sup> times NearBlocks in every month and shows the same drop (`node scripts/network-totals.mjs`). So Chain Signatures is a small but, since April 2026, visible part of network activity; transactions are not value, and the census does not measure fees.
 * **The structural signal and how to watch it:** bridge requests per month (`months[].series_requests_est.bridges` in out/metrics.json). They are the part of demand that is neither a single consumer integration nor a suspected test, and they connect NEAR to Bitcoin, Zcash and other chains through Near One's connectors. Watch them together with breadth: the number of requesters holding at least one percent in a month (`months[].concentration.requesters_ge_1pct`) and the share of the three largest (`months[].concentration.top3_share`). Refresh with `npm run monthly`, `npm run sample`, `npm run parse`, `npm run reproduce`.
-* **Bull case, in measurable terms:** after FastAuth's traffic falls away, bridge requests stay at or above 150k a month through March 2027, and demand broadens beyond anything seen in a full month so far: the three largest under 60% or at least 11 requesters at one percent in a month (lowest top-three share so far ≈66%<sup>[15]</sup>, highest count so far 10<sup>[16]</sup>, both in 2025-03<sup>[17]</sup>).
-* **Bear case, in measurable terms:** bridge requests fall below 150k in at least two of the months January to March 2027, and no new requester replaces FastAuth or Relay (the three largest stay above ≈66%<sup>[15]</sup> and fewer than 11 requesters reach one percent). Then Chain Signatures remains a narrow, NEAR-internal utility and should carry little weight in a long-term NEAR thesis.
+* **Bull case, in measurable terms:** after FastAuth's traffic falls away, bridge requests stay at or above 150k a month through March 2027, and demand broadens beyond anything seen in a full month so far: the three largest under 60% or at least 11 requesters at one percent in a month (lowest top-three share so far ≈66%<sup>[16]</sup>, highest count so far 10<sup>[17]</sup>, both in 2025-03<sup>[18]</sup>).
+* **Bear case, in measurable terms:** bridge requests fall below 150k in at least two of the months January to March 2027, and no new requester replaces FastAuth or Relay (the three largest stay above ≈66%<sup>[16]</sup> and fewer than 11 requesters reach one percent). Then Chain Signatures remains a narrow, NEAR-internal utility and should carry little weight in a long-term NEAR thesis.
 
 ## The question
 
@@ -21,8 +25,8 @@ Chain Signatures lets a NEAR account control addresses on other chains through N
 
 ## Key findings
 
-* **Works:** ≈6.4M<sup>[1]</sup> signature requests since August 2024; ≈99.9%<sup>[3]</sup> of sampled requests end with a successful signature callback (latency and downtime are not measured).
-* **Narrow:** the three largest requesters hold ≈74%<sup>[18]</sup> of all requests; only 7<sup>[19]</sup> requesters hold at least one percent of all requests over the whole period (44<sup>[20]</sup> reached one percent in at least one single month).
+* **Works:** ≈6.4M<sup>[3]</sup> signature requests since August 2024; ≈99.9%<sup>[1]</sup> of sampled requests end with a successful signature callback (latency and downtime are not measured).
+* **Narrow:** the three largest requesters hold ≈74%<sup>[2]</sup> of all requests; only 7<sup>[19]</sup> requesters hold at least one percent of all requests over the whole period (44<sup>[20]</sup> reached one percent in at least one single month).
 * **One integration drove the boom:** `fast-auth.near` (FastAuth logins issued by the Sweat Foundation's domain) added ≈346k<sup>[21]</sup> requests in April 2026; the Sweat Wallet product ends "in its present form" on 30 December 2026 ([source](https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/)).
 * **The largest third-party app left:** Relay's allocator (≈11%<sup>[22]</sup> of all requests, peak ≈189k<sup>[23]</sup> in 2026-04<sup>[24]</sup>) has no requests in the sample since 2026-08<sup>[25]</sup>.
 * **Bridges are the signal to watch:** ≈62k<sup>[26]</sup> (May 2026), ≈72k<sup>[27]</sup>, ≈156k<sup>[28]</sup>, ≈276k<sup>[29]</sup>, a peak of ≈303k<sup>[30]</sup> (September) and ≈237k<sup>[31]</sup> (October 2026, -22%<sup>[32]</sup> from the peak), out of ≈267k<sup>[33]</sup> structural requests that month.
@@ -57,7 +61,7 @@ All of these are keyless. Only `npm run verify` and the dashboard button "Check 
 | `npm run reproduce` | Offline. Rebuilds `out/metrics.json`, `out/scenarios.json`, THESIS.md, README.md and the submission drafts from committed data. It prints `out/metrics.json written. sha256` followed by 6e4ce7ca28a067c480c9759964aa93a6b4dac9b87b9dba492adf0a43e785fb0c<sup>[37]</sup>. Afterwards `git status` shows no changes. |
 | `npm run check:data` | `data/MANIFEST.sha256` is OK with 38<sup>[38]</sup> files checked. The raw-sample manifest lists 531<sup>[39]</sup> files, which are not committed (they are reported as not downloaded). |
 | `npm run verify -- --sample 50` | Takes several minutes. It re-checks a seeded random sample of transactions with sign receipts against an archival RPC node and NearBlocks (signer, block height, sign receipts). Last run: 50<sup>[40]</sup>/50<sup>[41]</sup> verified (archival RPC 50<sup>[42]</sup>/50<sup>[41]</sup>, NearBlocks 50<sup>[43]</sup>/50<sup>[41]</sup>); the output is in `docs/evidence/verify/`. It exits with an error on any mismatch. The default seed always picks the same transactions; add `--seed <any number>` for a different draw. It checks our parsing of sampled transactions, not the request estimate: it does not search for sign receipts we missed and does not compare the fulfilled flag. |
-| `npm run build:site && npm run site`, open `http://127.0.0.1:4173/` | The first block shows ≈6.4M<sup>[1]</sup>, which is `totals.requests_est` in `out/metrics.json`. "Hide the suspected benchmark" removes the hatched series. In "The boom", the sliders change the scenario; hovering a bubble in "Who" shows its share with the 95% interval, label confidence and evidence count. |
+| `npm run build:site && npm run site`, open `http://127.0.0.1:4173/` | The first block shows ≈6.4M<sup>[3]</sup>, which is `totals.requests_est` in `out/metrics.json`. "Hide the suspected benchmark" removes the hatched series. In "The boom", the sliders change the scenario; hovering a bubble in "Who" shows its share with the 95% interval, label confidence and evidence count. |
 | In the dashboard, press "Check a random transaction" | A sampled transaction is looked up in your browser at a public archival RPC node (`archival-rpc.mainnet.fastnear.com`; NearBlocks as fallback) and compared with our data: signer, block height and the requester and status of its sign receipt, each marked ✓ or ✗, with a NearBlocks link. Offline or blocked, it says so and shows the `npm run verify` command. Network is used only after the click. |
 | `npm run check:predictions` | The four falsification tests of THESIS.md (`config/predictions.json`) print "pending until 2027-04-01" with the days left; after that date (and a data refresh) they are evaluated against `out/metrics.json`. |
 | Edit `assumptions.yaml` (for example add a growth rate to `structural_monthly_growth`), then `npm run reproduce` and `npm run build:site` | `out/scenarios.json` gains the new combinations, and the dashboard's scenario table and the precomputed list reflect the new combinations (the sliders already cover any value). Undo with `git checkout assumptions.yaml && npm run reproduce && npm run build:site`. |
@@ -130,24 +134,24 @@ MIT, see [LICENSE](LICENSE). Licenses of the vendored fonts are in `site/vendor/
 
 All numbers above are generated by `npm run reproduce` from committed data (this file is rendered from a template listed in config/rendered-docs.json). Footnotes give the source and path:
 
-1. `out/metrics.json` → `totals.requests_est`
-2. `out/metrics.json` → `totals.series_requests_est.excluding_benchmark`
-3. `out/metrics.json` → `totals.fulfilled_rate`
-4. `out/metrics.json` → `derived.bridges_peak_month.month`
-5. `out/metrics.json` → `totals.top_requesters[requester=fast-auth.near].share_of_requests`
-6. `out/metrics.json` → `totals.top_requesters[requester=tx-bench.near].share_of_requests`
-7. `out/metrics.json` → `comparisons.network_scale.totals.v1signer_share_of_near_txs`
-8. `out/metrics.json` → `comparisons.network_scale.from`
-9. `out/metrics.json` → `comparisons.network_scale.to`
-10. `out/metrics.json` → `comparisons.network_scale.months."2026-10".v1signer_share_of_near_txs`
-11. `out/metrics.json` → `comparisons.network_scale.months."2026-03".near_txs_nearblocks`
-12. `out/metrics.json` → `comparisons.network_scale.months."2026-04".near_txs_nearblocks`
-13. `out/metrics.json` → `comparisons.network_scale.cross_check.fastnear_over_nearblocks_min`
-14. `out/metrics.json` → `comparisons.network_scale.cross_check.fastnear_over_nearblocks_max`
-15. `out/metrics.json` → `derived.top3_share_lowest_month.value`
-16. `out/metrics.json` → `derived.requesters_ge_1pct_highest_month.value`
-17. `out/metrics.json` → `derived.top3_share_lowest_month.month`
-18. `out/metrics.json` → `totals.concentration.top3_share`
+1. `out/metrics.json` → `totals.fulfilled_rate`
+2. `out/metrics.json` → `totals.concentration.top3_share`
+3. `out/metrics.json` → `totals.requests_est`
+4. `out/metrics.json` → `totals.series_requests_est.excluding_benchmark`
+5. `out/metrics.json` → `derived.bridges_peak_month.month`
+6. `out/metrics.json` → `totals.top_requesters[requester=fast-auth.near].share_of_requests`
+7. `out/metrics.json` → `totals.top_requesters[requester=tx-bench.near].share_of_requests`
+8. `out/metrics.json` → `comparisons.network_scale.totals.v1signer_share_of_near_txs`
+9. `out/metrics.json` → `comparisons.network_scale.from`
+10. `out/metrics.json` → `comparisons.network_scale.to`
+11. `out/metrics.json` → `comparisons.network_scale.months."2026-10".v1signer_share_of_near_txs`
+12. `out/metrics.json` → `comparisons.network_scale.months."2026-03".near_txs_nearblocks`
+13. `out/metrics.json` → `comparisons.network_scale.months."2026-04".near_txs_nearblocks`
+14. `out/metrics.json` → `comparisons.network_scale.cross_check.fastnear_over_nearblocks_min`
+15. `out/metrics.json` → `comparisons.network_scale.cross_check.fastnear_over_nearblocks_max`
+16. `out/metrics.json` → `derived.top3_share_lowest_month.value`
+17. `out/metrics.json` → `derived.requesters_ge_1pct_highest_month.value`
+18. `out/metrics.json` → `derived.top3_share_lowest_month.month`
 19. `out/metrics.json` → `totals.concentration.requesters_ge_1pct`
 20. `out/metrics.json` → `totals.concentration.requesters_ge_1pct_any_month`
 21. `out/metrics.json` → `months[2026-04].drivers_requests."fast-auth.near"`
