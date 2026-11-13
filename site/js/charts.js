@@ -10,6 +10,13 @@ import { monthShort } from "./format.js";
 const clamp = (x, a, b) => Math.min(b, Math.max(a, x));
 const easeOut = (t) => 1 - (1 - t) ** 3;
 const easeInOut = (t) => (t < 0.5 ? 4 * t * t * t : 1 - (-2 * t + 2) ** 3 / 2);
+/** Resolves when the page is really on screen: tab visible, fonts in, first frames painted, plus an optional pause. */
+export function whenShown(delay = 0) {
+  const visible = () => (document.visibilityState === "visible" ? Promise.resolve() : new Promise((r) => document.addEventListener("visibilitychange", function f() { if (document.visibilityState === "visible") { document.removeEventListener("visibilitychange", f); r(); } })));
+  const fonts = document.fonts?.ready ? Promise.race([document.fonts.ready, new Promise((r) => setTimeout(r, 700))]) : Promise.resolve();
+  const frames = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)));
+  return visible().then(() => fonts).then(frames).then(() => new Promise((r) => setTimeout(r, delay)));
+}
 export const reducedMotion = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
 /** Label side: the requested one, flipped when the (nowrap) text would run out of the chart. ~6.3px per character at the label size. */
 const sideFor = (want, x, W, text, sub) => {
@@ -62,9 +69,10 @@ export function smoothPath(pts, floor = Infinity, ceil = -Infinity, smooth = tru
 export function tween(ms, fn, ease = easeInOut) {
   let raf = 0, stopped = false;
   const done = new Promise((res) => {
-    const t0 = performance.now();
+    let t0 = null; // the clock starts at the first painted frame, so a slow start or a hidden tab never eats the animation
     const step = (now) => {
       if (stopped) return res(false);
+      if (t0 === null) t0 = now;
       const t = clamp((now - t0) / ms, 0, 1);
       fn(ease(t));
       if (t < 1) raf = requestAnimationFrame(step); else res(true);
@@ -337,7 +345,7 @@ export function createHeroStroke(host, { months, values, tailTo = null, events =
   render();
   new ResizeObserver(() => { if (Math.round(host.clientWidth) !== W) render(); }).observe(host);
   return {
-    play() { if (started) return; started = true; if (reducedMotion()) { progress = 1; paint(); return; } tween(2100, (t) => { progress = t; paint(); }, easeOut); },
+    play() { if (started) return; started = true; if (reducedMotion()) { progress = 1; paint(); return; } tween(2800, (t) => { progress = t; paint(); }, easeInOut); },
     get width() { return W; },
   };
 }

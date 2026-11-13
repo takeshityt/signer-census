@@ -2,7 +2,7 @@
 // Texts are templates around those numbers. Colors and motion live in css/style.css and js/charts.js.
 import { compact, approx, precise, pct, approxPct, range, rangePct, int, monthLabel, dayLabel } from "./format.js";
 import { inline, esc } from "./md.js";
-import { createChart, createHeroStroke, tween, reducedMotion } from "./charts.js";
+import { createChart, createHeroStroke, tween, reducedMotion, whenShown } from "./charts.js";
 import {
   headline, volumeSeries, boomSeries, fulfilledSeries, bridgeStack, destinationLines, timelineEvents, requesterRows, requesterName, requesterTone, splitWhy,
   chainFamilies, scenarioOptions, scenarioChart, categoryName, fullMonths, heroStats,
@@ -313,5 +313,5 @@ document.querySelectorAll(".chapter").forEach((s) => navIo.observe(s));
 
 document.documentElement.dataset.ready = "1";
 document.documentElement.dataset.readyMs = String(Math.round(performance.now()));
-stroke.play();
-countUp();
+if (!reducedMotion() && $("count-req")) $("count-req").textContent = "≈0"; // starts at zero, counts up once the page is on screen
+whenShown(350).then(() => { stroke.play(); countUp(); });

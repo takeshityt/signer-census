@@ -14,7 +14,7 @@
   --display: "Newsreader", "Iowan Old Style", Georgia, "Times New Roman", serif;
   --text: "Schibsted Grotesk", ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
   --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
-  --measure: 40rem; --wide: 72rem;
+  --measure: 40rem; --wide: 92rem;
 }
 @media (prefers-color-scheme: dark) {
   :root:not([data-theme="light"]) {
@@ -41,7 +41,7 @@ a:hover { text-decoration-thickness: 2px; }
 :focus-visible { outline: 3px solid var(--focus); outline-offset: 2px; border-radius: 3px; }
 .skip { position: absolute; top: 0; left: 0; background: var(--ink); color: var(--paper); padding: 0.6rem 1rem; z-index: 40; transform: translateY(-120%); }
 .skip:focus { transform: none; }
-.wrap { max-width: var(--wide); margin-inline: auto; padding-inline: max(16px, 4vw); }
+.wrap { width: 100%; max-width: var(--wide); margin-inline: auto; padding-inline: clamp(16px, 5vw, 80px); }
 .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; }
 code, pre { font-variant-ligatures: none; }
 code { font-family: var(--mono); font-size: 0.84em; background: color-mix(in srgb, var(--ink) 7%, transparent); padding: 0.06em 0.26em; border-radius: 3px; overflow-wrap: anywhere; }
@@ -64,7 +64,7 @@ code { font-family: var(--mono); font-size: 0.84em; background: color-mix(in srg
 
 /* hero */
 .hero { padding-block: clamp(2rem, 5vw, 4rem) clamp(2rem, 5vw, 3.5rem); }
-h1 { font: 500 clamp(2.3rem, 5.4vw, 4.3rem)/1.03 var(--display); letter-spacing: -0.022em; margin: 0 0 1.2rem; max-width: 19ch; text-wrap: balance; font-optical-sizing: auto; }
+h1 { font: 500 clamp(2.3rem, 4.8vw, 4.9rem)/1.03 var(--display); letter-spacing: -0.022em; margin: 0 0 1.2rem; max-width: 17ch; text-wrap: balance; font-optical-sizing: auto; }
 .deck { font-size: clamp(1.08rem, 1.9vw, 1.28rem); line-height: 1.45; max-width: 40rem; margin: 0 0 clamp(1.4rem, 3vw, 2rem); color: var(--muted); }
 .deck strong { color: var(--ink); font-weight: 600; }
 .stroke { margin: 0 0 clamp(1.4rem, 3vw, 2.2rem); }
@@ -88,6 +88,15 @@ h1 { font: 500 clamp(2.3rem, 5.4vw, 4.3rem)/1.03 var(--display); letter-spacing:
 .stats .count { display: inline-grid; }
 .stats .count > span { grid-area: 1 / 1; }
 .stats .count .ghost { visibility: hidden; }
+
+/* wide screens: headline left, the signature stroke right and above the fold (so the pen draws where it is seen), numbers below */
+@media (min-width: 1100px) {
+  .hero { display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); column-gap: clamp(2rem, 5vw, 5rem); align-items: end; }
+  .hero > h1 { grid-column: 1; grid-row: 1; max-width: 14ch; align-self: start; }
+  .hero > .deck { grid-column: 1; grid-row: 2; }
+  .hero > .stroke { grid-column: 2; grid-row: 1 / span 2; margin: 0; align-self: center; }
+  .hero > .stats { grid-column: 1 / -1; grid-row: 3; margin-top: clamp(2rem, 4vw, 3.5rem); }
+}
 
 /* chapters */
 .chapter { padding-block: clamp(3.5rem, 8vw, 6.5rem) 0; }
@@ -155,7 +164,7 @@ h3 { font: 650 1.3rem/1.25 var(--text); letter-spacing: -0.012em; margin: 3.2rem
 .more[open] > summary { margin-bottom: 0.5rem; }
 
 /* who: ranked share bars */
-.ranked { display: grid; max-width: 56rem; }
+.ranked { display: grid; max-width: min(100%, 76rem); }
 .rk { display: grid; grid-template-columns: minmax(0, 15rem) minmax(0, 1fr) 6.4rem; gap: 0.2rem 1.4rem; align-items: center; padding: 0.95rem 0; border-top: 1px solid var(--rule); }
 .rk:last-child { border-bottom: 1px solid var(--rule); }
 .rk .who { min-width: 0; }
@@ -191,7 +200,7 @@ h3 { font: 650 1.3rem/1.25 var(--text); letter-spacing: -0.012em; margin: 3.2rem
 .pull { margin: 3rem 0 0; padding: 0 0 0 1.3rem; border-left: 3px solid var(--fastauth); max-width: 40rem; }
 .pull p { font: 400 clamp(1.4rem, 3vw, 1.9rem)/1.28 var(--display); margin: 0 0 0.6rem; font-style: italic; letter-spacing: -0.01em; }
 .pull footer { font-size: 0.88rem; color: var(--muted); }
-.scenario { display: grid; gap: 1.1rem 2.2rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); margin: 1rem 0 0; max-width: 56rem; }
+.scenario { display: grid; gap: 1.1rem 2.2rem; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); margin: 1rem 0 0; max-width: min(100%, 76rem); }
 .scenario fieldset { border: 0; padding: 0; margin: 0; min-width: 0; }
 .scenario legend { font-weight: 600; font-size: 0.88rem; margin-bottom: 0.45rem; padding: 0; }
 .seg { display: flex; flex-wrap: wrap; gap: 0.35rem; }
@@ -205,7 +214,7 @@ h3 { font: 650 1.3rem/1.25 var(--text); letter-spacing: -0.012em; margin: 3.2rem
 .view { list-style: none; margin: 1.4rem 0 0; padding: 0; display: grid; gap: 1.1rem; max-width: var(--measure); }
 .view li { padding-left: 1.1rem; border-left: 3px solid var(--rule-strong); }
 .view li strong:first-child { display: block; font-size: 0.92rem; }
-.tests { display: grid; gap: 0; max-width: 52rem; }
+.tests { display: grid; gap: 0; max-width: min(100%, 76rem); }
 .tests details { border-top: 1px solid var(--rule); padding: 0.9rem 0; }
 .tests details:last-child { border-bottom: 1px solid var(--rule); }
 .tests summary { cursor: pointer; font: 500 1.08rem/1.45 var(--text); list-style: none; display: grid; grid-template-columns: 1fr auto; gap: 1rem; align-items: start; }
