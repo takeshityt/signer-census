@@ -4,7 +4,10 @@
 // Deterministic output (no timestamps) so the committed site/ can be compared with a fresh build.
 import { readFileSync, writeFileSync, mkdirSync, copyFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
+import { gunzipSync } from "node:zlib";
 import { sha256 } from "../src/lib/manifest.mjs";
+import { parseCsv } from "../src/lib/csv.mjs";
+import { pickTxs } from "../src/verify.mjs";
 import { parseLabels } from "../src/labels.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -51,6 +54,13 @@ export function exportLabels(text) {
   }));
 }
 
+/** Small deterministic list of sampled sign transactions for the "Verify it yourself" button (expected values come from our parsed sample). */
+export function verifySample(root, n = 120) {
+  const cfg = JSON.parse(readFileSync(join(root, "config/verify.json"), "utf8"));
+  const rows = parseCsv(gunzipSync(readFileSync(join(root, "data/derived/sample_parsed.csv.gz"))).toString());
+  return { note: "Seeded random sample of sign transactions from data/derived/sample_parsed.csv.gz. `signs` = sorted requester|status of the sign receipts on v1.signer in the tx.", seed: cfg.seed, rpc: cfg.rpc, nearblocks: cfg.nearblocks, txs: pickTxs(rows, n, cfg.seed) };
+}
+
 export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   for (const f of ["out/metrics.json", "out/scenarios.json", "THESIS.md"]) if (!existsSync(join(root, f))) throw new Error(`${f} is missing; run: npm run reproduce`);
   mkdirSync(join(siteDir, "data"), { recursive: true });
@@ -67,7 +77,12 @@ export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   emit("data/thesis.json", parseThesis(readFileSync(join(root, "THESIS.md"), "utf8")), "THESIS.md");
   copy("THESIS.md", "docs/THESIS.md");
   copy("docs/METHODOLOGY.md", "docs/METHODOLOGY.md");
-  for (const [pkg, file] of [["newsreader", "newsreader-latin-wght-normal"], ["schibsted-grotesk", "schibsted-grotesk-latin-wght-normal"]]) {
+  // browser copies of the pure, import-free modules the page shares with the command line (one implementation, tested)
+  mkdirSync(join(siteDir, "js"), { recursive: true });
+  for (const [from, to] of [["src/scenario-core.mjs", "js/scenario-core.js"], ["src/verify-core.mjs", "js/verify-core.js"], ["src/predictions.mjs", "js/predictions-core.js"]]) copy(from, to);
+  copy("config/predictions.json", "data/predictions.json");
+  emit("data/verify-sample.json", verifySample(root), "data/derived/sample_parsed.csv.gz (seeded draw, config/verify.json)");
+  for (const [pkg, file] of [["bricolage-grotesque", "bricolage-grotesque-latin-wght-normal"], ["geist", "geist-latin-wght-normal"], ["geist-mono", "geist-mono-latin-wght-normal"]]) {
     copy(`node_modules/@fontsource-variable/${pkg}/files/${file}.woff2`, `vendor/fonts/${file}.woff2`);
     copy(`node_modules/@fontsource-variable/${pkg}/LICENSE`, `vendor/fonts/LICENSE-OFL-${pkg}.txt`);
   }

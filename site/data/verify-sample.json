@@ -1,0 +1,1088 @@
+{
+ "note": "Seeded random sample of sign transactions from data/derived/sample_parsed.csv.gz. `signs` = sorted requester|status of the sign receipts on v1.signer in the tx.",
+ "seed": 20261112,
+ "rpc": "https://archival-rpc.mainnet.fastnear.com",
+ "nearblocks": "https://api.nearblocks.io",
+ "txs": [
+  {
+   "tx_hash": "8vx6ByaV5YzQ8fWhkDS4z27te4fqTPc5xyrNBJUXHDvt",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 160531118,
+   "month": "2025-08",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "8DME8tcv69G9yPmVJx9yqaGZPBiR3eZdhrB1XsYFXPo1",
+   "tx_signer": "agent-1740813190762.near",
+   "tx_block_height": 140926151,
+   "month": "2025-03",
+   "signs": [
+    "proxy-1740813177536.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "6Q9UaP67JGmPE2Mh6WeMeSCXcyFwM5YBXPjccftCf8nZ",
+   "tx_signer": "satoshi_optwo.near",
+   "tx_block_height": 154928849,
+   "month": "2025-07",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BvScmmtqadr2TTs4FRnEhRr7VcteE2ok7CGca52EnaBN",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 139900089,
+   "month": "2025-02",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "AparijN658dLaJSpXCRKdRxnpafhjxRaDqRZp5jUfsJ3",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 192669055,
+   "month": "2026-04",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "7EcjE5ASYfXLaQgto7KSPjoK9UK4KXJpDDTRoipzGLaQ",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 198791398,
+   "month": "2026-05",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "32JsTZ8GcuzgY4LbQfptVMPQxp38x8EFT3HSNPzFQH3j",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 217489062,
+   "month": "2026-09",
+   "signs": [
+    "zcash-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "C27x13NkTADeGvYecqeQjc2BuEEw3gxUtRb4yyP7H1mc",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 203024520,
+   "month": "2026-06",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "GzkrkryFQRHZRUfnungkub3tvvLX9EE2uNGXwBGSfWMi",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 223969970,
+   "month": "2026-11",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "Ecdp9R5r5yK4dsbCrsaq1MuE8MEPfeKoWBqvPMXbxBEP",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 138297096,
+   "month": "2025-01",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "A7CzN57hMymCYj2YDmF8GnPbPHmrmrZySn1TQ8Q1mcLT",
+   "tx_signer": "12d602abebd48bb531e534c221c751b6e2ccb0b4e37914591de55468ac345e12",
+   "tx_block_height": 190098972,
+   "month": "2026-03",
+   "signs": [
+    "reflect-adam-mainnet-agent-contract.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4bLHeopWfuYLPJteqpCoGcpTgYxVV3siCFtLdxVpZPcB",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 192951596,
+   "month": "2026-04",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "DLt51CGREYSTMdwHeM9d9kdyZFyL44g314SSVguuTWge",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 212278626,
+   "month": "2026-08",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "HoY2U9ngu7NryZTGy9YFdWWK3pT4vEo5X1wwftFBMm3A",
+   "tx_signer": "accountant-usdc-meteor-vaults.near",
+   "tx_block_height": 207315382,
+   "month": "2026-07",
+   "signs": [
+    "kernel-usdc.meteor-vaults.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BjZazFEuW2gTytCff5suC7rRaSrF5DecxDnUQqusGxtU",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 196634514,
+   "month": "2026-05",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "752c1eL6czQGjDXjCEy47V3d4kuRbeoewPmrqRvP8fMp",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 206585534,
+   "month": "2026-07",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "9p4N828cJo4dvY3VmN4rUXZ3wrbiPU2WcfP2cxzZLxFv",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 217227452,
+   "month": "2026-09",
+   "signs": [
+    "zcash-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BUadfHhRRK3MqGhdN1eaBwaVPhzhFX2eVD6sfcFc8xEK",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 221747495,
+   "month": "2026-10",
+   "signs": [
+    "zcash-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "DPQ6YaWchxGgu7eCxxK5c5fzC2Kb4e5e4AXJ1RGmVgU5",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 186464397,
+   "month": "2026-02",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "HuFJJnGAv8ixh5o4cJ4yUD2FDKdxysMbG4wqYqinZ2xt",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 190023228,
+   "month": "2026-03",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "BssdxRXnCsUzkagdJZ6dgU7rmRCmxXrF9QPxpVstLUZL",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 197936619,
+   "month": "2026-05",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "CXWSqWEqumSRMogXBNBqm9sgJLLqYFbnujdAPGGTZm85",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 207375803,
+   "month": "2026-07",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BgM47SiVv7f6RCfgud6Nd21uYLED1zWhNADxx93P2PGi",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 216927812,
+   "month": "2026-09",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "DkBiZraCLvLBcHchxbw7RenHo8uhwdainDErNhJ7ZPBZ",
+   "tx_signer": "enleap-test.near",
+   "tx_block_height": 146436424,
+   "month": "2025-05",
+   "signs": [
+    "enleap-test.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "2PUZP4bZjz1YiU5DFvQ8wa6ZrQMnAbj9xeLpWewhha3b",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 200255243,
+   "month": "2026-05",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "GHJhB1gwTVrP8YyCyABy1eopQLrji5QZsbrYYvnBGxK9",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 135871944,
+   "month": "2024-12",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "25HPh7LYwsTCaFLnfRoT4yHDEa6iq47fRYNGowJwwZsF",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 178166628,
+   "month": "2025-12",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "6zcFEUf6Kf84NkKVSxPqz49tEB4isktKsNh52AgfeBy5",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 170774032,
+   "month": "2025-11",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BN3xyiGZJmNoEbLHQ6SLjmCTWPgwha7YFw3CH4Gzz9AT",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 219796301,
+   "month": "2026-10",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "C9T9pJtz2ZUhkUZDusgjav63MXrkZc5QVLrRfDfx1jLT",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 154787238,
+   "month": "2025-07",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "EeAGJxCw4QSsQUxm1due6d7M3q9sXaDEVLUjJUC8YkgY",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 179829308,
+   "month": "2026-01",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "FBKvyfEN8nR2UMJiRZ4k9VST8C2PzynQM9jKp9z5y5zc",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 185885829,
+   "month": "2026-02",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BP2NNFLjXFwdTevFhtuURugBQHs85qQvrAr8EuEnP1fs",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 186360270,
+   "month": "2026-02",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FuqUCMAZGUibFoXsUhRwDSCP42kcUt4Tj9mNURBcPqux",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 188565664,
+   "month": "2026-03",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "4txL1ArnBj2igRRuQTd3QdgGapEBMzxpe7bBHNRA2yo8",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 206585816,
+   "month": "2026-07",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "H9ePqCpX1rGpoiFWCXEHeExzxUUeeiVWj3aUPYdByLmt",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 208298253,
+   "month": "2026-07",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "zv78TmaUaaLfPRMn6Fsz9B44fBMsK566CGkRCpVF6Uy",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 177070394,
+   "month": "2025-12",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3L6zE6BZ1LG7LHgxunpthtaFcHr8Qr9kcWcMR5mxFSoq",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 178652934,
+   "month": "2025-12",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "HXA1eysH9RNjYXKibSEYng9rtVHETnUtM2WxybYHV58",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 166491695,
+   "month": "2025-10",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4dxjVs5Sn1sdUscaNfkm5VXBKXXxC65wbbyGRzurp8Fu",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 205328351,
+   "month": "2026-07",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4cwwx3sfpCGiK4fEWmSXheAdW4ab51f15SgtTzz4ikyh",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 222871492,
+   "month": "2026-11",
+   "signs": [
+    "zcash-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "8CFc45iakicBofj37oFaY2AWJMSWP183oSrMg6ZahEVc",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 214173613,
+   "month": "2026-09",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "5mfdAQWPMrYaE87sUK6FnbLKU9AVt4vwaL66UgGZMomM",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 136345920,
+   "month": "2025-01",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "E7nmuBzmGySVRVVZ4LqpJYMXmNUicm8mHgcjbU628uS6",
+   "tx_signer": "6d411153c6cd51ce4d5e57e4f2a5feed75323deb5e6dd422db4407ac3fba8487",
+   "tx_block_height": 143696046,
+   "month": "2025-04",
+   "signs": [
+    "mindshare_contract.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FpeSvtqZFquDyiSbGL6hipmC7JTmo5szKNvSjcfiKmHc",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 169669049,
+   "month": "2025-10",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3ZpsXvxG19NDq5uv7tNRM4oaDGD6orTqUC5ZwHKPH4qx",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 183933534,
+   "month": "2026-02",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "FJwaX5YP3LhaJAvpVwKYKyw9AdPa8vd76QtmaJiX5X94",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 193658637,
+   "month": "2026-04",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "PuvVYYt6tcCsu4ASXwNYb8U8aQcxA9BXDHDRLV2tXtS",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 134128159,
+   "month": "2024-12",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "6as2nSb7c1hb6Ek4jN5awnNsPUuNJaNzCrM1jnmjnYuY",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 130812526,
+   "month": "2024-10",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "ADb3fB9FCr5wtYtDtBq7YHMeCQRLnDbrWbcJvCDpnBVy",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 128763449,
+   "month": "2024-09",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4HfFdQg1djsAmNrM4wNqMAapr77QmRJBwoGuGLw7pdke",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 222832160,
+   "month": "2026-11",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FT1bZzyskBXg2FmnbfhbNXSfMvLUTkUbrkSYFsdcbnQm",
+   "tx_signer": "serhii.near",
+   "tx_block_height": 127803087,
+   "month": "2024-09",
+   "signs": [
+    "serhii.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "49rvc8BEepmU16Yo5WiLvNTEAtzSqm7DJy5v15DxdEnk",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 216476779,
+   "month": "2026-09",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "8uoYnnKLTm4nHFwtBX7C9Wu4is2vandgYvW9bVHXLRg9",
+   "tx_signer": "serhii.near",
+   "tx_block_height": 124921450,
+   "month": "2024-08",
+   "signs": [
+    "serhii.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "CfU6ZUcNNHqtEsBWd1p5ua9QKA6iy4RrECdmvPXb4k5n",
+   "tx_signer": "satoshi_opthree.near",
+   "tx_block_height": 143832931,
+   "month": "2025-04",
+   "signs": [
+    "acc.ref-labs.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FXAkBbkS3bK8mzkXDtUaKGApRWiB4inmCEWYG6dmhLb5",
+   "tx_signer": "enochdanijel1.near",
+   "tx_block_height": 217227284,
+   "month": "2026-09",
+   "signs": [
+    "enochdanijel1.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "7yB7GBJ8onqCmHJLhS2JrpCwqN3rxfxdoCRJ4uJCSTQK",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 214173190,
+   "month": "2026-09",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BVZHzT7eQfEtsrttjKYAEDMLK2FiV9QmbnMB4zoB6hUs",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 200297092,
+   "month": "2026-05",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "7NLwHh6ybR1L3gU9AHQDNPUxedVgzCMzkfT7MdwrBw43",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 223129626,
+   "month": "2026-11",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "9FCtrnvEswZP1KG6Av8GV93Bkpbbfo3fCi6N9p2a9Uaa",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 207587221,
+   "month": "2026-07",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "C2H6i8acMkJuevLSoqJNXczbN8ck8RL37dcyyJXtDSuw",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 202215638,
+   "month": "2026-06",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BhdWDFdmnqGQEsoHVvyYmifXjHAN6CW5KL5YENo37gJe",
+   "tx_signer": "12d602abebd48bb531e534c221c751b6e2ccb0b4e37914591de55468ac345e12",
+   "tx_block_height": 192669300,
+   "month": "2026-04",
+   "signs": [
+    "reflect-adam-mainnet-agent-contract.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "AGaNGJhc8dy6T3goCxnNa7XK9N5hyMtddtot5d2ymZz2",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 147707491,
+   "month": "2025-05",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "HcEL6CVnu4BvC5tKe7N7YgHZGNJemj8fhDxdSfiW4EgA",
+   "tx_signer": "bithive-staging-relayer.near",
+   "tx_block_height": 134261994,
+   "month": "2024-12",
+   "signs": [
+    "stg1.btchive0.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FZAvawrqgGaZr1oDPghP9QZhwdNq7HUk3CBAaGrEjy1e",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 168585819,
+   "month": "2025-10",
+   "signs": [
+    "e12bc514e90e136cad10413669a6ccdeb9e3adb7.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "EC5c7GsSsMhqbEmy1KtS1tWY7pwEsiDjmnQfPxP8nrhP",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 162413161,
+   "month": "2025-09",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "EzeogBUuv3xhakNQT1tCyJQpNrTrCJPLcFMSekZ3pumY",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 224018812,
+   "month": "2026-11",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "9xhMU5Ha4KemXz4fR9PES2tsKgL8RyhmeUtVCaMxyDZz",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 180034370,
+   "month": "2026-01",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "HrGtW8WKZeZyme5XyRu9z3xZmvJkT58sxCxM5SvqvwsV",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 149297245,
+   "month": "2025-06",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "AYEQU8CiYmP3cPCMxNQG4cUYEciBqGCSBPA4cfiN3jpS",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 208364153,
+   "month": "2026-07",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "DPJp9rU1L4v6h8UpmerkTcBoWH7ioi8LEdQyn37nX3hF",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 200633800,
+   "month": "2026-05",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "ELwjb5LsDqN82oau5C298yDYZyyxFUhv3zKE1jZ8pm2t",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 180552819,
+   "month": "2026-01",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "445qeNJva6YdqynL426pHdu1nZHpNu4AcSqNcCsi6Cx8",
+   "tx_signer": "laika-runner.near",
+   "tx_block_height": 150359352,
+   "month": "2025-06",
+   "signs": [
+    "laikachainab.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "HP4HSjMa1WzHhmMztStuW8J8V2Zh7FRroFm1fdNHptbT",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 188565439,
+   "month": "2026-03",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "JBe9KxmbiqavxwJd4hkQs8VLbASWCkZSG6ZkgFt4XKGk",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 172938199,
+   "month": "2025-11",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3HcaeAC1t323h5TP4knTfGk2PJ8tBvCjCURVbas2p66H",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 220673671,
+   "month": "2026-10",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "87GzQGC4eGxh1RTB6ipvPcUpRvGAgpt6UPLJAxYzuhi1",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 205031332,
+   "month": "2026-07",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3Ymr5YaN14iu9pu49nYLQMdDEVVjuir7vym4wDN6K7Mf",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 218440491,
+   "month": "2026-10",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4NHr3gXa7v6hmcZhZLckf5mLqpTp3kcwgyX4zWNVQFP3",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 131207674,
+   "month": "2024-10",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "8zY3TE2nh5SdQRzJdRtJehEBXfjoEqLXCofSA7NsDgT",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 130373799,
+   "month": "2024-10",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "6kZzWR3rcaAdnq99n4Q7nBvzLaKUf4YoMe1cuQhusVXR",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 172620737,
+   "month": "2025-11",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "GqvShZ7CREi4npcJeFqvMuZh4s5KevsyQxmeuxwfHXBH",
+   "tx_signer": "satoshi_opfour.near",
+   "tx_block_height": 154928603,
+   "month": "2025-07",
+   "signs": [
+    "acc.ref-labs.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "EEFkQY4aESVfqVaaHRuQbyes3F3AYhFZ3A9bJrFXAwhk",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 141151942,
+   "month": "2025-03",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3JQLBm8FvyctNFGTnrNLDbjoysj4W8F6iokUgJ4Xi2Fr",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 188319126,
+   "month": "2026-03",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "Acmcf5pcmfkendcUYsb7Rf6T1sRJYv1zctbstCGPu7Yp",
+   "tx_signer": "1e47d8a642ea1e1d391c3df7ea48039ce509c3ab4393b0c1caa15467d608d814",
+   "tx_block_height": 148576863,
+   "month": "2025-05",
+   "signs": [
+    "v2.shadeagent.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3UoZUMgWJHhTQENsNk4gMwxXJKJpr6gN4HEyjwpNGajp",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 223129640,
+   "month": "2026-11",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "Fwo9iUjRMhAyPCWvf2UzTaAQjJLu2BQDTxPfCh1j2mSq",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 163247853,
+   "month": "2025-09",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "7msrpNuu93EGHvnRWJkexVWEtYWhmcMkfwYbPB8TUyan",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 201670447,
+   "month": "2026-06",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "34W8w1KTkUwtZJDRLN3tfmiwSTSQzBakoUMeUxqrjRVi",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 221756817,
+   "month": "2026-10",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "5fACoBhTxjJB4dsojYnewXv5roYDtAsSP4XDF5ndEHne",
+   "tx_signer": "60754e72b4805d24103dce9ffebb2b8c56c0df1b4ca2701b4a72caabbe5a9a24",
+   "tx_block_height": 182159497,
+   "month": "2026-01",
+   "signs": [
+    "kernel-usdt.meteor-vaults.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "68wBUVhcGD8Qp3LzbC36FcRBKdQUac85tgbiRqPut4L2",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 201700229,
+   "month": "2026-06",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BykYz9nUNURoMqBwP3gnBx5fmgUa7qhVUXVreVP8VUWG",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 223901248,
+   "month": "2026-11",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "DdmpHNr78P3StTmBmcXHMY3MB1p5BhixBod2WTFdyetA",
+   "tx_signer": "satoshi_opfour.near",
+   "tx_block_height": 166493194,
+   "month": "2025-10",
+   "signs": [
+    "acc.ref-labs.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4j6WxBAih7gvNCLNo7QWt4Bn3AgSSmkSZQWD8JzAi6hf",
+   "tx_signer": "laika-runner.near",
+   "tx_block_height": 145917994,
+   "month": "2025-05",
+   "signs": [
+    "laikachainab.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FdKKMZSpTe99aket6xukzt6ZuAwSAyo4d6uzH2j8Rca",
+   "tx_signer": "satoshi_opthree.near",
+   "tx_block_height": 143917940,
+   "month": "2025-04",
+   "signs": [
+    "acc.ref-labs.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "BAhr5AYk6iwBYtiYf94H8gP5HDs2em9XtC996HWyHfsR",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 128866732,
+   "month": "2024-09",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "GQgyXaqfTffn3jqfe635EMD97hNvy3e4HcwzLFniDFL7",
+   "tx_signer": "relay.aurora",
+   "tx_block_height": 200297092,
+   "month": "2026-05",
+   "signs": [
+    "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|Success"
+   ]
+  },
+  {
+   "tx_hash": "AQSLoZhBFPbfyp81LWASkP95SQB6ppHLbX9s9teGU4bE",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 153615182,
+   "month": "2025-07",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "6dtBDxytWjHihMpK8EGjrrDQTH2sGYACoVTfQdFnir21",
+   "tx_signer": "omni-relayer.bridge.near",
+   "tx_block_height": 222978100,
+   "month": "2026-11",
+   "signs": [
+    "omni.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FUDwe3kK82tVdAec9L7FwDc471okqT9nqyKbcCboubLP",
+   "tx_signer": "laika-runner.near",
+   "tx_block_height": 151497910,
+   "month": "2025-06",
+   "signs": [
+    "laikachainab.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "9hCj6m6MbYjyrYvGNPZ5s6cV5ym7t6z61ux2Nydg2qrY",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 200937980,
+   "month": "2026-06",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "HKc2bCCNN6K6KLBx3xFyZ6gWi7HJkRRLvN2KKZPfYJa",
+   "tx_signer": "357645786ef9dffec88a706aaffe65be11cd38891d488171ca582872441ba8f4",
+   "tx_block_height": 182580875,
+   "month": "2026-01",
+   "signs": [
+    "kernel-usdc.meteor-vaults.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "7z18hKWDTAkSUkodGKLpB7WK35nEVW8yYH5YjCHMKVga",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 223499192,
+   "month": "2026-11",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "231suYyscQp1t5hjCvyVNqmYsGR844CcBbvb3gEQcy3h",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 134139336,
+   "month": "2024-12",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "DjiaWzXA3TRxt7A1NSFfJjLEfXPM1EyvtzNJ8Mbpkrii",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 153198561,
+   "month": "2025-06",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3mg32jAhJbbabmmE2MrzvzwfGu13Hpzt1vqxsLuL3fRL",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 221756347,
+   "month": "2026-10",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "9A7bpVjXV3HnM4L7HUrzrBAqoxuHxWfpUMt7uBVDkgpT",
+   "tx_signer": "kelvintest.near",
+   "tx_block_height": 163242772,
+   "month": "2025-09",
+   "signs": [
+    "kelvintest.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "63s3jrVojo3FMkvz4XVnSQiRwSVT4EoTcmgqj7yd6xza",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 154321592,
+   "month": "2025-07",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "AyaqhjPZWWLXLW9thetrtmeENSPFh8XSLY3rBSUSCfYY",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 175181827,
+   "month": "2025-12",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "4YYZJvwSatAuR2sqNrR25Drnsg7A7tpbjfdq67drjeo3",
+   "tx_signer": "satoshi_optwo.near",
+   "tx_block_height": 166494998,
+   "month": "2025-10",
+   "signs": [
+    "btc-connector.bridge.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "A3wevee7oLXdBnt1rz93JZRHFCdoKEgFSgtfRk5qXmy7",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 128889830,
+   "month": "2024-09",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "C7oQwpZF2MpJX13W5JCb9sSJZcNtNP4NZ2iAr1cmEDfj",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 139915583,
+   "month": "2025-02",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "58qYnRgQVeqR4wb8yN4E7metxrhgx2NRVwuwgj9gFWNG",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 180723985,
+   "month": "2026-01",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "hso2hoVJTKARxkp6GRuGuk14XFSWErgRgY3BjbqdzFG",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 197455301,
+   "month": "2026-05",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "GUdA4eTAHdHGBTwEJUYRDN3NBFPBLtgyr8fpNsiG5wGw",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 152453460,
+   "month": "2025-06",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FTqankohpapmNYUSkgx8g9h6CwXviL3bjuW4691uCwhi",
+   "tx_signer": "tx-bench.near",
+   "tx_block_height": 182161497,
+   "month": "2026-01",
+   "signs": [
+    "tx-bench.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "FV5fEbJW7smTzPKBnSnoLqfipdYbhDeUKmLiniahDHwT",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 128901304,
+   "month": "2024-09",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3zLXrkQ5A3hREnLei3Cf7VSPR8JgowhH6YzrHbRiPsd4",
+   "tx_signer": "sweat-relayer.near",
+   "tx_block_height": 195987154,
+   "month": "2026-04",
+   "signs": [
+    "fast-auth.near|Success"
+   ]
+  },
+  {
+   "tx_hash": "3fGL8cXBW5djYDmV78JrhSg5fkG7TgWxumYVivp1Q8Ko",
+   "tx_signer": "satoshi_optwo.near",
+   "tx_block_height": 141341377,
+   "month": "2025-03",
+   "signs": [
+    "btc-connector.bridge.near|Failure"
+   ]
+  },
+  {
+   "tx_hash": "Cbf7iiWnVQNi8kg2pBxZgASLjpT6i3yBWukEdx12ZJiM",
+   "tx_signer": "ping-account.near",
+   "tx_block_height": 133979835,
+   "month": "2024-12",
+   "signs": [
+    "ping-account.near|Success"
+   ]
+  }
+ ]
+}

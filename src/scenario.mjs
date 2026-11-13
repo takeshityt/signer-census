@@ -1,6 +1,6 @@
 // Scenario model (NOT a forecast). Pure functions; inputs: baseline components from out/metrics.json + assumptions.yaml.
-const nextMonth = (m) => { const [y, mo] = m.split("-").map(Number); return mo === 12 ? `${y + 1}-01` : `${y}-${String(mo + 1).padStart(2, "0")}`; };
-export function monthsBetween(after, last) { const out = []; for (let m = nextMonth(after); m <= last; m = nextMonth(m)) out.push(m); return out; }
+import { project, monthsBetween } from "./scenario-core.mjs";
+export { project, monthsBetween };
 
 /** Baseline components of one month of metrics (as produced by reproduce.mjs). */
 export function baselineFrom(metrics, a) {
@@ -16,24 +16,14 @@ export function baselineFrom(metrics, a) {
 }
 
 export function runScenarios(base, a) {
-  const months = monthsBetween(base.month, a.horizon_end);
   const out = [];
+  let months = [];
   for (const r of a.fastauth_retention) for (const bm of a.benchmark) for (const g of a.structural_monthly_growth) {
-    const proj = {};
-    let cum = 0;
-    months.forEach((m, i) => {
-      const k = i + 1;
-      const structural = base.structural * (1 + g) ** k;
-      const fastauth = m <= a.fastauth_end_month ? base.fastauth : base.fastauth * r;
-      const benchmark = bm === "kept" ? base.benchmark : 0;
-      const total = structural + fastauth + benchmark;
-      cum += total;
-      proj[m] = { structural: Math.round(structural), fastauth: Math.round(fastauth), benchmark: Math.round(benchmark), total: Math.round(total) };
-    });
-    const last = proj[months.at(-1)];
+    const res = project(base, { retention: r, benchmark: bm, growth: g, horizon: a.horizon_end, endMonth: a.fastauth_end_month });
+    months = Object.keys(res.projection);
     out.push({ id: `fastauth${Math.round(r * 100)}_bench-${bm}_g${g >= 0 ? "+" : ""}${Math.round(g * 100)}`,
       assumptions: { fastauth_retention_after_end: r, benchmark: bm, structural_monthly_growth: g },
-      projection: proj, end_month: months.at(-1), end_month_total: last.total, end_month_vs_baseline: last.total / base.all - 1, cumulative_requests: Math.round(cum) });
+      projection: res.projection, end_month: res.end_month, end_month_total: res.end_month_total, end_month_vs_baseline: res.end_month_vs_baseline, cumulative_requests: res.cumulative_requests });
   }
   return { label: "SCENARIOS, not forecasts", baseline: base, horizon: { from: months[0], to: months.at(-1) }, scenarios: out };
 }

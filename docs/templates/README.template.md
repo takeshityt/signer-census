@@ -22,8 +22,9 @@ The full thesis, with evidence for and against, scenarios and the falsification 
 
 ## Dashboard
 
-* Hosted: https://takeshityt.github.io/signer-census/ (not live yet: `.github/workflows/pages.yml` deploys `site/` on every push to `main` once the repository is public and the author enables GitHub Pages with source "GitHub Actions").
-* Locally: `npm run build:site && npm run site`, then open `http://127.0.0.1:4173/`. The page reads only `site/data/*.json` (copies of `out/metrics.json` and `out/scenarios.json` with a `sha256` manifest); it makes no other network request.
+* Hosted: https://takeshityt.github.io/signer-census/ (`.github/workflows/pages.yml` deploys `site/` on every push to `main`).
+* Open data: `out/metrics.json` is published with the site at https://takeshityt.github.io/signer-census/data/metrics.json, free to use as a data source (it also lists its own `sha256` in `data/manifest.json`).
+* Locally: `npm run build:site && npm run site`, then open `http://127.0.0.1:4173/`. The page reads only `site/data/*.json` (copies of `out/metrics.json`, `out/scenarios.json` and the configs with a `sha256` manifest). It makes no other network request, except when you press "Check a random transaction" (see below).
 
 ## Quick start
 
@@ -39,7 +40,7 @@ npm run reproduce
 
 ## Do X → see Y
 
-All of these are keyless. Only `npm run verify` uses the network (public endpoints).
+All of these are keyless. Only `npm run verify` and the dashboard button "Check a random transaction" use the network (public endpoints).
 
 | Do | See |
 |---|---|
@@ -47,8 +48,10 @@ All of these are keyless. Only `npm run verify` uses the network (public endpoin
 | `npm run reproduce` | Offline. Rebuilds `out/metrics.json`, `out/scenarios.json`, THESIS.md, README.md and the submission drafts from committed data. It prints `out/metrics.json written. sha256` followed by {{r:metrics_sha256|raw}}. Afterwards `git status` shows no changes. |
 | `npm run check:data` | `data/MANIFEST.sha256` is OK with {{r:data_manifest_files|raw}} files checked. The raw-sample manifest lists {{r:raw_manifest_files|raw}} files, which are not committed (they are reported as not downloaded). |
 | `npm run verify -- --sample 50` | Takes several minutes. It re-checks a seeded random sample of transactions with sign receipts against an archival RPC node and NearBlocks (signer, block height, sign receipts). Last run: {{r:verify.verified|raw}}/{{r:verify.sample|raw}} verified (archival RPC {{r:verify.rpc_ok|raw}}/{{r:verify.sample|raw}}, NearBlocks {{r:verify.nearblocks_ok|raw}}/{{r:verify.sample|raw}}); the output is in `docs/evidence/verify/`. It exits with an error on any mismatch. The default seed always picks the same transactions; add `--seed <any number>` for a different draw. It checks our parsing of sampled transactions, not the request estimate: it does not search for sign receipts we missed and does not compare the fulfilled flag. |
-| `npm run build:site && npm run site`, open `http://127.0.0.1:4173/` | The hero shows ≈{{m:totals.requests_est|M1}}, which is `totals.requests_est` in `out/metrics.json`. The "Exclude the suspected benchmark" switch removes the hatched series. The scenario buttons change the projection. Checks and screenshots: `docs/evidence/dashboard/CHECKS.md`. |
-| Edit `assumptions.yaml` (for example add a growth rate to `structural_monthly_growth`), then `npm run reproduce` and `npm run build:site` | `out/scenarios.json` gains the new combinations, and the dashboard shows the new option in "Structural demand per month". Undo with `git checkout assumptions.yaml && npm run reproduce && npm run build:site`. |
+| `npm run build:site && npm run site`, open `http://127.0.0.1:4173/` | The first block shows ≈{{m:totals.requests_est|M1}}, which is `totals.requests_est` in `out/metrics.json`. "Hide the suspected benchmark" removes the hatched series. In "The boom", the sliders change the scenario; hovering a bubble in "Who" shows its share with the {{lit:95%}} interval, label confidence and evidence count. |
+| In the dashboard, press "Check a random transaction" | A sampled transaction is looked up in your browser at a public archival RPC node (`archival-rpc.mainnet.fastnear.com`; NearBlocks as fallback) and compared with our data: signer, block height and the requester and status of its sign receipt, each marked ✓ or ✗, with a NearBlocks link. Offline or blocked, it says so and shows the `npm run verify` command. Network is used only after the click. |
+| `npm run check:predictions` | The four falsification tests of THESIS.md (`config/predictions.json`) print "pending until {{lit:2027-04-01}}" with the days left; after that date (and a data refresh) they are evaluated against `out/metrics.json`. |
+| Edit `assumptions.yaml` (for example add a growth rate to `structural_monthly_growth`), then `npm run reproduce` and `npm run build:site` | `out/scenarios.json` gains the new combinations, and the dashboard's scenario table and the precomputed list reflect the new combinations (the sliders already cover any value). Undo with `git checkout assumptions.yaml && npm run reproduce && npm run build:site`. |
 
 Refreshing the data from the chain (slow, network, optional): `npm run monthly` (exact monthly totals), `npm run sample` and `npm run parse` (the cluster sample; a full re-download, see docs/METHODOLOGY.md "Refreshing the data"), `node scripts/network-totals.mjs` (whole-network transaction counts), then `npm run reproduce`.
 

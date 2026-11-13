@@ -233,3 +233,27 @@ export function splitWhy(bullet) {
   const m = /^(.*?)\s+(Why[ :][\s\S]*)$/.exec(bullet);
   return m ? { claim: m[1].trim(), why: m[2].trim() } : { claim: bullet.trim(), why: "" };
 }
+
+/** Chart arrays for a slider setting: `proj` is the result of project() (scenario-core.js); history = last `back` full months. */
+export function scenarioSeries(metrics, scenarios, proj, back = 8) {
+  const hist = fullMonths(metrics).slice(-back);
+  const pm = Object.keys(proj.projection);
+  const lead = Array(hist.length - 1).fill(null);
+  return {
+    months: [...hist.map((m) => m.month), ...pm], baselineMonth: scenarios.baseline.month,
+    history: [...hist.map((m) => m.series_requests_est.all.value), ...Array(pm.length).fill(null)],
+    total: [...lead, hist.at(-1).series_requests_est.all.value, ...pm.map((m) => proj.projection[m].total)],
+    structural: [...lead, scenarios.baseline.structural, ...pm.map((m) => proj.projection[m].structural)],
+    fastauth: [...lead, scenarios.baseline.fastauth, ...pm.map((m) => proj.projection[m].fastauth)],
+  };
+}
+
+/** One falsification test as short plain lines (numbers from config/predictions.json and metrics.derived, never typed here). */
+export function predictionLines(pred, metrics, fmt) {
+  const val = (c, month) => { const t = c.threshold_path ? c.threshold_path.replace("{month}", month).split(".").reduce((o, k) => o?.[k], metrics) : c.threshold; return t; };
+  return pred.any_of.map((c) => {
+    const f = fmt[c.fmt] ?? String;
+    const t = c.threshold_path ? pred.months.map((m) => f(val(c, m))).join(" / ") : f(c.threshold);
+    return c.text.replace("{t}", t);
+  });
+}

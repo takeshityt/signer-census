@@ -5,9 +5,9 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Signer Census: NEAR Chain Signatures, measured</title>
 <meta name="description" content="A reproducible, evidence-backed census of who uses NEAR Chain Signatures (the v1.signer MPC contract), with the numbers, the evidence and the commands to re-run it.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 rx=%276%27 fill=%27%2315191d%27/%3E%3Cpath d=%27M5 22 C9 8 12 8 14 18 S20 26 27 9%27 fill=%27none%27 stroke=%27%23f5f6f7%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
-<link rel="preload" href="vendor/fonts/newsreader-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="vendor/fonts/schibsted-grotesk-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%27http://www.w3.org/2000/svg%27 viewBox=%270 0 32 32%27%3E%3Crect width=%2732%27 height=%2732%27 fill=%27%23111315%27/%3E%3Cpath d=%27M5 22 C9 8 12 8 14 18 S20 26 27 9%27 fill=%27none%27 stroke=%27%23f7f7f6%27 stroke-width=%273%27 stroke-linecap=%27round%27/%3E%3C/svg%3E">
+<link rel="preload" href="vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
 <script>document.documentElement.classList.add("js");</script>
 </head>
@@ -17,111 +17,119 @@
   <div class="wrap topbar">
     <a class="brand" href="#top">Signer Census</a>
     <nav aria-label="Chapters" id="nav">
-      <a href="#works">It works</a><a href="#who">Who uses it</a><a href="#boom">The boom</a><a href="#bridges">Bridges</a><a href="#watch">What to watch</a><a href="#rerun">Re-run it</a><a href="#evidence">Evidence</a>
+      <a href="#works">It works</a><a href="#who">Who</a><a href="#boom">The boom</a><a href="#bridges">Bridges</a><a href="#wrong">Proof</a><a href="#verify">Verify</a><a href="#rerun">Re-run</a>
     </nav>
-    <button id="theme" type="button" aria-label="Color theme"></button>
+    <button id="theme" type="button"></button>
   </div>
 </header>
 
 <main id="main">
-  <section id="top" class="hero wrap" aria-labelledby="h1">
-    <h1 id="h1"></h1>
-    <p class="deck" id="deck"></p>
-    <figure class="stroke">
-      <div id="hero-stroke"></div>
-      <figcaption id="stroke-caption"></figcaption>
-    </figure>
-    <dl class="stats" id="facts"></dl>
+  <section id="top" class="hero" aria-labelledby="h1">
+    <div class="wrap">
+      <h1 id="h1"></h1>
+      <p class="deck" id="deck"></p>
+      <figure class="stroke">
+        <div id="hero-stroke"></div>
+        <figcaption class="sr-only" id="stroke-caption"></figcaption>
+      </figure>
+      <dl class="stats" id="facts"></dl>
+      <details class="more" id="hero-more"><summary>How to read these numbers</summary><div class="body" id="hero-notes"></div></details>
+    </div>
   </section>
 
   <section id="works" class="chapter wrap" aria-labelledby="h-works">
-    <h2 id="h-works"></h2>
-    <p class="lede" id="works-intro"></p>
-    <div class="controls"><label class="switch"><input type="checkbox" id="excl-bench"><span>Leave out the suspected benchmark</span></label></div>
-    <figure class="chartfig">
-      <div id="chart-volume"></div>
-      <ul class="key" id="key-volume"></ul>
-      <figcaption id="cap-volume"></figcaption>
-    </figure>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-volume"></div></details>
-    <h3 id="h-fulfilled"></h3>
-    <p class="note" id="fulfilled-intro"></p>
-    <figure class="chartfig short">
-      <div id="chart-fulfilled"></div>
-    </figure>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-fulfilled"></div></details>
+    <div class="ch">
+      <div class="ch-head"><h2 id="h-works"></h2><p class="sub" id="works-intro"></p></div>
+      <div class="ch-body">
+        <div class="controls"><label class="check"><input type="checkbox" id="excl-bench"><span>Hide the suspected benchmark</span></label></div>
+        <figure class="chartfig"><div id="chart-volume"></div><ul class="key" id="key-volume"></ul></figure>
+        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-volume"></div></details>
+        <h3 class="sectionhead" id="h-fulfilled"></h3>
+        <figure class="chartfig short"><div id="chart-fulfilled"></div></figure>
+        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-fulfilled"></div></details>
+        <details class="more"><summary>About this measure</summary><div class="body" id="works-notes"></div></details>
+      </div>
+    </div>
   </section>
 
   <section id="who" class="chapter wrap" aria-labelledby="h-who">
-    <h2 id="h-who"></h2>
-    <p class="lede" id="who-intro"></p>
-    <div id="who-list" class="ranked"></div>
-    <p class="note" id="who-note"></p>
+    <div class="ch">
+      <div class="ch-head"><h2 id="h-who"></h2><p class="sub" id="who-intro"></p></div>
+      <div class="ch-body">
+        <div id="bubbles"></div>
+        <div id="who-list" class="ranked"></div>
+        <details class="more"><summary>About these labels</summary><div class="body" id="who-notes"></div></details>
+      </div>
+    </div>
   </section>
 
   <section id="boom" class="chapter wrap" aria-labelledby="h-boom">
-    <h2 id="h-boom"></h2>
-    <p class="lede" id="boom-intro"></p>
-    <figure class="chartfig">
-      <div id="chart-boom"></div>
-      <ul class="key" id="key-boom"></ul>
-    </figure>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-boom"></div></details>
-    <blockquote class="pull" id="sunset-callout"></blockquote>
-    <h3 id="h-scenario">What could happen to the volume after that date</h3>
-    <p class="note" id="sunset-intro"></p>
-    <form class="scenario" id="scenario" aria-label="Scenario assumptions"></form>
-    <p class="result" id="scenario-result" aria-live="polite"></p>
-    <figure class="chartfig">
-      <div id="chart-scenario"></div>
-      <ul class="key" id="key-scenario"></ul>
-    </figure>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-scenario"></div></details>
-    <details class="more"><summary>How the scenarios work, and their simplifications</summary><p class="note" id="scenario-note"></p></details>
+    <div class="ch">
+      <div class="ch-head"><h2 id="h-boom"></h2><p class="sub" id="boom-intro"></p></div>
+      <div class="ch-body">
+        <figure class="chartfig"><div id="chart-boom"></div><ul class="key" id="key-boom"></ul></figure>
+        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-boom"></div></details>
+        <p class="note srcnote" id="sunset-source"></p>
+        <h3 class="sectionhead" id="h-scenario">After the end date</h3>
+        <form class="sliders" id="scenario" aria-label="Scenario assumptions"></form>
+        <p class="result" id="scenario-result" aria-live="polite"></p>
+        <figure class="chartfig"><div id="chart-scenario"></div><ul class="key" id="key-scenario"></ul></figure>
+        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-scenario"></div></details>
+        <details class="more"><summary>How the scenarios work</summary><div class="body"><p id="scenario-note"></p></div></details>
+      </div>
+    </div>
   </section>
 
   <section id="bridges" class="chapter wrap" aria-labelledby="h-bridges">
-    <h2 id="h-bridges"></h2>
-    <p class="lede" id="bridges-intro"></p>
-    <figure class="chartfig">
-      <div id="chart-bridges"></div>
-      <ul class="key" id="key-bridges"></ul>
-    </figure>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-bridges"></div></details>
-    <h3 id="h-chains"></h3>
-    <p class="note" id="chains-intro"></p>
-    <figure class="chartfig">
-      <div id="chart-chains"></div>
-      <ul class="key" id="key-chains"></ul>
-    </figure>
-    <details class="tableview"><summary>Show as table</summary><div class="scroll" id="table-chains"></div></details>
-    <details class="more"><summary>Where the signatures go, by chain family (whole period)</summary><div id="families" class="families"></div></details>
+    <div class="ch">
+      <div class="ch-head"><h2 id="h-bridges"></h2><p class="sub" id="bridges-intro"></p></div>
+      <div class="ch-body">
+        <figure class="chartfig"><div id="chart-bridges"></div><ul class="key" id="key-bridges"></ul></figure>
+        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-bridges"></div></details>
+        <h3 class="sectionhead" id="h-chains"></h3>
+        <figure class="chartfig"><div id="chart-chains"></div><ul class="key" id="key-chains"></ul></figure>
+        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-chains"></div></details>
+        <details class="more"><summary>Destinations over the whole period</summary><div id="families" class="families"></div><p class="note" id="chains-note"></p></details>
+      </div>
+    </div>
   </section>
 
-  <section id="watch" class="chapter wrap" aria-labelledby="h-watch">
-    <h2 id="h-watch">What to watch, and what would prove us wrong</h2>
-    <h3>What this means for a long-term NEAR view</h3>
-    <ul class="view" id="nearview"></ul>
-    <h3>What would prove us wrong</h3>
-    <p class="note" id="wrong-intro"></p>
-    <div class="tests" id="wrong"></div>
+  <section id="wrong" class="chapter wrap" aria-labelledby="h-wrong">
+    <div class="ch">
+      <div class="ch-head"><h2 id="h-wrong">What would prove us wrong</h2><p class="sub" id="wrong-intro"></p></div>
+      <div class="ch-body">
+        <div class="preds" id="preds"></div>
+        <details class="more"><summary>Rules in full, with the reasons</summary><div class="body" id="wrong-full"></div></details>
+        <details class="more"><summary>What this means for a long-term NEAR view</summary><div class="body"><ul class="view" id="nearview"></ul></div></details>
+      </div>
+    </div>
   </section>
 
-  <section id="rerun" class="chapter wrap" aria-labelledby="h-rerun">
-    <h2 id="h-rerun">Don’t take our word for it: re-run it</h2>
-    <p class="lede">Needs Node and nothing else: no account, no API key, no paid service.</p>
-    <div id="rerun-steps" class="steps"></div>
+  <section id="verify" class="chapter wrap" aria-labelledby="h-verify">
+    <div class="ch">
+      <div class="ch-head"><h2 id="h-verify">Verify it yourself</h2><p class="sub" id="verify-intro"></p></div>
+      <div class="ch-body">
+        <button class="vbtn" id="verify-btn" type="button">Check a random transaction</button>
+        <div class="vresult" id="verify-out" aria-live="polite"></div>
+      </div>
+    </div>
   </section>
 
-  <section id="evidence" class="chapter wrap" aria-labelledby="h-evidence">
-    <h2 id="h-evidence">Evidence and honest notes</h2>
-    <div id="honest-body" class="honest"></div>
+  <section id="rerun" class="rerun has-field-host">
+    <div class="wrap">
+      <div class="ch">
+        <div class="ch-head"><h2 id="h-rerun">Re-run it yourself</h2><p class="sub">Node and nothing else. No account, no key.</p></div>
+        <div class="ch-body"><div id="rerun-steps" class="steps"></div>
+          <details class="more"><summary>Evidence and honest notes</summary><div id="honest-body" class="honest"></div></details>
+        </div>
+      </div>
+    </div>
   </section>
 </main>
 
 <footer class="foot wrap" id="foot"></footer>
 
 <script type="module" src="js/main.js"></script>
-<noscript><p class="wrap">This page needs JavaScript to draw the charts. The numbers are in site/data/metrics.json and docs/THESIS.md.</p></noscript>
+<noscript><p class="wrap">This page needs JavaScript to draw the charts. The numbers are in data/metrics.json and docs/THESIS.md.</p></noscript>
 </body>
 </html>
