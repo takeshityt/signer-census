@@ -8,6 +8,7 @@ import { gunzipSync } from "node:zlib";
 import { sha256 } from "../src/lib/manifest.mjs";
 import { parseCsv } from "../src/lib/csv.mjs";
 import { pickTxs } from "../src/verify.mjs";
+import { clusterStats } from "../src/estimate.mjs";
 import { parseLabels } from "../src/labels.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -61,6 +62,22 @@ export function verifySample(root, n = 120) {
   return { note: "Seeded random sample of sign transactions from data/derived/sample_parsed.csv.gz. `signs` = sorted requester|status of the sign receipts on v1.signer in the tx.", seed: cfg.seed, rpc: cfg.rpc, nearblocks: cfg.nearblocks, txs: pickTxs(rows, n, cfg.seed) };
 }
 
+/** Monthly estimated requests of the largest requesters (point estimates = exact monthly tx total x sampled requests per tx), for the sparklines. */
+export function requesterMonthly(root) {
+  const metrics = JSON.parse(readFileSync(join(root, "out/metrics.json"), "utf8"));
+  const accounts = metrics.totals.top_requesters.map((r) => r.requester);
+  const clusters = clusterStats(parseCsv(gunzipSync(readFileSync(join(root, "data/derived/sample_parsed.csv.gz"))).toString()));
+  const out = Object.fromEntries(accounts.map((a) => [a, {}]));
+  for (const m of metrics.months) {
+    const list = clusters.filter((c) => c.month === m.month);
+    const n = list.reduce((a, c) => a + c.n_tx, 0);
+    if (!n) continue;
+    const f = m.tx_total.value / n;
+    for (const a of accounts) out[a][m.month] = Math.round(list.reduce((t, c) => t + (c.requesters[a] ?? 0), 0) * f);
+  }
+  return { note: "Point estimates per month (exact monthly tx total x sampled requests per tx), no intervals. Same method as out/metrics.json.", months: metrics.months.map((m) => m.month), accounts: out };
+}
+
 export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   for (const f of ["out/metrics.json", "out/scenarios.json", "THESIS.md"]) if (!existsSync(join(root, f))) throw new Error(`${f} is missing; run: npm run reproduce`);
   mkdirSync(join(siteDir, "data"), { recursive: true });
@@ -81,6 +98,7 @@ export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   mkdirSync(join(siteDir, "js"), { recursive: true });
   for (const [from, to] of [["src/scenario-core.mjs", "js/scenario-core.js"], ["src/verify-core.mjs", "js/verify-core.js"], ["src/predictions.mjs", "js/predictions-core.js"]]) copy(from, to);
   copy("config/predictions.json", "data/predictions.json");
+  emit("data/requester-monthly.json", requesterMonthly(root), "data/derived/sample_parsed.csv.gz + out/metrics.json");
   emit("data/verify-sample.json", verifySample(root), "data/derived/sample_parsed.csv.gz (seeded draw, config/verify.json)");
   for (const [pkg, file] of [["bricolage-grotesque", "bricolage-grotesque-latin-wght-normal"], ["geist", "geist-latin-wght-normal"], ["geist-mono", "geist-mono-latin-wght-normal"]]) {
     copy(`node_modules/@fontsource-variable/${pkg}/files/${file}.woff2`, `vendor/fonts/${file}.woff2`);

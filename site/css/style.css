@@ -180,26 +180,27 @@ h3 { font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.02em; }
 .more .body p { margin: 0.4rem 0; }
 .more .body ul { padding-left: 1.1rem; margin: 0.4rem 0; }
 
-/* who: bubbles (area = share) and a compact ranking */
-.bubbles { position: relative; width: 100%; }
-.bubbles svg { display: block; width: 100%; overflow: visible; }
-.bubble { cursor: pointer; outline: none; }
-.bubble .disc { fill: color-mix(in srgb, var(--c) 16%, var(--paper)); stroke: var(--c); stroke-width: 1.5; transition: fill 0.2s; }
-.bubble.t-hatch .disc { fill: url(#hatch-b); stroke: var(--hatch-line); }
-.bubble:hover .disc, .bubble.on .disc, .bubble:focus-visible .disc { fill: color-mix(in srgb, var(--c) 32%, var(--paper)); }
-.bubble.t-hatch:hover .disc, .bubble.t-hatch.on .disc { fill: url(#hatch-b); stroke-width: 2.6; }
-.bubble:focus-visible .disc { stroke: var(--focus); stroke-width: 3; }
-.bubble text { paint-order: stroke; stroke: color-mix(in srgb, var(--paper) 85%, transparent); stroke-width: 3px; stroke-linejoin: round; fill: var(--ink); font: 500 0.78rem var(--text); text-anchor: middle; pointer-events: none; }
-.bubble text.big { font: 600 1.05rem var(--display); letter-spacing: -0.01em; }
-.bubble text.v { font: 0.72rem var(--mono); fill: var(--muted); }
-.btip { position: absolute; z-index: 6; pointer-events: none; background: var(--surface); border: 1px solid var(--rule-strong); border-radius: 2px; padding: 0.6rem 0.75rem; font-size: 0.82rem; line-height: 1.45; min-width: 13rem; max-width: 20rem; opacity: 0; transition: opacity 0.15s; }
-.btip.on { opacity: 1; }
-.btip b { display: block; font: 600 1rem var(--display); letter-spacing: -0.01em; }
-.btip .acct { font: 0.72rem var(--mono); color: var(--muted); display: block; overflow-wrap: anywhere; }
-.btip dl { margin: 0.4rem 0 0; display: grid; grid-template-columns: auto 1fr; gap: 0.1rem 0.8rem; font: 0.74rem var(--mono); }
-.btip dt { color: var(--muted); } .btip dd { margin: 0; text-align: right; }
+/* who: waffle (1 square = 1%) and a ranking with sparklines */
+.waffle { display: grid; grid-template-columns: minmax(0, 22rem) minmax(0, 1fr); gap: 1.6rem clamp(1.5rem, 4vw, 4rem); align-items: start; }
+.wf-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; width: 100%; max-width: 22rem; aspect-ratio: 1; }
+.sq { display: block; background: color-mix(in srgb, var(--c) 78%, var(--paper)); border-radius: 1px; transition: opacity 0.2s, outline-color 0.2s; }
+.sq.t-hatch { background: repeating-linear-gradient(45deg, var(--hatch-bg) 0 2px, var(--hatch-line) 2px 3px); }
+.sq.t-muted { background: var(--c-muted); }
+.js .wf-grid:not(.in) .sq { opacity: 0; }
+.js .wf-grid.in .sq { animation: sqin 0.35s ease both; animation-delay: calc(var(--n) * 12ms); }
+@keyframes sqin { from { opacity: 0; transform: scale(0.6); } to { opacity: 1; transform: none; } }
+.waffle.dim .sq:not(.hot), .waffle.dim .wf-legend li:not(.hot) { opacity: 0.28; }
+.sq.hot { outline: 1.5px solid var(--ink); outline-offset: 1px; }
+.wf-legend { list-style: none; margin: 0; padding: 0; display: grid; align-content: start; }
+.wf-legend li { display: grid; grid-template-columns: auto 1fr auto; gap: 0 0.7rem; align-items: baseline; padding: 0.55rem 0; border-top: 1px solid var(--rule); cursor: pointer; transition: opacity 0.2s; }
+.wf-legend li:last-child { border-bottom: 1px solid var(--rule); }
+.wf-legend .sw { align-self: center; border-radius: 1px; }
+.wf-name { font-weight: 600; } .wf-val { font: 600 0.95rem var(--mono); }
+.wf-sub { grid-column: 2 / 4; font: 0.72rem var(--mono); color: var(--muted); overflow-wrap: anywhere; }
+.wf-legend li.hot { background: color-mix(in srgb, var(--ink) 4%, transparent); }
+.wf-foot { grid-column: 1 / -1; margin: 0; max-width: 44rem; font-size: 0.8rem; }
 .ranked { display: grid; margin-top: 1.6rem; }
-.rk { display: grid; grid-template-columns: minmax(0, 1.4fr) minmax(0, 2fr) 5.6rem; gap: 0.15rem 1.4rem; align-items: center; padding: 0.75rem 0; border-top: 1px solid var(--rule); }
+.rk { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(0, 1.6fr) 8.5rem 4.6rem; gap: 0.15rem 1.4rem; align-items: center; padding: 0.75rem 0; border-top: 1px solid var(--rule); }
 .rk:last-child { border-bottom: 1px solid var(--rule); }
 .rk .who { min-width: 0; }
 .rk .nm { display: block; font-weight: 600; line-height: 1.25; }
@@ -208,6 +209,16 @@ h3 { font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.02em; }
 .rk .fill { position: absolute; left: 0; top: 0.4rem; bottom: 0.4rem; background: var(--c); width: 0; transition: width 0.9s cubic-bezier(.2,.7,.2,1) calc(var(--i, 0) * 60ms); }
 .rk.in .fill { width: var(--w); }
 .rk .fill.t-hatch { background: repeating-linear-gradient(45deg, var(--hatch-bg) 0 3px, var(--hatch-line) 3px 4px); }
+.rk .whisk { position: absolute; top: 0; bottom: 0; left: var(--lo); width: calc(var(--hi) - var(--lo)); opacity: 0; transition: opacity 0.4s 0.7s; }
+.rk.in .whisk { opacity: 1; }
+.rk .whisk::before { content: ""; position: absolute; left: 0; right: 0; top: 50%; height: 1px; background: var(--ink); }
+.rk .whisk::after { content: ""; position: absolute; left: 0; right: 0; top: 0.25rem; bottom: 0.25rem; border-inline: 1px solid var(--ink); }
+.spk { line-height: 0; }
+.spark { display: block; overflow: visible; }
+.sp-base { stroke: var(--rule); stroke-width: 1; fill: none; }
+.sp-line { fill: none; stroke: var(--c); stroke-width: 1.6; stroke-linejoin: round; stroke-linecap: round; }
+.sp-tail { fill: none; stroke: var(--c); stroke-width: 1.4; stroke-dasharray: 1.5 3; }
+.sp-pk { fill: var(--c); }
 .rk .val { text-align: right; font: 600 1rem var(--mono); }
 .rk .meta { grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: baseline; gap: 0.2rem 1.2rem; font-size: 0.82rem; color: var(--muted); }
 .rk > * { min-width: 0; }
@@ -281,11 +292,16 @@ h3 { font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.02em; }
 .js [data-reveal].in { opacity: 1; }
 @media (prefers-reduced-motion: reduce) {
   .js [data-reveal] { opacity: 1; transition: none; }
+  .js .wf-grid:not(.in) .sq { opacity: 1; }
+  .js .wf-grid.in .sq { animation: none; }
+  .rk .whisk { opacity: 1; }
   .rk .fill, .ann-layer .ev, .ann-layer .dl, .hero-stroke .mk, .js[data-ready] main, .btip { transition: none; }
   .rk .fill { width: var(--w); }
   html { scroll-behavior: auto; }
 }
 @media (max-width: 900px) {
+  .waffle { grid-template-columns: minmax(0, 1fr); }
+  .wf-grid { max-width: 20rem; }
   .stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .stats > div:nth-child(3) { padding-left: 0; border-left: 0; }
   .stats > div:nth-child(n+3) { border-top: 1px solid var(--rule); }
@@ -300,8 +316,10 @@ h3 { font-size: 1.35rem; line-height: 1.2; letter-spacing: -0.02em; }
   .stats > div + div, .pred + .pred { border-top: 1px solid var(--rule); }
   .rk { grid-template-columns: minmax(0, 1fr) 4.8rem; }
   .rk .track { grid-column: 1 / -1; order: 3; }
+  .rk .spk { grid-column: 1 / -1; order: 4; }
+  .rk .spk .spark { width: 100%; height: 30px; }
   .rk .val { order: 2; }
-  .rk .meta { order: 4; }
+  .rk .meta { order: 5; }
   .families .row { grid-template-columns: 5.5rem 1fr 6.4rem; }
   .top nav { gap: 1rem; }
 }

@@ -3,7 +3,8 @@
 import { compact, approx, precise, pct, approxPct, range, rangePct, int, monthLabel, dayLabel } from "./format.js";
 import { inline, esc } from "./md.js";
 import { createChart, createHeroStroke, tween, reducedMotion, whenShown } from "./charts.js";
-import { createBubbles } from "./bubbles.js";
+import { createWaffle, waffleGroups } from "./waffle.js";
+import { sparkline } from "./spark.js";
 import { createPlusField } from "./plus-field.js";
 import { setupVerify } from "./verify-ui.js";
 import { project } from "./scenario-core.js";
@@ -15,7 +16,7 @@ import {
 
 const $ = (id) => document.getElementById(id);
 const getJSON = (f) => fetch(`data/${f}`).then((r) => { if (!r.ok) throw new Error(`cannot load data/${f}`); return r.json(); });
-const [metrics, scenarios, labels, verify, thesis, manifest, predictions, vsample] = await Promise.all(["metrics.json", "scenarios.json", "labels.json", "verify.json", "thesis.json", "manifest.json", "predictions.json", "verify-sample.json"].map(getJSON));
+const [metrics, scenarios, labels, verify, thesis, manifest, predictions, vsample, rmonthly] = await Promise.all(["metrics.json", "scenarios.json", "labels.json", "verify.json", "thesis.json", "manifest.json", "predictions.json", "verify-sample.json", "requester-monthly.json"].map(getJSON));
 const hero = heroStats(metrics, verify);
 const E = timelineEvents(metrics, scenarios);
 const T = metrics.totals;
@@ -121,24 +122,29 @@ $("works-notes").innerHTML = `<p>Success means the callback of that sign receipt
 const rows = requesterRows(metrics, labels);
 const ge1 = T.concentration.requesters_ge_1pct.value, geAny = T.concentration.requesters_ge_1pct_any_month.value;
 $("h-who").textContent = `Three requesters make ${approxPct(T.concentration.top3_share.value)} of requests.`;
-$("who-intro").textContent = "Bubble area is share of all requests.";
+$("who-intro").textContent = "One square is one percent of all requests.";
 const dots = { high: 3, medium: 2, low: 1 };
 const labelText = (r) => (r.category === "unknown" && r.suspected ? "Unknown, suspected benchmark" : r.category ? categoryName(r.category) : "Not labeled");
 const shareText = (r) => approxPct(r.share, r.share < 0.1 ? 1 : 0);
-createBubbles($("bubbles"), {
-  aria: "Bubble chart of the largest requesters; the area of each bubble is its share of all requests",
-  items: rows.map((r) => ({
-    id: r.account, name: requesterName(r), account: r.account, share: r.share, tone: requesterTone(r), valueText: shareText(r),
-    detail: [["Share", shareText(r)], ["95% interval", rangePct(r.shareCi, 1)], ["Requests", approx(r.requests)], ["Label", r.confidence ? `${r.confidence} confidence` : "none"], ["Evidence", `${r.evidence.length} source${r.evidence.length === 1 ? "" : "s"}`]],
-  })),
+const WTONE = { "near-infra:bridge-omni": "bridge-dark", "near-infra:bridge-btc": "bridge-mid", "near-infra:bridge-zcash": "bridge-light" };
+const wgroups = waffleGroups(rows, 6, (r) => WTONE[r.category] ?? (requesterTone(r) === "muted" ? "base" : requesterTone(r)), requesterName);
+createWaffle($("waffle"), {
+  groups: wgroups,
+  aria: "Waffle chart: 100 squares, each one percent of all requests, coloured by requester",
+  text: { shareText: (g) => approxPct(g.share, g.share < 0.1 ? 1 : 0), ciText: (g) => (g.ci ? `95% interval ${rangePct(g.ci, 1)}` : "") },
+  footnote: `Each square is 1% of all requests. Squares are rounded by the largest-remainder method so the grid sums to exactly 100: ${wgroups.map((g) => `${g.name} ${g.squares}`).join(", ")}. Exact shares and 95% intervals are in the legend and the list below.`,
 });
+const sparkLabels = rmonthly.months.map(monthLabel);
 const evidenceList = (ev) => `<ul>${ev.map((e) => `<li>${esc(e.claim)} <a href="${esc(e.url)}" rel="noopener noreferrer">source</a></li>`).join("")}</ul>`;
 function rankRow(r, k) {
-  const w = (r.share / Math.max(...rows.map((x) => x.share))) * 100;
+  const axisMax = Math.max(...rows.map((x) => x.shareCi?.[1] ?? x.share)) * 1.05;
+  const w = (r.share / axisMax) * 100, lo = ((r.shareCi?.[0] ?? r.share) / axisMax) * 100, hi = ((r.shareCi?.[1] ?? r.share) / axisMax) * 100;
+  const series = rmonthly.months.map((m) => rmonthly.accounts[r.account]?.[m] ?? 0);
   const note = [r.note ? `<p>${esc(r.note)}</p>` : "", r.integrator ? `<p><strong>Dominant integrator: ${esc(r.integrator.name)}</strong> (confidence ${esc(r.integrator.confidence)}). ${esc(r.integrator.note ?? "")}</p>${evidenceList(r.integrator.evidence)}` : "", r.evidence.length ? `<p><strong>Evidence for the label</strong></p>${evidenceList(r.evidence)}` : ""].join("");
-  return `<div class="rk" style="--i:${k};--w:${w.toFixed(2)}%">
+  return `<div class="rk" style="--i:${k};--w:${w.toFixed(2)}%;--lo:${lo.toFixed(2)}%;--hi:${hi.toFixed(2)}%">
     <div class="who"><span class="nm">${esc(requesterName(r))}</span><span class="acct">${esc(r.account)}</span></div>
-    <div class="track" role="img" aria-label="${esc(requesterName(r))}: ${approxPct(r.share, 1)} of requests, 95% interval ${esc(rangePct(r.shareCi, 1))}"><span class="fill t-${requesterTone(r)}"></span></div>
+    <div class="track" role="img" aria-label="${esc(requesterName(r))}: ${approxPct(r.share, 1)} of requests, 95% interval ${esc(rangePct(r.shareCi, 1))}"><span class="fill t-${requesterTone(r)}"></span><span class="whisk"></span></div>
+    <div class="spk t-${requesterTone(r)}">${sparkline(series, { labels: sparkLabels, partialLast: !!lastMonth.partial_month, fmt: approx })}</div>
     <div class="val">${shareText(r)}</div>
     <div class="meta"><span>${esc(labelText(r))}${r.owner ? ` · ${esc(r.owner)}` : ""}</span><span>${r.confidence ? `${esc(r.confidence)} confidence (${dots[r.confidence]}/3)` : "no label"}</span>
       ${note ? `<details><summary>Notes and ${r.evidence.length} source${r.evidence.length === 1 ? "" : "s"}</summary><div>${note}</div></details>` : ""}</div>
@@ -146,7 +152,7 @@ function rankRow(r, k) {
 }
 const TOP = 6;
 $("who-list").innerHTML = rows.slice(0, TOP).map(rankRow).join("") + (rows.length > TOP ? `<details class="more rk-more"><summary>All ${rows.length} requesters</summary>${rows.slice(TOP).map((r, k) => rankRow(r, k)).join("")}</details>` : "");
-$("who-notes").innerHTML = `<p>The requester is the account that called <code>sign</code>, not the transaction signer (those are mostly relayers). Only ${ge1} requesters hold 1% or more over the whole period; ${geAny} did so in at least one month. The ${rows.length} largest hold ${approxPct(rows.reduce((a, r) => a + r.share, 0))}. Every label has evidence links; confidence three of three means an official source or an on-chain fact names the owner.</p>`;
+$("who-notes").innerHTML = `<p>The requester is the account that called <code>sign</code>, not the transaction signer (those are mostly relayers). Only ${ge1} requesters hold 1% or more over the whole period; ${geAny} did so in at least one month. The ${rows.length} largest hold ${approxPct(rows.reduce((a, r) => a + r.share, 0))}. The bar is the share with its 95% interval; each sparkline is that requester’s estimated requests per month on its own scale (the dotted end is the partial month). Every label has evidence links; confidence three of three means an official source or an on-chain fact names the owner.</p>`;
 
 /* ------------------------------------------------------------------ chapter 3: the boom */
 const fa = rows.find((r) => r.account === "fast-auth.near");
