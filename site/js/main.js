@@ -313,12 +313,18 @@ $("foot").innerHTML = `Data: exact transaction counts as of block ${int(metrics.
 
 /* ------------------------------------------------------------------ motion: fade-in on scroll, ranked bars, nav highlight, the "+" fields */
 const reveal = [...document.querySelectorAll(".hero .wrap > *, .chapter .ch-head, .chapter .ch-body > *, .rerun .ch > *")];
-reveal.forEach((el) => el.setAttribute("data-reveal", ""));
-const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } }), { threshold: 0.08, rootMargin: "0px 0px -4% 0px" });
-reveal.forEach((el) => io.observe(el));
-const rkio = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("in"); rkio.unobserve(e.target); } }), { threshold: 0.3 });
-document.querySelectorAll(".rk").forEach((el) => rkio.observe(el));
-document.querySelector(".rk-more")?.addEventListener("toggle", (e) => { if (e.target.open) e.target.querySelectorAll(".rk").forEach((r) => r.classList.add("in")); });
+// Content is visible by default. Only elements still below the fold are hidden ("pending") until they scroll in; if the observer never fires, a timer reveals them.
+const canObserve = "IntersectionObserver" in window && !reducedMotion();
+reveal.forEach((el) => { el.setAttribute("data-reveal", ""); if (canObserve && el.getBoundingClientRect().top > innerHeight) el.classList.add("pending"); });
+const show = (el) => el.classList.remove("pending");
+if (canObserve) {
+  const io = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { show(e.target); io.unobserve(e.target); } }), { threshold: 0.08, rootMargin: "0px 0px -4% 0px" });
+  reveal.forEach((el) => io.observe(el));
+  setTimeout(() => reveal.forEach(show), 8000);
+}
+const rkio = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) { e.target.classList.add("play"); rkio.unobserve(e.target); } }), { threshold: 0.3 });
+if (!reducedMotion()) document.querySelectorAll(".rk").forEach((el) => rkio.observe(el));
+document.querySelector(".rk-more")?.addEventListener("toggle", (e) => { if (e.target.open && !reducedMotion()) e.target.querySelectorAll(".rk").forEach((r) => r.classList.add("play")); });
 const navLinks = [...document.querySelectorAll("#nav a")];
 const navIo = new IntersectionObserver((entries) => entries.forEach((e) => { if (e.isIntersecting) navLinks.forEach((a) => a.setAttribute("aria-current", String(a.getAttribute("href") === `#${e.target.id}`))); }), { rootMargin: "-30% 0px -60% 0px" });
 document.querySelectorAll("main section[id]").forEach((s) => navIo.observe(s));

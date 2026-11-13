@@ -9,7 +9,7 @@
 <link rel="preload" href="vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="vendor/fonts/geist-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="css/style.css">
-<script>document.documentElement.classList.add("js");</script>
+<script>document.documentElement.classList.add("js"); setTimeout(function () { document.documentElement.setAttribute("data-ready", document.documentElement.getAttribute("data-ready") || "late"); }, 6000); /* failsafe: never leave the page blank */</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>

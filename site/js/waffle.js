@@ -39,8 +39,8 @@ export function createWaffle(host, { groups, text, aria, footnote }) {
     el.addEventListener("focus", () => mark(el.dataset.g));
     el.addEventListener("blur", () => mark(pinned));
   }
-  // squares fill in sequence when the grid scrolls into view; instantly under reduced motion
+  // Progressive enhancement: the grid is complete and visible from the start. When it scrolls into view (and motion is allowed) the squares
+  // replay a short fill-in that starts from, and ends in, the normal visible state (CSS animation-fill backwards).
   const grid = host.querySelector(".wf-grid");
-  if (reducedMotion() || !("IntersectionObserver" in window)) grid.classList.add("in");
-  else new IntersectionObserver((es, io) => { if (es.some((e) => e.isIntersecting)) { grid.classList.add("in"); io.disconnect(); } }, { threshold: 0.3 }).observe(grid);
+  if (!reducedMotion() && "IntersectionObserver" in window) new IntersectionObserver((es, io) => { if (es.some((e) => e.isIntersecting)) { grid.classList.add("play"); io.disconnect(); } }, { threshold: 0.3 }).observe(grid);
 }
