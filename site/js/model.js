@@ -128,3 +128,132 @@ export function scenarioChart(metrics, scenarios, sel, back = 8) {
     fastauth: [...Array(hist.length - 1).fill(null), scenarios.baseline.fastauth, ...projMonths.map((m) => s.projection[m].fastauth)],
   };
 }
+
+/* ------------------------------------------------------------------ editorial additions (design branch) */
+
+/** The headline sentence is read from THESIS.md (section "Headline"), never retyped on the page. */
+export const headline = (thesis) => String(thesis.sections.headline.markdown).replace(/\*\*/g, "").trim();
+
+/** Volume view for the "it works" chart: everything in one neutral series, the suspected benchmark on top (hatched). */
+export function volumeSeries(metrics, { excludeBenchmark = false } = {}) {
+  const st = stackedSeries(metrics, { excludeBenchmark: false });
+  const bench = st.series.find((s) => s.id === "benchmark");
+  const others = st.series.filter((s) => s.id !== "benchmark");
+  const sum = (i) => others.reduce((a, s) => a + s.values[i], 0);
+  return {
+    months: st.months, partial: st.partial,
+    series: [
+      { id: "all", label: "Requests", tone: "base", values: st.months.map((_, i) => sum(i)), ci: metrics.months.map((m) => m.series_requests_est.excluding_benchmark.ci95) },
+      { id: "benchmark", label: "Suspected benchmark", tone: "hatch", values: bench.values, ci: bench.ci },
+    ].map((s) => (excludeBenchmark && s.id === "benchmark" ? { ...s, values: s.values.map(() => 0) } : s)),
+  };
+}
+
+/** Boom view: FastAuth (the focal series, bottom), everyone else (muted), suspected benchmark (hatched, top). */
+export function boomSeries(metrics, { excludeBenchmark = false } = {}) {
+  const st = stackedSeries(metrics, { excludeBenchmark: false });
+  const get = (id) => st.series.find((s) => s.id === id);
+  const fa = get("fastauth"), bench = get("benchmark");
+  const rest = st.series.filter((s) => s.id !== "fastauth" && s.id !== "benchmark");
+  return {
+    months: st.months, partial: st.partial,
+    series: [
+      { id: "fastauth", label: "FastAuth logins", tone: "fastauth", values: fa.values, ci: fa.ci },
+      { id: "rest", label: "Everyone else", tone: "muted", values: st.months.map((_, i) => rest.reduce((a, s) => a + s.values[i], 0)), ci: st.months.map(() => null) },
+      { id: "benchmark", label: "Suspected benchmark", tone: "hatch", values: bench.values.map((v) => (excludeBenchmark ? 0 : v)), ci: bench.ci },
+    ],
+  };
+}
+
+/** Callback success rate per month (a line), with its interval. */
+export function fulfilledSeries(metrics) {
+  return { months: metrics.months.map((m) => m.month), partial: metrics.months.map((m) => m.partial_month), values: metrics.months.map((m) => m.fulfilled_rate.value), ci: metrics.months.map((m) => m.fulfilled_rate.ci95) };
+}
+
+/** Bridges as three stacked connectors (one green family) plus the total as a line is not needed: the sum is the stack. */
+export function bridgeStack(metrics) {
+  const b = bridgeSeries(metrics);
+  return { months: b.months, partial: b.partial, series: b.series.map((s, i) => ({ id: s.id, label: s.label, tone: ["bridge-dark", "bridge-mid", "bridge-light"][i], values: s.values, ci: s.ci })), total: b.bridgesTotal, structural: b.structural };
+}
+
+/** NEAR itself vs other chains as lines; "not known" is the remainder band. */
+export function destinationLines(metrics) {
+  const c = chainSeries(metrics);
+  const by = (id) => c.series.find((s) => s.id === id);
+  const near = by("near_native"), other = by("other_chains"), unk = by("unknown");
+  const full = fullMonths(metrics).map((m) => m.month);
+  // first full month in which other chains are ahead of NEAR itself and stay ahead to the end of the full months
+  let cross = null;
+  for (let i = c.months.length - 1; i >= 0; i--) {
+    if (!full.includes(c.months[i])) continue;
+    if (other.values[i] > near.values[i]) cross = i; else break;
+  }
+  return { months: c.months, partial: metrics.months.map((m) => m.partial_month), near, other, unknown: unk, crossover: cross === null ? null : { month: c.months[cross], index: cross, near: near.values[cross], other: other.values[cross] } };
+}
+
+/** Dated events used as annotations. Every date comes from the data or from a cited source URL (the release date is in its path). */
+export function timelineEvents(metrics, scenarios) {
+  const full = fullMonths(metrics);
+  const fa = (m) => m.drivers_requests["fast-auth.near"]?.value ?? 0;
+  let ramp = null;
+  for (let i = 1; i < full.length; i++) { const d = fa(full[i]) - fa(full[i - 1]); if (!ramp || d > ramp.jump) ramp = { month: full[i].month, jump: d, value: fa(full[i]) }; }
+  const exit = (metrics.derived.exits ?? [])[0] ?? null;
+  const rel = /\/(\d{4})\/(\d{2})\/(\d{2})\//.exec(scenarios.event.source);
+  const peak = metrics.derived.bridges_peak_month;
+  return {
+    fastauthRamp: ramp,
+    relayExit: exit ? { month: exit.zero_from, lastActive: exit.last_active_month, peak: exit.peak_value, peakMonth: exit.peak_month } : null,
+    sweatAnnounced: rel ? { date: `${rel[1]}-${rel[2]}-${rel[3]}`, source: scenarios.event.source } : null,
+    sweatEnds: { date: scenarios.event.date, source: scenarios.event.source },
+    bridgesPeak: { month: peak.month, value: peak.value },
+  };
+}
+
+/** Human-readable requester name (the account id stays visible next to it). */
+const SHORT_NAMES = { "near-infra:fastauth": "FastAuth logins", "near-infra:bridge-omni": "Omni bridge", "near-infra:bridge-btc": "Bitcoin bridge connector", "near-infra:bridge-zcash": "Zcash bridge connector" };
+export function requesterName(r) {
+  if (r.suspected) return "Suspected benchmark";
+  if (SHORT_NAMES[r.category]) return SHORT_NAMES[r.category];
+  const owner = r.owner ? r.owner.split(/ \(| per |;|,/)[0].trim() : "";
+  if (owner && !/^(not established|probably)/i.test(owner)) return owner;
+  if (r.category && r.category !== "unknown") return categoryName(r.category);
+  return r.category === "unknown" ? "Unknown account" : "Unlabeled account";
+}
+
+/** Tone (color family) of a requester bar: color follows the entity everywhere on the page. */
+export function requesterTone(r) {
+  if (r.category === "near-infra:fastauth") return "fastauth";
+  if (String(r.category).startsWith("near-infra:bridge")) return "bridge-dark";
+  if (r.suspected) return "hatch";
+  return "muted";
+}
+
+/** Splits a thesis bullet into the claim and the reasoning ("Why ..."), so the reasoning can sit in a collapsed block. */
+export function splitWhy(bullet) {
+  const m = /^(.*?)\s+(Why[ :][\s\S]*)$/.exec(bullet);
+  return m ? { claim: m[1].trim(), why: m[2].trim() } : { claim: bullet.trim(), why: "" };
+}
+
+/** Chart arrays for a slider setting: `proj` is the result of project() (scenario-core.js); history = last `back` full months. */
+export function scenarioSeries(metrics, scenarios, proj, back = 8) {
+  const hist = fullMonths(metrics).slice(-back);
+  const pm = Object.keys(proj.projection);
+  const lead = Array(hist.length - 1).fill(null);
+  return {
+    months: [...hist.map((m) => m.month), ...pm], baselineMonth: scenarios.baseline.month,
+    history: [...hist.map((m) => m.series_requests_est.all.value), ...Array(pm.length).fill(null)],
+    total: [...lead, hist.at(-1).series_requests_est.all.value, ...pm.map((m) => proj.projection[m].total)],
+    structural: [...lead, scenarios.baseline.structural, ...pm.map((m) => proj.projection[m].structural)],
+    fastauth: [...lead, scenarios.baseline.fastauth, ...pm.map((m) => proj.projection[m].fastauth)],
+  };
+}
+
+/** One falsification test as short plain lines (numbers from config/predictions.json and metrics.derived, never typed here). */
+export function predictionLines(pred, metrics, fmt) {
+  const val = (c, month) => { const t = c.threshold_path ? c.threshold_path.replace("{month}", month).split(".").reduce((o, k) => o?.[k], metrics) : c.threshold; return t; };
+  return pred.any_of.map((c) => {
+    const f = fmt[c.fmt] ?? String;
+    const t = c.threshold_path ? pred.months.map((m) => f(val(c, m))).join(" / ") : f(c.threshold);
+    return c.text.replace("{t}", t);
+  });
+}

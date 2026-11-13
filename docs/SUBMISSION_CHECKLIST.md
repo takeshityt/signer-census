@@ -46,7 +46,7 @@ Status legend: ✅ done · ⏳ in progress / planned · ❌ missing · 👤 foun
 |---|---|
 | Q-001/Q-003/Q-004 only work inside the window is judged; old projects need a separate branch/tags + a README section linking the diff | ✅ new repo, all commits from 2026-11-10/11 on; README states there is no pre-hackathon code. Tag `hackathon-submission`: optional for a new repo, not created (founder decision) |
 | Q-002 existing product on another chain | n/a |
-| Q-005 libraries, templates and **AI-generated code must be listed in the README** | ✅ README "Disclosure": Claude Code (Claude Sonnet and Opus), human role, vitest, yaml, Chart.js, Bricolage Grotesque, data sources |
+| Q-005 libraries, templates and **AI-generated code must be listed in the README** | ✅ README "Disclosure": Claude Code (Claude Sonnet and Opus), human role, vitest, yaml, Newsreader and Schibsted Grotesk fonts, data sources |
 | Q-009 public RPC is fine | ✅ keyless FastNEAR / archival RPC / NearBlocks |
 | Q-010 testnet-only eligible | n/a (read-only mainnet data, no transactions) |
 | Q-011 no mandatory integrations | ✅ (the thesis track hints: on-chain data, dashboards, research) |

@@ -1,0 +1,88 @@
+{
+  "note": "The four falsification tests of docs/THESIS.md as machine-checkable rules. Thresholds are the ones printed in THESIS.md (a test checks that). A test is 'breached' in a month when any of its conditions holds; the claim is refuted when it is breached in at least `needed` of the listed months. The point estimate decides; `decisive` says whether the whole 95% interval is on the same side.",
+  "check_after": "2027-04-01",
+  "predictions": [
+    {
+      "id": "P1",
+      "claim": "Demand stays narrow",
+      "months": [
+        "2027-01",
+        "2027-02",
+        "2027-03"
+      ],
+      "needed": 2,
+      "any_of": [
+        {
+          "path": "concentration.top3_share",
+          "op": "<",
+          "threshold": 0.6,
+          "text": "top three hold less than {t}",
+          "fmt": "pct"
+        },
+        {
+          "path": "concentration.requesters_ge_1pct",
+          "op": ">=",
+          "threshold": 11,
+          "text": "{t} or more requesters hold 1% or more",
+          "fmt": "int"
+        }
+      ]
+    },
+    {
+      "id": "P2",
+      "claim": "The boom was one integration that ends with Sweat Wallet",
+      "months": [
+        "2027-02",
+        "2027-03"
+      ],
+      "needed": 2,
+      "any_of": [
+        {
+          "path": "drivers_requests.fast-auth.near",
+          "op": ">=",
+          "threshold_path": "derived.fastauth_trend.half_projection.{month}",
+          "text": "FastAuth at or above half of its trend line ({t})",
+          "fmt": "k"
+        }
+      ]
+    },
+    {
+      "id": "P3",
+      "claim": "Bridges are the most persistent demand",
+      "months": [
+        "2027-01",
+        "2027-02",
+        "2027-03"
+      ],
+      "needed": 2,
+      "any_of": [
+        {
+          "path": "series_requests_est.bridges",
+          "op": "<",
+          "threshold": 150000,
+          "text": "bridge requests below {t}",
+          "fmt": "k"
+        }
+      ]
+    },
+    {
+      "id": "P4",
+      "claim": "Signing works at the level measured",
+      "months": [
+        "2027-01",
+        "2027-02",
+        "2027-03"
+      ],
+      "needed": 1,
+      "any_of": [
+        {
+          "path": "fulfilled_rate",
+          "op": "<",
+          "threshold": 0.995,
+          "text": "callback success below {t}",
+          "fmt": "pct1"
+        }
+      ]
+    }
+  ]
+}

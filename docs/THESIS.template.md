@@ -3,6 +3,10 @@ In the template every number is a placeholder: metric (out/metrics.json), scenar
 `npm test` fails if THESIS.md contains any other digit or differs from the rendering. Syntax: see src/thesis.mjs. -->
 # Thesis: Chain Signatures works, but its demand is narrow — bridges are the signal to watch
 
+## Headline
+
+Chain Signatures works. Its demand is narrow — and its biggest user is winding down.
+
 ## The claim
 
 **Chain Signatures works at the level we can measure (≈{{m:totals.requests_est|M1}} signature requests since {{lit:August 2024}}; ≈{{m:totals.fulfilled_rate|pct1}} of sampled requests end with a successful signature callback, while latency and downtime are not measured), but its demand is narrow. A handful of integrations generate nearly all usage. The {{lit:2026}} boom came mostly from one consumer integration: FastAuth logins issued by the Sweat Foundation's login domain, most likely Sweat Wallet, a product that ends "in its present form" on {{ext:30 December 2026|https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/}}. The largest third-party application, Relay's allocator on Aurora, has sent no requests in the sample since {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|raw}}. The bridge connectors (Omni, Bitcoin, Zcash) are the most persistent demand we observe and now carry most of the non-test demand, but they became large only in {{lit:May 2026}} and fell from their {{m:derived.bridges_peak_month.month|raw}} peak in the following month.**

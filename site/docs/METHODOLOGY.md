@@ -230,6 +230,6 @@ a declared literal (dates and thresholds we define) or an external figure with i
 
 ## 17. Dashboard (GATE 4)
 
-`site/` is a static page (HTML, CSS, ES modules, Chart.js vendored, one self-hosted font; no runtime network calls). `npm run build:site` copies out/metrics.json and out/scenarios.json into site/data/ with a sha256 manifest and exports
+`site/` is a static page (HTML, CSS, ES modules, charts drawn as plain SVG, two self-hosted variable fonts; no runtime network calls). `npm run build:site` copies out/metrics.json and out/scenarios.json into site/data/ with a sha256 manifest and exports
 labels.yaml, the latest docs/evidence/verify run and the THESIS.md sections as JSON; `npm run site` serves it on 127.0.0.1:4173. Every number on the page is read from those files (`site/js/model.js`, unit-tested against the real data); the five thesis lines and the falsification tests are exported from THESIS.md, not retyped.
-Checks and screenshots: docs/evidence/dashboard/CHECKS.md. Chart.js is the single chart library (stacked bars, hatch patterns, custom tooltips with the 95% intervals, no dependencies, MIT).
+Checks and screenshots: docs/evidence/dashboard/CHECKS.md. The charts are drawn by `site/js/charts.js` (stacked bars, monotone lines, bands, dated annotations, direct labels, crosshair tooltips with the 95% intervals; no chart library). Color follows the entity on every chart (FastAuth warm, bridges green, suspected benchmark hatched grey, everyone else muted grey); the accent pairs were checked with the dataviz palette validator in light and dark. Chapter headings and the headline are read from THESIS.md (section "Headline") or built from the JSON; no number is typed in the page (`test/site-model.test.mjs`).

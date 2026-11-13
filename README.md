@@ -31,8 +31,9 @@ The full thesis, with evidence for and against, scenarios and the falsification 
 
 ## Dashboard
 
-* Hosted: https://takeshityt.github.io/signer-census/ (not live yet: `.github/workflows/pages.yml` deploys `site/` on every push to `main` once the repository is public and the author enables GitHub Pages with source "GitHub Actions").
-* Locally: `npm run build:site && npm run site`, then open `http://127.0.0.1:4173/`. The page reads only `site/data/*.json` (copies of `out/metrics.json` and `out/scenarios.json` with a `sha256` manifest); it makes no other network request.
+* Hosted: https://takeshityt.github.io/signer-census/ (`.github/workflows/pages.yml` deploys `site/` on every push to `main`).
+* Open data: `out/metrics.json` is published with the site at https://takeshityt.github.io/signer-census/data/metrics.json, free to use as a data source (it also lists its own `sha256` in `data/manifest.json`).
+* Locally: `npm run build:site && npm run site`, then open `http://127.0.0.1:4173/`. The page reads only `site/data/*.json` (copies of `out/metrics.json`, `out/scenarios.json` and the configs with a `sha256` manifest). It makes no other network request, except when you press "Check a random transaction" (see below).
 
 ## Quick start
 
@@ -48,16 +49,18 @@ npm run reproduce
 
 ## Do X → see Y
 
-All of these are keyless. Only `npm run verify` uses the network (public endpoints).
+All of these are keyless. Only `npm run verify` and the dashboard button "Check a random transaction" use the network (public endpoints).
 
 | Do | See |
 |---|---|
-| `npm test` | vitest ends with 9<sup>[35]</sup> test files and 75<sup>[36]</sup> tests passed (exit code zero). Covers parsing, labels, chain rules, the estimator, the verifier, the dashboard data model, and checks that every number in README.md and THESIS.md comes from the JSON outputs. |
+| `npm test` | vitest ends with 12<sup>[35]</sup> test files and 106<sup>[36]</sup> tests passed (exit code zero). Covers parsing, labels, chain rules, the estimator, the verifier, the dashboard data model, and checks that every number in README.md and THESIS.md comes from the JSON outputs. |
 | `npm run reproduce` | Offline. Rebuilds `out/metrics.json`, `out/scenarios.json`, THESIS.md, README.md and the submission drafts from committed data. It prints `out/metrics.json written. sha256` followed by 6e4ce7ca28a067c480c9759964aa93a6b4dac9b87b9dba492adf0a43e785fb0c<sup>[37]</sup>. Afterwards `git status` shows no changes. |
 | `npm run check:data` | `data/MANIFEST.sha256` is OK with 38<sup>[38]</sup> files checked. The raw-sample manifest lists 531<sup>[39]</sup> files, which are not committed (they are reported as not downloaded). |
 | `npm run verify -- --sample 50` | Takes several minutes. It re-checks a seeded random sample of transactions with sign receipts against an archival RPC node and NearBlocks (signer, block height, sign receipts). Last run: 50<sup>[40]</sup>/50<sup>[41]</sup> verified (archival RPC 50<sup>[42]</sup>/50<sup>[41]</sup>, NearBlocks 50<sup>[43]</sup>/50<sup>[41]</sup>); the output is in `docs/evidence/verify/`. It exits with an error on any mismatch. The default seed always picks the same transactions; add `--seed <any number>` for a different draw. It checks our parsing of sampled transactions, not the request estimate: it does not search for sign receipts we missed and does not compare the fulfilled flag. |
-| `npm run build:site && npm run site`, open `http://127.0.0.1:4173/` | The hero shows ≈6.4M<sup>[1]</sup>, which is `totals.requests_est` in `out/metrics.json`. The "Exclude the suspected benchmark" switch removes the hatched series. The scenario buttons change the projection. Checks and screenshots: `docs/evidence/dashboard/CHECKS.md`. |
-| Edit `assumptions.yaml` (for example add a growth rate to `structural_monthly_growth`), then `npm run reproduce` and `npm run build:site` | `out/scenarios.json` gains the new combinations, and the dashboard shows the new option in "Structural demand per month". Undo with `git checkout assumptions.yaml && npm run reproduce && npm run build:site`. |
+| `npm run build:site && npm run site`, open `http://127.0.0.1:4173/` | The first block shows ≈6.4M<sup>[1]</sup>, which is `totals.requests_est` in `out/metrics.json`. "Hide the suspected benchmark" removes the hatched series. In "The boom", the sliders change the scenario; hovering a bubble in "Who" shows its share with the 95% interval, label confidence and evidence count. |
+| In the dashboard, press "Check a random transaction" | A sampled transaction is looked up in your browser at a public archival RPC node (`archival-rpc.mainnet.fastnear.com`; NearBlocks as fallback) and compared with our data: signer, block height and the requester and status of its sign receipt, each marked ✓ or ✗, with a NearBlocks link. Offline or blocked, it says so and shows the `npm run verify` command. Network is used only after the click. |
+| `npm run check:predictions` | The four falsification tests of THESIS.md (`config/predictions.json`) print "pending until 2027-04-01" with the days left; after that date (and a data refresh) they are evaluated against `out/metrics.json`. |
+| Edit `assumptions.yaml` (for example add a growth rate to `structural_monthly_growth`), then `npm run reproduce` and `npm run build:site` | `out/scenarios.json` gains the new combinations, and the dashboard's scenario table and the precomputed list reflect the new combinations (the sliders already cover any value). Undo with `git checkout assumptions.yaml && npm run reproduce && npm run build:site`. |
 
 Refreshing the data from the chain (slow, network, optional): `npm run monthly` (exact monthly totals), `npm run sample` and `npm run parse` (the cluster sample; a full re-download, see docs/METHODOLOGY.md "Refreshing the data"), `node scripts/network-totals.mjs` (whole-network transaction counts), then `npm run reproduce`.
 
@@ -91,7 +94,7 @@ Details and the full comparison table: `docs/evidence/reconcile-proximity.md`.
 
 * **AI-generated code.** The code, documentation and analysis were written with Claude Code (Anthropic's Claude models, Claude Sonnet and Claude Opus). Research sub-agents inside Claude Code collected attribution evidence. In `labels.yaml` every claim says how it was checked; claims we re-checked say so, and claims we did not re-check are marked "not re-verified by us" or "wording not re-checked". An independent review re-checked the evidence links.
 * **Human role.** The author (takeshityt) set the scope and positioning, decided what may be claimed, chose the data sources, and approved every gate and every push.
-* **Libraries.** vitest (MIT, tests only), yaml (ISC, parses labels and rules), Chart.js (MIT, vendored in `site/vendor/` with its license), the Bricolage Grotesque font (SIL Open Font License, via `@fontsource-variable`, vendored with its license). Everything else uses Node built-ins.
+* **Libraries.** vitest (MIT, tests only), yaml (ISC, parses labels and rules), the Newsreader and Schibsted Grotesk fonts (SIL Open Font License, via `@fontsource-variable`, vendored in `site/vendor/fonts/` with their licenses). The charts are plain SVG drawn by `site/js/charts.js`, with no chart library. Everything else uses Node built-ins.
 * **Data sources.** FastNEAR transaction API and RPC (including the archival node), NearBlocks API (transaction details and the daily network chart), NEAR public RPC, the public page of the `proximity_team/v1signer` Dune dashboard (values read from the rendered public page; its SQL is not visible), the Sweat Foundation press release (Chainwire, altfins), project documentation and source repositories linked in `labels.yaml`.
 * **Hackathon window.** All commits were made during NEAR HACKATHON; there is no pre-hackathon code. Some groups of commits share the same second: the agent committed several finished parts with one scripted sequence of `git commit` calls (visible as separate `commit` entries in `git reflog`); each commit still holds one part.
 
@@ -118,7 +121,7 @@ See [ROADMAP.md](ROADMAP.md).
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Third-party licenses for the vendored Chart.js and font are in `site/vendor/`.
+MIT, see [LICENSE](LICENSE). Licenses of the vendored fonts are in `site/vendor/fonts/`.
 
 
 ---

@@ -17,11 +17,16 @@
     "check:data": "node scripts/check-manifest.mjs",
     "verify": "node scripts/verify.mjs",
     "build:site": "node scripts/build-site.mjs",
-    "site": "node scripts/serve-site.mjs"
+    "site": "node scripts/serve-site.mjs",
+    "check:predictions": "node scripts/check-predictions.mjs",
+    "build:standalone": "node scripts/build-standalone.mjs site design-versions/signer-census.html"
   },
   "devDependencies": {
     "@fontsource-variable/bricolage-grotesque": "^5.3.0",
-    "chart.js": "^4.6.1",
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@fontsource-variable/newsreader": "^5.3.0",
+    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
     "vitest": "^5.1.0"
   },
   "dependencies": {

@@ -2,10 +2,10 @@ import { describe, it, expect } from "vitest";
 import { readFileSync } from "node:fs";
 import { compact, approx, pct, monthLabel, dayLabel, range } from "../site/js/format.js";
 import { inline } from "../site/js/md.js";
-import { stackedSeries, monthTotals, heroStats, requesterRows, chainSeries, bridgeSeries, scenarioOptions, pickScenario, scenarioChart, STACK, fullMonths } from "../site/js/model.js";
+import { stackedSeries, monthTotals, heroStats, requesterRows, chainSeries, bridgeSeries, scenarioOptions, pickScenario, scenarioChart, STACK, fullMonths, headline, volumeSeries, boomSeries, fulfilledSeries, bridgeStack, destinationLines, timelineEvents, requesterName, requesterTone, splitWhy } from "../site/js/model.js";
 
 const j = (f) => JSON.parse(readFileSync(new URL(`../site/data/${f}`, import.meta.url), "utf8"));
-const metrics = j("metrics.json"), scenarios = j("scenarios.json"), labels = j("labels.json"), verify = j("verify.json");
+const metrics = j("metrics.json"), scenarios = j("scenarios.json"), labels = j("labels.json"), verify = j("verify.json"), thesis = j("thesis.json");
 
 describe("format", () => {
   it("compact numbers and approximations", () => {
@@ -68,3 +68,70 @@ describe("model on the real data", () => {
     expect(other.end_month_total).not.toBe(s.end_month_total);
   });
 });
+
+describe("editorial views (design branch)", () => {
+  const tot = (series, i) => series.reduce((a, x) => a + x.values[i], 0);
+  it("the headline is the THESIS.md Headline section, verbatim", () => {
+    const md = readFileSync(new URL("../THESIS.md", import.meta.url), "utf8");
+    expect(md).toContain(`## Headline\n\n${headline(thesis)}`);
+    expect(headline(thesis)).toMatch(/^Chain Signatures works\./);
+  });
+  it("volume and boom views add up to the same monthly totals as the stacked groups; hiding the benchmark zeroes only that series", () => {
+    const all = monthTotals(metrics);
+    const v = volumeSeries(metrics), b = boomSeries(metrics);
+    v.months.forEach((_, i) => { expect(Math.abs(tot(v.series, i) - all[i])).toBeLessThanOrEqual(8); expect(Math.abs(tot(b.series, i) - all[i])).toBeLessThanOrEqual(8); });
+    const ve = volumeSeries(metrics, { excludeBenchmark: true }), be = boomSeries(metrics, { excludeBenchmark: true });
+    expect(ve.series.find((s) => s.id === "benchmark").values.every((x) => x === 0)).toBe(true);
+    expect(be.series.find((s) => s.id === "benchmark").values.every((x) => x === 0)).toBe(true);
+    expect(ve.series[0].values).toEqual(v.series[0].values);
+    const tx = monthTotals(metrics, { excludeBenchmark: true });
+    ve.months.forEach((_, i) => expect(Math.abs(tot(ve.series, i) - tx[i])).toBeLessThanOrEqual(8));
+  });
+  it("FastAuth in the boom view is the fast-auth.near driver; fulfilled and bridge views read their metrics", () => {
+    const b = boomSeries(metrics).series.find((s) => s.id === "fastauth");
+    metrics.months.forEach((m, i) => expect(Math.abs(b.values[i] - m.drivers_requests["fast-auth.near"].value)).toBeLessThanOrEqual(1));
+    const f = fulfilledSeries(metrics);
+    expect(f.values.at(-1)).toBe(metrics.months.at(-1).fulfilled_rate.value);
+    const br = bridgeStack(metrics);
+    br.months.forEach((_, i) => expect(Math.abs(tot(br.series, i) - br.total.values[i])).toBeLessThanOrEqual(br.series.length));
+  });
+  it("destination view: lines and band are the monthly shares, and the crossover is the first month other chains stay ahead", () => {
+    const d = destinationLines(metrics);
+    d.months.forEach((_, i) => expect(Math.abs(d.near.values[i] + d.other.values[i] + d.unknown.values[i] - 1)).toBeLessThan(1e-5));
+    expect(d.crossover).not.toBeNull();
+    const i = d.crossover.index;
+    expect(d.other.values[i]).toBeGreaterThan(d.near.values[i]);
+    expect(i === 0 || d.other.values[i - 1] <= d.near.values[i - 1]).toBe(true);
+    const last = fullMonths(metrics).length - 1;
+    for (let k = i; k <= last; k++) expect(d.other.values[k]).toBeGreaterThan(d.near.values[k]);
+  });
+  it("timeline events come from the data and the cited source, not from typed dates", () => {
+    const e = timelineEvents(metrics, scenarios);
+    const fa = (m) => m.drivers_requests["fast-auth.near"].value;
+    const full = fullMonths(metrics);
+    const jumps = full.slice(1).map((m, i) => ({ month: m.month, d: fa(m) - fa(full[i]) }));
+    expect(e.fastauthRamp.month).toBe(jumps.reduce((a, x) => (x.d > a.d ? x : a)).month);
+    expect(e.relayExit.month).toBe(metrics.derived.exits[0].zero_from);
+    expect(e.bridgesPeak.month).toBe(metrics.derived.bridges_peak_month.month);
+    expect(e.sweatEnds.date).toBe(scenarios.event.date);
+    expect(scenarios.event.source).toContain(e.sweatAnnounced.date.replaceAll("-", "/"));
+  });
+  it("requester names are human-readable and tones follow the entity", () => {
+    const rows = requesterRows(metrics, labels);
+    const by = (a) => rows.find((r) => r.account === a);
+    expect(requesterName(by("fast-auth.near"))).toBe("FastAuth logins");
+    expect(requesterName(by("tx-bench.near"))).toBe("Suspected benchmark");
+    expect(requesterName(by("omni.bridge.near"))).toBe("Omni bridge");
+    expect(rows.every((r) => requesterName(r).length > 0)).toBe(true);
+    expect(requesterTone(by("fast-auth.near"))).toBe("fastauth");
+    expect(requesterTone(by("tx-bench.near"))).toBe("hatch");
+    expect(requesterTone(by("btc-connector.bridge.near"))).toBe("bridge-dark");
+  });
+  it("falsification bullets split into claim and reasoning without losing text", () => {
+    for (const b of thesis.sections["what-would-prove-this-thesis-wrong"].bullets) {
+      const { claim, why } = splitWhy(b);
+      expect((claim + " " + why).replace(/\s+/g, " ").trim()).toBe(b.replace(/\s+/g, " ").trim());
+    }
+  });
+});
+
