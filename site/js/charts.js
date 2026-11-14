@@ -117,7 +117,9 @@ export function createChart(host, init) {
   host.innerHTML = `<svg class="cv" aria-hidden="true"><defs>
       <pattern id="${uid}h" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" class="hatch-bg"/><rect width="2" height="6" class="hatch-line"/></pattern>
       <pattern id="${uid}l" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="1" height="7" class="hatch-light"/></pattern>
-      <clipPath id="${uid}c"><rect x="0" y="-20" width="0" height="2000"/></clipPath></defs>
+      <clipPath id="${uid}c"><rect x="0" y="-20" width="0" height="2000"/></clipPath>
+      <clipPath id="${uid}e"><rect class="early" x="-20" y="-20" width="0" height="2000"/></clipPath>
+      <clipPath id="${uid}r"><rect class="rest" x="0" y="-20" width="4000" height="2000"/></clipPath></defs>
     <g class="plot"></g><g class="ann"></g><g class="over"></g></svg><div class="ann-layer"></div><div class="tip" hidden></div>`;
   const svg = host.querySelector("svg"), plot = svg.querySelector(".plot"), annG = svg.querySelector(".ann"), over = svg.querySelector(".over");
   const annLayer = host.querySelector(".ann-layer"), tip = host.querySelector(".tip"), clip = svg.querySelector("clipPath rect");
@@ -209,10 +211,17 @@ export function createChart(host, init) {
       if (s.type !== "line") return;
       const pts = cur[k].map((v, i) => (v == null ? null : [X(i + 0.5), Y(v, ymax)]));
       const dotted = spec.partial?.at(-1) && pts.at(-1) && pts.at(-2) && s.tail !== false;   // the partial last month continues as a dotted tail
-      out += `<path class="line t-${s.tone}${s.dash ? " dashed" : ""}" d="${smoothPath(dotted ? pts.slice(0, -1) : pts, base, mg.top, s.smooth !== false)}" clip-path="url(#${uid}c)"/>`;
+      const path = `<path class="line t-${s.tone}${s.dash ? " dashed" : ""}" d="${smoothPath(dotted ? pts.slice(0, -1) : pts, base, mg.top, s.smooth !== false)}" clip-path="url(#${uid}c)"/>`;
+      out += shadeTo > 0 ? `<g class="dim" clip-path="url(#${uid}e)">${path}</g><g clip-path="url(#${uid}r)">${path}</g>` : path;
       if (dotted) { const p = pts.at(-1), q = pts.at(-2); out += `<path class="tail t-${s.tone}" d="M${q[0].toFixed(1)},${q[1].toFixed(1)}L${p[0].toFixed(1)},${p[1].toFixed(1)}" clip-path="url(#${uid}c)"/>`; }
     });
-    if (shadeTo > 0) out += `<rect class="shade" x="${mg.left}" y="${mg.top}" width="${(X(shadeTo) - mg.left).toFixed(1)}" height="${g.plotH}"/>`;
+    if (shadeTo > 0) {
+      // the low-volume period: a thin dashed boundary (no veil, so the hatch keeps one meaning across the chart)
+      const xb = X(shadeTo);
+      out += `<line class="shade-edge" x1="${xb.toFixed(1)}" x2="${xb.toFixed(1)}" y1="${mg.top}" y2="${(mg.top + g.plotH).toFixed(1)}"/>`;
+      svg.querySelector(`#${uid}e rect`).setAttribute("width", (xb + 20).toFixed(1));
+      svg.querySelector(`#${uid}r rect`).setAttribute("x", xb.toFixed(1));
+    }
     if (spec.pulse && entrance >= 1) {
       const k = spec.series.findIndex((q) => q.id === spec.pulse.id), i = spec.pulse.index;
       if (k >= 0 && cur[k][i] != null) out += `<circle class="pulse" cx="${X(i + 0.5).toFixed(1)}" cy="${Y(cur[k][i], ymax).toFixed(1)}" r="7"/>`;
