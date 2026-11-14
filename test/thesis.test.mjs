@@ -31,11 +31,20 @@ describe("rendered documents (THESIS.md, README.md, submission drafts): every nu
     expect(desc.length).toBeLessThanOrEqual(2000);
     expect(desc).not.toMatch(/<sup>|\]\(/);
   });
-  it("X post fits 280 characters, says NEAR HACKATHON and tags @NEARProtocol and #NEARHackathon", () => {
+  // X weighted length (twitter-text v3): links count 23; code points outside these ranges count 2
+  const xLength = (s) => {
+    const w1 = [[0x0, 0x10ff], [0x2000, 0x200d], [0x2010, 0x201f], [0x2032, 0x2037]];
+    const urls = s.match(/\b(?:https?:\/\/)?[a-z0-9-]+(?:\.[a-z0-9-]+)*\.(?:com|io|org)(?:\/\S*)?/gi) ?? [];
+    let rest = s; for (const u of urls) rest = rest.replace(u, "");
+    return urls.length * 23 + [...rest.normalize("NFC")].reduce((n, ch) => n + (w1.some(([a, b]) => ch.codePointAt(0) >= a && ch.codePointAt(0) <= b) ? 1 : 2), 0);
+  };
+  it("X posts fit 280 (X weighting), say NEAR HACKATHON and tag @NEARProtocol and #NEARHackathon", () => {
     const t = read("docs/submission/X_POST.md");
-    const post = /<!-- post:start -->\n([\s\S]*?)\n<!-- post:end -->/.exec(t)[1];
-    expect([...post].length).toBeLessThanOrEqual(280);
-    expect(post).toMatch(/NEAR HACKATHON/); expect(post).toMatch(/@NEARProtocol/); expect(post).toMatch(/#NEARHackathon/);
+    const block = (k) => new RegExp(`<!-- ${k}:start -->\\n([\\s\\S]*?)\\n<!-- ${k}:end -->`).exec(t)[1];
+    for (const k of ["post", "thread1", "thread2"]) expect(xLength(block(k)), k).toBeLessThanOrEqual(280);
+    for (const k of ["post", "thread1"]) { const p = block(k); expect(p).toMatch(/NEAR HACKATHON/); expect(p).toMatch(/@NEARProtocol/); expect(p).toMatch(/#NEARHackathon/); }
+    expect(block("post")).toMatch(/takeshityt\.github\.io\/signer-census/); expect(block("post")).toMatch(/github\.com\/takeshityt\/signer-census/);
+    expect(xLength("a takeshityt.github.io/signer-census ≈")).toBe(2 + 23 + 1 + 2);
   });
 });
 
