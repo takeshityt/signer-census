@@ -11,22 +11,22 @@ Rules kept in the wording: observed estimates (up to {{s:baseline.month|month}})
 
 * **On screen:** the hero: two-tone headline, the dot-matrix month columns settling in, the `fast-auth.near` case card, the counters.
 * **Action:** wait on load until the counters stop flipping.
-* **On-screen caption:** "≈{{m:totals.requests_est|M1}} requests · {{m:totals.fulfilled_rate|pct1}} fulfilled"
-* **Narration:** "Since {{lit:August 2024}}: about {{m:totals.requests_est|Mw}} requests; {{m:totals.fulfilled_rate|pct1}} succeed in our sample."
+* **On-screen caption:** "NEAR Chain Signatures · ≈{{m:totals.requests_est|M1}} requests · {{m:totals.fulfilled_rate|pct1}} fulfilled"
+* **Narration:** "NEAR Chain Signatures, since {{lit:August 2024}}: about {{m:totals.requests_est|Mw}} requests; {{m:totals.fulfilled_rate|pct1}} succeed in our sample."
 
 ### {{lit:2}} · {{lit:0:08–0:16}} · "Demand is narrow"
 
 * **On screen:** chapter "Demand is narrow": the square matrix and its legend.
 * **Action:** scroll past "It works" to "Demand is narrow"; hover the legend rows FastAuth logins, Suspected benchmark, Relay Protocol in turn.
 * **On-screen caption:** "Top {{lit:3}} = {{m:totals.concentration.top3_share|pct0}} · one is a suspected benchmark"
-* **Narration:** "Top three: {{m:totals.concentration.top3_share|pct0}}. FastAuth {{m:totals.top_requesters[requester=fast-auth.near].share_of_requests|pct0}}, a suspected benchmark {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}}, Relay Protocol {{m:totals.top_requesters[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].share_of_requests|pct0}}."
+* **Narration:** "Top three: {{m:totals.concentration.top3_share|pct0}}. FastAuth {{m:totals.top_requesters[requester=fast-auth.near].share_of_requests|pct0}}, suspected benchmark {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}}, Relay Protocol {{m:totals.top_requesters[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].share_of_requests|pct0}}."
 
 ### {{lit:3}} · {{lit:0:16–0:25}} · The boom, steps {{lit:1}} and {{lit:2}}
 
 * **On screen:** "The boom" scroll scene: step {{lit:1}} "FastAuth logins arrive" (coral bars rise), then step {{lit:2}} "Relay goes quiet" (Relay split out).
 * **Action:** scroll slowly; the chart stays in place while the steps pass.
-* **On-screen caption:** "Relay quiet since {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month}}"
-* **Narration:** "FastAuth: associated with the Sweat Foundation, medium confidence. Relay: quiet since {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month}}."
+* **On-screen caption:** "Boom = FastAuth · main user Sweat Wallet (medium confidence)"
+* **Narration:** "The boom was FastAuth logins. Its main user: Sweat Wallet, medium confidence. Relay: quiet since {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month}}."
 
 ### {{lit:4}} · {{lit:0:25–0:33}} · The boom, step {{lit:3}}
 
@@ -46,8 +46,8 @@ Rules kept in the wording: observed estimates (up to {{s:baseline.month|month}})
 
 * **On screen:** "Your scenario, live".
 * **Action:** click the preset "Optimistic", then "Cautious"; the big number rolls to the Cautious value.
-* **On-screen caption:** "Scenario, not a forecast · rest flat"
-* **Narration:** "Without FastAuth and the benchmark, {{s:scenarios[fastauth0_bench-removed_g+0].end_month|month}} is about {{s:scenarios[fastauth0_bench-removed_g+0].end_month_total|kw}} a month — a scenario, not a forecast."
+* **On-screen caption:** "Scenario, not a forecast · no FastAuth, no benchmark"
+* **Narration:** "Without FastAuth and the benchmark, {{s:scenarios[fastauth0_bench-removed_g+0].end_month|month}} is about {{s:scenarios[fastauth0_bench-removed_g+0].end_month_total|kw}} monthly — a scenario, not a forecast."
 
 ### {{lit:7}} · {{lit:0:48–0:58}} · "What would prove us wrong"
 
@@ -71,11 +71,11 @@ Rules kept in the wording: observed estimates (up to {{s:baseline.month|month}})
 
 ## Russian translation of the narration (for the founder, not for the video)
 
-{{lit:1}}. «С {{lit:августа 2024}} года — около {{m:totals.requests_est|M1}} запросов; в выборке {{m:totals.fulfilled_rate|pct1}} завершаются успешно.»
+{{lit:1}}. «NEAR Chain Signatures, с {{lit:августа 2024}} года: около {{m:totals.requests_est|M1}} запросов; в выборке {{m:totals.fulfilled_rate|pct1}} завершаются успешно.»
 
 {{lit:2}}. «Тройка крупнейших — {{m:totals.concentration.top3_share|pct0}}: вход через FastAuth — {{m:totals.top_requesters[requester=fast-auth.near].share_of_requests|pct0}}, подозреваемый бенчмарк — {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}} и Relay Protocol — {{m:totals.top_requesters[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].share_of_requests|pct0}}.»
 
-{{lit:3}}. «FastAuth связан с Sweat Foundation — со средней уверенностью. Relay затих с {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month_ru_gen}} года.»
+{{lit:3}}. «Бум — это входы через FastAuth. Его главный пользователь — Sweat Wallet (средняя уверенность). Relay затих с {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month_ru_gen}} года.»
 
 {{lit:4}}. «Sweat Foundation сообщает: Sweat Wallet в нынешнем виде прекращает работу {{s:event.date|day_ru}} года.» (На экране — точная цитата из релиза по-английски.)
 
