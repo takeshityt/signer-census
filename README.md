@@ -125,7 +125,9 @@ See [ROADMAP.md](ROADMAP.md).
 
 ## License
 
-MIT, see [LICENSE](LICENSE). Licenses of the vendored fonts are in `site/vendor/fonts/`.
+MIT, see [LICENSE](LICENSE).
+
+**Credits.** The dashboard self-hosts the Geist, Geist Mono and Doto fonts under the SIL Open Font License 1.1; attribution and the full license texts are in [site/vendor/fonts/OFL.txt](site/vendor/fonts/OFL.txt).
 
 
 ---
