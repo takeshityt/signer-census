@@ -8,9 +8,9 @@ Submit once, only after the author confirms the exact payload (docs/HACKATHON.md
 | projectName | {{lit:2–80}} characters | proposal: Signer Census (author to confirm) |
 | leadName | {{lit:2–80}} characters | **author only** |
 | email | valid, at most {{lit:2}} submissions per email | **author only** |
-| size | one of the listed values | **author only** |
+| size | one of `{{lit:1}}`, `{{lit:2 - 4}}`, `{{lit:4 - 6}}`, `{{lit:6 - 8}}`, `{{lit:8+}}`, exactly as written | `{{lit:1}}` (solo author) |
 | tracks | ids from the tracks table | proposal: `thesis` (author to confirm) |
-| nearAddress | mainnet payout account created by the team | **author only** (never created or invented by the agent) |
+| nearAddress | mainnet payout account created by the author | **author only** (never created or invented by the agent) |
 | projectUrl | public repository URL (a hosted dashboard is a plus: https://takeshityt.github.io/signer-census/, keep it up as the hackathon rules ask) | https://github.com/takeshityt/signer-census (public) |
 | demoUrl | public X post URL | **author only** (after posting, see `X_POST.md`) |
 | idea | {{lit:20–2000}} characters | below |
