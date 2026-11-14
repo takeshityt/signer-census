@@ -9,9 +9,13 @@
 // One-time setup: npx playwright install chromium
 import { chromium } from "playwright";
 import { createInterface } from "node:readline/promises";
+import { mkdirSync } from "node:fs";
 
 const URL = process.env.DEMO_URL ?? "https://takeshityt.github.io/signer-census/";
 const DRY = process.argv.includes("--dry");
+// page zoom (CSS zoom on the root): fits each shot's block into the 1280x720 frame; text and SVG charts stay vector-sharp
+const ZOOM = Number((process.argv.find((a) => a.startsWith("--zoom=")) ?? "--zoom=0.85").split("=")[1]);
+const SHOTS_DIR = process.argv.includes("--shots") || DRY ? new globalThis.URL("../docs/evidence/video/", import.meta.url).pathname : null;
 const RELAY = "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora";
 const rl = createInterface({ input: process.stdin, output: process.stdout });
 const ask = async (q) => { if (!DRY) await rl.question(q); };
@@ -19,12 +23,12 @@ const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
 
 const browser = await chromium.launch({ headless: DRY, args: ["--window-size=1280,860"] });
 const ctx = await browser.newContext({ viewport: { width: 1280, height: 720 }, colorScheme: "dark", reducedMotion: "no-preference" }); // a fresh profile every run
-await ctx.addInitScript(() => {
+await ctx.addInitScript((zoom) => {
   try { localStorage.setItem("theme", "dark"); } catch { /* ignore */ }
   // recording aids only: hide the scrollbar and draw a small cursor ring that the script moves (the real macOS cursor does not follow Playwright)
   document.addEventListener("DOMContentLoaded", () => {
     const st = document.createElement("style");
-    st.textContent = `html{scrollbar-width:none}::-webkit-scrollbar{display:none}
+    st.textContent = `html{scrollbar-width:none;zoom:${zoom}}::-webkit-scrollbar{display:none}
       #demo-cursor{position:fixed;left:0;top:0;width:14px;height:14px;margin:-7px 0 0 -7px;border:2px solid rgba(255,255,255,.85);border-radius:50%;
         box-shadow:0 0 0 1px rgba(0,0,0,.35);pointer-events:none;z-index:99999;opacity:0;transition:left .7s cubic-bezier(.2,.7,.2,1),top .7s cubic-bezier(.2,.7,.2,1),opacity .3s}
       #demo-cursor.on{opacity:1}#demo-cursor.click{animation:democlick .45s ease-out}
@@ -32,7 +36,7 @@ await ctx.addInitScript(() => {
     document.head.appendChild(st);
     const c = document.createElement("div"); c.id = "demo-cursor"; document.body.appendChild(c);
   });
-});
+}, ZOOM);
 const page = await ctx.newPage();
 const errors = [];
 page.on("pageerror", (e) => errors.push(e.message));
@@ -55,7 +59,7 @@ async function pointAt(sel) {
   if (!vis) await scrollTo(await centreOn(sel), 1100);
   const box = await page.evaluate((s) => { const el = document.querySelector(s); if (!el) return null; const r = el.getBoundingClientRect(); return { x: r.left + Math.min(r.width / 2, 80), y: r.top + r.height / 2 }; }, sel);
   if (!box) return null;
-  await page.evaluate(({ x, y }) => { const c = document.getElementById("demo-cursor"); if (c) { c.classList.add("on"); c.style.left = `${x}px`; c.style.top = `${y}px`; } }, box);
+  await page.evaluate(({ x, y, z }) => { const c = document.getElementById("demo-cursor"); if (c) { c.classList.add("on"); c.style.left = `${x / z}px`; c.style.top = `${y / z}px`; } }, { ...box, z: ZOOM });
   await page.mouse.move(box.x, box.y, { steps: 12 }); // a real pointer move, so :hover and the page's hover logic react
   await sleep(700);
   return box;
@@ -66,6 +70,25 @@ async function clickAt(sel) {
   if (process.env.DEMO_DEBUG) console.log("  hit:", await page.evaluate(({ x, y }) => { const e = document.elementFromPoint(x, y); return `${e?.tagName}#${e?.id}.${e?.className}`; }, box), box);
   await page.mouse.click(box.x, box.y);
   return true;
+}
+// the union of the target blocks, in page coordinates
+const blockOf = (sels) => page.evaluate((ss) => {
+  const rs = ss.map((s) => document.querySelector(s)?.getBoundingClientRect()).filter(Boolean);
+  const head = document.querySelector(".top")?.getBoundingClientRect().bottom ?? 0;
+  return { top: Math.min(...rs.map((r) => r.top)) + scrollY, bottom: Math.max(...rs.map((r) => r.bottom)) + scrollY, head, vh: innerHeight };
+}, sels);
+// scroll so the block's top sits just under the sticky header (small margin); if the block is shorter than the frame, centre the rest
+async function alignTo(sels, ms = 1500) {
+  const b = await blockOf(sels), margin = 14, room = b.vh - b.head - 2 * margin, h = b.bottom - b.top;
+  await scrollTo(b.top - b.head - margin - Math.max(0, (room - h) / 2) * 0.35, ms);
+}
+const fits = [];
+async function check(n, label, sels) {
+  const r = await page.evaluate((ss) => { const head = document.querySelector(".top")?.getBoundingClientRect().bottom ?? 0; return ss.map((s) => { const e = document.querySelector(s); const b = e?.getBoundingClientRect(); return b ? { s, top: Math.round(b.top - head), bottom: Math.round(innerHeight - b.bottom) } : { s, missing: true }; }); }, sels);
+  const bad = r.filter((x) => x.missing || x.top < 0 || x.bottom < 0);
+  fits.push({ shot: n, label, ok: !bad.length, cut_px: bad.map((x) => ({ target: x.s, above_px: Math.max(0, -x.top), below_px: Math.max(0, -x.bottom) })) });
+  console.log(`  ${bad.length ? "✗" : "✓"} ${label}${bad.length ? "  " + JSON.stringify(bad) : ""}`);
+  if (SHOTS_DIR) { mkdirSync(SHOTS_DIR, { recursive: true }); await page.screenshot({ path: `${SHOTS_DIR}shot-${n}${label.startsWith("b") ? "b" : ""}.png` }); }
 }
 let t0 = 0;
 const now = () => (performance.now() - t0) / 1000;
@@ -84,39 +107,48 @@ errors.length = 0;
 t0 = performance.now();
 
 await shot(1, 0, "Hero");
-await sleep(7000);
+await sleep(3800);
+await check(1, "a hero: status line, headline, dot columns, case card, counters", [".statusline", ".hero-grid", "#key-hero"]);
+await sleep(3000);
 
 await shot(2, 8, "\"Demand is narrow\" — legend rows");
-await scrollTo(await topOf("#who"), 1800);
+await alignTo(["#who .ch-head", "#who .bento > .tile:first-child"], 1800);
+await check(2, "a heading and the square matrix with its legend", ["#who .ch-head", "#who .bento > .tile:first-child"]);
 for (const id of ["fast-auth.near", "tx-bench.near", RELAY]) await pointAt(`.wf-legend li[data-g="${id}"]`);
 await page.mouse.move(5, 5); await page.evaluate(() => document.getElementById("demo-cursor")?.classList.remove("on"));
 
 await shot(3, 16, "The boom — steps 1 and 2");
-await scrollTo(await topOf("#boom"), 1500);
-await scrollTo(await centreOn('#boom-steps .step-card[data-stage="1"]'), 3000);
-await sleep(1200);
-await scrollTo(await centreOn('#boom-steps .step-card[data-stage="2"]'), 2600);
+await alignTo(["#boom .ch-head"], 1300);
+await scrollTo(await centreOn('#boom-steps .step-card[data-stage="1"]'), 2800);
+await sleep(1000);
+await scrollTo(await centreOn('#boom-steps .step-card[data-stage="2"]'), 2400);
+await check(3, "a sticky chart and step 2", [".scene-chart .tile", '#boom-steps .step-card[data-stage="2"]']);
 
 await shot(4, 25, "The boom — step 3");
 await scrollTo(await centreOn('#boom-steps .step-card[data-stage="3"]'), 2600);
+await check(4, "a sticky chart and step 3", [".scene-chart .tile", '#boom-steps .step-card[data-stage="3"]']);
 
 await shot(5, 33, "\"Bridges remain\" and \"Where signatures go\"");
-await scrollTo(await topOf("#bridges"), 1800);
-await sleep(1800);
-await scrollTo(await centreOn("#chart-chains"), 2200);
+await alignTo(["#bridges .bento > .tile:first-child", "#bridge-nums"], 1700);
+await check(5, "a bridges chart and its three numbers", ["#bridges .bento > .tile:first-child", "#bridge-nums"]);
+await sleep(1200);
+await alignTo(["#bridges .bento > .tile:last-child"], 1800);
+await check(5, "b where signatures go", ["#bridges .bento > .tile:last-child"]);
 
 await shot(6, 40, "Scenario presets");
-await scrollTo(await centreOn(".live"), 1600);
+await alignTo([".live"], 1500);
+await check(6, "a the scenario card", [".live"]);
 await clickAt('.preset[data-i="2"]'); await sleep(1600);
 await clickAt('.preset[data-i="0"]'); await sleep(900);
 await page.evaluate(() => document.getElementById("demo-cursor")?.classList.remove("on"));
 
 await shot(7, 48, "\"What would prove us wrong\"");
-await scrollTo(await topOf("#wrong"), 1600);
-await scrollTo(await topOf("#countdown", 120), 1400);
+await alignTo(["#countdown", "#preds"], 1800);
+await sleep(1500);
+await check(7, "a countdown and the four case files", ["#countdown", "#preds"]);
 
 await shot(8, 58, "Verify button, then Re-run commands");
-await scrollTo(await centreOn(".verify-tile"), 1500);
+await alignTo([".verify-tile", "#xcheck"], 1500);
 let badge = null;
 for (let attempt = 1; attempt <= 2 && badge !== "ok"; attempt++) {
   await clickAt("#verify-btn");
@@ -126,10 +158,12 @@ for (let attempt = 1; attempt <= 2 && badge !== "ok"; attempt++) {
   if (badge !== "ok") console.log(`  ! verify attempt ${attempt}: ${badge}${attempt === 1 ? " — retrying once" : ""}  [log: ${(await page.textContent("#verify-log")).slice(-160)}]`);
 }
 if (badge !== "ok") console.log("  ! WARNING: the Verify badge did not appear (public node unreachable?). Re-record shot 8 or cut it.");
-await sleep(1200);
+await check(8, "a verify panel with the result", [".verify-tile", "#xcheck"]);
+await sleep(600);
 await page.evaluate(() => document.getElementById("demo-cursor")?.classList.remove("on"));
-await scrollTo(await topOf("#rerun"), 1800);
-await sleep(1600);
+await alignTo(["#rerun .ch-head", "#rerun-steps"], 1800);
+await check(8, "b re-run commands", ["#rerun-steps"]);
+await sleep(1000);
 await pointAt("#rerun-steps .step.first code");
 const end = now();
 await sleep(3000); // hold on the repository link
@@ -138,7 +172,7 @@ console.log(`■ end at ${stamp(now())} (held on the repository link from ${stam
 console.log("\nDone — stop the recording");
 if (errors.length) console.log("page errors:", errors);
 const state = await page.evaluate(() => ({ boom_stage: document.getElementById("boom-stage-label")?.textContent, preset_pressed: document.querySelector('.preset[aria-pressed="true"] b')?.textContent, cards: document.querySelectorAll("#preds .case").length }));
-console.log(JSON.stringify({ total_s: +now().toFixed(1), verify_badge: badge === "ok", ...state, page_errors: errors.length, timings }, null, 1));
+console.log(JSON.stringify({ zoom: ZOOM, total_s: +now().toFixed(1), verify_badge: badge === "ok", all_targets_visible: fits.every((f) => f.ok), not_visible: fits.filter((f) => !f.ok), ...state, page_errors: errors.length, timings }, null, 1));
 await ask("Press Enter to close the browser ");
 rl.close();
 await browser.close();
