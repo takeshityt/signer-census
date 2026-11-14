@@ -51,6 +51,9 @@ const fmtNum = (x, f) => {
     case "r2": return x.toFixed(2);
     case "r3": return x.toFixed(3);
     case "raw": return String(x);
+    case "Mw": return `${(x / 1e6).toFixed(1)} million`;   // spoken: "6.4 million"
+    case "kw": return `${Math.round(x / 1e3).toLocaleString("en-US")} thousand`; // spoken: "237 thousand"
+    case "word": case "Word": { const w = ["zero", "one", "two", "three", "four", "five", "six", "seven", "eight", "nine", "ten"][x]; if (w == null) throw new Error(`no word for ${x}`); return f === "Word" ? w[0].toUpperCase() + w.slice(1) : w; }
     default: throw new Error(`unknown format ${f}`);
   }
 };
