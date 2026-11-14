@@ -133,6 +133,11 @@ export function scenarioChart(metrics, scenarios, sel, back = 8) {
 
 /** The headline sentence is read from THESIS.md (section "Headline"), never retyped on the page. */
 export const headline = (thesis) => String(thesis.sections.headline.markdown).replace(/\*\*/g, "").trim();
+/** Two-tone split: the first sentence (ink) and the rest (muted). Joining the parts with a space gives the headline back. */
+export function splitHeadline(text) {
+  const m = /^(.+?[.!?])\s+(.+)$/s.exec(String(text).trim());
+  return m ? [m[1], m[2]] : [String(text).trim(), ""];
+}
 
 /** Volume view for the "it works" chart: everything in one neutral series, the suspected benchmark on top (hatched). */
 export function volumeSeries(metrics, { excludeBenchmark = false } = {}) {
@@ -255,5 +260,57 @@ export function predictionLines(pred, metrics, fmt) {
     const f = fmt[c.fmt] ?? String;
     const t = c.threshold_path ? pred.months.map((m) => f(val(c, m))).join(" / ") : f(c.threshold);
     return c.text.replace("{t}", t);
+  });
+}
+
+/** Hero columns: per month FastAuth, bridges, suspected benchmark and everyone else (the rest of the estimate). Groups bottom to top. */
+export function heroColumns(metrics) {
+  const ms = metrics.months;
+  const all = ms.map((m) => m.series_requests_est.all.value);
+  const fa = ms.map((m) => m.drivers_requests["fast-auth.near"]?.value ?? 0);
+  const br = ms.map((m) => m.series_requests_est.bridges.value);
+  const bench = ms.map((m) => m.series_requests_est.all.value - m.series_requests_est.excluding_benchmark.value);
+  const rest = all.map((v, i) => v - fa[i] - br[i] - bench[i]);
+  return {
+    months: ms.map((m) => m.month), partial: ms.map((m) => !!m.partial_month),
+    groups: [
+      { id: "rest", label: "Everyone else", tone: "muted", values: rest },
+      { id: "bridges", label: "Bridges", tone: "bridge-dark", values: br },
+      { id: "fastauth", label: "FastAuth", tone: "fastauth", values: fa },
+      { id: "benchmark", label: "Suspected benchmark", tone: "hatch", values: bench },
+    ],
+  };
+}
+
+/** Boom scene: months extended to the end of the scenario horizon; Relay split out of "everyone else"; ghost bars = the default scenario after the end month. */
+export function boomScene(metrics, scenarios, relayAccount, defaultId = "fastauth0_bench-removed_g+0") {
+  const ms = metrics.months.map((m) => m.month);
+  const sc = scenarios.scenarios.find((s) => s.id === defaultId);
+  const future = Object.keys(sc.projection).filter((m) => m > scenarios.fastauth_end_month && m > ms.at(-1));
+  const months = [...ms, ...future], pad = (arr) => [...arr, ...future.map(() => 0)];
+  const get = (f) => metrics.months.map(f);
+  const all = get((m) => m.series_requests_est.all.value);
+  const fa = get((m) => m.drivers_requests["fast-auth.near"]?.value ?? 0);
+  const relay = get((m) => m.drivers_requests[relayAccount]?.value ?? 0);
+  const bench = get((m) => m.series_requests_est.all.value - m.series_requests_est.excluding_benchmark.value);
+  const rest = all.map((v, i) => v - fa[i] - relay[i] - bench[i]);
+  return {
+    months, partial: [...get((m) => !!m.partial_month), ...future.map(() => false)], future, scenarioId: sc.id,
+    fastauth: pad(fa), relay: pad(relay), rest: pad(rest), restWithRelay: pad(rest.map((v, i) => v + relay[i])), benchmark: pad(bench),
+    ghost: [...ms.map(() => 0), ...future.map((m) => sc.projection[m].total)],
+  };
+}
+
+/** "Now vs threshold" for a falsification test: the latest full month's value of each condition and the line where the claim would be wrong. */
+export function predictionGauges(pred, metrics) {
+  const full = metrics.months.filter((m) => !m.partial_month), now = full.at(-1);
+  const pick = (obj, path) => { const parts = path.split("."); const go = (o, i) => { if (i === parts.length) return o; for (let j = parts.length; j > i; j--) { const k = parts.slice(i, j).join("."); if (o != null && Object.hasOwn(o, k)) { const r = go(o[k], j); if (r !== undefined) return r; } } return undefined; }; return go(obj, 0); };
+  return pred.any_of.map((c) => {
+    const v = pick(now, c.path)?.value;
+    const thr = c.threshold_path ? pred.months.map((m) => pick(metrics, c.threshold_path.replace("{month}", m))) : [c.threshold];
+    const t = thr[0];
+    const max = c.fmt === "pct" || c.fmt === "pct1" ? 1 : Math.max(v, ...thr) * 1.25;
+    const min = c.fmt === "pct1" ? Math.min(0.98, Math.floor(Math.min(v, t) * 100 - 1) / 100) : 0;
+    return { path: c.path, month: now.month, now: v, threshold: t, thresholds: thr, op: c.op, fmt: c.fmt, min, max, wrongNow: c.op === "<" ? v < t : v >= t };
   });
 }

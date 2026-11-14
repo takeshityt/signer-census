@@ -28,8 +28,8 @@ export function createPlusField(section, { step = 36 } = {}) {
         if (touch) k = Math.max(0, Math.sin(i * 0.35 + j * 0.28 - t / 900)) ** 6;
         else { const d = Math.hypot(x - mx, y - my); k = d < R ? (1 - d / R) ** 2 : 0; }
       }
-      const half = 2.6 + k * 4.2;
-      ctx.globalAlpha = 0.10 + k * 0.5; ctx.lineWidth = 1 + k * 0.4;
+      const half = 3 + k * 4.5;
+      ctx.globalAlpha = 0.17 + k * 0.6; ctx.lineWidth = 1 + k * 0.4;
       ctx.beginPath(); ctx.moveTo(x - half, y); ctx.lineTo(x + half, y); ctx.moveTo(x, y - half); ctx.lineTo(x, y + half); ctx.stroke();
     }
     ctx.globalAlpha = 1;
