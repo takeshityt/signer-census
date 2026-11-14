@@ -25,10 +25,10 @@ export function waffleGroups(rows, top, toneOf, nameOf) {
 export function createWaffle(host, { groups, text, aria, footnote }) {
   host.classList.add("waffle");
   let k = 0;
-  const cells = groups.flatMap((g) => Array.from({ length: g.squares }, () => ({ g, i: k++ })));
-  host.innerHTML = `<div class="wf-grid" role="group" aria-label="${esc(aria)}">${cells.map((c) => `<i class="sq t-${c.g.tone}" data-g="${esc(c.g.id)}" style="--n:${c.i}"></i>`).join("")}</div>
-    <ul class="wf-legend">${groups.map((g) => `<li tabindex="0" class="t-${g.tone}" data-g="${esc(g.id)}"><span class="sw"></span><span class="wf-name">${esc(g.name)}</span><span class="wf-val">${esc(text.shareText(g))}</span><span class="wf-sub">${esc(g.account)}${text.ciText(g) ? ` · ${esc(text.ciText(g))}` : ""}</span></li>`).join("")}</ul>
-    <p class="note wf-foot">${esc(footnote)}</p>`;
+  const cells = groups.flatMap((g, gi) => Array.from({ length: g.squares }, (_, j) => ({ g, gi, j, i: k++ })));
+  host.innerHTML = `<div class="wf-grid" role="group" aria-label="${esc(aria)}">${cells.map((c) => `<i class="sq t-${c.g.tone}" data-g="${esc(c.g.id)}" style="--n:${c.i};--g:${c.gi};--j:${c.j}"></i>`).join("")}</div>
+    <ul class="wf-legend">${groups.map((g) => `<li tabindex="0" class="t-${g.tone}" data-g="${esc(g.id)}"><span class="sw"></span><span class="wf-name">${esc(g.name)}</span><span class="wf-val">${esc(text.shareText(g))}</span><span class="wf-sub">${text.acct ? text.acct(g.account) : esc(g.account)}${text.ciText(g) ? ` · ${esc(text.ciText(g))}` : ""}</span></li>`).join("")}</ul>
+    <details class="more wf-foot"><summary>How the squares are rounded</summary><div class="body"><p>${esc(footnote)}</p></div></details>`;
   const all = [...host.querySelectorAll("[data-g]")];
   let pinned = null;
   const mark = (id) => { host.classList.toggle("dim", id != null); all.forEach((el) => el.classList.toggle("hot", id != null && el.dataset.g === id)); };

@@ -39,8 +39,9 @@
         <dl class="counters" id="counters"></dl>
       </div>
       <div class="hero-field">
-        <div id="dotfield"></div>
+        <div id="dotcols"></div>
         <div class="casecard" id="casecard"></div>
+        <ul class="key hero-key" id="key-hero"></ul>
       </div>
     </div>
     <details class="more" id="hero-more"><summary>How to read these numbers</summary><div class="body" id="hero-notes"></div></details>
@@ -66,7 +67,7 @@
   <section id="who" class="chapter wrap" aria-labelledby="h-who">
     <header class="ch-head"><p class="micro" data-ch>Who uses it</p><h2 id="h-who" class="two-tone"></h2></header>
     <div class="bento">
-      <article class="tile span-8"><div class="tile-head"><p class="micro">One dot = one percent of all requests</p></div><div id="waffle"></div></article>
+      <article class="tile span-8"><div class="tile-head"><p class="micro">One square = one percent of all requests</p></div><div id="waffle"></div></article>
       <article class="tile span-4 stack" id="who-nums"></article>
       <article class="tile span-12"><div class="tile-head"><p class="micro">Largest requesters · share with its interval · requests per month</p></div><div id="who-list" class="ranked"></div></article>
     </div>
@@ -75,14 +76,18 @@
 
   <section id="boom" class="chapter wrap" aria-labelledby="h-boom">
     <header class="ch-head"><p class="micro" data-ch>The boom</p><h2 id="h-boom" class="two-tone"></h2></header>
-    <div class="bento">
-      <article class="tile span-8">
-        <div class="tile-head"><p class="micro">Requests per month by requester</p></div>
-        <figure class="chartfig"><div id="chart-boom"></div><ul class="key" id="key-boom"></ul></figure>
-        <details class="tableview"><summary>Table</summary><div class="scroll" id="table-boom"></div></details>
-      </article>
-      <article class="tile span-4 accent" id="accent-tile"></article>
-      <article class="tile span-12"><ol class="steps3" id="boom-steps"></ol></article>
+    <div class="scene" id="boom-scene">
+      <div class="scene-chart">
+        <article class="tile">
+          <div class="tile-head"><p class="micro" id="boom-stage-label">Requests per month by requester</p></div>
+          <figure class="chartfig"><div id="chart-boom"></div><ul class="key" id="key-boom"></ul></figure>
+          <details class="tableview"><summary>Table</summary><div class="scroll" id="table-boom"></div></details>
+        </article>
+      </div>
+      <div class="scene-steps">
+        <article class="tile accent" id="accent-tile"></article>
+        <ol class="steps3" id="boom-steps"></ol>
+      </div>
     </div>
   </section>
 
@@ -112,6 +117,7 @@
           <p class="micro">Drag the sliders</p>
           <p class="live-title">Your scenario, live</p>
           <form class="sliders" id="scenario-form" aria-label="Scenario assumptions"></form>
+          <div class="presets" id="presets" role="group" aria-label="Scenario presets"></div>
         </div>
         <div class="live-chart">
           <p class="live-result" id="scenario-result" aria-live="polite"></p>
@@ -126,6 +132,7 @@
 
   <section id="wrong" class="chapter wrap" aria-labelledby="h-wrong">
     <header class="ch-head"><p class="micro" data-ch>What would prove us wrong</p><h2 id="h-wrong" class="two-tone"></h2></header>
+    <div class="countdown" id="countdown"></div>
     <div class="bento cases" id="preds"></div>
     <details class="more"><summary>Rules in full, with the reasons</summary><div class="body" id="wrong-full"></div></details>
     <details class="more"><summary>What this means for a long-term NEAR view</summary><div class="body"><ul class="view" id="nearview"></ul></div></details>
@@ -135,13 +142,14 @@
     <header class="ch-head"><p class="micro" data-ch>Verify it yourself</p><h2 id="h-verify" class="two-tone"></h2></header>
     <div class="bento">
       <article class="tile span-12 verify-tile">
-        <div><p class="micro">Network is used only after this click</p><button class="vbtn" id="verify-btn" type="button">Check a random transaction</button></div>
-        <div class="vresult" id="verify-out" aria-live="polite"></div>
+        <div><p class="micro">Network is used only after this click</p><button class="vbtn" id="verify-btn" type="button">Check a random transaction</button>
+          <ol class="vlog" id="verify-log" aria-live="polite"></ol><p class="micro vcount" id="verify-count"></p></div>
+        <div class="vresult" id="verify-out"></div>
       </article>
     </div>
   </section>
 
-  <section id="rerun" class="chapter wrap" aria-labelledby="h-rerun">
+  <section id="rerun" class="chapter wrap rerun" aria-labelledby="h-rerun">
     <header class="ch-head"><p class="micro" data-ch>Re-run it yourself</p><h2 id="h-rerun" class="two-tone"></h2></header>
     <div class="bento" id="rerun-steps"></div>
     <details class="more"><summary>Evidence and honest notes</summary><div id="honest-body" class="honest"></div></details>

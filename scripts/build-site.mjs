@@ -9,6 +9,7 @@ import { sha256 } from "../src/lib/manifest.mjs";
 import { parseCsv } from "../src/lib/csv.mjs";
 import { pickTxs } from "../src/verify.mjs";
 import { clusterStats } from "../src/estimate.mjs";
+import { repoFacts } from "../src/repo-facts.mjs";
 import { parseLabels } from "../src/labels.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
@@ -99,6 +100,7 @@ export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   for (const [from, to] of [["src/scenario-core.mjs", "js/scenario-core.js"], ["src/verify-core.mjs", "js/verify-core.js"], ["src/predictions.mjs", "js/predictions-core.js"]]) copy(from, to);
   copy("config/predictions.json", "data/predictions.json");
   emit("data/requester-monthly.json", requesterMonthly(root), "data/derived/sample_parsed.csv.gz + out/metrics.json");
+  { const f = repoFacts(root); emit("data/repo.json", { tests: f.tests, test_files: f.test_files, metrics_sha256: f.metrics_sha256, verify: f.verify }, "src/repo-facts.mjs (test count, output hash, last verify run)"); }
   emit("data/verify-sample.json", verifySample(root), "data/derived/sample_parsed.csv.gz (seeded draw, config/verify.json)");
   for (const [pkg, file] of [["geist", "geist-latin-wght-normal"], ["geist-mono", "geist-mono-latin-wght-normal"], ["doto", "doto-latin-wght-normal"]]) {
     copy(`node_modules/@fontsource-variable/${pkg}/files/${file}.woff2`, `vendor/fonts/${file}.woff2`);

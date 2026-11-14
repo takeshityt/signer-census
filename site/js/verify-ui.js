@@ -28,26 +28,65 @@ async function viaNearblocks(cfg, exp) {
 /** Random pick with the browser's crypto source (nothing is sent anywhere). */
 export const pickRandom = (list) => list[crypto.getRandomValues(new Uint32Array(1))[0] % list.length];
 
-export function setupVerify({ button, out, sample, command }) {
-  const row = (label, expected, got, ok) => `<tr><th scope="row">${esc(label)}</th><td>${esc(expected)}</td><td>${esc(got)}</td><td class="${ok ? "ok" : "bad"}">${ok ? "✓" : "✗"}</td></tr>`;
+/** "fast-auth.near|Success, x|Failure" -> "fast-auth.near · Success, x · Failure" */
+export const fmtSigns = (signs) => signs.map((x) => x.replace("|", " · ")).join(", ");
+
+const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+const calm = () => matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/**
+ * button, log (ol), counter (p), out (case card host), sample (verify-sample.json), command.
+ * Before the click: an empty case card skeleton. On click: a typed log, rows fill one by one, then the badge stamps in.
+ */
+export function setupVerify({ button, log, counter, out, sample, command }) {
+  const LABELS = ["Transaction signer", "Block height", "Sign requester · status"];
+  const card = (head, flag, rows, foot = "") => `<div class="vcase"><div class="ch-line"><span class="micro">${head}</span>${flag}</div>
+    <table><thead><tr><th scope="col">Check</th><th scope="col">Ours</th><th scope="col">Chain</th><th scope="col">Status</th></tr></thead><tbody>${rows}</tbody></table>${foot}</div>`;
+  const skeletonRows = LABELS.map((l, i) => `<tr data-r="${i}"><th scope="row">${esc(l)}</th><td>—</td><td>—</td><td class="st">—</td></tr>`).join("");
+  out.innerHTML = card("Case · no transaction yet", `<span class="flag idle">Waiting</span>`, skeletonRows);
+  let checked = 0, ok = 0;
+  const say = async (text, { wait = false } = {}) => {
+    const li = document.createElement("li"); log.appendChild(li);
+    if (calm()) { li.textContent = text; } else { for (let i = 1; i <= text.length; i++) { li.textContent = text.slice(0, i); await sleep(12); } }
+    if (wait) li.classList.add("wait");
+    return li;
+  };
   button.addEventListener("click", async () => {
     const exp = pickRandom(sample.txs);
     button.disabled = true; out.setAttribute("aria-busy", "true");
-    out.innerHTML = `<p class="micro">Asking a public NEAR archival node about <span class="mono">${esc(exp.tx_hash.slice(0, 10))}…</span></p>`;
-    let res = null, errs = [];
-    for (const f of [viaRpc, viaNearblocks]) { try { res = await f(sample, exp); break; } catch (e) { errs.push(String(e.message ?? e)); } }
-    button.disabled = false; out.removeAttribute("aria-busy");
+    log.innerHTML = "";
+    const old = out.querySelector(".vcase"); if (old && !calm()) { old.classList.add("fading"); await sleep(220); }
+    out.innerHTML = card(`Case · tx ${esc(exp.tx_hash.slice(0, 10))}… · ${esc(exp.month)}`, `<span class="flag idle">Checking</span>`, skeletonRows);
+    await say("→ picking a random sampled transaction");
+    const host = new URL(sample.rpc).host;
+    const asking = await say(`→ asking ${host}…`, { wait: true });
+    let res = null; const errs = [];
+    for (const f of [viaRpc, viaNearblocks]) {
+      try { res = await f(sample, exp); break; } catch (e) { errs.push(String(e.message ?? e)); if (f === viaRpc) { asking.classList.remove("wait"); await say(`→ ${host} did not answer, asking ${new URL(sample.nearblocks).host}…`, { wait: true }); } }
+    }
+    log.querySelectorAll(".wait").forEach((li) => li.classList.remove("wait"));
+    checked++;
     if (!res) {
-      out.innerHTML = `<div class="vcase"><div class="ch-line"><span class="micro">Case · tx ${esc(exp.tx_hash.slice(0, 10))}…</span><span class="flag bad">Offline</span></div><p>Could not reach a public node from this browser (${esc(errs.join("; "))}). That is the network, not the data. Check it from your own machine instead: <code>${esc(command)}</code></p></div>`;
+      await say(`→ no public node reachable from this browser (${errs.join("; ")}). That is the network, not the data. Run it on your machine: ${command}`);
+      out.innerHTML = card(`Case · tx ${esc(exp.tx_hash.slice(0, 10))}…`, `<span class="flag bad stamp">Offline</span>`, skeletonRows);
+      counter.textContent = `checked by you: ${ok} of ${checked} ✓`;
+      button.disabled = false; out.removeAttribute("aria-busy");
       return;
     }
+    await say("→ comparing with our record");
     const cmp = compare(exp, res.got, { height: res.height });
-    const gotSigns = res.got.signs.join(", "), expSigns = exp.signs.join(", ");
-    const okSigner = res.got.tx_signer === exp.tx_signer, okH = res.height === exp.tx_block_height, okS = gotSigns === expSigns;
-    out.innerHTML = `<div class="vcase"><div class="ch-line"><span class="micro">Case · tx ${esc(exp.tx_hash.slice(0, 10))}… · ${esc(exp.month)}</span><span class="flag ${cmp.ok ? "ok" : "bad"}">${cmp.ok ? "Verified on-chain" : "Mismatch"}</span></div><table><thead><tr><th scope="col">Check</th><th scope="col">Our data</th><th scope="col">${esc(res.source)}</th><th scope="col"><span class="sr-only">Result</span></th></tr></thead><tbody>
-      ${row("Transaction signer", exp.tx_signer, res.got.tx_signer, okSigner)}
-      ${row("Block height", String(exp.tx_block_height), String(res.height), okH)}
-      ${row("Requester and status of the sign receipt(s)", expSigns, gotSigns, okS)}
-      </tbody></table><p>${cmp.ok ? "All three match." : "Mismatch: " + esc(cmp.problems.join("; "))} <a href="https://nearblocks.io/txns/${esc(exp.tx_hash)}" rel="noopener noreferrer">${esc(exp.tx_hash.slice(0, 8))}… on NearBlocks</a>. This checks the parsing of one transaction, not the estimate.</p></div>`;
+    const vals = [[exp.tx_signer, res.got.tx_signer], [String(exp.tx_block_height), String(res.height)], [fmtSigns(exp.signs), fmtSigns(res.got.signs)]];
+    const body = out.querySelector("tbody"); out.querySelector("thead th:nth-child(3)").textContent = `Chain (${res.source})`;
+    for (const [i, [a, b]] of vals.entries()) {
+      const tr = body.querySelector(`tr[data-r="${i}"]`), good = a === b;
+      tr.innerHTML = `<th scope="row">${esc(LABELS[i])}</th><td>${esc(a)}</td><td>${esc(b)}</td><td class="st ${good ? "ok" : "bad"}"><span class="tick">${good ? "✓" : "✗"}</span></td>`;
+      tr.classList.add("filled");
+      if (!calm()) await sleep(260);
+    }
+    if (cmp.ok) ok++;
+    const flag = out.querySelector(".flag"); flag.className = `flag ${cmp.ok ? "ok" : "bad"} stamp`; flag.textContent = cmp.ok ? "Verified on-chain" : "Mismatch";
+    out.querySelector(".vcase").insertAdjacentHTML("beforeend", `<p>${cmp.ok ? "All three match." : "Mismatch: " + esc(cmp.problems.join("; "))} <a href="https://nearblocks.io/txns/${esc(exp.tx_hash)}" rel="noopener noreferrer">${esc(exp.tx_hash.slice(0, 8))}… on NearBlocks</a>. This checks the parsing of one transaction, not the estimate.</p>`);
+    counter.textContent = `checked by you: ${ok} of ${checked} ✓`;
+    button.disabled = false; out.removeAttribute("aria-busy");
   });
 }

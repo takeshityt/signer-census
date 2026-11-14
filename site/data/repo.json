@@ -1,0 +1,14 @@
+{
+ "tests": 117,
+ "test_files": 14,
+ "metrics_sha256": "6e4ce7ca28a067c480c9759964aa93a6b4dac9b87b9dba492adf0a43e785fb0c",
+ "verify": {
+  "verified": 50,
+  "sample": 50,
+  "rpc_ok": 50,
+  "nearblocks_ok": 50,
+  "date": "2026-11-11",
+  "file": "verify-2026-11-11-seed20261112-n50.json",
+  "seed": 20261112
+ }
+}

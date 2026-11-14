@@ -10,5 +10,5 @@ export function sparkline(values, { labels, partialLast = false, w = 132, h = 30
   const pk = full.reduce((a, p, i) => (values[i] > values[a] ? i : a), 0);
   const step = (w - 2 * pad) / (n - 1);
   const hits = values.map((v, i) => `<rect x="${(x(i) - step / 2).toFixed(1)}" y="0" width="${step.toFixed(1)}" height="${h}" fill="transparent"><title>${esc(labels[i])}: ${esc(fmt(v))}</title></rect>`).join("");
-  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="Monthly estimate, ${esc(labels[0])} to ${esc(labels.at(-1))}; peak ${esc(labels[pk])}, ${esc(fmt(values[pk]))}"><path class="sp-base" d="M${pad},${h - pad}H${w - pad}"/><path class="sp-line" d="${d}"/>${tail}<circle class="sp-pk" cx="${pts[pk][0].toFixed(1)}" cy="${pts[pk][1].toFixed(1)}" r="2.4"/>${hits}</svg>`;
+  return `<svg class="spark" viewBox="0 0 ${w} ${h}" width="${w}" height="${h}" role="img" aria-label="Monthly estimate, ${esc(labels[0])} to ${esc(labels.at(-1))}; peak ${esc(labels[pk])}, ${esc(fmt(values[pk]))}"><path class="sp-base" d="M${pad},${h - pad}H${w - pad}"/><path class="sp-line" pathLength="1" d="${d}"/>${tail}<circle class="sp-pk" cx="${pts[pk][0].toFixed(1)}" cy="${pts[pk][1].toFixed(1)}" r="2.4"/>${hits}</svg>`;
 }

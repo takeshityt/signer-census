@@ -116,6 +116,7 @@ export function createChart(host, init) {
   host.setAttribute("role", "group");
   host.innerHTML = `<svg class="cv" aria-hidden="true"><defs>
       <pattern id="${uid}h" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" class="hatch-bg"/><rect width="2" height="6" class="hatch-line"/></pattern>
+      <pattern id="${uid}l" width="7" height="7" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="1" height="7" class="hatch-light"/></pattern>
       <clipPath id="${uid}c"><rect x="0" y="-20" width="0" height="2000"/></clipPath></defs>
     <g class="plot"></g><g class="ann"></g><g class="over"></g></svg><div class="ann-layer"></div><div class="tip" hidden></div>`;
   const svg = host.querySelector("svg"), plot = svg.querySelector(".plot"), annG = svg.querySelector(".ann"), over = svg.querySelector(".over");
@@ -163,32 +164,38 @@ export function createChart(host, init) {
     const ymax = yMaxCur, base = mg.top + g.plotH, lo = spec.yMin ?? 0;
     let out = "";
     // gridlines + y labels
-    const ticksN = 4;
-    for (let k = 0; k <= ticksN; k++) {
-      const v = lo + ((ymax - lo) * k) / ticksN, y = Y(v, ymax);
+    const ticks = spec.yTicks ?? Array.from({ length: 5 }, (_, k) => lo + ((ymax - lo) * k) / 4);
+    for (const [k, v] of ticks.entries()) {
+      const y = Y(v, ymax);
       out += `<line class="grid${k === 0 ? " zero" : ""}" x1="${mg.left}" x2="${W - mg.right}" y1="${y.toFixed(1)}" y2="${y.toFixed(1)}"/><text class="ytick" x="${mg.left - 8}" y="${(y + 4).toFixed(1)}" text-anchor="end">${esc(spec.yFormat(v))}</text>`;
     }
     // x labels: as many as fit with ≥ 54px between them, anchored on January/July-style rounding by index
     const step = Math.max(1, Math.ceil(54 / bw));
     for (let i = (n - 1) % step; i < n; i += step) out += `<text class="xtick" x="${X(i + 0.5).toFixed(1)}" y="${H - 7}" text-anchor="middle">${esc(monthShort(spec.months[i]))}</text>`;
+    // a faded early period (e.g. "low volume, shares are noisy"): drawn as a translucent veil over the plot
+    const shadeTo = spec.shade?.to ?? 0;
     // bands (behind everything)
     spec.series.forEach((s, k) => {
       if (s.type !== "band") return;
       const pts = cur[k].map((v, i) => (v == null ? null : [X(i + 0.5), Y(v, ymax)]));
       const top = Y(spec.bandTop ?? 1, ymax);
       const edge = smoothPath(pts, base, mg.top, false);
-      out += `<path class="band t-${s.tone}" d="${edge}L${X(n - 0.5).toFixed(1)},${top.toFixed(1)}L${X(0.5).toFixed(1)},${top.toFixed(1)}Z" clip-path="url(#${uid}c)"/>`;
+      out += `<path class="band t-${s.tone}${s.hatch ? " hatched" : ""}" d="${edge}L${X(n - 0.5).toFixed(1)},${top.toFixed(1)}L${X(0.5).toFixed(1)},${top.toFixed(1)}Z" clip-path="url(#${uid}c)"${s.hatch ? ` style="fill:url(#${uid}l)"` : ""}/>`;
     });
     // stacked bars
     const barIdx = spec.series.map((s, k) => (s.type === "bar" ? k : -1)).filter((k) => k >= 0);
     if (barIdx.length) {
       const barW = clamp(bw * 0.66, 3, 30);
+      const L = barIdx.length;
       for (let i = 0; i < n; i++) {
-        const pi = reducedMotion() ? 1 : easeOut(clamp(entrance * 1.7 - (i / Math.max(1, n - 1)) * 0.7, 0, 1));
+        const stagger = (e) => easeOut(clamp(e * 1.7 - (i / Math.max(1, n - 1)) * 0.7, 0, 1));
+        const pi = reducedMotion() ? 1 : stagger(entrance);
         let cum = 0;
         const x0 = X(i + 0.5) - barW / 2;
-        for (const k of barIdx) {
-          const s = spec.series[k], v = (cur[k][i] ?? 0) * pi;
+        for (const [li, k] of barIdx.entries()) {
+          // layered: series build one after another (bottom layer first); otherwise all layers grow together
+          const pk = spec.layered && !reducedMotion() ? stagger(clamp(entrance * L - li, 0, 1)) : pi;
+          const s = spec.series[k], v = (cur[k][i] ?? 0) * pk;
           if (v <= 0.0001) continue;
           const yTop = Y(cum + v, ymax), yBot = Y(cum, ymax);
           const h = Math.max(0, yBot - yTop - (cum > 0 ? 1.2 : 0));
@@ -205,8 +212,14 @@ export function createChart(host, init) {
       out += `<path class="line t-${s.tone}${s.dash ? " dashed" : ""}" d="${smoothPath(dotted ? pts.slice(0, -1) : pts, base, mg.top, s.smooth !== false)}" clip-path="url(#${uid}c)"/>`;
       if (dotted) { const p = pts.at(-1), q = pts.at(-2); out += `<path class="tail t-${s.tone}" d="M${q[0].toFixed(1)},${q[1].toFixed(1)}L${p[0].toFixed(1)},${p[1].toFixed(1)}" clip-path="url(#${uid}c)"/>`; }
     });
+    if (shadeTo > 0) out += `<rect class="shade" x="${mg.left}" y="${mg.top}" width="${(X(shadeTo) - mg.left).toFixed(1)}" height="${g.plotH}"/>`;
+    if (spec.pulse && entrance >= 1) {
+      const k = spec.series.findIndex((q) => q.id === spec.pulse.id), i = spec.pulse.index;
+      if (k >= 0 && cur[k][i] != null) out += `<circle class="pulse" cx="${X(i + 0.5).toFixed(1)}" cy="${Y(cur[k][i], ymax).toFixed(1)}" r="7"/>`;
+    }
     plot.innerHTML = out;
-    clip.setAttribute("width", ((W - mg.left * 0) * (reducedMotion() ? 1 : entrance)).toFixed(1));
+    const lineT = spec.linesAfter ? clamp((entrance - 0.55) / 0.45, 0, 1) : entrance;
+    clip.setAttribute("width", ((W - mg.left * 0) * (reducedMotion() ? 1 : lineT)).toFixed(1));
   }
 
   function annotate() {
@@ -221,6 +234,11 @@ export function createChart(host, init) {
       const end = sideFor(e.align, x, W, e.text, e.sub);
       const inner = `<b>${esc(e.text)}</b>${e.sub ? `<span>${esc(e.sub)}</span>` : ""}`;
       html += `<div class="ev ${end ? "end" : "start"}" style="${end ? `right:${(W - x + 8).toFixed(1)}px` : `left:${(x + 8).toFixed(1)}px`};top:${(laneTop - 4).toFixed(1)}px">${e.href ? `<a href="${esc(e.href)}" rel="noopener noreferrer">${inner}</a>` : inner}</div>`;
+    }
+    if (spec.shade?.label && spec.shade.to > 0) html += `<div class="shade-label" style="left:${(mg.left + 6).toFixed(1)}px;top:${(mg.top + 6).toFixed(1)}px;max-width:${Math.max(60, X(spec.shade.to) - mg.left - 12).toFixed(0)}px">${esc(spec.shade.label)}</div>`;
+    if (spec.areaLabel) {
+      const k = spec.series.findIndex((q) => q.id === spec.areaLabel.id), i = spec.areaLabel.index;
+      if (k >= 0 && cur[k][i] != null) { const yv = (cur[k][i] + (spec.bandTop ?? 1)) / 2; html += `<div class="area-label" style="left:${X(i + 0.5).toFixed(1)}px;top:${Y(yv, ymax).toFixed(1)}px">${esc(spec.areaLabel.text)}</div>`; }
     }
     if (host.classList.contains("has-dl")) {
       const vals = spec.series.map((q) => q.values), last = g.n - 1, barW = clamp(g.bw * 0.66, 3, 30);
@@ -282,7 +300,7 @@ export function createChart(host, init) {
     const enter = () => {
       if (entered) return; entered = true;
       if (reducedMotion()) { entrance = 1; draw(); annotate(); return; }
-      tw = tween(1300, (t) => { entrance = t; draw(); if (t >= 0.98) annLayer.classList.add("on"); }, (t) => t); // linear: the per-bar stagger inside draw() provides the easing
+      tw = tween(spec.duration ?? 1300, (t) => { entrance = t; draw(); if (t >= 0.98) { annotate(); annLayer.classList.add("on"); } }, (t) => t); // linear: the per-bar stagger inside draw() provides the easing
     };
     if ("IntersectionObserver" in window) { const io = new IntersectionObserver((es) => { if (es.some((e) => e.isIntersecting)) { enter(); io.disconnect(); } }, { threshold: 0.25 }); io.observe(host); } else enter();
   }
@@ -302,7 +320,7 @@ export function createChart(host, init) {
   function relayoutSoft() { draw(); annotate(); annLayer.classList.add("on"); if (hoverI >= 0) setHover(hoverI); }
 
   start();
-  return { update, relayout, get width() { return g?.W; } };
+  return { update, relayout, get width() { return g?.W; }, get entered() { return entered; } };
 }
 
 /** The hero pen stroke: one smooth line with dated markers whose labels sit in lanes above it. */
