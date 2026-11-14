@@ -15,6 +15,7 @@ Ideas that are outside the hackathon scope. Nothing here is claimed as done.
 * **Check your own transaction.** A field on the Verify panel where anyone pastes a transaction hash and sees how Signer Census parses it: whether a `sign` receipt on `v1.signer` is found, the requester (the predecessor of that sign receipt), the destination chain by our rules in `config/chain_rules.yaml`, and whether the callback succeeded. Fetched live from the archival RPC and NearBlocks, keyless, like the existing button.
   * Why it is not the proof: the random sample stays the proof of the parsing, because we do not choose which transactions get checked. A transaction picked by the user is a convenience for skeptics, not evidence about the estimate.
   * Caveat shown in the UI: a transaction outside the sample is parsed the same way, but asking whether it is "in the estimate" is not meaningful; the estimate is a ratio measured on a cluster sample and scaled to exact monthly counts.
+* **Independent cross-check with Dune.** Recompute monthly sign requests and top requesters from Dune's NEAR tables and compare with our estimates and their 95% intervals. Not done in the hackathon: the Dune API is paid and MPP payments need wallet signing, which this project does not do. A manual run of public Dune queries in the browser would be a first step.
 
 ## Freshness
 
@@ -23,5 +24,4 @@ Ideas that are outside the hackathon scope. Nothing here is claimed as done.
 
 ## Presentation
 
-* Host the dashboard (GitHub Pages or another static host) once the repository is public.
-* Cross-browser check of the dashboard (Safari, Firefox) and a check on a real phone.
+* **Real-device check.** Test the dashboard on physical phones (iOS Safari, Android Chrome); so far only emulated 390 px widths in Chromium, WebKit and Firefox.
