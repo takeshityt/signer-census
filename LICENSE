@@ -21,5 +21,5 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 
 Third-party files vendored in site/vendor/ keep their own licenses:
-the Newsreader and Schibsted Grotesk fonts (SIL Open Font License 1.1,
-site/vendor/fonts/LICENSE-OFL-newsreader.txt and LICENSE-OFL-schibsted-grotesk.txt).
+the Geist, Geist Mono and Doto fonts (SIL Open Font License 1.1,
+site/vendor/fonts/LICENSE-OFL-geist.txt, LICENSE-OFL-geist-mono.txt and LICENSE-OFL-doto.txt).
