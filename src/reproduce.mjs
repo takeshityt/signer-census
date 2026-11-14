@@ -12,6 +12,8 @@ import { densityWeighted, censusReplay, windowComparison } from "./robustness.mj
 import { writeScenarios } from "../scripts/scenario.mjs";
 import { render, expandIncludes } from "./thesis.mjs";
 import { repoFacts } from "./repo-facts.mjs";
+import { buildCrosscheck } from "./crosscheck.mjs";
+import { fillMarkers, fillCrosscheck } from "./doc-markers.mjs";
 
 const ROOT = new URL("..", import.meta.url).pathname;
 const read = (p) => readFileSync(ROOT + p);
@@ -264,6 +266,12 @@ console.log(`out/metrics.json written. sha256 ${sha256(Buffer.from(text))}`);
 console.log(`months: ${months.length}, clusters: ${allSample.n_clusters}, sampled txs: ${allSample.n_txs}, estimated requests: ${out.totals.requests_est.value} (95% CI ${out.totals.requests_est.ci95.join(" – ")})`);
 const sc = writeScenarios(); // scenarios (NOT forecasts) from out/metrics.json + assumptions.yaml
 console.log(`out/scenarios.json written (${sc.count} scenarios, baseline ${sc.baseline}). sha256 ${sc.sha256}`);
+// Cross-check against exact per-account counts (data/exact/, fetched by `npm run exact-check`): offline, written to out/crosscheck.json.
+const exact = { counts: JSON.parse(read("data/exact/counts.json")), unit: JSON.parse(read("data/exact/unit-check.json")), meta: JSON.parse(read("data/exact/meta.json")) };
+const cc = buildCrosscheck(JSON.parse(readFileSync(ROOT + "out/metrics.json", "utf8")), exact);
+const ccText = JSON.stringify(cc, null, 1) + "\n";
+writeFileSync(ROOT + "out/crosscheck.json", ccText);
+console.log(`out/crosscheck.json written (${cc.summary.inside} of ${cc.summary.compared} inside the 95% intervals). sha256 ${sha256(Buffer.from(ccText))}`);
 // THESIS.md, README.md and the submission drafts are rendered from templates (config/rendered-docs.json): every number comes from
 // out/metrics.json, out/scenarios.json or repository facts. npm test fails if an output differs from its rendering or contains another digit.
 const docData = { metrics: JSON.parse(readFileSync(ROOT + "out/metrics.json", "utf8")), scenarios: JSON.parse(readFileSync(ROOT + "out/scenarios.json", "utf8")), repo: repoFacts(ROOT) };
@@ -274,3 +282,5 @@ for (const d of JSON.parse(read("config/rendered-docs.json")).docs) {
   writeFileSync(ROOT + d.output, text);
   console.log(`${d.output} rendered from ${d.template}. sha256 ${sha256(Buffer.from(text))}`);
 }
+// docs/METHODOLOGY.md is hand-written; its numbers live in markers refilled here (src/doc-markers.mjs) and checked by npm test
+{ const p = ROOT + "docs/METHODOLOGY.md"; writeFileSync(p, fillCrosscheck(fillMarkers(readFileSync(p, "utf8"), docData), cc)); console.log("docs/METHODOLOGY.md markers refilled"); }

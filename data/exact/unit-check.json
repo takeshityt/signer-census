@@ -1,0 +1,44 @@
+{
+ "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora|2026-05": {
+  "txs": 200,
+  "with_sign_by_acc": 200,
+  "sign_receipts_by_acc": 200,
+  "touching_v1signer": 200,
+  "max_signs_per_tx": 1
+ },
+ "btc-connector.bridge.near|2026-08": {
+  "txs": 200,
+  "with_sign_by_acc": 63,
+  "sign_receipts_by_acc": 63,
+  "touching_v1signer": 63,
+  "max_signs_per_tx": 1
+ },
+ "fast-auth.near|2026-05": {
+  "txs": 200,
+  "with_sign_by_acc": 200,
+  "sign_receipts_by_acc": 200,
+  "touching_v1signer": 200,
+  "max_signs_per_tx": 1
+ },
+ "omni.bridge.near|2026-09": {
+  "txs": 200,
+  "with_sign_by_acc": 28,
+  "sign_receipts_by_acc": 28,
+  "touching_v1signer": 71,
+  "max_signs_per_tx": 1
+ },
+ "tx-bench.near|2026-01": {
+  "txs": 200,
+  "with_sign_by_acc": 170,
+  "sign_receipts_by_acc": 170,
+  "touching_v1signer": 170,
+  "max_signs_per_tx": 1
+ },
+ "zcash-connector.bridge.near|2026-09": {
+  "txs": 200,
+  "with_sign_by_acc": 44,
+  "sign_receipts_by_acc": 44,
+  "touching_v1signer": 44,
+  "max_signs_per_tx": 1
+ }
+}

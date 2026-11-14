@@ -1,0 +1,8 @@
+{
+  "endpoint": "POST https://tx.main.fastnear.com/v0/account (keyless)",
+  "counts": "txs_count for {account_id, limit: 1, from_tx_block_height: start_height, to_tx_block_height: end_height_exclusive - 1}; `any` = every tx touching the account, `pred` = with is_predecessor: true",
+  "block_bounds": "data/derived/monthly_tx_totals.csv (the same month bounds as the census; the last month ends at the census snapshot)",
+  "unit_check": "per account, its busiest full month: 2 windows of 100 consecutive txs touching the account (ascending from a seeded random height, seed 20261114), details from POST /v0/transactions; counted sign receipts on v1.signer whose predecessor is the account",
+  "fetched_utc": "2026-11-14",
+  "command": "npm run exact-check"
+}

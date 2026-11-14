@@ -1,0 +1,294 @@
+{
+ "note": "Sample estimates of requests per requester compared with exact per-account transaction counts. Only accounts whose txs carry exactly one sign receipt by the account (unit check) are compared. Our 95% intervals cover sampling error only.",
+ "source": {
+  "endpoint": "POST https://tx.main.fastnear.com/v0/account (keyless)",
+  "counts": "txs_count for {account_id, limit: 1, from_tx_block_height: start_height, to_tx_block_height: end_height_exclusive - 1}; `any` = every tx touching the account, `pred` = with is_predecessor: true",
+  "block_bounds": "data/derived/monthly_tx_totals.csv (the same month bounds as the census; the last month ends at the census snapshot)",
+  "unit_check": "per account, its busiest full month: 2 windows of 100 consecutive txs touching the account (ascending from a seeded random height, seed 20261114), details from POST /v0/transactions; counted sign receipts on v1.signer whose predecessor is the account",
+  "fetched_utc": "2026-11-14",
+  "command": "npm run exact-check"
+ },
+ "min_compared": 1000,
+ "verified": [
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "unit_check": [
+    {
+     "month": "2026-05",
+     "txs": 200,
+     "with_sign": 200,
+     "sign_receipts": 200,
+     "max_per_tx": 1
+    }
+   ]
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "unit_check": [
+    {
+     "month": "2026-05",
+     "txs": 200,
+     "with_sign": 200,
+     "sign_receipts": 200,
+     "max_per_tx": 1
+    }
+   ]
+  }
+ ],
+ "not_compared": [
+  {
+   "account": "tx-bench.near",
+   "name": "Suspected benchmark",
+   "unit_check": [
+    {
+     "month": "2026-01",
+     "txs": 200,
+     "with_sign": 170,
+     "sign_receipts": 170,
+     "max_per_tx": 1
+    }
+   ],
+   "reason": "account tx counts are not a measure of its sign requests: not every tx touching the account carries one sign receipt by it"
+  },
+  {
+   "account": "omni.bridge.near",
+   "name": "Omni bridge",
+   "unit_check": [
+    {
+     "month": "2026-09",
+     "txs": 200,
+     "with_sign": 28,
+     "sign_receipts": 28,
+     "max_per_tx": 1
+    }
+   ],
+   "reason": "account tx counts are not a measure of its sign requests: not every tx touching the account carries one sign receipt by it"
+  },
+  {
+   "account": "btc-connector.bridge.near",
+   "name": "Bitcoin connector",
+   "unit_check": [
+    {
+     "month": "2026-08",
+     "txs": 200,
+     "with_sign": 63,
+     "sign_receipts": 63,
+     "max_per_tx": 1
+    }
+   ],
+   "reason": "account tx counts are not a measure of its sign requests: not every tx touching the account carries one sign receipt by it"
+  },
+  {
+   "account": "zcash-connector.bridge.near",
+   "name": "Zcash connector",
+   "unit_check": [
+    {
+     "month": "2026-09",
+     "txs": 200,
+     "with_sign": 44,
+     "sign_receipts": 44,
+     "max_per_tx": 1
+    }
+   ],
+   "reason": "account tx counts are not a measure of its sign requests: not every tx touching the account carries one sign receipt by it"
+  }
+ ],
+ "comparisons": [
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-04",
+   "estimate": 345639,
+   "ci95": [
+    251739,
+    432962
+   ],
+   "exact": 483117,
+   "inside": false
+  },
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-05",
+   "estimate": 564130,
+   "ci95": [
+    509783,
+    609494
+   ],
+   "exact": 555176,
+   "inside": true
+  },
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-06",
+   "estimate": 498883,
+   "ci95": [
+    461884,
+    533097
+   ],
+   "exact": 507318,
+   "inside": true
+  },
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-07",
+   "estimate": 515891,
+   "ci95": [
+    476299,
+    552683
+   ],
+   "exact": 491633,
+   "inside": true
+  },
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-08",
+   "estimate": 421881,
+   "ci95": [
+    393299,
+    452073
+   ],
+   "exact": 439647,
+   "inside": true
+  },
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-09",
+   "estimate": 243216,
+   "ci95": [
+    204093,
+    280383
+   ],
+   "exact": 262660,
+   "inside": true
+  },
+  {
+   "account": "fast-auth.near",
+   "name": "FastAuth",
+   "month": "2026-10",
+   "estimate": 161394,
+   "ci95": [
+    135333,
+    192484
+   ],
+   "exact": 145964,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2025-12",
+   "estimate": 25909,
+   "ci95": [
+    21781,
+    30037
+   ],
+   "exact": 22169,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-01",
+   "estimate": 41394,
+   "ci95": [
+    37049,
+    45587
+   ],
+   "exact": 41598,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-02",
+   "estimate": 79699,
+   "ci95": [
+    61167,
+    99517
+   ],
+   "exact": 75240,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-03",
+   "estimate": 148653,
+   "ci95": [
+    131845,
+    167158
+   ],
+   "exact": 155583,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-04",
+   "estimate": 189261,
+   "ci95": [
+    151993,
+    226894
+   ],
+   "exact": 139327,
+   "inside": false
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-05",
+   "estimate": 155405,
+   "ci95": [
+    124863,
+    189091
+   ],
+   "exact": 173727,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-06",
+   "estimate": 89910,
+   "ci95": [
+    60868,
+    121339
+   ],
+   "exact": 90910,
+   "inside": true
+  },
+  {
+   "account": "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora",
+   "name": "Relay allocator",
+   "month": "2026-07",
+   "estimate": 3999,
+   "ci95": [
+    1600,
+    6799
+   ],
+   "exact": 15356,
+   "inside": false
+  }
+ ],
+ "summary": {
+  "compared": 15,
+  "inside": 12,
+  "outside": 3,
+  "outside_months": [
+   "FastAuth 2026-04",
+   "Relay allocator 2026-04",
+   "Relay allocator 2026-07"
+  ]
+ },
+ "exact_zero_from": {
+  "fast-auth.near": null,
+  "7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora": "2026-08"
+ }
+}

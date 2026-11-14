@@ -20,6 +20,7 @@
     "site": "node scripts/serve-site.mjs",
     "check:predictions": "node scripts/check-predictions.mjs",
     "record:demo": "node scripts/record-demo.mjs",
+    "exact-check": "node scripts/exact-check.mjs",
     "build:standalone": "node scripts/build-standalone.mjs site design-versions/signer-census.html"
   },
   "devDependencies": {

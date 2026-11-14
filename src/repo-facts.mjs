@@ -1,6 +1,6 @@
 // Facts about the repository itself that documents quote (test count, output hashes, manifest sizes, last verify run).
 // Computed deterministically from committed files, so README.md and the submission drafts can be checked by `npm test`.
-import { readFileSync, readdirSync } from "node:fs";
+import { readFileSync, readdirSync, existsSync } from "node:fs";
 import { join } from "node:path";
 import { sha256 } from "./lib/manifest.mjs";
 import { latestVerify } from "../scripts/build-site.mjs";
@@ -21,6 +21,7 @@ export function repoFacts(root) {
     scenarios_sha256: sha256(readFileSync(join(root, "out/scenarios.json"))),
     data_manifest_files: lines(join(root, "data/MANIFEST.sha256")),
     raw_manifest_files: lines(join(root, "data/MANIFEST.raw-sample.sha256")),
+    crosscheck: existsSync(join(root, "out/crosscheck.json")) ? JSON.parse(readFileSync(join(root, "out/crosscheck.json"), "utf8")) : null,
     predictions_check_after: JSON.parse(readFileSync(join(root, "config/predictions.json"), "utf8")).check_after,
     predictions_count: JSON.parse(readFileSync(join(root, "config/predictions.json"), "utf8")).predictions.length,
     node_engines: JSON.parse(readFileSync(join(root, "package.json"), "utf8")).engines.node,
