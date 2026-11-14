@@ -2,9 +2,12 @@
 Every number is a placeholder (metrics, scenarios, repository facts, declared literal or external figure with URL); `npm test` fails on any other digit. -->
 # Signer Census
 
-**For a long-term NEAR investor:** Chain Signatures works (≈{{m:totals.fulfilled_rate|pct1}} of sampled requests end with a successful signature), but three requesters make ≈{{m:totals.concentration.top3_share|pct0}} of its ≈{{m:totals.requests_est|M1}} requests, so it is working infrastructure, not yet broad adoption.
-
 [![CI](https://github.com/takeshityt/signer-census/actions/workflows/ci.yml/badge.svg)](https://github.com/takeshityt/signer-census/actions/workflows/ci.yml)
+[![Pages](https://github.com/takeshityt/signer-census/actions/workflows/pages.yml/badge.svg)](https://github.com/takeshityt/signer-census/actions/workflows/pages.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Live dashboard](https://img.shields.io/badge/live-dashboard-ec6a33.svg)](https://takeshityt.github.io/signer-census/)
+
+**For a long-term NEAR investor:** Chain Signatures works (≈{{m:totals.fulfilled_rate|pct1}} of sampled requests end with a successful signature), but three requesters make ≈{{m:totals.concentration.top3_share|pct0}} of its ≈{{m:totals.requests_est|M1}} requests, so it is working infrastructure, not yet broad adoption.
 
 A reproducible, evidence-backed census of who uses NEAR Chain Signatures (the `v1.signer` MPC contract): how many signature requests there are, who sends them and for which chains, turned into a long-term thesis for NEAR. Read-only: no keys, no transactions, no paid services.
 
