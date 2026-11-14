@@ -24,4 +24,4 @@ Ideas that are outside the hackathon scope. Nothing here is claimed as done.
 
 ## Presentation
 
-* **Real-device check.** Test the dashboard on physical phones (iOS Safari, Android Chrome); so far only emulated 390 px widths in Chromium, WebKit and Firefox.
+* **Real-device check on Android.** The live dashboard was checked by hand on one iPhone (iOS Safari, 2026-11-14); Android Chrome on a physical phone is not checked yet. Automated checks use emulated 390 px widths in Chromium, WebKit and Firefox.
