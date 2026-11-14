@@ -100,7 +100,7 @@ export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   copy("config/predictions.json", "data/predictions.json");
   emit("data/requester-monthly.json", requesterMonthly(root), "data/derived/sample_parsed.csv.gz + out/metrics.json");
   emit("data/verify-sample.json", verifySample(root), "data/derived/sample_parsed.csv.gz (seeded draw, config/verify.json)");
-  for (const [pkg, file] of [["bricolage-grotesque", "bricolage-grotesque-latin-wght-normal"], ["geist", "geist-latin-wght-normal"], ["geist-mono", "geist-mono-latin-wght-normal"]]) {
+  for (const [pkg, file] of [["geist", "geist-latin-wght-normal"], ["geist-mono", "geist-mono-latin-wght-normal"], ["doto", "doto-latin-wght-normal"]]) {
     copy(`node_modules/@fontsource-variable/${pkg}/files/${file}.woff2`, `vendor/fonts/${file}.woff2`);
     copy(`node_modules/@fontsource-variable/${pkg}/LICENSE`, `vendor/fonts/LICENSE-OFL-${pkg}.txt`);
   }

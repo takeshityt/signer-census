@@ -14,10 +14,10 @@
   "js/predictions-core.js": "6aa10691082a22b9f4448cb0bb72358ff3984bdfb66fd3b6230a31d57c6ca60a",
   "js/scenario-core.js": "9ac4a9e1ab9814acb9f5286e18d30b071ea7397ad1492bedc9b16d7e1b334902",
   "js/verify-core.js": "9a9827a987d8a4c520e43276a3d25e11c4f0da2c1c55d8be5defed242308f184",
-  "vendor/fonts/LICENSE-OFL-bricolage-grotesque.txt": "923f4ddf0fd39f9b7794ab0df7332f3d95dc43e8ad7ec2289d6d9e8491177f51",
+  "vendor/fonts/LICENSE-OFL-doto.txt": "33cbb094aa3c5d82a2f2f80ae4c0310e6a4aedf54eac49c52662d5f77ee7265f",
   "vendor/fonts/LICENSE-OFL-geist-mono.txt": "cc815ed4fc045f0e991abb10395b7932bd028c6a067deb13316d6002105074e6",
   "vendor/fonts/LICENSE-OFL-geist.txt": "71609cbb5c78b5870d712eab73a31d76622635c6ed034ab5cee3b9ecbda8685f",
-  "vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2": "a97804dc9fbe5fc972a08018c5eda4dab7ef2346f64c57e61419d05e6de4ea1c",
+  "vendor/fonts/doto-latin-wght-normal.woff2": "0e1a84240f323bafc2db7540d303ba17ace1daa8bde2936a76be82d24a7a271b",
   "vendor/fonts/geist-latin-wght-normal.woff2": "19f9c92546aa300c312235e3125af1b81394d8db9a4bc4a425cd5b641d2d54e1",
   "vendor/fonts/geist-mono-latin-wght-normal.woff2": "684ad5b531f81d43c1e8c7038262d5db7cdc1f68006e04d6c7769efa8d33c8cc"
  },
@@ -35,10 +35,10 @@
   "js/predictions-core.js": "src/predictions.mjs",
   "js/scenario-core.js": "src/scenario-core.mjs",
   "js/verify-core.js": "src/verify-core.mjs",
-  "vendor/fonts/LICENSE-OFL-bricolage-grotesque.txt": "node_modules/@fontsource-variable/bricolage-grotesque/LICENSE",
+  "vendor/fonts/LICENSE-OFL-doto.txt": "node_modules/@fontsource-variable/doto/LICENSE",
   "vendor/fonts/LICENSE-OFL-geist-mono.txt": "node_modules/@fontsource-variable/geist-mono/LICENSE",
   "vendor/fonts/LICENSE-OFL-geist.txt": "node_modules/@fontsource-variable/geist/LICENSE",
-  "vendor/fonts/bricolage-grotesque-latin-wght-normal.woff2": "node_modules/@fontsource-variable/bricolage-grotesque/files/bricolage-grotesque-latin-wght-normal.woff2",
+  "vendor/fonts/doto-latin-wght-normal.woff2": "node_modules/@fontsource-variable/doto/files/doto-latin-wght-normal.woff2",
   "vendor/fonts/geist-latin-wght-normal.woff2": "node_modules/@fontsource-variable/geist/files/geist-latin-wght-normal.woff2",
   "vendor/fonts/geist-mono-latin-wght-normal.woff2": "node_modules/@fontsource-variable/geist-mono/files/geist-mono-latin-wght-normal.woff2"
  }

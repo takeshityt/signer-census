@@ -133,6 +133,11 @@ export function scenarioChart(metrics, scenarios, sel, back = 8) {
 
 /** The headline sentence is read from THESIS.md (section "Headline"), never retyped on the page. */
 export const headline = (thesis) => String(thesis.sections.headline.markdown).replace(/\*\*/g, "").trim();
+/** Two-tone split: the first sentence (ink) and the rest (muted). Joining the parts with a space gives the headline back. */
+export function splitHeadline(text) {
+  const m = /^(.+?[.!?])\s+(.+)$/s.exec(String(text).trim());
+  return m ? [m[1], m[2]] : [String(text).trim(), ""];
+}
 
 /** Volume view for the "it works" chart: everything in one neutral series, the suspected benchmark on top (hatched). */
 export function volumeSeries(metrics, { excludeBenchmark = false } = {}) {

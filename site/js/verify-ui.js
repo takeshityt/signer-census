@@ -33,21 +33,21 @@ export function setupVerify({ button, out, sample, command }) {
   button.addEventListener("click", async () => {
     const exp = pickRandom(sample.txs);
     button.disabled = true; out.setAttribute("aria-busy", "true");
-    out.innerHTML = `<p class="note">Asking a public NEAR archival node about <span class="mono">${esc(exp.tx_hash.slice(0, 10))}…</span></p>`;
+    out.innerHTML = `<p class="micro">Asking a public NEAR archival node about <span class="mono">${esc(exp.tx_hash.slice(0, 10))}…</span></p>`;
     let res = null, errs = [];
     for (const f of [viaRpc, viaNearblocks]) { try { res = await f(sample, exp); break; } catch (e) { errs.push(String(e.message ?? e)); } }
     button.disabled = false; out.removeAttribute("aria-busy");
     if (!res) {
-      out.innerHTML = `<p>Could not reach a public node from this browser (${esc(errs.join("; "))}). That is the network, not the data. Check it from your own machine instead: <code>${esc(command)}</code></p>`;
+      out.innerHTML = `<div class="vcase"><div class="ch-line"><span class="micro">Case · tx ${esc(exp.tx_hash.slice(0, 10))}…</span><span class="flag bad">Offline</span></div><p>Could not reach a public node from this browser (${esc(errs.join("; "))}). That is the network, not the data. Check it from your own machine instead: <code>${esc(command)}</code></p></div>`;
       return;
     }
     const cmp = compare(exp, res.got, { height: res.height });
     const gotSigns = res.got.signs.join(", "), expSigns = exp.signs.join(", ");
     const okSigner = res.got.tx_signer === exp.tx_signer, okH = res.height === exp.tx_block_height, okS = gotSigns === expSigns;
-    out.innerHTML = `<table><thead><tr><th scope="col">Check</th><th scope="col">Our data</th><th scope="col">${esc(res.source)}</th><th scope="col"><span class="sr-only">Result</span></th></tr></thead><tbody>
+    out.innerHTML = `<div class="vcase"><div class="ch-line"><span class="micro">Case · tx ${esc(exp.tx_hash.slice(0, 10))}… · ${esc(exp.month)}</span><span class="flag ${cmp.ok ? "ok" : "bad"}">${cmp.ok ? "Verified on-chain" : "Mismatch"}</span></div><table><thead><tr><th scope="col">Check</th><th scope="col">Our data</th><th scope="col">${esc(res.source)}</th><th scope="col"><span class="sr-only">Result</span></th></tr></thead><tbody>
       ${row("Transaction signer", exp.tx_signer, res.got.tx_signer, okSigner)}
       ${row("Block height", String(exp.tx_block_height), String(res.height), okH)}
       ${row("Requester and status of the sign receipt(s)", expSigns, gotSigns, okS)}
-      </tbody></table><p>${cmp.ok ? "All three match." : "Mismatch: " + esc(cmp.problems.join("; "))} <a href="https://nearblocks.io/txns/${esc(exp.tx_hash)}" rel="noopener noreferrer">${esc(exp.tx_hash.slice(0, 8))}… on NearBlocks</a>. This checks the parsing of one transaction, not the estimate.</p>`;
+      </tbody></table><p>${cmp.ok ? "All three match." : "Mismatch: " + esc(cmp.problems.join("; "))} <a href="https://nearblocks.io/txns/${esc(exp.tx_hash)}" rel="noopener noreferrer">${esc(exp.tx_hash.slice(0, 8))}… on NearBlocks</a>. This checks the parsing of one transaction, not the estimate.</p></div>`;
   });
 }
