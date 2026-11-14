@@ -1,5 +1,5 @@
 import { firefox } from "playwright";
-const OUT = "/Users/takeshi/Projects/NEAR/signer-census/docs/evidence/design/v3-r2";
+const OUT = new URL(".", import.meta.url).pathname.replace(/\/$/, ""); // this folder (docs/evidence/design/v3-r2)
 const b = await firefox.launch();
 for (const theme of ["dark", "light"]) {
   const ctx = await b.newContext({ viewport: { width: 1280, height: 900 }, reducedMotion: "reduce" });

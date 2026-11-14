@@ -1,5 +1,5 @@
 import { chromium, webkit } from "playwright";
-const OUT = "/Users/takeshi/Projects/NEAR/signer-census/docs/evidence/design/v3-r2";
+const OUT = new URL(".", import.meta.url).pathname.replace(/\/$/, ""); // this folder (docs/evidence/design/v3-r2)
 for (const [n, bt] of [["chromium", chromium], ["webkit", webkit]]) {
   const b = await bt.launch();
   for (const theme of ["dark", "light"]) for (const w of [1280, 390]) {

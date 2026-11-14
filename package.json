@@ -20,15 +20,12 @@
     "site": "node scripts/serve-site.mjs",
     "check:predictions": "node scripts/check-predictions.mjs",
     "record:demo": "node scripts/record-demo.mjs",
-    "exact-check": "node scripts/exact-check.mjs",
-    "build:standalone": "node scripts/build-standalone.mjs site design-versions/signer-census.html"
+    "exact-check": "node scripts/exact-check.mjs"
   },
   "devDependencies": {
     "@fontsource-variable/doto": "^5.3.0",
     "@fontsource-variable/geist": "^5.3.0",
     "@fontsource-variable/geist-mono": "^5.3.0",
-    "@fontsource-variable/newsreader": "^5.3.0",
-    "@fontsource-variable/schibsted-grotesk": "^5.3.0",
     "playwright": "1.47.2",
     "vitest": "^5.1.0"
   },

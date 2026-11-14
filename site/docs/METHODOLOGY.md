@@ -27,7 +27,7 @@ it measures the fraction of sign receipts per tx in a sample (section 4).
 
 * **request** = an executed `sign` receipt on `v1.signer`. Its own status may be a failure (the contract rejects a repeat of a still-pending identical request with
   "Signature request has already been submitted"); such receipts still count as requests and are reported separately as `sign_receipt_failed_rate`
-  (sample: 2.3% of all sign receipts overall, 45% in 2025-03, ~0% in most other months).
+  (estimated share of all sign receipts over the whole period: <!--{{m:totals.sign_receipt_failed_rate|pct2}}-->0.03%<!--/-->; in 2025-03 <!--{{m:months[2025-03].sign_receipt_failed_rate|pct0}}-->45%<!--/-->, near zero in most other months).
 * **fulfilled** = the callback found among the descendant receipts of **that** sign receipt (breadth-first over `outcome.receipt_ids`, depth ≤ 4) succeeded.
   Callback names: `return_signature_and_clean_state_on_success` (current; sampled from 2025-02 on) and `return_signature_on_finish` (legacy contract version, until 2025-02;
   sign → sign_helper → return_signature_on_finish). A tx can hold several sign receipts (13 such txs in the sample, at most 2 sign receipts each: `meta.sample.txs_with_multiple_sign_receipts` and
@@ -104,6 +104,9 @@ with (b) the tx list of FastNEAR and the full receipt tree of each tx from RPC `
 
 * **Sampling bias.** Start heights are uniform in block height. A tx that follows a long quiet gap is more likely to be the first tx of a cluster than a tx inside a dense burst, so quiet periods are slightly over-weighted.
   The bootstrap interval does not include this bias, only between-cluster variability. Months with a few very bursty actors (e.g. the benchmark account `tx-bench.near`) have wider intervals.
+* **Fixed number of clusters.** Every sampled month has the same number of clusters (`config/sample.json`, 20 clusters of up to 200 txs), so the largest months have the lowest sampling fraction and the widest relative uncertainty. The cluster bootstrap captures sampling error only and is too narrow in months of abrupt change (see §15b).
+* **Per-month concentration is a sample statistic.** `months[].concentration.requesters_ge_1pct` counts requesters at or above 1% *in the sample* of that month; small requesters are often missed and a requester near 1% can be in or out by chance, so the count is biased and noisy. Falsification test P1 uses it (THESIS.md); its threshold was not changed.
+* **Short outages can fall between sample windows.** The fulfilled rate is measured on the sampled clusters, so an outage of hours can be missed entirely; falsification test P4 (callback success below 99.5% in a month) therefore has low power to detect short outages.
 * **Overlap.** Clusters of one month can overlap when a month is small; overlapping txs are counted in both clusters (the bootstrap is then conservative).
 * **Month attribution.** A request is attributed to the month of its tx, not of the callback execution.
 * **Unmatched callbacks.** `fulfilled` is 0 when no callback is found in the descendant receipts (rejected or pending sign receipts); pending requests at the very tip of the chain are not separated from failed ones.
@@ -140,9 +143,9 @@ Only `sign` counts as a signature request. **Other request types are reported se
 
 * Every requester needed for ≥ 95% of estimated requests (8 accounts) plus all with ≥ 0.5% (11) are labeled; 15 accounts in total (also three smaller kernel/satoshi accounts and brg.toalice.near, the main cause of the 2025-03 rejection spike). 
   Each entry has category, confidence, owner, note and evidence URLs; `npm test` fails if an entry has no evidence URL, a made-up category, or an `unknown` entry without a note.
-* **Coverage** (`totals.labeling_coverage`): requests of requesters that have any label ≈ 98.4% (98.1-98.7%);
-  requests whose requester is **identified** (category other than `unknown`) ≈ 78.7% (77.9-79.6%). By confidence: high ≈ 76.6%, medium ≈ 2.1%,
-  low ≈ 19.7% (this is dominated by tx-bench.near, an `unknown` entry), unlabeled ≈ 1.6%.
+* **Coverage** (`totals.labeling_coverage`, refilled from out/metrics.json): requests of requesters that have any label ≈ <!--{{m:totals.labeling_coverage.labeled_share_of_requests_including_unknown_category|pct1}}-->98.4%<!--/--> (<!--{{m:totals.labeling_coverage.labeled_share_of_requests_including_unknown_category|ci_pct1}}-->98.1%–98.7%<!--/-->);
+  requests whose requester is **identified** (category other than `unknown`) ≈ <!--{{m:totals.labeling_coverage.identified_share_of_requests|pct1}}-->78.7%<!--/--> (<!--{{m:totals.labeling_coverage.identified_share_of_requests|ci_pct1}}-->77.9%–79.6%<!--/-->). By confidence: high ≈ <!--{{m:totals.labeling_coverage.by_confidence.high|pct1}}-->62.6%<!--/-->, medium ≈ <!--{{m:totals.labeling_coverage.by_confidence.medium|pct1}}-->16.2%<!--/-->,
+  low ≈ <!--{{m:totals.labeling_coverage.by_confidence.low|pct1}}-->19.7%<!--/--> (this is dominated by tx-bench.near, an `unknown` entry), unlabeled ≈ <!--{{m:totals.labeling_coverage.by_confidence.unlabeled|pct1}}-->1.6%<!--/-->.
 * **tx-bench.near** (≈ 19.1% of requests) is deliberately *not* labeled benchmark-test: `category: unknown`, `suspected_category: benchmark-test`, confidence low. The evidence is behavioural (no contract, one key, empty path,
   constant then random payloads, clockwork cadence, top-ups from n1-*.near accounts); no source names the account. The headline is shown both with and without it.
 * `aurora` is not used as a category: `*.aurora` accounts are only the NEAR-side transport of Aurora EVM contracts; the two found (7eda04…, e12bc5…) are Relay Protocol's allocators and are labeled `third-party-app`.
@@ -174,7 +177,10 @@ All confidence intervals in this repository are **sampling-only** (cluster boots
 
 ## 12. Dependencies
 
-* `vitest` (dev): test runner required by CLAUDE.md. `yaml` (runtime): parses `labels.yaml` and `config/chain_rules.yaml`, the human-editable formats chosen for evidence-bearing data. No other dependencies; Node built-ins elsewhere.
+* `vitest` (dev): test runner required by CLAUDE.md. `yaml` (runtime): parses `labels.yaml` and `config/chain_rules.yaml`, the human-editable formats chosen for evidence-bearing data.
+* `@fontsource-variable/geist`, `@fontsource-variable/geist-mono`, `@fontsource-variable/doto` (dev): the three dashboard fonts (SIL OFL 1.1), copied into `site/vendor/fonts/` by `npm run build:site`.
+* `playwright` (dev, pinned 1.47.2): only for `npm run record:demo` (driving the dashboard for the demo video) and the browser checks in docs/evidence/design; pinned because on macOS 12 newer versions did not install their browsers. Not used by the census itself.
+* No other dependencies; Node built-ins elsewhere.
 
 ## 13. Thesis metrics (GATE 3)
 
@@ -223,6 +229,48 @@ re-download: `npm run monthly`, then `npm run sample` (all months, about 5,800 A
 that is at least about 32 minutes, more with FastNEAR's frequent HTTP 429 answers), `npm run parse` and `npm run reproduce`. A cluster file is reused only if it was fetched for the same block range:
 after `npm run monthly` moves the end of a month that was partial before, its old cluster files are re-fetched instead of being reused (`scripts/sample-details.mjs`).
 
+## 15b. Cross-check against exact per-account counts
+
+For a requester whose every transaction carries exactly one sign receipt by it, the FastNEAR count of transactions touching the account is an exact count of its sign requests.
+`npm run exact-check` fetches those counts for the six largest requesters (keyless, paced, cached in `data/exact/`, see `data/exact/meta.json`) and checks the unit on sampled windows;
+`npm run reproduce` compares them offline with our monthly estimates and writes `out/crosscheck.json`. The table below is refilled from that file (`npm test` checks it).
+
+<!-- crosscheck-table -->
+**12 of 15** monthly comparisons fall inside our 95% intervals (months where the estimate or the exact count is at least 1,000).
+
+| Requester | Month | Our estimate | 95% interval | Exact count | Inside |
+|---|---|---:|---:|---:|---|
+| FastAuth | Apr 2026 | 345,639 | 251,739–432,962 | 483,117 | **no** |
+| FastAuth | May 2026 | 564,130 | 509,783–609,494 | 555,176 | yes |
+| FastAuth | Jun 2026 | 498,883 | 461,884–533,097 | 507,318 | yes |
+| FastAuth | Jul 2026 | 515,891 | 476,299–552,683 | 491,633 | yes |
+| FastAuth | Aug 2026 | 421,881 | 393,299–452,073 | 439,647 | yes |
+| FastAuth | Sep 2026 | 243,216 | 204,093–280,383 | 262,660 | yes |
+| FastAuth | Oct 2026 | 161,394 | 135,333–192,484 | 145,964 | yes |
+| Relay allocator | Dec 2025 | 25,909 | 21,781–30,037 | 22,169 | yes |
+| Relay allocator | Jan 2026 | 41,394 | 37,049–45,587 | 41,598 | yes |
+| Relay allocator | Feb 2026 | 79,699 | 61,167–99,517 | 75,240 | yes |
+| Relay allocator | Mar 2026 | 148,653 | 131,845–167,158 | 155,583 | yes |
+| Relay allocator | Apr 2026 | 189,261 | 151,993–226,894 | 139,327 | **no** |
+| Relay allocator | May 2026 | 155,405 | 124,863–189,091 | 173,727 | yes |
+| Relay allocator | Jun 2026 | 89,910 | 60,868–121,339 | 90,910 | yes |
+| Relay allocator | Jul 2026 | 3,999 | 1,600–6,799 | 15,356 | **no** |
+
+Unit check (txs touching the account that carry one sign receipt by it, in sampled windows of the busiest month):
+
+| Requester | Sign receipts / txs checked | Result |
+|---|---|---|
+| FastAuth | May 2026: 200 of 200 | compared |
+| Relay allocator | May 2026: 200 of 200 | compared |
+| Suspected benchmark | Jan 2026: 170 of 200 | not compared |
+| Omni bridge | Sep 2026: 28 of 200 | not compared |
+| Bitcoin connector | Aug 2026: 63 of 200 | not compared |
+| Zcash connector | Sep 2026: 44 of 200 | not compared |
+<!-- /crosscheck-table -->
+
+What this shows: our intervals capture sampling error only and are too narrow in months of abrupt change (the April 2026 FastAuth ramp; Relay's allocator in April and July 2026).
+The comparison does not change the estimator, the metrics or the falsification thresholds. For the suspected benchmark and the bridge connectors the account count is not a measure of their sign requests (most of their transactions are other calls), so they are not compared.
+
 ## 16. THESIS.md
 
 THESIS.md is rendered from docs/THESIS.template.md by `npm run reproduce`. Every number is a placeholder resolved from out/metrics.json or out/scenarios.json (with a footnote giving the JSON path),
@@ -230,6 +278,6 @@ a declared literal (dates and thresholds we define) or an external figure with i
 
 ## 17. Dashboard (GATE 4)
 
-`site/` is a static page (HTML, CSS, ES modules, charts drawn as plain SVG, two self-hosted variable fonts; no runtime network calls). `npm run build:site` copies out/metrics.json and out/scenarios.json into site/data/ with a sha256 manifest and exports
+`site/` is a static page (HTML, CSS, ES modules, charts drawn as plain SVG, three self-hosted fonts, Geist, Geist Mono and Doto; no network calls except the explicit "Check a random transaction" button). `npm run build:site` copies out/metrics.json and out/scenarios.json into site/data/ with a sha256 manifest and exports
 labels.yaml, the latest docs/evidence/verify run and the THESIS.md sections as JSON; `npm run site` serves it on 127.0.0.1:4173. Every number on the page is read from those files (`site/js/model.js`, unit-tested against the real data); the five thesis lines and the falsification tests are exported from THESIS.md, not retyped.
 Checks and screenshots: docs/evidence/dashboard/CHECKS.md. The charts are drawn by `site/js/charts.js` (stacked bars, monotone lines, bands, dated annotations, direct labels, crosshair tooltips with the 95% intervals; no chart library). Color follows the entity on every chart (FastAuth warm, bridges green, suspected benchmark hatched grey, everyone else muted grey); the accent pairs were checked with the dataviz palette validator in light and dark. Chapter headings and the headline are read from THESIS.md (section "Headline") or built from the JSON; no number is typed in the page (`test/site-model.test.mjs`).

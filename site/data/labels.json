@@ -17,7 +17,7 @@
    },
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call fast-auth.near.mpc_domain_id returned \"1\" (Ed25519 domain of v1.signer), matching domain_id=1 on all sampled sign receipts."
+    "claim": "view call fast-auth.near.mpc_domain_id returned \"1\" (Ed25519 domain of v1.signer), matching domain_id=1 on all sampled sign receipts. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"fast-auth.near\",\"method_name\":\"mpc_domain_id\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://docs.near.org/web3-apps/tutorials/near-auth",
@@ -39,7 +39,7 @@
    "evidence": [
     {
      "url": "https://rpc.mainnet.fastnear.com",
-     "claim": "view_state of jwt.fast-auth.near (block 224116390) maps issuer \"https://fastauth.swe.at\" to guard account \"sweat.jwt.fast-auth.near\" (and \"https://login.auth.near.org/\" to \"auth0.jwt.fast-auth.near\"); maintainer fast-auth-maintainer.sputnik-dao.near."
+     "claim": "view_state of jwt.fast-auth.near (block 224116390) maps issuer \"https://fastauth.swe.at\" to guard account \"sweat.jwt.fast-auth.near\" (and \"https://login.auth.near.org/\" to \"auth0.jwt.fast-auth.near\"); maintainer fast-auth-maintainer.sputnik-dao.near. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_state\",\"account_id\":\"jwt.fast-auth.near\",\"prefix_base64\":\"\",\"block_id\":224116390}}'"
     },
     {
      "url": "https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/",
@@ -74,7 +74,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view_account tx-bench.near returned code_hash 11111111111111111111111111111111 (no contract); view_access_key_list returned a single FullAccess key ed25519:9XMdCmpw… (owner not established)."
+    "claim": "view_account tx-bench.near returned code_hash 11111111111111111111111111111111 (no contract); view_access_key_list returned a single FullAccess key ed25519:9XMdCmpw… (owner not established). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"account_id\":\"tx-bench.near\",\"finality\":\"final\"}}' ; curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_access_key_list\",\"account_id\":\"tx-bench.near\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://nearblocks.io/txns/2y7oUAur5wJRr3ywPb1jDLbvVX9Avoo24drYtgYJCtmk",
@@ -124,7 +124,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call omni.bridge.near.contract_source_metadata returned link https://github.com/Near-One/omni-bridge/tree/83e3ac1eeef6b1330744f53d68dd037fa53aab0f, version 0.4.18."
+    "claim": "view call omni.bridge.near.contract_source_metadata returned link https://github.com/Near-One/omni-bridge/tree/83e3ac1eeef6b1330744f53d68dd037fa53aab0f, version 0.4.18. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"omni.bridge.near\",\"method_name\":\"contract_source_metadata\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://github.com/Near-One/omni-bridge/blob/83e3ac1eeef6b1330744f53d68dd037fa53aab0f/near/omni-bridge/src/lib.rs",
@@ -147,7 +147,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call btc-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/7740fae0ed8dc56571adfe2aaf36bd4edee0d441, version 0.9.6."
+    "claim": "view call btc-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/7740fae0ed8dc56571adfe2aaf36bd4edee0d441, version 0.9.6. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"btc-connector.bridge.near\",\"method_name\":\"contract_source_metadata\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://github.com/Near-One/btc-bridge/blob/7740fae0ed8dc56571adfe2aaf36bd4edee0d441/contracts/satoshi-bridge/src/chain_signature.rs",
@@ -170,11 +170,11 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call zcash-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/37be7c6dfcb3a067ce8bedbe68052a8739e1445c, version 0.9.9."
+    "claim": "view call zcash-connector.bridge.near.contract_source_metadata returned link https://github.com/Near-One/btc-bridge/tree/37be7c6dfcb3a067ce8bedbe68052a8739e1445c, version 0.9.9. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"zcash-connector.bridge.near\",\"method_name\":\"contract_source_metadata\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view_code of zcash-connector.bridge.near (block 224191358) contains \"orchard\" 12 times and \"zcash\" 19 times case-sensitive (50 and 39 ignoring case); btc-connector.bridge.near contains \"orchard\" 0 times and \"zcash\" 2 times case-sensitive (7 ignoring case) (counted 2026-11-12)."
+    "claim": "view_code of zcash-connector.bridge.near (block 224191358) contains \"orchard\" 12 times and \"zcash\" 19 times case-sensitive (50 and 39 ignoring case); btc-connector.bridge.near contains \"orchard\" 0 times and \"zcash\" 2 times case-sensitive (7 ignoring case) (counted 2026-11-12). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_code\",\"account_id\":\"zcash-connector.bridge.near\",\"block_id\":224191358}}'"
    }
   ],
   "dominant_integrator": null
@@ -193,7 +193,7 @@
    },
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view_code of reflect-adam-mainnet-agent-contract.near contains the method names request_signature, register_agent and whitelist_agent (checked 2026-11-11)."
+    "claim": "view_code of reflect-adam-mainnet-agent-contract.near contains the method names request_signature, register_agent and whitelist_agent (checked 2026-11-11). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_code\",\"account_id\":\"reflect-adam-mainnet-agent-contract.near\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/research-aurora-reflect.json",
@@ -212,7 +212,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call kernel-usdc.meteor-vaults.near.contract_source_metadata returned link https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958, version 0.1.0 (the repo returns 404: not public)."
+    "claim": "view call kernel-usdc.meteor-vaults.near.contract_source_metadata returned link https://github.com/Meteor-Wallet/dew-finance-contract/tree/b76442e858ac551f4ecb462280b951f02dfba958, version 0.1.0 (the repo returns 404: not public). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"kernel-usdc.meteor-vaults.near\",\"method_name\":\"contract_source_metadata\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://docs.dew.finance/introduction/overview",
@@ -235,7 +235,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view_account kernel-usdt.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z, identical to kernel-usdc (whose NEP-330 link names Meteor-Wallet/dew-finance-contract)."
+    "claim": "view_account kernel-usdt.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z, identical to kernel-usdc (whose NEP-330 link names Meteor-Wallet/dew-finance-contract). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"account_id\":\"kernel-usdt.meteor-vaults.near\",\"finality\":\"final\"}}'"
    }
   ],
   "dominant_integrator": null
@@ -292,7 +292,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view_account kernel-near.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z (same as kernel-usdc)."
+    "claim": "view_account kernel-near.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z (same as kernel-usdc). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"account_id\":\"kernel-near.meteor-vaults.near\",\"finality\":\"final\"}}'"
    }
   ],
   "dominant_integrator": null
@@ -307,7 +307,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view_account kernel-zec.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z (same as kernel-usdc)."
+    "claim": "view_account kernel-zec.meteor-vaults.near returned code_hash 36E2TZP6jKjhxWPzXqo4vq9cAazHAHjYHmFEKbcxtQ3Z (same as kernel-usdc). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"view_account\",\"account_id\":\"kernel-zec.meteor-vaults.near\",\"finality\":\"final\"}}'"
    }
   ],
   "dominant_integrator": null
@@ -322,11 +322,11 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call acc.ref-labs.near.contract_source_metadata returned link https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/af06d696f87ea1294912d03e47eae35553c56ef7, version 0.1.3."
+    "claim": "view call acc.ref-labs.near.contract_source_metadata returned link https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/af06d696f87ea1294912d03e47eae35553c56ef7, version 0.1.3. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"acc.ref-labs.near\",\"method_name\":\"contract_source_metadata\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call acc.ref-labs.near.get_config returned bridge_account_id btc-connector.bridge.near, nbtc_account_id nbtc.bridge.near, chain_signatures_account_id v1.signer; view_code contains sign_near_transaction, request_sign_near_txs, create_csna_and_inner_account and no sign_btc_transaction."
+    "claim": "view call acc.ref-labs.near.get_config returned bridge_account_id btc-connector.bridge.near, nbtc_account_id nbtc.bridge.near, chain_signatures_account_id v1.signer; view_code contains sign_near_transaction, request_sign_near_txs, create_csna_and_inner_account and no sign_btc_transaction. Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"acc.ref-labs.near\",\"method_name\":\"get_config\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    }
   ],
   "dominant_integrator": null
@@ -341,7 +341,7 @@
   "evidence": [
    {
     "url": "https://rpc.mainnet.fastnear.com",
-    "claim": "view call brg.toalice.near.contract_source_metadata returned link https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/79ef8efb2a4eca49c1b44064699e9b2e7f286924, version 0.4.0 (nep330); view_account code_hash 5MuoSSgssY5iZCkU9tFvmhBnFzjzWpe4gqa7ZiY17Gkj (2026-11-11)."
+    "claim": "view call brg.toalice.near.contract_source_metadata returned link https://github.com/Near-Bridge-Lab/btc-bridge-contract/tree/79ef8efb2a4eca49c1b44064699e9b2e7f286924, version 0.4.0 (nep330); view_account code_hash 5MuoSSgssY5iZCkU9tFvmhBnFzjzWpe4gqa7ZiY17Gkj (2026-11-11). Reproduce: curl -s https://rpc.mainnet.fastnear.com -H 'content-type: application/json' -d '{\"jsonrpc\":\"2.0\",\"id\":1,\"method\":\"query\",\"params\":{\"request_type\":\"call_function\",\"account_id\":\"brg.toalice.near\",\"method_name\":\"contract_source_metadata\",\"args_base64\":\"e30=\",\"finality\":\"final\"}}'"
    },
    {
     "url": "https://github.com/takeshityt/signer-census/blob/main/docs/evidence/attribution/requester-profiles.json",

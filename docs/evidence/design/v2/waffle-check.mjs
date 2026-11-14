@@ -1,7 +1,7 @@
 import { webkit, chromium } from "playwright";
 import { writeFileSync, mkdirSync } from "node:fs";
 import { readFileSync } from "node:fs";
-const ROOT = "/Users/takeshi/Projects/NEAR/signer-census";
+const ROOT = new URL("../../../../", import.meta.url).pathname.replace(/\/$/, ""); // repository root
 const { waffleGroups } = await import(`${ROOT}/site/js/waffle.js`);
 const { requesterRows, requesterName, requesterTone } = await import(`${ROOT}/site/js/model.js`);
 const metrics = JSON.parse(readFileSync(`${ROOT}/out/metrics.json`)), labels = JSON.parse(readFileSync(`${ROOT}/site/data/labels.json`));

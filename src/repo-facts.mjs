@@ -21,6 +21,7 @@ export function repoFacts(root) {
     scenarios_sha256: sha256(readFileSync(join(root, "out/scenarios.json"))),
     data_manifest_files: lines(join(root, "data/MANIFEST.sha256")),
     raw_manifest_files: lines(join(root, "data/MANIFEST.raw-sample.sha256")),
+    exact_counts: existsSync(join(root, "data/exact/counts.json")) ? JSON.parse(readFileSync(join(root, "data/exact/counts.json"), "utf8")) : null,
     crosscheck: existsSync(join(root, "out/crosscheck.json")) ? JSON.parse(readFileSync(join(root, "out/crosscheck.json"), "utf8")) : null,
     predictions_check_after: JSON.parse(readFileSync(join(root, "config/predictions.json"), "utf8")).check_after,
     predictions_count: JSON.parse(readFileSync(join(root, "config/predictions.json"), "utf8")).predictions.length,

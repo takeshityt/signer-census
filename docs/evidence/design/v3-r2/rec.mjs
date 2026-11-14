@@ -1,7 +1,7 @@
 import { chromium } from "playwright";
 import { renameSync, readdirSync, mkdirSync } from "node:fs";
-const OUT = "/Users/takeshi/Projects/NEAR/signer-census/docs/evidence/design/v3-r2";
-const tmp = "/tmp/pwtest/vid"; mkdirSync(tmp, { recursive: true });
+const OUT = new URL(".", import.meta.url).pathname.replace(/\/$/, ""); // this folder (docs/evidence/design/v3-r2)
+const tmp = new URL("./.vid", import.meta.url).pathname; mkdirSync(tmp, { recursive: true });
 const b = await chromium.launch();
 async function record(name, fn) {
   const ctx = await b.newContext({ viewport: { width: 1280, height: 800 }, reducedMotion: "no-preference", recordVideo: { dir: tmp, size: { width: 1280, height: 800 } } });

@@ -99,6 +99,7 @@ export function buildSite({ root = ROOT, siteDir = join(root, "site") } = {}) {
   mkdirSync(join(siteDir, "js"), { recursive: true });
   for (const [from, to] of [["src/scenario-core.mjs", "js/scenario-core.js"], ["src/verify-core.mjs", "js/verify-core.js"], ["src/predictions.mjs", "js/predictions-core.js"]]) copy(from, to);
   copy("config/predictions.json", "data/predictions.json");
+  copy("out/crosscheck.json", "data/crosscheck.json");
   emit("data/requester-monthly.json", requesterMonthly(root), "data/derived/sample_parsed.csv.gz + out/metrics.json");
   { const f = repoFacts(root); emit("data/repo.json", { tests: f.tests, test_files: f.test_files, metrics_sha256: f.metrics_sha256, verify: f.verify }, "src/repo-facts.mjs (test count, output hash, last verify run)"); }
   emit("data/verify-sample.json", verifySample(root), "data/derived/sample_parsed.csv.gz (seeded draw, config/verify.json)");

@@ -30,7 +30,7 @@
     },
     {
       "id": "P2",
-      "claim": "The boom was one integration that ends with Sweat Wallet",
+      "claim": "The boom was mostly one integration that ends with Sweat Wallet",
       "months": [
         "2027-02",
         "2027-03"
@@ -82,7 +82,8 @@
           "text": "callback success below {t}",
           "fmt": "pct1"
         }
-      ]
+      ],
+      "note": "Low power: the success rate is measured on sampled windows, so an outage of a few hours can fall between them."
     }
   ]
 }

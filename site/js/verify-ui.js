@@ -84,7 +84,7 @@ export function setupVerify({ button, log, counter, out, sample, command }) {
       if (!calm()) await sleep(260);
     }
     if (cmp.ok) ok++;
-    const flag = out.querySelector(".flag"); flag.className = `flag ${cmp.ok ? "ok" : "bad"} stamp`; flag.textContent = cmp.ok ? "Verified on-chain" : "Mismatch";
+    const flag = out.querySelector(".flag"); flag.className = `flag ${cmp.ok ? "ok" : "bad"} stamp`; flag.textContent = cmp.ok ? "Parsing re-checked" : "Mismatch";
     out.querySelector(".vcase").insertAdjacentHTML("beforeend", `<p>${cmp.ok ? "All three match." : "Mismatch: " + esc(cmp.problems.join("; "))} <a href="https://nearblocks.io/txns/${esc(exp.tx_hash)}" rel="noopener noreferrer">${esc(exp.tx_hash.slice(0, 8))}… on NearBlocks</a>. This checks the parsing of one transaction, not the estimate.</p>`);
     counter.textContent = `checked by you: ${ok} of ${checked} ✓`;
     button.disabled = false; out.removeAttribute("aria-busy");

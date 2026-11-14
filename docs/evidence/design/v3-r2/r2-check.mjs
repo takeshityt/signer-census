@@ -1,5 +1,5 @@
 import { chromium, webkit } from "playwright";
-const OUT = "/Users/takeshi/Projects/NEAR/signer-census/docs/evidence/design/v3-r2";
+const OUT = new URL(".", import.meta.url).pathname.replace(/\/$/, ""); // this folder (docs/evidence/design/v3-r2)
 const SECTIONS = ["top", "works", "who", "boom", "bridges", "scenario", "wrong", "verify", "rerun"];
 const lum = (c) => { const m = c.match(/[\d.]+/g).map(Number); const f = (v) => { v /= 255; return v <= 0.03928 ? v / 12.92 : ((v + 0.055) / 1.055) ** 2.4; }; return 0.2126 * f(m[0]) + 0.7152 * f(m[1]) + 0.0722 * f(m[2]); };
 const ratio = (a, b) => { const [x, y] = [lum(a), lum(b)].sort((p, q) => q - p); return (x + 0.05) / (y + 0.05); };

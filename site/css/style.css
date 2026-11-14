@@ -537,3 +537,8 @@ tr.filled td { animation: fadein 0.3s ease backwards; }
   .preset-row { grid-template-columns: minmax(0, 1fr); }
 }
 .scene-steps > *, .scroll-scene .steps3 { width: 100%; min-width: 0; }
+
+.gh { flex: none; font: 500 0.68rem var(--mono); letter-spacing: 0.1em; text-transform: uppercase; color: var(--muted); text-decoration: none; }
+.gh:hover { color: var(--ink); }
+.xcheck { margin: 0.9rem 0 0; font-size: 0.85rem; }
+.case .note { margin: 0; font-size: 0.78rem; }

@@ -18,7 +18,7 @@ import {
 
 const $ = (id) => document.getElementById(id);
 const getJSON = (f) => fetch(`data/${f}`).then((r) => { if (!r.ok) throw new Error(`cannot load data/${f}`); return r.json(); });
-const [metrics, scenarios, labels, verify, thesis, manifest, predictions, vsample, rmonthly, repo] = await Promise.all(["metrics.json", "scenarios.json", "labels.json", "verify.json", "thesis.json", "manifest.json", "predictions.json", "verify-sample.json", "requester-monthly.json", "repo.json"].map(getJSON));
+const [metrics, scenarios, labels, verify, thesis, manifest, predictions, vsample, rmonthly, repo, xc] = await Promise.all(["metrics.json", "scenarios.json", "labels.json", "verify.json", "thesis.json", "manifest.json", "predictions.json", "verify-sample.json", "requester-monthly.json", "repo.json", "crosscheck.json"].map(getJSON));
 const hero = heroStats(metrics, verify);
 const E = timelineEvents(metrics, scenarios);
 const T = metrics.totals;
@@ -72,8 +72,8 @@ twoTone("h1", h1a, h1b);
 $("deck").textContent = "A reproducible count of who asks NEAR’s MPC signer to sign, and for which chains. Each column is a month of requests.";
 $("counters").innerHTML = [
   ["Signature requests", dotNum(approx(hero.requests))],
-  ["Fulfilled", dotNum(pct(hero.fulfilled, 1))],
-  ["Verified on-chain", dotNum(`${hero.verified}/${hero.sample}`)],
+  ["Fulfilled · est., volume-weighted", dotNum(pct(hero.fulfilled, 1))],
+  ["Parsing re-checked", dotNum(`${hero.verified}/${hero.sample}`)],
 ].map(([l, v]) => `<div><dt>${esc(l)}</dt><dd>${v}</dd></div>`).join("");
 const cols = heroColumns(metrics);
 const faVals = cols.groups.find((g) => g.id === "fastauth").values;
@@ -103,7 +103,7 @@ const dc = createDotColumns($("dotcols"), {
 });
 keyList("key-hero", [{ tone: "fastauth", label: "FastAuth" }, { tone: "bridge-dark", label: "Bridges" }, { tone: "hatch", label: "Suspected benchmark" }, { tone: "muted", label: "Everyone else" }]);
 $("key-hero").insertAdjacentHTML("beforeend", `<li class="unit">One dot = ${esc(compact(dc.per))} requests</li>`);
-$("hero-notes").innerHTML = `<p>Requests are estimated: exact monthly transaction totals times the share of sign receipts in a cluster sample; 95% interval (sampling error only) ${esc(range(hero.requestsCi, precise))}. “Fulfilled” = the callback of the sign receipt succeeded, in the sample; latency and downtime are not measured. “Verified on-chain” = ${hero.sample} sampled transactions re-parsed identically by an archival RPC node and NearBlocks (${esc(dayLabel(hero.verifyDate))}); it checks the parsing, not the estimate.</p><p>Columns: one dot = ${esc(compact(dc.per))} requests, rounded per month; ${esc(monthLabel(lastMonth.month))} is partial and drawn lighter. Every number is read from <code>out/metrics.json</code>, also served as <a href="data/metrics.json">data/metrics.json</a>.</p>`;
+$("hero-notes").innerHTML = `<p>Requests are estimated: exact monthly transaction totals times the share of sign receipts in a cluster sample; 95% interval (sampling error only) ${esc(range(hero.requestsCi, precise))}. “Fulfilled” = an estimated, volume-weighted share of requests whose sign receipt’s callback succeeded (measured on the sample); latency and downtime are not measured. “Parsing re-checked” = ${hero.sample} sampled transactions re-parsed identically by an archival RPC node and NearBlocks (${esc(dayLabel(hero.verifyDate))}); it checks the parsing, not the estimate.</p><p>Columns: one dot = ${esc(compact(dc.per))} requests, rounded per month; ${esc(monthLabel(lastMonth.month))} is partial and drawn lighter. Every number is read from <code>out/metrics.json</code>, also served as <a href="data/metrics.json">data/metrics.json</a>.</p>`;
 
 /* ------------------------------------------------------------------ chapter: it works */
 twoTone("h-works", "It works.", "Almost every request ends in a signature.");
@@ -138,7 +138,7 @@ createChart($("chart-fulfilled"), {
   yMin: 0.5, yMax: 1, yTicks: tickStep(0.5, 1, 2), yFormat: (v) => pct(v), height: 160, lanes: 1, duration: 1500,
   events: [{ at: lowAll.month, lane: 0, text: `Low ${pct(lowAll.value)}`, align: "end" }],
   tip: (i) => ({ title: monthTitle(ful.months, ful.partial, i), rows: [{ tone: "near", label: "Callback success", value: pct(ful.values[i], 1), ci: ci95(ful.ci[i], (c) => rangePct(c, 1)) }] }),
-  aria: "Share of sampled requests that end with a successful signature callback, per month",
+  aria: "Estimated share of requests (volume-weighted, from the sample) that end with a successful signature callback, per month",
 });
 table("table-fulfilled", ["Month", "Callback success", "95% interval"], ful.months.map((m, i) => [monthLabel(m) + (ful.partial[i] ? " (partial)" : ""), pct(ful.values[i], 1), rangePct(ful.ci[i], 1)]));
 $("works-notes").innerHTML = `<p>Success means the callback of that sign receipt succeeded. The first months were rougher (${pct(lowAll.value)} in ${monthLabel(lowAll.month)}), mostly because the contract rejected duplicate requests. Hover, tap or use the arrow keys on a chart for the 95% interval; ${monthLabel(lastMonth.month)} is partial and drawn lighter.</p>`;
@@ -185,11 +185,11 @@ const rel = T.relayer_share_of_requester["fast-auth.near via sweat-relayer.near"
 const relayRow = rows.find((r) => /relay/i.test(requesterName(r)));
 const sc = boomScene(metrics, scenarios, relayRow.account);
 const defaultSc = scenarios.scenarios.find((s) => s.id === sc.scenarioId);
-twoTone("h-boom", "The boom was one integration.", `Its product ends in present form on ${dayLabel(ev.date)}.`);
+twoTone("h-boom", "The boom was mostly one integration.", `Its product ends in present form on ${dayLabel(ev.date)}.`);
 const ramp = E.fastauthRamp, relayFrom = E.relayExit.month;
 const EVENTS = [
   { at: ramp.month, lane: 2, text: "FastAuth ramp", align: "end" },
-  { at: relayFrom, lane: 1, text: "Relay goes quiet", align: "end" },
+  { at: relayFrom, lane: 1, text: "Relay allocator silent", align: "end" },
   { at: ev.date, lane: 0, text: "Sweat ends · scenario after", href: ev.source, align: "start" },
 ];
 const zero = sc.months.map(() => 0);
@@ -204,7 +204,7 @@ function boomStage(stage) {
   ];
   return { months: sc.months, partial: sc.partial, series, events: EVENTS.slice(0, stage), tip: (i) => ({ title: `${monthTitle(sc.months, sc.partial, i)}${sc.future.includes(sc.months[i]) ? " (scenario, not a forecast)" : ""}`, rows: series.filter((s) => s.values[i]).map((s) => ({ tone: s.tone, label: s.label, value: approx(s.values[i]) })) }) };
 }
-const STAGE_LABEL = ["Requests per month · everyone in grey", "Step 1 · FastAuth logins arrive", "Step 2 · Relay goes quiet", "Step 3 · after the end date: scenario, not a forecast"];
+const STAGE_LABEL = ["Requests per month · everyone in grey", "Step 1 · FastAuth logins arrive", "Step 2 · Relay’s allocator went silent", "Step 3 · after the end date: scenario, not a forecast"];
 const sceneMode = desktop() && !calm;
 let stageNow = sceneMode ? 0 : 3;
 const boomChart = createChart($("chart-boom"), {
@@ -219,7 +219,7 @@ table("table-boom", ["Month", ...fin.series.map((s) => s.label)], sc.months.map(
 $("accent-tile").innerHTML = `<p class="micro">One integration · ${esc(fa.account)}</p><div><p class="huge">${dotNum(shareText(fa))}</p><p class="line">of all requests since ${esc(monthLabel(hero.firstMonth))}. ${approxPct(rel.value, 2)} of it relayed by sweat-relayer.near.</p></div>`;
 const STEPS = [
   ["Ramp", monthLabel(ramp.month), "FastAuth logins arrive", `<span class="stepcount" data-to="${ramp.value}">${esc(approx(ramp.value))}</span> requests in ${esc(monthLabel(ramp.month))} alone.`],
-  ["Exit", monthLabel(relayFrom), "Relay goes quiet", `Relay Protocol, the largest third-party app: none in the sample from ${esc(monthLabel(relayFrom))}.`],
+  ["Exit", monthLabel(relayFrom), "Relay’s allocator contract went silent", `The largest third-party app: exactly ${esc(String(0))} transactions from ${esc(monthLabel(xc.exact_zero_from[relayRow.account] ?? relayFrom))} (exact account count).`],
   ["Sunset", dayLabel(ev.date), "Sweat Wallet ends in present form", `Announced ${esc(dayLabel(E.sweatAnnounced.date))}. The translucent bars after it are the cautious default scenario: a scenario, not a forecast.`],
 ];
 $("boom-steps").innerHTML = STEPS.map(([st, when, title, text], i) => `<li class="step-card" data-stage="${i + 1}"><p class="st"><i aria-hidden="true"></i>${String(i + 1).padStart(2, "0")} · ${esc(st)} · ${esc(when)}</p><h3>${esc(title)}</h3><p>${text}</p></li>`).join("");
@@ -382,7 +382,7 @@ $("preds").innerHTML = predictions.predictions.map((p, pi) => {
       <div class="g-bar" role="img" aria-label="${esc(name)} ${esc(f(gg.now))} in ${esc(monthLabel(gg.month))}; wrong if ${gg.op === "<" ? "below" : "at or above"} ${esc(thr)}"><span class="g-zone ${gg.op === "<" ? "left" : "right"}"></span><span class="g-thr"></span><span class="g-now"></span></div>
     </div>`;
   }).join("");
-  return `<article class="tile case" style="--d:${pi}"><p class="micro status"><i aria-hidden="true"></i>${esc(status)}</p><p class="micro">Case ${esc(p.id)}</p><h3>${esc(p.claim)}</h3>
+  return `<article class="tile case" style="--d:${pi}"><p class="micro status"><i aria-hidden="true"></i>${esc(status)}</p><p class="micro">Case ${esc(p.id)}</p><h3>${esc(p.claim)}</h3>${p.note ? `<p class="note">${esc(p.note)}</p>` : ""}
     <ul>${lines.map((l) => `<li>Wrong if ${esc(l)}</li>`).join("")}<li>${esc(need)} ${p.months.length} months: ${esc(p.months.map(monthShort).join(", "))}</li></ul>
     <div class="gauges"><p class="micro">Now (${esc(monthLabel(lastFull))}) vs threshold</p>${gauges}</div></article>`;
 }).join("");
@@ -392,6 +392,7 @@ $("wrong-full").innerHTML = `<p>${inline(wrongSec.markdown.split(/\n\n+/)[0].rep
 
 /* ------------------------------------------------------------------ chapter: verify it yourself */
 twoTone("h-verify", "Verify it yourself.", "One click, one sampled transaction, a public node.");
+$("xcheck").innerHTML = `Cross-check: ${xc.summary.inside} of ${xc.summary.compared} exact monthly counts fall inside our 95% intervals. <a href="https://github.com/takeshityt/signer-census/blob/main/docs/METHODOLOGY.md#15b-cross-check-against-exact-per-account-counts" rel="noopener noreferrer">How we checked</a>`;
 setupVerify({ button: $("verify-btn"), log: $("verify-log"), counter: $("verify-count"), out: $("verify-out"), sample: vsample, command: `npm run verify -- --sample ${verify.sample}` });
 
 /* ------------------------------------------------------------------ chapter: re-run it, honest notes, footer */
@@ -420,7 +421,7 @@ $("honest-body").innerHTML = [
   block("Methodology in short", para(S["methodology-in-short"].markdown)),
   block("Read more", `<p><a href="docs/THESIS.md">THESIS.md</a> (every number footnoted to its JSON path) · <a href="docs/METHODOLOGY.md">METHODOLOGY.md</a> · <a href="data/metrics.json">metrics.json</a> (open data, free to reuse).</p>`),
 ].join("");
-$("foot").innerHTML = `Signer Census · exact transaction counts as of block ${int(metrics.meta.snapshot.block_height)} (${snapshotDay}); requests are estimates from a cluster sample · metrics.json sha256 <code>${hash}</code> · no cookies, no tracking, no network request except “Check a random transaction”.`;
+$("foot").innerHTML = `<a href="https://github.com/takeshityt/signer-census" rel="noopener noreferrer">Source on GitHub</a> · Signer Census · exact transaction counts as of block ${int(metrics.meta.snapshot.block_height)} (${snapshotDay}); requests are estimates from a cluster sample · metrics.json sha256 <code>${hash}</code> · no cookies, no tracking, no network request except “Check a random transaction”.`;
 createPlusField($("rerun"));
 
 /* ------------------------------------------------------------------ motion: tiles, headlines, labels, dot numbers, reveals (all once, all into the visible state) */

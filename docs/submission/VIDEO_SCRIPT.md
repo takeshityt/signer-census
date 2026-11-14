@@ -11,8 +11,8 @@ Rules kept in the wording: observed estimates (up to October 2026) and scenarios
 
 * **On screen:** the hero: two-tone headline, the dot-matrix month columns settling in, the `fast-auth.near` case card, the counters.
 * **Action:** wait on load until the counters stop flipping.
-* **On-screen caption:** "NEAR Chain Signatures · ≈6.4M requests · 99.9% fulfilled"
-* **Narration:** "NEAR Chain Signatures, since August 2024: about 6.4 million requests; 99.9% succeed in our sample."
+* **On-screen caption:** "NEAR Chain Signatures · ≈6.4M requests · ≈99.9% fulfilled (est., volume-weighted)"
+* **Narration:** "NEAR Chain Signatures, since August 2024: about 6.4 million requests; an estimated 99.9% succeed, volume-weighted."
 
 ### 2 · 0:08–0:16 · "Demand is narrow"
 
@@ -23,10 +23,10 @@ Rules kept in the wording: observed estimates (up to October 2026) and scenarios
 
 ### 3 · 0:16–0:25 · The boom, steps 1 and 2
 
-* **On screen:** "The boom" scroll scene: step 1 "FastAuth logins arrive" (coral bars rise), then step 2 "Relay goes quiet" (Relay split out).
+* **On screen:** "The boom" scroll scene: step 1 "FastAuth logins arrive" (coral bars rise), then step 2 "Relay's allocator contract went silent" (Relay split out).
 * **Action:** scroll slowly; the chart stays in place while the steps pass.
-* **On-screen caption:** "Boom = FastAuth · main user Sweat Wallet (medium confidence)"
-* **Narration:** "The boom was FastAuth logins. Its main user: Sweat Wallet, medium confidence. Relay: quiet since August 2026."
+* **On-screen caption:** "Boom = mostly FastAuth · main user Sweat Wallet (medium confidence)"
+* **Narration:** "The boom was FastAuth logins. Its main user: Sweat Wallet, medium confidence. Relay's allocator contract went silent from August 2026."
 
 ### 4 · 0:25–0:33 · The boom, step 3
 
@@ -47,7 +47,7 @@ Rules kept in the wording: observed estimates (up to October 2026) and scenarios
 * **On screen:** "Your scenario, live".
 * **Action:** click the preset "Optimistic", then "Cautious"; the big number rolls to the Cautious value.
 * **On-screen caption:** "Scenario, not a forecast · no FastAuth, no benchmark"
-* **Narration:** "Without FastAuth and the benchmark, June 2027 is about 267 thousand monthly — a scenario, not a forecast."
+* **Narration:** "Without FastAuth and the benchmark, with other demand flat, June 2027 is about 267 thousand monthly — a scenario, not a forecast."
 
 ### 7 · 0:48–0:58 · "What would prove us wrong"
 
@@ -58,9 +58,9 @@ Rules kept in the wording: observed estimates (up to October 2026) and scenarios
 
 ### 8 · 0:58–1:10 · Verify button and Re-run commands
 
-* **On screen:** "Verify it yourself": the log types, the rows fill, the badge stamps VERIFIED ON-CHAIN; then the "Re-run it yourself" command cards.
+* **On screen:** "Verify it yourself": the log types, the rows fill, the badge stamps PARSING RE-CHECKED; then the "Re-run it yourself" command cards.
 * **Action:** click "Check a random transaction"; when the badge appears, scroll to the Re-run commands and end on the repository link.
-* **On-screen caption:** "Reproduce offline · verify a random sample"
+* **On-screen caption:** "Reproduce offline · parsing re-checked on a random sample"
 * **Narration:** "Every number rebuilds offline from committed data. A random sample is re-checked on-chain — that checks the parsing, not the estimate."
 
 ## Recording notes
@@ -71,17 +71,17 @@ Rules kept in the wording: observed estimates (up to October 2026) and scenarios
 
 ## Russian translation of the narration (for the founder, not for the video)
 
-1. «NEAR Chain Signatures, с августа 2024 года: около 6.4M запросов; в выборке 99.9% завершаются успешно.»
+1. «NEAR Chain Signatures, с августа 2024 года: около 6.4M запросов; по оценке 99.9% завершаются успешно (с учётом объёма).»
 
 2. «Тройка крупнейших — 74%: вход через FastAuth — 44%, подозреваемый бенчмарк — 19% и Relay Protocol — 11%.»
 
-3. «Бум — это входы через FastAuth. Его главный пользователь — Sweat Wallet (средняя уверенность). Relay затих с августа 2026 года.»
+3. «Бум — это входы через FastAuth. Его главный пользователь — Sweat Wallet (средняя уверенность). Контракт-аллокатор Relay замолчал с августа 2026 года.»
 
 4. «Sweat Foundation сообщает: Sweat Wallet в нынешнем виде прекращает работу 30 декабря 2026 года.» (На экране — точная цитата из релиза по-английски.)
 
 5. «Остаются мосты: около 237k запросов за октябрь 2026 года — большая часть спроса, если убрать FastAuth и бенчмарк.»
 
-6. «Без FastAuth и бенчмарка (остальное без изменений) на июнь 2027 года выходит около 267k в месяц — это сценарий, а не прогноз.»
+6. «Без FastAuth и бенчмарка, при неизменном остальном спросе, на июнь 2027 года выходит около 267k в месяц — это сценарий, а не прогноз.»
 
 7. «Chain Signatures работает. Его спрос узкий — а крупнейший пользователь сворачивается. Четыре условия, заданные заранее: проверка 1 апреля 2027 года.»
 

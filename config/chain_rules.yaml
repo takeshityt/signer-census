@@ -30,7 +30,7 @@ rules:
 
   - id: relay-allocator-multi
     family: multi
-    confidence: high
+    confidence: medium # matches labels.yaml (Relay Protocol attribution is medium confidence)
     match: { requester: 7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora }
     evidence:
       - url: https://explorer.mainnet.aurora.dev/api/v2/smart-contracts/0x7EdA04920F22ba6A2b9f2573fd9a6F6F1946Ff9f
