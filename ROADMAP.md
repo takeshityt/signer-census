@@ -10,6 +10,12 @@ Ideas that are outside the hackathon scope. Nothing here is claimed as done.
 * **Other MPC signer contracts.** Add `v1.sig-net.near` and any successor of `v1.signer`, kept as separate series.
 * **Requester labels.** Extend labels below the current coverage threshold; settle the open questions in `labels.yaml` (operator of `tx-bench.near`, owner of `relay.aurora`, who "Reflect" is, whether Sweat Wallet logins are confirmed by Sweat).
 
+## Verification
+
+* **Check your own transaction.** A field on the Verify panel where anyone pastes a transaction hash and sees how Signer Census parses it: whether a `sign` receipt on `v1.signer` is found, the requester (the predecessor of that sign receipt), the destination chain by our rules in `config/chain_rules.yaml`, and whether the callback succeeded. Fetched live from the archival RPC and NearBlocks, keyless, like the existing button.
+  * Why it is not the proof: the random sample stays the proof of the parsing, because we do not choose which transactions get checked. A transaction picked by the user is a convenience for skeptics, not evidence about the estimate.
+  * Caveat shown in the UI: a transaction outside the sample is parsed the same way, but asking whether it is "in the estimate" is not meaningful; the estimate is a ratio measured on a cluster sample and scaled to exact monthly counts.
+
 ## Freshness
 
 * **Monthly auto-refresh.** A scheduled job that runs `npm run monthly`, `npm run sample`, `npm run parse`, `npm run reproduce` and `npm run verify` after each month ends and opens a pull request with the new data and the re-rendered THESIS.md and README.md (no keys needed).
