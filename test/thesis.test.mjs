@@ -48,6 +48,14 @@ describe("renderer helpers", () => {
     expect(resolve(obj, 't."a.b c"').value).toBe(1234567);
     expect(() => resolve(obj, "months[1999-01].x")).toThrow(/not found/);
   });
+  it("formats spoken dates (English and Russian) from JSON month/day strings", () => {
+    expect(format("2026-08", "month")).toBe("August 2026");
+    expect(format("2026-12-30", "day")).toBe("30 December 2026");
+    expect(format("2026-10", "month_ru")).toBe("октябрь 2026");
+    expect(format("2026-08", "month_ru_gen")).toBe("августа 2026");
+    expect(format("2027-04-01", "day_ru")).toBe("1 апреля 2027");
+    expect(() => format("soon", "month")).toThrow();
+  });
   it("formats", () => {
     expect(format({ value: 1234567 }, "M1")).toBe("1.2M");
     expect(format({ value: 1234567 }, "int")).toBe("1,234,567");

@@ -1,50 +1,80 @@
 <!-- Rendered from docs/templates/VIDEO_SCRIPT.template.md by `npm run reproduce`. Every number comes from out/metrics.json, out/scenarios.json or repository facts. -->
-# Demo video script (about one minute)
+# Demo video script (60–75 seconds)
 
-Draft for the author, who records and posts the video. Record the live dashboard (https://takeshityt.github.io/signer-census/, or locally `npm run build:site && npm run site`; desktop width, light theme) and one terminal window. Speak slowly; the cuts follow the sections of the page from top to bottom. Each block has the English narration and a Russian translation for the author.
+Draft for the author, who records and posts the video. Record the live dashboard at https://takeshityt.github.io/signer-census/ in a 1280×720 browser window, dark theme, motion on (macOS "Reduce motion" off). Eight shots, one narration line each; the page is scrolled from top to bottom. Speak calmly, about two words per second.
 
-## 0–5 s: the headline
+Rules kept in the wording: observed estimates (up to October 2026) and scenarios (later months) are never mixed; the 74% "top three" includes one suspected benchmark, not three products; "reproduce" and "verify" are different checks.
 
-**On screen:** the hero; the pen-stroke line draws itself under ≈6.4M.
+## Shot list and narration
 
-**Narration:** "NEAR Chain Signatures has signed about 6.4M requests since August 2024. Who actually uses it?"
+### 1 · 0:00–0:08 · Hero
 
-**Перевод:** «Chain Signatures в NEAR подписал около 6.4M запросов с августа 2024 года. Кто на самом деле этим пользуется?»
+* **On screen:** the hero: two-tone headline, the dot-matrix month columns settling in, the `fast-auth.near` case card, the counters.
+* **Action:** wait on load until the counters stop flipping.
+* **Narration:** "Who uses NEAR Chain Signatures? About 6.4M requests since August 2024; 99.9% of sampled requests succeed."
 
-## 5–20 s: who really uses it
+### 2 · 0:08–0:16 · "Demand is narrow"
 
-**On screen:** the chapter "Almost every request ends in a signature", then tick "Hide the suspected benchmark"; scroll to "Who" and hover the coral FastAuth squares of the waffle, then stop on the `fast-auth.near` row with its sparkline.
+* **On screen:** chapter "Demand is narrow": the square matrix and its legend.
+* **Action:** scroll past "It works" to "Demand is narrow"; hover the legend rows FastAuth logins, Suspected benchmark, Relay Protocol in turn.
+* **Narration:** "Three requesters make 74%: FastAuth logins 44%, a suspected benchmark 19%, and Relay Protocol 11%."
 
-**Narration:** "Three requesters make about 74% of all requests. The April 2026 boom is mostly one integration: FastAuth logins from the Sweat Foundation's login domain, about 346k requests in its first month. Another 19% is a suspected benchmark; this tick removes it."
+### 3 · 0:16–0:25 · The boom, steps 1 and 2
 
-**Перевод:** «Три запрашивающих дают около 74% всех запросов. Бум апреля 2026 года — в основном одна интеграция: вход через FastAuth с домена Sweat Foundation, около 346k запросов в первый же месяц. Ещё 19% — подозреваемый бенчмарк; эта галочка его убирает.»
+* **On screen:** "The boom" scroll scene: step 1 "FastAuth logins arrive" (coral bars rise), then step 2 "Relay goes quiet" (Relay split out).
+* **Action:** scroll slowly; the chart stays in place while the steps pass.
+* **Narration:** "FastAuth's login domain is associated with the Sweat Foundation, medium confidence. Relay went quiet from August 2026."
 
-## 20–35 s: the Sweat sunset and the bridges
+### 4 · 0:25–0:33 · The boom, step 3
 
-**On screen:** "The boom" chart; drag the slider "FastAuth after the end date" to zero, leave the benchmark off and other demand at zero, and show the result line; then the "Bridges" chapter.
+* **On screen:** step 3 "Sweat Wallet ends in present form"; the translucent scenario bars appear after the end date.
+* **Action:** stop on step 3.
+* **Narration:** "Sweat Foundation's release says: “Sweat Wallet and SWEAT in their present form will end on 30 December 2026.”"
 
-**Narration:** "Sweat Wallet ends in its present form on 30 December 2026. If that traffic stops, monthly volume in 2027-06 is about 267k, -40% against October 2026: a scenario, not a forecast. What remains is structural, and most of it is bridges: about 237k of 267k structural requests in October."
+### 5 · 0:33–0:40 · "Bridges remain" and "Where signatures go"
 
-**Перевод:** «Sweat Wallet в нынешнем виде заканчивается 30 декабря 2026 года. Если этот трафик прекратится, месячный объём в 2027-06 составит около 267k, -40% к октябрю 2026: это сценарий, а не прогноз. Остаётся структурный спрос, и большая его часть — мосты: около 237k из 267k структурных запросов в октябре.»
+* **On screen:** "Bridges remain" (layered green bars and the three numbers), then the "Where signatures go" tile with the crossover.
+* **Action:** scroll through both tiles without stopping.
+* **Narration:** "Bridges remain: October 2026, an estimated 237k of 267k structural requests."
 
-## 35–50 s: the thesis and what would prove it wrong
+### 6 · 0:40–0:48 · Scenario presets
 
-**On screen:** the hero headline once more, then "What would prove us wrong": the four cards with their countdown.
+* **On screen:** "Your scenario, live".
+* **Action:** click the preset "Optimistic", then "Cautious"; the big number rolls to the Cautious value.
+* **Narration:** "If FastAuth stops, June 2027 is about 267k a month: a scenario, not a forecast."
 
-**Narration:** "Our thesis: Chain Signatures works, but demand is narrow, the largest third-party app has left, and bridges are the signal to watch. For a long-term NEAR view that means: working infrastructure, not yet broad adoption. We publish what would prove it wrong: for example, if bridge requests fall below 150k in two of the months January to March 2027, or if demand spreads out more than ever measured: the three largest under 60%, or at least 11 requesters with 1% or more in a month."
+### 7 · 0:48–0:58 · "What would prove us wrong"
 
-**Перевод:** «Наш тезис: Chain Signatures работает, но спрос узкий, крупнейшее стороннее приложение ушло, а следить нужно за мостами. Для долгосрочного взгляда на NEAR это значит: работающая инфраструктура, но ещё не широкое распространение. Мы публикуем, что опровергло бы тезис: например, если запросы мостов упадут ниже 150 тыс. в двух из месяцев январь–март 2027 года, или если спрос станет шире, чем когда-либо: три крупнейших меньше 60% или не меньше 11 запрашивающих с долей от 1% за месяц.»
+* **On screen:** the countdown and the 4 case files with their "now vs threshold" gauges.
+* **Action:** scroll to the chapter and hold while the cards deal in.
+* **Narration:** "Thesis: Chain Signatures works. Its demand is narrow — and its biggest user is winding down. 4 conditions, set in advance, get checked 1 April 2027."
 
-## 50–60 s: re-run it yourself
+### 8 · 0:58–1:10 · Verify button and Re-run commands
 
-**On screen:** the chapter "Verify it yourself": press "Check a random transaction" and wait for the three check marks; then the terminal: `npm run reproduce` (the `sha256` line), then the last line of `npm run verify -- --sample 50`; end on the repository URL.
-
-**Narration:** "Every number re-runs from public NEAR data. Press this button and your browser checks a sampled transaction on a public node. npm run reproduce rebuilds it offline; npm run verify re-checks the parsing of sampled transactions against two sources: 50 out of 50. Built at NEAR HACKATHON."
-
-**Перевод:** «Каждое число пересчитывается из публичных данных NEAR. Эта кнопка проверяет в вашем браузере случайную транзакцию на публичном узле. npm run reproduce пересобирает всё оффлайн; npm run verify перепроверяет разбор выборки транзакций по двум источникам: 50 из 50. Сделано на NEAR HACKATHON.»
+* **On screen:** "Verify it yourself": the log types, the rows fill, the badge stamps VERIFIED ON-CHAIN; then the "Re-run it yourself" command cards.
+* **Action:** click "Check a random transaction"; when the badge appears, scroll to the Re-run commands and end on the repository link.
+* **Narration:** "Reproduce: anyone rebuilds every number offline from committed data. Verify: sampled transactions re-checked on an archival node and NearBlocks; checks the parsing, not the estimate."
 
 ## Recording notes
 
-* Run the terminal commands before recording and keep the output on screen (verify takes several minutes); show only the final lines.
-* Use reduced motion off so the pen stroke draws once at the start.
+* The Verify click needs the network; if the node does not answer, the page says so: re-record that shot or cut it.
+* Sources to have at hand: the Sweat release is The Sweat Foundation Ltd (release of 2026-10-01), https://chainwire.org/2026/10/01/sweat-wallet-and-the-sweat-token-as-they-exist-today-end-on-30-december-2026/. The last `npm run verify` run: 50/50 sampled transactions verified.
 * The post must say it was built at NEAR HACKATHON and tag @NEARProtocol and #NEARHackathon (draft: `docs/submission/X_POST.md`).
+
+## Russian translation of the narration (for the founder, not for the video)
+
+1. «Кто пользуется Chain Signatures в NEAR? Около 6.4M запросов с августа 2024 года; 99.9% запросов в выборке завершаются успешно.»
+
+2. «Три запрашивающих дают 74%: вход через FastAuth — 44%, подозреваемый бенчмарк — 19% и Relay Protocol — 11%.»
+
+3. «Домен входа FastAuth связан с Sweat Foundation — со средней уверенностью. Relay Protocol затих с августа 2026 года.»
+
+4. «В релизе Sweat Foundation сказано: Sweat Wallet и SWEAT в нынешнем виде прекратят работу 30 декабря 2026 года.»
+
+5. «Остаются мосты: за октябрь 2026 года по оценке около 237k из 267k структурных запросов.»
+
+6. «Если трафик FastAuth прекратится, на июнь 2027 года выходит около 267k в месяц. Это сценарий, а не прогноз.»
+
+7. «Наш тезис: Chain Signatures работает. Его спрос узкий — а крупнейший пользователь сворачивается. 4 условия, заданные заранее, проверяются 1 апреля 2027 года.»
+
+8. «Любой может воспроизвести каждое число оффлайн из закоммиченных данных. Verify перепроверяет выборку транзакций на архивном узле и в NearBlocks; это проверка разбора, а не оценки.»

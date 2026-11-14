@@ -21,6 +21,8 @@ export function repoFacts(root) {
     scenarios_sha256: sha256(readFileSync(join(root, "out/scenarios.json"))),
     data_manifest_files: lines(join(root, "data/MANIFEST.sha256")),
     raw_manifest_files: lines(join(root, "data/MANIFEST.raw-sample.sha256")),
+    predictions_check_after: JSON.parse(readFileSync(join(root, "config/predictions.json"), "utf8")).check_after,
+    predictions_count: JSON.parse(readFileSync(join(root, "config/predictions.json"), "utf8")).predictions.length,
     node_engines: JSON.parse(readFileSync(join(root, "package.json"), "utf8")).engines.node,
     verify: { verified: v.verified, sample: v.sample, rpc_ok: v.rpc_ok, nearblocks_ok: v.nearblocks_ok, date: v.date, file: v.file, seed: v.seed },
   };

@@ -1,50 +1,80 @@
 <!-- Rendered from docs/templates/VIDEO_SCRIPT.template.md by `npm run reproduce`. Every number comes from out/metrics.json, out/scenarios.json or repository facts. -->
-# Demo video script (about one minute)
+# Demo video script ({{lit:60–75}} seconds)
 
-Draft for the author, who records and posts the video. Record the live dashboard (https://takeshityt.github.io/signer-census/, or locally `npm run build:site && npm run site`; desktop width, light theme) and one terminal window. Speak slowly; the cuts follow the sections of the page from top to bottom. Each block has the English narration and a Russian translation for the author.
+Draft for the author, who records and posts the video. Record the live dashboard at https://takeshityt.github.io/signer-census/ in a {{lit:1280×720}} browser window, dark theme, motion on (macOS "Reduce motion" off). Eight shots, one narration line each; the page is scrolled from top to bottom. Speak calmly, about two words per second.
 
-## {{lit:0–5 s}}: the headline
+Rules kept in the wording: observed estimates (up to {{s:baseline.month|month}}) and scenarios (later months) are never mixed; the {{m:totals.concentration.top3_share|pct0}} "top three" includes one suspected benchmark, not three products; "reproduce" and "verify" are different checks.
 
-**On screen:** the hero; the pen-stroke line draws itself under ≈{{m:totals.requests_est|M1}}.
+## Shot list and narration
 
-**Narration:** "NEAR Chain Signatures has signed about {{m:totals.requests_est|M1}} requests since {{lit:August 2024}}. Who actually uses it?"
+### {{lit:1}} · {{lit:0:00–0:08}} · Hero
 
-**Перевод:** «Chain Signatures в NEAR подписал около {{m:totals.requests_est|M1}} запросов с {{lit:августа 2024}} года. Кто на самом деле этим пользуется?»
+* **On screen:** the hero: two-tone headline, the dot-matrix month columns settling in, the `fast-auth.near` case card, the counters.
+* **Action:** wait on load until the counters stop flipping.
+* **Narration:** "Who uses NEAR Chain Signatures? About {{m:totals.requests_est|M1}} requests since {{lit:August 2024}}; {{m:totals.fulfilled_rate|pct1}} of sampled requests succeed."
 
-## {{lit:5–20 s}}: who really uses it
+### {{lit:2}} · {{lit:0:08–0:16}} · "Demand is narrow"
 
-**On screen:** the chapter "Almost every request ends in a signature", then tick "Hide the suspected benchmark"; scroll to "Who" and hover the coral FastAuth squares of the waffle, then stop on the `fast-auth.near` row with its sparkline.
+* **On screen:** chapter "Demand is narrow": the square matrix and its legend.
+* **Action:** scroll past "It works" to "Demand is narrow"; hover the legend rows FastAuth logins, Suspected benchmark, Relay Protocol in turn.
+* **Narration:** "Three requesters make {{m:totals.concentration.top3_share|pct0}}: FastAuth logins {{m:totals.top_requesters[requester=fast-auth.near].share_of_requests|pct0}}, a suspected benchmark {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}}, and Relay Protocol {{m:totals.top_requesters[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].share_of_requests|pct0}}."
 
-**Narration:** "Three requesters make about {{m:totals.concentration.top3_share|pct0}} of all requests. The {{lit:April 2026}} boom is mostly one integration: FastAuth logins from the Sweat Foundation's login domain, about {{m:months[2026-04].drivers_requests."fast-auth.near"|k0}} requests in its first month. Another {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}} is a suspected benchmark; this tick removes it."
+### {{lit:3}} · {{lit:0:16–0:25}} · The boom, steps {{lit:1}} and {{lit:2}}
 
-**Перевод:** «Три запрашивающих дают около {{m:totals.concentration.top3_share|pct0}} всех запросов. Бум {{lit:апреля 2026}} года — в основном одна интеграция: вход через FastAuth с домена Sweat Foundation, около {{m:months[2026-04].drivers_requests."fast-auth.near"|k0}} запросов в первый же месяц. Ещё {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}} — подозреваемый бенчмарк; эта галочка его убирает.»
+* **On screen:** "The boom" scroll scene: step {{lit:1}} "FastAuth logins arrive" (coral bars rise), then step {{lit:2}} "Relay goes quiet" (Relay split out).
+* **Action:** scroll slowly; the chart stays in place while the steps pass.
+* **Narration:** "FastAuth's login domain is associated with the Sweat Foundation, medium confidence. Relay went quiet from {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month}}."
 
-## {{lit:20–35 s}}: the Sweat sunset and the bridges
+### {{lit:4}} · {{lit:0:25–0:33}} · The boom, step {{lit:3}}
 
-**On screen:** "The boom" chart; drag the slider "FastAuth after the end date" to zero, leave the benchmark off and other demand at zero, and show the result line; then the "Bridges" chapter.
+* **On screen:** step {{lit:3}} "Sweat Wallet ends in present form"; the translucent scenario bars appear after the end date.
+* **Action:** stop on step {{lit:3}}.
+* **Narration:** "Sweat Foundation's release says: “{{s:event.statement|raw}}”"
 
-**Narration:** "Sweat Wallet ends in its present form on {{lit:30 December 2026}}. If that traffic stops, monthly volume in {{s:scenarios[fastauth0_bench-removed_g+0].end_month|raw}} is about {{s:scenarios[fastauth0_bench-removed_g+0].end_month_total|k0}}, {{s:scenarios[fastauth0_bench-removed_g+0].end_month_vs_baseline|pct0}} against {{lit:October 2026}}: a scenario, not a forecast. What remains is structural, and most of it is bridges: about {{m:months[2026-10].series_requests_est.bridges|k0}} of {{m:months[2026-10].series_requests_est.structural|k0}} structural requests in {{lit:October}}."
+### {{lit:5}} · {{lit:0:33–0:40}} · "Bridges remain" and "Where signatures go"
 
-**Перевод:** «Sweat Wallet в нынешнем виде заканчивается {{lit:30 декабря 2026}} года. Если этот трафик прекратится, месячный объём в {{s:scenarios[fastauth0_bench-removed_g+0].end_month|raw}} составит около {{s:scenarios[fastauth0_bench-removed_g+0].end_month_total|k0}}, {{s:scenarios[fastauth0_bench-removed_g+0].end_month_vs_baseline|pct0}} к {{lit:октябрю 2026}}: это сценарий, а не прогноз. Остаётся структурный спрос, и большая его часть — мосты: около {{m:months[2026-10].series_requests_est.bridges|k0}} из {{m:months[2026-10].series_requests_est.structural|k0}} структурных запросов в {{lit:октябре}}.»
+* **On screen:** "Bridges remain" (layered green bars and the three numbers), then the "Where signatures go" tile with the crossover.
+* **Action:** scroll through both tiles without stopping.
+* **Narration:** "Bridges remain: {{s:baseline.month|month}}, an estimated {{m:months[2026-10].series_requests_est.bridges|k0}} of {{m:months[2026-10].series_requests_est.structural|k0}} structural requests."
 
-## {{lit:35–50 s}}: the thesis and what would prove it wrong
+### {{lit:6}} · {{lit:0:40–0:48}} · Scenario presets
 
-**On screen:** the hero headline once more, then "What would prove us wrong": the four cards with their countdown.
+* **On screen:** "Your scenario, live".
+* **Action:** click the preset "Optimistic", then "Cautious"; the big number rolls to the Cautious value.
+* **Narration:** "If FastAuth stops, {{s:scenarios[fastauth0_bench-removed_g+0].end_month|month}} is about {{s:scenarios[fastauth0_bench-removed_g+0].end_month_total|k0}} a month: a scenario, not a forecast."
 
-**Narration:** "Our thesis: Chain Signatures works, but demand is narrow, the largest third-party app has left, and bridges are the signal to watch. For a long-term NEAR view that means: working infrastructure, not yet broad adoption. We publish what would prove it wrong: for example, if bridge requests fall below {{lit:150k}} in two of the months {{lit:January to March 2027}}, or if demand spreads out more than ever measured: the three largest under {{lit:60%}}, or at least {{lit:11}} requesters with {{lit:1%}} or more in a month."
+### {{lit:7}} · {{lit:0:48–0:58}} · "What would prove us wrong"
 
-**Перевод:** «Наш тезис: Chain Signatures работает, но спрос узкий, крупнейшее стороннее приложение ушло, а следить нужно за мостами. Для долгосрочного взгляда на NEAR это значит: работающая инфраструктура, но ещё не широкое распространение. Мы публикуем, что опровергло бы тезис: например, если запросы мостов упадут ниже {{lit:150 тыс.}} в двух из месяцев {{lit:январь–март 2027}} года, или если спрос станет шире, чем когда-либо: три крупнейших меньше {{lit:60%}} или не меньше {{lit:11}} запрашивающих с долей от {{lit:1%}} за месяц.»
+* **On screen:** the countdown and the {{r:predictions_count|raw}} case files with their "now vs threshold" gauges.
+* **Action:** scroll to the chapter and hold while the cards deal in.
+* **Narration:** "Thesis: {{include:docs/THESIS.template.md#Headline}} {{r:predictions_count|raw}} conditions, set in advance, get checked {{r:predictions_check_after|day}}."
 
-## {{lit:50–60 s}}: re-run it yourself
+### {{lit:8}} · {{lit:0:58–1:10}} · Verify button and Re-run commands
 
-**On screen:** the chapter "Verify it yourself": press "Check a random transaction" and wait for the three check marks; then the terminal: `npm run reproduce` (the `sha256` line), then the last line of `npm run verify -- --sample 50`; end on the repository URL.
-
-**Narration:** "Every number re-runs from public NEAR data. Press this button and your browser checks a sampled transaction on a public node. npm run reproduce rebuilds it offline; npm run verify re-checks the parsing of sampled transactions against two sources: {{r:verify.verified|raw}} out of {{r:verify.sample|raw}}. Built at NEAR HACKATHON."
-
-**Перевод:** «Каждое число пересчитывается из публичных данных NEAR. Эта кнопка проверяет в вашем браузере случайную транзакцию на публичном узле. npm run reproduce пересобирает всё оффлайн; npm run verify перепроверяет разбор выборки транзакций по двум источникам: {{r:verify.verified|raw}} из {{r:verify.sample|raw}}. Сделано на NEAR HACKATHON.»
+* **On screen:** "Verify it yourself": the log types, the rows fill, the badge stamps VERIFIED ON-CHAIN; then the "Re-run it yourself" command cards.
+* **Action:** click "Check a random transaction"; when the badge appears, scroll to the Re-run commands and end on the repository link.
+* **Narration:** "Reproduce: anyone rebuilds every number offline from committed data. Verify: sampled transactions re-checked on an archival node and NearBlocks; checks the parsing, not the estimate."
 
 ## Recording notes
 
-* Run the terminal commands before recording and keep the output on screen (verify takes several minutes); show only the final lines.
-* Use reduced motion off so the pen stroke draws once at the start.
+* The Verify click needs the network; if the node does not answer, the page says so: re-record that shot or cut it.
+* Sources to have at hand: the Sweat release is {{s:event.issuer|raw}}, {{s:event.source|raw}}. The last `npm run verify` run: {{r:verify.verified|raw}}/{{r:verify.sample|raw}} sampled transactions verified.
 * The post must say it was built at NEAR HACKATHON and tag @NEARProtocol and #NEARHackathon (draft: `docs/submission/X_POST.md`).
+
+## Russian translation of the narration (for the founder, not for the video)
+
+{{lit:1}}. «Кто пользуется Chain Signatures в NEAR? Около {{m:totals.requests_est|M1}} запросов с {{lit:августа 2024}} года; {{m:totals.fulfilled_rate|pct1}} запросов в выборке завершаются успешно.»
+
+{{lit:2}}. «Три запрашивающих дают {{m:totals.concentration.top3_share|pct0}}: вход через FastAuth — {{m:totals.top_requesters[requester=fast-auth.near].share_of_requests|pct0}}, подозреваемый бенчмарк — {{m:totals.top_requesters[requester=tx-bench.near].share_of_requests|pct0}} и Relay Protocol — {{m:totals.top_requesters[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].share_of_requests|pct0}}.»
+
+{{lit:3}}. «Домен входа FastAuth связан с Sweat Foundation — со средней уверенностью. Relay Protocol затих с {{m:derived.exits[requester=7eda04920f22ba6a2b9f2573fd9a6f6f1946ff9f.aurora].zero_from|month_ru_gen}} года.»
+
+{{lit:4}}. «В релизе Sweat Foundation сказано: Sweat Wallet и SWEAT в нынешнем виде прекратят работу {{s:event.date|day_ru}} года.»
+
+{{lit:5}}. «Остаются мосты: за {{s:baseline.month|month_ru}} года по оценке около {{m:months[2026-10].series_requests_est.bridges|k0}} из {{m:months[2026-10].series_requests_est.structural|k0}} структурных запросов.»
+
+{{lit:6}}. «Если трафик FastAuth прекратится, на {{s:scenarios[fastauth0_bench-removed_g+0].end_month|month_ru}} года выходит около {{s:scenarios[fastauth0_bench-removed_g+0].end_month_total|k0}} в месяц. Это сценарий, а не прогноз.»
+
+{{lit:7}}. «Наш тезис: Chain Signatures работает. Его спрос узкий — а крупнейший пользователь сворачивается. {{r:predictions_count|raw}} условия, заданные заранее, проверяются {{r:predictions_check_after|day_ru}} года.»
+
+{{lit:8}}. «Любой может воспроизвести каждое число оффлайн из закоммиченных данных. Verify перепроверяет выборку транзакций на архивном узле и в NearBlocks; это проверка разбора, а не оценки.»

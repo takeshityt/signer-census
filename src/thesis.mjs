@@ -55,6 +55,19 @@ const fmtNum = (x, f) => {
   }
 };
 
+const EN = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+const RU = ["январь", "февраль", "март", "апрель", "май", "июнь", "июль", "август", "сентябрь", "октябрь", "ноябрь", "декабрь"];
+const RU_GEN = ["января", "февраля", "марта", "апреля", "мая", "июня", "июля", "августа", "сентября", "октября", "ноября", "декабря"];
+const ym = (x) => { const m = /^(\d{4})-(\d{2})(?:-(\d{2}))?/.exec(String(x)); if (!m) throw new Error(`not a date: ${x}`); return { y: m[1], m: Number(m[2]) - 1, d: m[3] ? Number(m[3]) : null }; };
+/** Spoken dates for scripts: "2026-08" -> "August 2026"; "2026-12-30" -> "30 December 2026"; Russian nominative / genitive variants. */
+const DATE_FMT = {
+  month: (x) => { const d = ym(x); return `${EN[d.m]} ${d.y}`; },
+  day: (x) => { const d = ym(x); return `${d.d} ${EN[d.m]} ${d.y}`; },
+  month_ru: (x) => { const d = ym(x); return `${RU[d.m]} ${d.y}`; },
+  month_ru_gen: (x) => { const d = ym(x); return `${RU_GEN[d.m]} ${d.y}`; },
+  day_ru: (x) => { const d = ym(x); return `${d.d} ${RU_GEN[d.m]} ${d.y}`; },
+};
+
 export function format(v, fmt) {
   if (fmt.startsWith("ci_")) {
     if (!v || !Array.isArray(v.ci95)) throw new Error("ci_ format needs an object with ci95");
@@ -63,6 +76,7 @@ export function format(v, fmt) {
   }
   const x = typeof v === "object" && v !== null && "value" in v ? v.value : v;
   if (fmt === "raw" && typeof x === "string") return x; // e.g. a month label
+  if (DATE_FMT[fmt]) return DATE_FMT[fmt](x);
   if (typeof x !== "number") throw new Error(`placeholder does not resolve to a number (${JSON.stringify(v).slice(0, 60)})`);
   return fmtNum(x, fmt);
 }
