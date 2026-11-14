@@ -1,0 +1,40 @@
+SIGNER CENSUS — CAPCUT EDIT SHEET
+Source: docs/submission/VIDEO_SCRIPT.md (current wording). Captions as written; VOICE with numbers spelled as spoken.
+Timings follow the recording script (npm run record:demo prints the actual shot start times; use those if they differ).
+
+SHOT 1 — 0:00–0:08 — Hero
+CAPTION: NEAR Chain Signatures · ≈6.4M requests · ≈99.9% fulfilled (est., volume-weighted)
+VOICE: NEAR Chain Signatures, since August twenty twenty-four: about six point four million requests; an estimated ninety-nine point nine percent succeed, volume-weighted.
+
+SHOT 2 — 0:08–0:16 — "Demand is narrow"
+CAPTION: Top 3 = 74% · one is a suspected benchmark
+VOICE: Top three: seventy-four percent. FastAuth forty-four percent, suspected benchmark nineteen percent, Relay Protocol eleven percent.
+
+SHOT 3 — 0:16–0:25 — The boom, steps 1 and 2
+CAPTION: Boom = mostly FastAuth · main user Sweat Wallet (medium confidence)
+VOICE: The boom was FastAuth logins. Its main user: Sweat Wallet, medium confidence. Relay's allocator contract went silent from August twenty twenty-six.
+
+SHOT 4 — 0:25–0:33 — The boom, step 3
+CAPTION: “Sweat Wallet and SWEAT in their present form will end on 30 December 2026.” — The Sweat Foundation Ltd, release of 1 October 2026
+VOICE: Sweat Foundation says Sweat Wallet ends in its present form on the thirtieth of December, twenty twenty-six.
+
+SHOT 5 — 0:33–0:40 — "Bridges remain" and "Where signatures go"
+CAPTION: Bridges ≈237k in October 2026
+VOICE: Bridges remain: about two hundred thirty-seven thousand requests in October twenty twenty-six — most of the demand left without FastAuth and the benchmark.
+
+SHOT 6 — 0:40–0:48 — Scenario presets
+CAPTION: Scenario, not a forecast · no FastAuth, no benchmark
+VOICE: Without FastAuth and the benchmark, with other demand flat, June twenty twenty-seven is about two hundred sixty-seven thousand monthly — a scenario, not a forecast.
+
+SHOT 7 — 0:48–0:58 — "What would prove us wrong"
+CAPTION: Four conditions · checked 1 April 2027
+VOICE: Chain Signatures works. Its demand is narrow — and its biggest user is winding down. Four conditions set in advance: checked the first of April, twenty twenty-seven.
+
+SHOT 8 — 0:58–1:10 — Verify button and Re-run commands
+CAPTION: Reproduce offline · parsing re-checked on a random sample
+VOICE: Every number rebuilds offline from committed data. A random sample is re-checked on-chain — that checks the parsing, not the estimate.
+
+END CARD — 1:10–1:13 (3 seconds, no voice)
+Signer Census
+takeshityt.github.io/signer-census
+Built at NEAR HACKATHON 2026
